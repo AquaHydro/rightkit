@@ -1,0 +1,10 @@
+.DS_Store
+.research-fixtures/
+.build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+.env
+.env.*
+*.p12
+*.p8
