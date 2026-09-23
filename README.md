@@ -20,6 +20,7 @@ RightKit 是一个 macOS Finder 右键菜单增强工具。本仓库用于在原
 - [技术方案](docs/technical.md)：已确认的旧版结构、候选重建边界和待验证决策。
 - [验证方案](docs/verification.md)：可重复的端到端用例和验收规则。
 - [阶段路线图](docs/roadmap.md)：从证据补全到可发布重建版本的计划。
+- [设计规范](DESIGN.md)：重建版本的视觉、交互与文案规则（macOS 26 基线）。
 - [领域术语](CONTEXT.md)：项目统一用语。
 - [协作约定](AGENTS.md)：代理工作方式和安全边界。
 
