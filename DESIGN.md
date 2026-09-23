@@ -117,7 +117,7 @@ components:
 
 RightKit 是一个常驻后台的 macOS 工具：用户几乎只在访达右键菜单里用它，设置窗口一个月打开一两次。设计目标因此只有三条：
 
-1. **菜单快而准。** 右键弹出不能等，只出现与当前选择相关的命令。
+1. **菜单快而准。** 右键弹出不能等，只在用户配置的监视目录内出现与当前选择相关的命令。
 2. **像系统自带的一样。** 设置、菜单栏、对话框全部用系统组件，让 Liquid Glass、深色模式、强调色、“减少透明度”“增强对比度”、macOS 27 的玻璃透明度滑块都自动生效，不写一行适配代码。
 3. **品牌只在该出现的地方出现。** 珊瑚色渐变只属于应用图标、欢迎窗口和关于页。
 
@@ -193,6 +193,7 @@ macOS 26 用 **Liquid Glass** 把“功能层”（工具栏、侧栏、菜单�
 - 每个分栏内是 `Form { Section { … } }.formStyle(.grouped)`。
 - 「重启访达」放在「通用」的扩展状态区。「退出 RightKit」只放在菜单栏菜单。设置窗口只放设置。
 - RightKit 是 `LSUIElement` 应用，没有 App 菜单，所以从菜单栏打开设置时用 `SettingsLink`，并先激活应用，否则窗口会出现在其他应用后面。用户再次从访达或启动台打开 RightKit 时，直接打开设置窗口。
+- 「通用」还显示监视目录列表。首次只有当前用户主目录；用户可添加或移除目录，不能添加 `/` 或系统目录。说明文字是「RightKit 仅在这些文件夹及其子文件夹的访达菜单中显示。」
 
 ### 设置行
 
@@ -244,13 +245,13 @@ macOS 26 用 **Liquid Glass** 把“功能层”（工具栏、侧栏、菜单�
 
 ## Finder 菜单
 
-依据 HIG 的菜单与子菜单规则。显示哪些命令见 [功能规格](docs/features.md)。
+依据 HIG 的菜单与子菜单规则。显示哪些命令见 [功能规格](docs/features.md)。Finder Sync 只在监视目录及其子目录内提供上下文菜单；范围外不插入菜单项。工具栏始终只提供“设置…”。
 
 - **只出现相关命令。** 菜单内容由当前选择决定，不要把全部命令一直摆出来。
-- **子菜单只一层。** HIG 建议子菜单超过约五项时考虑拆分。工具箱有 17 个命令，用分隔线分成五组，危险操作永远在最后一组：
+- **子菜单只一层。** HIG 建议子菜单超过约五项时考虑拆分。工具箱有 16 个命令，用分隔线分成五组，危险操作永远在最后一组：
   1. 拷贝路径、拷贝名称
   2. 根据文件名新建文件夹、发送替身到桌面、隔空投送、授予写入权限、文件信息（哈希）…
-  3. 隐藏 / 显示所选、显示 / 隐藏扩展名、显示 / 隐藏隐藏文件
+  3. 隐藏 / 显示所选、显示 / 隐藏扩展名
   4. 转换图片…、生成 macOS 图标集、生成 iOS 图标集、设为壁纸、设置文件夹图标…
   5. 解散文件夹、彻底删除…
 - **图标同组一致。** 一组里要么都有 SF Symbol，要么都没有；“在菜单项中显示图标”关闭时全部隐藏，文字必须自足。
@@ -285,6 +286,7 @@ macOS 26 用 **Liquid Glass** 把“功能层”（工具栏、侧栏、菜单�
 - **App Intents**：macOS 26 起聚焦可直接执行 App Intents，快捷指令也能用。首批暴露拷贝路径、拷贝名称、新建文件、文件哈希、转换图片、生成 macOS / iOS 图标集、生成二维码、在应用中打开。HIG 限定每个应用最多 10 个 App Shortcuts，按使用频率挑选。彻底删除、解散文件夹不做 Intent，避免绕过确认。
 - **文本服务**：翻译和生成二维码注册为系统服务。结果窗口按“哈希窗口”的规则做：没有父窗口时用独立窗口。
 - **访达扩展管理**：macOS 15 起访达扩展开关移到“系统设置 → 通用 → 登录项与扩展”，引导文案必须和当前系统路径一致。
+- **隐藏文件显示**：不提供 Finder 的全局隐藏文件开关。公开的 Open/Save Panel 配置只影响该面板，不能作为 Finder 全局状态的替代。
 
 ## Accessibility
 
@@ -313,5 +315,7 @@ macOS 26 用 **Liquid Glass** 把“功能层”（工具栏、侧栏、菜单�
 - [WWDC26 SwiftUI guide](https://developer.apple.com/wwdc26/guides/swiftui/)，[WWDC26 SwiftUI 新特性整理](https://dev.to/arshtechpro/wwdc26-whats-new-in-swiftui-a-developers-breakdown-1333)
 - macOS 27 界面变化：[ANI News](https://www.aninews.in/news/tech/mobile/apple-announces-macos-27-golden-gate-at-wwdc-2026-with-liquid-glass-design-changes-and-more20260609002106/)（二手报道，未在官方文档核实）
 - [Develop for Shortcuts and Spotlight with App Intents（WWDC25）](https://developer.apple.com/videos/play/wwdc2025/260/)
+- [Finder Sync Extensions](https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Finder.html)，[directoryURLs](https://developer.apple.com/documentation/findersync/fifindersynccontroller/directoryurls)
+- [App Groups Entitlement](https://developer.apple.com/documentation/bundleresources/entitlements/com.apple.security.application-groups)，[Using the Open and Save Panels](https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/UsingtheOpenandSavePanels/UsingtheOpenandSavePanels.html)
 - [Finder Sync 扩展在 Sequoia 的设置变化](https://mjtsai.com/blog/2024/10/03/finder-sync-extensions-removed-from-system-settings-in-sequoia/)
 - [DESIGN.md 格式规范](https://github.com/google-labs-code/design.md/blob/main/docs/spec.md)

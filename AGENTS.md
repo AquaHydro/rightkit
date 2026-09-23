@@ -9,7 +9,7 @@
 
 ## 开始工作前
 
-1. 阅读 `README.md`、`CONTEXT.md`、`docs/features.md`、`DESIGN.md` 和 `docs/technical.md`。
+1. 阅读 `README.md`、`CONTEXT.md`、`docs/features.md`、`DESIGN.md`、`docs/technical.md`、`docs/verification.md` 和 `docs/roadmap.md`。
 2. 行为以 `docs/features.md` 为准，视觉以 `DESIGN.md` 为准。不要对照机器上另外安装的应用来增删功能或改默认值。
 3. 使用已有 `F-xxx` 与 `V-xxx` 编号。不要重排、复用或静默改变编号含义。
 

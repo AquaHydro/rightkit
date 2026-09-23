@@ -10,7 +10,7 @@
 - `RightKitFinder`：Finder Sync Extension。只读取当前菜单目标、生成菜单、把动作发给主程序。
 - `RightKitCore`：Swift package。放菜单规则、命名、保护路径、模板描述和设置模型。不链接 SwiftUI，也不读写磁盘。
 
-开发期 bundle ID 使用 `app.rightkit.mac`，扩展使用 `app.rightkit.mac.finder`，App Group 使用 `group.app.rightkit.mac`。不要改成 `com.rightkit.app`。
+开发期 bundle ID 使用 `app.rightkit.mac`，扩展使用 `app.rightkit.mac.finder`，App Group 使用 `group.app.rightkit.mac`。不要改成 `com.rightkit.app`。两个 target 都启用 App Groups，并使用同一个开发团队签名；扩展启用 App Sandbox，主程序不启用。
 
 主程序不启用 App Sandbox，因为操作目标是用户在访达里点中的任意项目。扩展按系统要求启用 Sandbox，但不在扩展里改文件。不要另外做一套商店沙盒分支。
 
@@ -28,6 +28,7 @@
 - 在菜单回调里只使用当次的目标文件夹和选中项快照。空白处的文件夹和选中的文件不能混用。
 - 可以同步读取体积很小的设置快照。不能在菜单回调里打开用户文件、计算哈希或转换图片。
 - 点击命令后把意图发给主程序。主程序没运行时先启动它，最多等 3 秒；仍不可用就放弃这次点击，不要在扩展里代做。
+- 每个扩展进程启动时都从共享设置读取监视目录，并写入 `FIFinderSyncController.directoryURLs`。不注册 `/`；没有可用监视目录时注册空集合。
 
 `RightKitCore` 必须能在不打开访达的情况下测试菜单表、重名编号、保护路径和模板名。
 
@@ -35,17 +36,18 @@
 
 设置是 App Group 里的一个 JSON 文件，编码使用 `schemaVersion`。当前版本是 `1`。写入要原子替换。读到无法识别的文件时，把原文件留成备份并使用默认值，不要崩溃。
 
-模型包含：主题、语言、三个启动开关、彻底删除确认、五个功能组、新建类型、自定义模板、打开工具、常用目录、发送到、工具箱顺序和开关、欢迎窗口是否已显示。
+模型包含：主题、语言、三个启动开关、彻底删除确认、五个功能组、监视目录、新建类型、自定义模板、打开工具、常用目录、发送到、工具箱顺序和开关、欢迎窗口是否已显示。
 
-用户选择的文件夹和应用保存 bookmark 或 bundle ID，不保存可能失效后还继续使用的裸路径。文件夹不见了，按功能规格显示「该文件夹已不存在。」
+用户选择的文件夹和应用保存 bookmark 或 bundle ID，不保存可能失效后还继续使用的裸路径。监视目录、常用目录和发送到文件夹不见了，按功能规格显示「该文件夹已不存在。」
 
 扩展在自己的初始化里，向 App Group 写本次登录的心跳时间。主程序用它区分「已启用」和「未运行」。
 
 ## 通信
 
-主程序发布本应用专用的 XPC 服务。消息包含 schema 版本、请求 ID、动作、目标 URL 列表和可选参数。
+主程序发布名为 `group.app.rightkit.mac.command` 的本应用专用 XPC 服务。服务名必须以 App Group 标识符为前缀。消息包含 schema 版本、请求 ID、动作、目标 URL 列表和可选参数。
 
-- 只接受来自 `app.rightkit.mac.finder` 的连接。
+- 连接建立后先根据 audit token 验证签名标识符是 `app.rightkit.mac.finder`，并验证开发团队与主程序一致；验证失败立即断开。
+- XPC 方法只接收一个编码后的请求信封和一个结果回复。先检查信封大小、版本和字段类型，再解码 URL；不要把不受信任的数据直接当作路径使用。
 - 请求 ID 重复时忽略后到的一条。
 - 超过 30 秒的请求拒绝执行。
 - URL 必须是文件 URL。拒绝之后，主程序显示该动作自己的失败提示。
@@ -63,6 +65,10 @@
 
 图片读取和写出使用 ImageIO。macOS 图标集的 `.icns` 由 `iconutil` 从刚写出的 `.iconset` 生成，参数固定，不把文件名拼进 shell。
 
+不实现 Finder 全局隐藏文件显示开关。`NSSavePanel` 和 `NSOpenPanel` 的隐藏文件选项只影响对应面板，不拿来宣称可以控制 Finder。
+
+内置 Office 模板作为版本控制的资源放在主程序 target 中，不能在运行时从网络下载或依赖机器上安装的 Office 应用生成。测试至少验证包结构、内容类型和不覆盖规则；有对应应用的人工验收再验证打开时不要求修复。
+
 ## 系统集成
 
 - 登录项使用 `SMAppService.mainApp`。
@@ -72,3 +78,7 @@
 - App Intents 只暴露功能规格里的 9 个动作。
 
 证书、描述文件和发布渠道不在这一阶段决定。私钥和 API key 不要进仓库。
+
+## 构建与验证入口
+
+第一个实现提交必须包含 Xcode 工程、三个 target 的 entitlements、`RightKitCoreTests` 和一个统一的 `make verify`。该命令至少运行 `xcodebuild test`、`python3 scripts/check_docs.py` 和 `git diff --check`。Finder 真实菜单测试另外记录系统版本、构建提交、监视目录和菜单回调日志，不用单元测试冒充。
