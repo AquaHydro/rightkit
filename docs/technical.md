@@ -1,60 +1,74 @@
-# 技术调研与复刻方案
+# 工程边界
 
-调研日期：2026-09-22。安装包事实与新实现建议分别记录。当前尚无恢复的源码，也未创建可运行的新应用。
+实现 [功能规格](features.md) 时按这里拆分。视觉规则不要写进扩展。
 
-## 已确认的旧版结构
+## 目标
 
-| 项目 | 证据与结论 |
-| --- | --- |
-| 主程序 | `com.rightkit.app`，1.0.0 (1)，arm64，最低 macOS 14，`LSUIElement=true` |
-| Finder 扩展 | 内嵌 `RightKitFinder.appex`，`com.rightkit.app.finder`，扩展点 `com.apple.FinderSync`，入口 `RightKitFinder.FinderSync` |
-| UI / 系统依赖 | 动态链接 SwiftUI、AppKit、FinderSync、ServiceManagement、CryptoKit、CoreImage、ImageIO 等，不能仅凭链接断言某函数如何实现 |
-| 主程序权限 | 签名声明 Apple Events automation；未声明 App Sandbox |
-| 扩展权限 | 声明 App Sandbox；本次导出的 entitlement 未见 App Groups |
-| 签名 | ad hoc，runtime 标志，TeamIdentifier 未设置；注册开发者账号不会自动改变已有安装包签名 |
-| 文本服务 | Info.plist 注册 Google 翻译、百度翻译、生成二维码三个 NSStringPboardType 服务 |
-| 本地资源 | 中英文文案、12 类模板。未把旧版图标或 Office 模板复制为新版资产 |
-| 通信线索 | 二进制含 NSDistributedNotificationCenter、`com.rightkit.ipc.config/command/hello`；这是静态线索，消息结构、验证机制和实际调用尚不明 |
+最低系统 macOS 26。三个目标：
 
-原始导出见 [evidence](evidence/host-info.json)、[权限](evidence/host-entitlements.txt)、[扩展权限](evidence/finder-entitlements.txt)、[链接库](evidence/linked-frameworks.txt)、[通信线索](evidence/ipc-clues.txt)。
+- `RightKit`：SwiftUI 主程序，`LSUIElement = true`。负责设置、欢迎窗口、确认、哈希和二维码窗口、文件操作、系统服务、App Intents。
+- `RightKitFinder`：Finder Sync Extension。只读取当前菜单目标、生成菜单、把动作发给主程序。
+- `RightKitCore`：Swift package。放菜单规则、命名、保护路径、模板描述和设置模型。不链接 SwiftUI，也不读写磁盘。
 
-## 建议的实现边界（未批准的最终架构）
+开发期 bundle ID 使用 `app.rightkit.mac`，扩展使用 `app.rightkit.mac.finder`，App Group 使用 `group.app.rightkit.mac`。不要改成 `com.rightkit.app`。
 
-采用 Xcode 的 macOS App + Finder Sync Extension targets；设置界面使用 SwiftUI，系统窗口、菜单、剪贴板、共享面板等窄范围接入 AppKit。纯数据模型和可测试逻辑放独立 Swift package。最低版本暂以旧版 macOS 14 为基线，玻璃效果通过可用性检查回退。
+主程序不启用 App Sandbox，因为操作目标是用户在访达里点中的任意项目。扩展按系统要求启用 Sandbox，但不在扩展里改文件。不要另外做一套商店沙盒分支。
 
-- **Host**：设置、模板管理、长任务、用户确认、操作结果与权限交互。
-- **Finder Extension**：读取当次菜单上下文、生成轻量菜单、发出操作意图。不得在菜单回调中计算哈希或执行大文件 I/O。
-- **Core**：菜单可用性、模板描述、操作参数、名称冲突策略、哈希与结果模型。
-- **Platform adapters**：文件系统、应用启动、剪贴板、权限、共享和图片处理。
+## 谁做什么
 
-Finder 的 `targetedURL` 与 `selectedItemURLs` 有回调时机限制，应在合法菜单回调或菜单动作中取得快照。不能把空白区域目标目录和选中文件混为一谈。[Apple API](https://developer.apple.com/documentation/findersync/fifindersynccontroller/selecteditemurls())、[Finder Sync 指南](https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Finder.html)。指南为归档资料，当前 SDK 需再次编译验证。
+主程序：
 
-## 第一项技术验证：签名后的扩展通信
+- 读写设置，并注册登录项。
+- 执行全部文件、图片、哈希、分享和删除操作。
+- 显示确认、失败提示和结果窗口。
+- 打开其他应用时使用系统 API，不拼接 shell。
 
-先验证正式开发签名的最小闭环：启用扩展 → 在隔离目录生成菜单 → 点击只读命令 → 主程序展示收到的路径 → 设置更改传播回扩展。需要覆盖主程序未运行、扩展重启、旧版同时安装、命令重复、消息过期及权限拒绝。
+扩展：
 
-共享设置优先评估 App Groups；命令传输评估有明确身份边界的 XPC 等机制，必须在实际沙盒和签名条件下验证可行性。不要仅因旧版字符串存在就照搬通知广播，更不能把任意进程发来的路径当作已授权操作。消息应有版本、请求 ID、动作枚举、目标快照、结果和超时。设置持久化要有 schema 版本、原子写入和迁移策略。
+- 在菜单回调里只使用当次的目标文件夹和选中项快照。空白处的文件夹和选中的文件不能混用。
+- 可以同步读取体积很小的设置快照。不能在菜单回调里打开用户文件、计算哈希或转换图片。
+- 点击命令后把意图发给主程序。主程序没运行时先启动它，最多等 3 秒；仍不可用就放弃这次点击，不要在扩展里代做。
 
-## 文件与工具行为设计要求
+`RightKitCore` 必须能在不打开访达的情况下测试菜单表、重名编号、保护路径和模板名。
 
-这些是新实现验收建议，并非已经证明的旧版行为：
+## 设置
 
-| 能力 | 实现方向 | 必须明确的边界 |
-| --- | --- | --- |
-| 新建 | 克隆有效模板，原子落盘 | 重名、空名称、扩展名、只读目录、自定义模板失效 |
-| 剪切 / 复制 / 移动 | 显式操作状态与逐项结果 | 跨卷、重复粘贴、同目录、符号链接、多选部分失败、不静默覆盖 |
-| 删除 / 解散文件夹 | 独立确认与受保护位置校验 | 解析真实路径、拒绝危险目标、冲突处理，不能用真实资料试验 |
-| 应用打开 | 基于应用标识与 URL 的系统 API；终端适配单独处理 | 应用卸载、空格/引号/换行路径，禁止拼接可执行 shell 命令 |
-| 哈希 | 流式读取、后台任务、可取消 | 空文件、大文件、文件变化、无权限；MD5/SHA1仅兼容校验展示 |
-| 图片 / 图标 | ImageIO/CoreImage 等候选；对照旧版输出再定规格 | 支持格式、尺寸、透明度、色彩、输出目录待验证 |
-| 权限 | 最小权限、明确错误 | “授予写入权限”具体改变哪些位尚未确认，不默认递归提权 |
-| 翻译 | 系统文本服务，外部浏览器方案待实测 | 提供方 URL、编码、目标语言及用户文本外发提示待定 |
-| 二维码 | 本地生成与 PNG 导出候选 | 空文本、Unicode、长文本、尺寸与容错等级待实测 |
+设置是 App Group 里的一个 JSON 文件，编码使用 `schemaVersion`。当前版本是 `1`。写入要原子替换。读到无法识别的文件时，把原文件留成备份并使用默认值，不要崩溃。
 
-## Apple 开发者账号与发布
+模型包含：主题、语言、三个启动开关、彻底删除确认、五个功能组、新建类型、自定义模板、打开工具、常用目录、发送到、工具箱顺序和开关、欢迎窗口是否已显示。
 
-开发账号已注册来自用户陈述；未登录或检查证书、Team ID、设备或权限。新 App / extension 的 bundle ID 和显示名应与旧版隔离，保留旧版作为对照。
+用户选择的文件夹和应用保存 bookmark 或 bundle ID，不保存可能失效后还继续使用的裸路径。文件夹不见了，按功能规格显示「该文件夹已不存在。」
 
-若选择站外分发，需要 Developer ID 签名、公证和发行包验证；公证不同于 App Review。[Apple 公证说明](https://developer.apple.com/documentation/security/notarizing-macos-software-before-distribution)。若选择 Mac App Store，则需独立验证沙盒权限与功能可行性，不能承诺两条渠道功能天然相同。[Apple 分发签名](https://developer.apple.com/documentation/xcode/creating-distribution-signed-code-for-the-mac/)。
+扩展在自己的初始化里，向 App Group 写本次登录的心跳时间。主程序用它区分「已启用」和「未运行」。
 
-发布渠道尚未决定。下一阶段先做本地开发签名 PoC；不创建证书、不上传公证、不发布商店、不覆盖 `/Applications/RightKit.app`。确认渠道后再补 entitlements、CI secret 与发布流程。证书私钥、API key、Team 个人配置不得提交 Git。
+## 通信
+
+主程序发布本应用专用的 XPC 服务。消息包含 schema 版本、请求 ID、动作、目标 URL 列表和可选参数。
+
+- 只接受来自 `app.rightkit.mac.finder` 的连接。
+- 请求 ID 重复时忽略后到的一条。
+- 超过 30 秒的请求拒绝执行。
+- URL 必须是文件 URL。拒绝之后，主程序显示该动作自己的失败提示。
+- 不要用分布式通知接收命令，也不要执行消息里带来的路径字符串。
+
+## 文件操作
+
+重名编号、保护路径判断和「创建前先写临时文件」放在 `RightKitCore` 或主程序的同一处，不要在每个命令里各写一遍。
+
+这些动作必须走同一套编号和失败汇总：新建、自定义模板克隆、复制、移动、粘贴、根据文件名新建文件夹、替身、解散文件夹、图片输出、两种图标集。
+
+永久删除先走保护判断，通过后才删除。保护路径的解析要在删除前完成。
+
+哈希使用流式读取，放在可取消的后台任务里。四个算法的结果类型放在 `RightKitCore`，方便和已知测试向量对照。
+
+图片读取和写出使用 ImageIO。macOS 图标集的 `.icns` 由 `iconutil` 从刚写出的 `.iconset` 生成，参数固定，不把文件名拼进 shell。
+
+## 系统集成
+
+- 登录项使用 `SMAppService.mainApp`。
+- 扩展状态使用 `FIFinderSyncController.isExtensionEnabled`。
+- 打开扩展设置使用 `FIFinderSyncController.showExtensionManagementInterface()`。
+- 文本服务注册 Google 翻译、百度翻译和生成二维码，输入类型是字符串。
+- App Intents 只暴露功能规格里的 9 个动作。
+
+证书、描述文件和发布渠道不在这一阶段决定。私钥和 API key 不要进仓库。

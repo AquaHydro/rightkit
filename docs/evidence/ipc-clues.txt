@@ -1,4 +1,0 @@
-So31NSDistributedNotificationCenterC
-com.rightkit.ipc.config
-com.rightkit.ipc.command
-com.rightkit.ipc.hello

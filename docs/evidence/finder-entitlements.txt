@@ -1,5 +1,0 @@
-[Dict]
-	[Key] com.apple.security.app-sandbox
-	[Value]
-		[Bool] true
-Executable=/Applications/RightKit.app/Contents/PlugIns/RightKitFinder.appex/Contents/MacOS/RightKitFinder
