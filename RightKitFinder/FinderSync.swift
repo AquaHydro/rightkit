@@ -38,7 +38,7 @@ final class FinderSync: FIFinderSync, @unchecked Sendable {
             .filter { $0 != "/" && FileManager.default.fileExists(atPath: $0) }
             .map { URL(filePath: $0, directoryHint: .isDirectory) }
         FIFinderSyncController.default().directoryURLs = Set(urls)
-        log.info("Monitoring \(urls.map(\.path).joined(separator: ", "), privacy: .public)")
+        log.notice("Monitoring \(urls.map(\.path).joined(separator: ", "), privacy: .public)")
     }
 
     /// 沙盒里 `NSHomeDirectory()` 是容器目录，要取真实主目录。
@@ -78,11 +78,19 @@ final class FinderSync: FIFinderSync, @unchecked Sendable {
         )
         let nodes = MenuBuilder.build(input, settings: settings, environment: Self.environment)
         commands = []
-        log.info("menu kind=\(menuKind.rawValue) folder=\(input.folder, privacy: .public) items=\(items.count) -> \(nodes.map(\.title).joined(separator: "|"), privacy: .public)")
+        log.notice("menu kind=\(menuKind.rawValue) folder=\(input.folder, privacy: .public) items=\(items.count) -> \(Self.describe(nodes), privacy: .public)")
         guard !nodes.isEmpty else { return nil }
         let menu = NSMenu(title: "")
         nodes.forEach { menu.addItem(makeItem($0)) }
         return menu
+    }
+
+    /// 菜单回调日志：子菜单写成“标题[子项|子项]”，分隔线写成“—”。
+    static func describe(_ nodes: [MenuNode]) -> String {
+        nodes.map { node in
+            if node.content == .separator { return "—" }
+            return node.children.isEmpty ? node.title : "\(node.title)[\(describe(node.children))]"
+        }.joined(separator: "|")
     }
 
     private func makeItem(_ node: MenuNode) -> NSMenuItem {
@@ -116,7 +124,8 @@ final class FinderSync: FIFinderSync, @unchecked Sendable {
     @objc private func runCommand(_ sender: NSMenuItem) {
         guard commands.indices.contains(sender.tag) else { return }
         let envelope = CommandEnvelope(command: commands[sender.tag], folder: snapshot.folder, items: snapshot.items)
-        log.info("perform \(envelope.command.action.rawValue, privacy: .public)")
+        log.notice("perform \(envelope.command.action.rawValue, privacy: .public)")
+        if envelope.command.presentsUI(settings: settings) { CommandSender.bringMainAppForward() }
         CommandSender.send(envelope)
     }
 
@@ -156,6 +165,13 @@ enum CommandSender {
             if !accepted { log.error("Request \(envelope.requestID, privacy: .public) was not accepted") }
             connection.invalidate()
         }
+    }
+
+    /// 协作式激活下，主程序自己调用 `activate()` 会被拒绝；由扩展经 LaunchServices 打开专用网址来激活它。
+    static func bringMainAppForward() {
+        NSApp.yieldActivation(toApplicationWithBundleIdentifier: ServiceNames.appBundleID)
+        guard let url = URL(string: "rightkit://activate") else { return }
+        NSWorkspace.shared.open(url, configuration: NSWorkspace.OpenConfiguration())
     }
 
     /// 扩展在 `RightKit.app/Contents/PlugIns/RightKitFinder.appex`。

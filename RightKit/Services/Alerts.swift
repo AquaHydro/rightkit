@@ -62,7 +62,7 @@ enum Alerts {
 
     @discardableResult
     static func run(_ alert: NSAlert) -> NSApplication.ModalResponse {
-        NSApp.activate()
+        bringToFront()
         alert.window.level = .modalPanel
         return alert.runModal()
     }
@@ -86,6 +86,11 @@ extension Alerts {
         return formats[control.selectedSegment]
     }
 
+    /// 从访达触发时访达仍是前台应用，协作式的 `activate()` 会被拒绝。
+    static func bringToFront() {
+        NSApp.activate()
+    }
+
     static func chooseFolder(prompt: String) -> URL? {
         let panel = NSOpenPanel()
         panel.canChooseDirectories = true
@@ -93,7 +98,7 @@ extension Alerts {
         panel.canCreateDirectories = true
         panel.allowsMultipleSelection = false
         panel.prompt = prompt
-        NSApp.activate()
+        bringToFront()
         return panel.runModal() == .OK ? panel.url : nil
     }
 
@@ -102,7 +107,7 @@ extension Alerts {
         panel.canChooseDirectories = false
         panel.allowedContentTypes = [.image]
         panel.prompt = L("选择")
-        NSApp.activate()
+        bringToFront()
         return panel.runModal() == .OK ? panel.url : nil
     }
 }

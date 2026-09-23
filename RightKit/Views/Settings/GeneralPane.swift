@@ -75,25 +75,31 @@ struct ExtensionStatusRow: View {
 
     var body: some View {
         let status = model.extensionStatus
-        LabeledContent {
+        HStack(alignment: .center, spacing: 12) {
+            VStack(alignment: .leading, spacing: 2) {
+                HStack(spacing: 6) {
+                    Image(systemName: "circle.fill")
+                        .font(.system(size: 8))
+                        .foregroundStyle(status.isHealthy ? Color.green : Color.secondary)
+                        .contentTransition(.symbolEffect(.replace))
+                        .accessibilityHidden(true)
+                    Text(status.title).bold()
+                }
+                Text(status == .backgroundBlocked
+                     ? L("请在“系统设置 → 通用 → 登录项与扩展 → 允许在后台”中打开 RightKit。")
+                     : L("如果菜单项没有立即出现，请重启一次访达。"))
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .accessibilityElement(children: .combine)
+            Spacer()
             if status == .disabled || status == .backgroundBlocked {
                 Button(L("打开系统设置")) { FinderControl.openSettings(for: status) }
                     .buttonStyle(.borderedProminent)
             } else {
                 Button(L("重启访达")) { confirmingRestart = true }
             }
-        } label: {
-            HStack(spacing: 6) {
-                Image(systemName: "circle.fill")
-                    .font(.system(size: 8))
-                    .foregroundStyle(status.isHealthy ? Color.green : Color.secondary)
-                    .contentTransition(.symbolEffect(.replace))
-                    .accessibilityHidden(true)
-                Text(status.title).bold()
-            }
-            Text(status == .backgroundBlocked
-                 ? L("请在“系统设置 → 通用 → 登录项与扩展 → 允许在后台”中打开 RightKit。")
-                 : L("如果菜单项没有立即出现，请重启一次访达。"))
         }
         .animation(.default, value: status)
     }

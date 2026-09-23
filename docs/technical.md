@@ -57,6 +57,7 @@
 - 超过 30 秒的请求拒绝执行。
 - URL 必须是文件 URL。拒绝之后，主程序显示该动作自己的失败提示。
 - 不要用分布式通知接收命令，也不要执行消息里带来的路径字符串。
+- 协作式激活下，访达在前台时主程序自己调用 `activate()` 会被拒绝。会弹出窗口或对话框的命令（`Command.presentsUI`），扩展先经 LaunchServices 打开 `rightkit://activate`，再发送命令。这个网址只让系统把主程序带到前台，不携带任何命令或路径。
 
 ## 文件操作
 
@@ -86,4 +87,4 @@
 
 ## 构建与验证入口
 
-第一个实现提交必须包含 Xcode 工程、三个 target 的 entitlements、`RightKitCoreTests` 和一个统一的 `make verify`。该命令至少运行 `xcodebuild test`、`python3 scripts/check_docs.py` 和 `git diff --check`。Finder 真实菜单测试另外记录系统版本、构建提交、监视目录和菜单回调日志，不用单元测试冒充。
+第一个实现提交必须包含 Xcode 工程、三个 target 的 entitlements、`RightKitCoreTests` 和一个统一的 `make verify`。该命令至少运行 `xcodebuild test`、`python3 scripts/check_docs.py` 和 `git diff --check`。Finder 真实菜单测试另外记录系统版本、构建提交、监视目录和菜单回调日志，不用单元测试冒充。记录写在 [验收记录](verification-log.md)，可复用的访达脚本在 `scripts/e2e/`。扩展的菜单回调和命令日志用 notice 级别，便于事后取证。

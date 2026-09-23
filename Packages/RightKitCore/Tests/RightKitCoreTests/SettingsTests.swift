@@ -143,3 +143,32 @@ import Testing
         #expect(!PathRules.isMovingIntoItself(source: "/a/b", destinationFolder: "/a/bc"))
     }
 }
+
+/// V-010：内置模板内容与 F-010 一致。
+@Suite struct TemplateTests {
+    @Test func textTemplates() {
+        #expect(BuiltinType.txt.textContent == "")
+        #expect(BuiltinType.md.textContent == "")
+        #expect(BuiltinType.css.textContent == "")
+        #expect(BuiltinType.js.textContent == "")
+        #expect(BuiltinType.rtf.textContent == "{\\rtf1\\ansi\\pard\\par}")
+        #expect(BuiltinType.json.textContent == "{}\n")
+        #expect(BuiltinType.sh.textContent == "#!/bin/zsh\n")
+        let xml = BuiltinType.xml.textContent ?? ""
+        #expect(xml.hasPrefix("<?xml version=\"1.0\" encoding=\"UTF-8\"?>") && xml.contains("<root/>"))
+        let html = BuiltinType.html.textContent ?? ""
+        #expect(html.contains("<meta charset=\"utf-8\">") && html.hasPrefix("<!DOCTYPE html>"))
+        for office in [BuiltinType.docx, .xlsx, .pptx] { #expect(office.textContent == nil, "Office 模板来自资源文件") }
+    }
+
+    @Test func titlesInBothLanguages() {
+        L10n.$override.withValue(.english) {
+            #expect(BuiltinType.allCases.map(\.title) == ["Plain Text", "Markdown", "Rich Text", "Word Document", "Excel Workbook",
+                                                           "PowerPoint Presentation", "JSON", "XML", "HTML", "CSS", "JavaScript", "Shell Script"])
+        }
+        L10n.$override.withValue(.simplifiedChinese) {
+            #expect(BuiltinType.allCases.map(\.title) == ["文本文档", "Markdown", "RTF 文稿", "Word 文档", "Excel 工作簿",
+                                                           "PowerPoint 演示文稿", "JSON", "XML", "HTML", "CSS", "JavaScript", "Shell 脚本"])
+        }
+    }
+}

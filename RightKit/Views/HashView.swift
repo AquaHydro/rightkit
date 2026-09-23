@@ -14,7 +14,7 @@ struct HashView: View {
 
     private var size: String {
         let bytes = (try? url.resourceValues(forKeys: [.fileSizeKey]).fileSize) ?? 0
-        return ByteCountFormatter.string(fromByteCount: Int64(bytes), countStyle: .file)
+        return Int64(bytes).formatted(.byteCount(style: .file).locale(Locale(identifier: L10n.code)))
     }
 
     var body: some View {
@@ -38,22 +38,22 @@ struct HashView: View {
                 }
                 .frame(width: 560, alignment: .leading)
             case .done(let hashes):
-                Form {
+                Grid(alignment: .leadingFirstTextBaseline, horizontalSpacing: 12, verticalSpacing: 10) {
                     ForEach(FileHashes.Algorithm.allCases, id: \.self) { algorithm in
+                        if algorithm != .md5 { Divider() }
                         HashRow(algorithm: algorithm, value: hashes.value(algorithm))
                     }
                 }
-                .formStyle(.grouped)
-                .scrollDisabled(true)
                 .frame(width: 560)
-                .fixedSize(horizontal: false, vertical: true)
             case .failed(let message):
                 Label(message, systemImage: "exclamationmark.triangle.fill")
                     .symbolRenderingMode(.multicolor)
                     .frame(width: 560, alignment: .leading)
             }
         }
+        .frame(width: 560)
         .padding(20)
+        .fixedSize()
         .animation(.default, value: stateKey)
         .task(id: url) { await compute() }
     }
@@ -88,29 +88,26 @@ private struct HashRow: View {
     @State private var copied = false
 
     var body: some View {
-        LabeledContent {
-            HStack(alignment: .firstTextBaseline, spacing: 8) {
-                Text(value)
-                    .font(.body.monospaced())
-                    .textSelection(.enabled)
-                    .lineLimit(nil)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                Button(copied ? L("已拷贝") : L("拷贝")) {
-                    Pasteboard.copyLines([value])
-                    copied = true
-                    Task {
-                        try? await Task.sleep(for: .seconds(1.5))
-                        copied = false
-                    }
-                }
-                .buttonStyle(.bordered)
-                .contentTransition(.opacity)
-            }
-        } label: {
+        GridRow {
             Text(algorithm.rawValue)
                 .font(.caption)
                 .foregroundStyle(.secondary)
+                .gridColumnAlignment(.trailing)
+            Text(value)
+                .font(.body.monospaced())
+                .textSelection(.enabled)
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Button(copied ? L("已拷贝") : L("拷贝")) {
+                Pasteboard.copyLines([value])
+                copied = true
+                Task {
+                    try? await Task.sleep(for: .seconds(1.5))
+                    copied = false
+                }
+            }
+            .buttonStyle(.bordered)
+            .frame(minWidth: 64)
         }
     }
 }

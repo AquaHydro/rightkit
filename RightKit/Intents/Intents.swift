@@ -29,7 +29,7 @@ struct CopyPathIntent: AppIntent {
 
     @MainActor
     func perform() async throws -> some IntentResult & ReturnsValue<String> {
-        let lines = urls(items).map { $0.path(percentEncoded: false) }
+        let lines = urls(items).map { PathRules.standardized($0.path(percentEncoded: false)) }
         Pasteboard.copyLines(lines)
         return .result(value: lines.joined(separator: "\n"))
     }

@@ -116,3 +116,16 @@ public enum ServiceNames {
 @objc public protocol AppXPC {
     func handle(_ envelope: Data, reply: @escaping @Sendable (Bool) -> Void)
 }
+
+public extension Command {
+    /// 会弹出窗口或对话框的命令。扩展先请系统把主程序带到前台，否则访达仍在前台，对话框拿不到键盘焦点。
+    func presentsUI(settings: Settings) -> Bool {
+        switch action {
+        case .openSettings, .hash, .convertImage, .airDrop, .setFolderIcon: true
+        case .newFile: settings.askFileName
+        case .copyTo, .moveTo: argument == nil
+        case .deletePermanently: settings.confirmPermanentDelete
+        default: false
+        }
+    }
+}

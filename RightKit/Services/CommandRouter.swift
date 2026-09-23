@@ -17,7 +17,7 @@ final class CommandRouter {
     }
 
     func handle(_ request: ValidatedRequest) {
-        log.info("handle \(request.command.action.rawValue, privacy: .public) items=\(request.items.count)")
+        log.notice("handle \(request.command.action.rawValue, privacy: .public) items=\(request.items.count)")
         Task { await perform(request) }
     }
 
@@ -38,9 +38,9 @@ final class CommandRouter {
 
         case .copyCurrentPath:
             guard let folder = request.folder else { return Alerts.showFailure(for: action) }
-            Pasteboard.copyLines([folder.path(percentEncoded: false)])
+            Pasteboard.copyLines([PathRules.standardized(folder.path(percentEncoded: false))])
         case .copyPath:
-            Pasteboard.copyLines(items.map { $0.path(percentEncoded: false) })
+            Pasteboard.copyLines(items.map { PathRules.standardized($0.path(percentEncoded: false)) })
         case .copyName:
             Pasteboard.copyLines(items.map { FileManager.default.displayName(atPath: $0.path(percentEncoded: false)) })
 
