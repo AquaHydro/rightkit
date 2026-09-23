@@ -4,13 +4,14 @@
 
 ## 目标
 
-最低系统 macOS 26。三个目标：
+最低系统 macOS 26。四个目标：
 
 - `RightKit`：SwiftUI 主程序，`LSUIElement = true`。负责设置、欢迎窗口、确认、哈希和二维码窗口、文件操作、系统服务、App Intents。
 - `RightKitFinder`：Finder Sync Extension。只读取当前菜单目标、生成菜单、把动作发给主程序。
+- `RightKitAgent`：主程序包内 `Contents/MacOS` 下的命令行程序，签名标识 `app.rightkit.mac.agent`，由 `SMAppService.agent` 注册为 LaunchAgent。只负责持有 XPC 服务名、校验来者并把请求转交主程序，不处理文件。
 - `RightKitCore`：Swift package。放菜单规则、命名、保护路径、模板描述和设置模型。不链接 SwiftUI，也不读写磁盘。
 
-开发期 bundle ID 使用 `app.rightkit.mac`，扩展使用 `app.rightkit.mac.finder`，App Group 使用 `group.app.rightkit.mac`。不要改成 `com.rightkit.app`。两个 target 都启用 App Groups，并使用同一个开发团队签名；扩展启用 App Sandbox，主程序不启用。
+开发期 bundle ID 使用 `app.rightkit.mac`，扩展使用 `app.rightkit.mac.finder`，App Group 使用 `group.app.rightkit.mac`。不要改成 `com.rightkit.app`。主程序和扩展都启用 App Groups，所有 target 使用同一个开发团队签名；扩展启用 App Sandbox，主程序和 agent 不启用。
 
 主程序不启用 App Sandbox，因为操作目标是用户在访达里点中的任意项目。扩展按系统要求启用 Sandbox，但不在扩展里改文件。不要另外做一套商店沙盒分支。
 
@@ -27,7 +28,7 @@
 
 - 在菜单回调里只使用当次的目标文件夹和选中项快照。空白处的文件夹和选中的文件不能混用。
 - 可以同步读取体积很小的设置快照。不能在菜单回调里打开用户文件、计算哈希或转换图片。
-- 点击命令后把意图发给主程序。主程序没运行时先启动它，最多等 3 秒；仍不可用就放弃这次点击，不要在扩展里代做。
+- 点击命令后把意图发给主程序。主程序没运行时由 agent 启动它，最多等 3 秒；仍不可用就放弃这次点击，不要在扩展里代做。agent 本身不可用时，扩展直接打开主程序，由主程序显示「后台服务已关闭」。
 - 每个扩展进程启动时都从共享设置读取监视目录，并写入 `FIFinderSyncController.directoryURLs`。不注册 `/`；没有可用监视目录时注册空集合。
 
 `RightKitCore` 必须能在不打开访达的情况下测试菜单表、重名编号、保护路径和模板名。
@@ -40,13 +41,17 @@
 
 用户选择的文件夹和应用保存 bookmark 或 bundle ID，不保存可能失效后还继续使用的裸路径。监视目录、常用目录和发送到文件夹不见了，按功能规格显示「该文件夹已不存在。」
 
-扩展在自己的初始化里，向 App Group 写本次登录的心跳时间。主程序用它区分「已启用」和「未运行」。
+扩展在自己的初始化里，向 App Group 写心跳：时间和扩展进程号。主程序检查该进程仍在运行且确实是 `RightKitFinder`，以此判断本次登录中扩展是否在运行，区分「已启用」和「未运行」。
+
+主程序修改设置后发出 Darwin 通知 `group.app.rightkit.mac.settings`（不带数据）。扩展收到后重读设置并更新 `directoryURLs`。这只是“设置变了”的提醒，不传命令。
 
 ## 通信
 
-主程序发布名为 `group.app.rightkit.mac.command` 的本应用专用 XPC 服务。服务名必须以 App Group 标识符为前缀。消息包含 schema 版本、请求 ID、动作、目标 URL 列表和可选参数。
+普通 App 进程不能自己发布带名字的 XPC 服务，只有 launchd 管理的任务可以。因此由主程序包内的 `RightKitAgent` 通过 LaunchAgent 的 `MachServices` 发布名为 `group.app.rightkit.mac.command` 的本应用专用 XPC 服务。服务名以 App Group 标识符为前缀，沙盒里的扩展可以直接查找。消息包含 schema 版本、请求 ID、发出时间、动作、目标 URL 列表和可选参数。
 
-- 连接建立后先根据 audit token 验证签名标识符是 `app.rightkit.mac.finder`，并验证开发团队与主程序一致；验证失败立即断开。
+- 主程序每次启动都注册 agent（已注册时不重复），然后连接 agent，交出一个匿名 `NSXPCListener` 的 endpoint。agent 把扩展的请求原样转交这个 endpoint。
+- 主程序没有交出 endpoint 时，agent 用 `NSWorkspace` 启动主程序，最多等 3 秒。
+- agent 的监听用 `setConnectionCodeSigningRequirement` 只接受签名标识为 `app.rightkit.mac.finder` 或 `app.rightkit.mac`、且开发团队与 agent 自身一致的进程；主程序的匿名监听只接受 `app.rightkit.mac.agent`。团队标识从自身签名读取，不写死。验证失败立即断开。
 - XPC 方法只接收一个编码后的请求信封和一个结果回复。先检查信封大小、版本和字段类型，再解码 URL；不要把不受信任的数据直接当作路径使用。
 - 请求 ID 重复时忽略后到的一条。
 - 超过 30 秒的请求拒绝执行。

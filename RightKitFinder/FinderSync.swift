@@ -1,0 +1,168 @@
+import AppKit
+import FinderSync
+import os
+import RightKitCore
+
+/// 只读当次的菜单快照、组装菜单、把点击交给主程序（technical.md 扩展）。
+/// 访达在主线程调用这些方法；设置通知也回到主线程处理。
+final class FinderSync: FIFinderSync, @unchecked Sendable {
+    private let log = Logger(subsystem: ServiceNames.extensionBundleID, category: "menu")
+    private var settings = Settings()
+    /// 最近一次菜单的命令和目标快照。访达会复制菜单项，只有 tag 能可靠带回来。
+    private var commands: [Command] = []
+    private var snapshot: (folder: URL?, items: [URL]) = (nil, [])
+
+    override init() {
+        super.init()
+        SharedStore.writeHeartbeat()
+        reloadSettings()
+        let observer = Unmanaged.passUnretained(self).toOpaque()
+        CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), observer, { _, observer, _, _, _ in
+            guard let observer else { return }
+            let finderSync = Unmanaged<FinderSync>.fromOpaque(observer).takeUnretainedValue()
+            DispatchQueue.main.async { finderSync.reloadSettings() }
+        }, ServiceNames.settingsChanged as CFString, nil, .deliverImmediately)
+        log.info("Extension started, pid \(ProcessInfo.processInfo.processIdentifier)")
+    }
+
+    private func reloadSettings() {
+        if case .loaded(let loaded) = SharedStore.loadSettings(backupOnFailure: false) {
+            settings = loaded
+        } else {
+            settings = Settings.makeDefault(home: Self.home) { FileManager.default.fileExists(atPath: $0) }
+        }
+        L10n.setLanguage(settings.language)
+        // 不注册 `/`；不存在的目录不注册。
+        let urls = settings.monitoredFolders
+            .map(\.path)
+            .filter { $0 != "/" && FileManager.default.fileExists(atPath: $0) }
+            .map { URL(filePath: $0, directoryHint: .isDirectory) }
+        FIFinderSyncController.default().directoryURLs = Set(urls)
+        log.info("Monitoring \(urls.map(\.path).joined(separator: ", "), privacy: .public)")
+    }
+
+    /// 沙盒里 `NSHomeDirectory()` 是容器目录，要取真实主目录。
+    static let home: String = {
+        guard let pw = getpwuid(getuid()), let dir = pw.pointee.pw_dir else { return NSHomeDirectory() }
+        return String(cString: dir)
+    }()
+
+    // MARK: 工具栏（F-008）
+
+    override var toolbarItemName: String { "RightKit" }
+    override var toolbarItemToolTip: String { "RightKit" }
+    override var toolbarItemImage: NSImage {
+        NSImage(named: "MenuBarIcon") ?? NSImage(systemSymbolName: "contextualmenu.and.cursorarrow", accessibilityDescription: "RightKit")!
+    }
+
+    // MARK: 菜单
+
+    override func menu(for menuKind: FIMenuKind) -> NSMenu? {
+        let controller = FIFinderSyncController.default()
+        let location: MenuLocation
+        switch menuKind {
+        case .toolbarItemMenu: location = .toolbar
+        case .contextualMenuForContainer: location = .container
+        case .contextualMenuForItems, .contextualMenuForSidebar: location = .items
+        @unknown default: return nil
+        }
+        let folder = controller.targetedURL()
+        let items = location == .items ? (controller.selectedItemURLs() ?? []) : []
+        snapshot = (location == .toolbar ? nil : folder, items)
+
+        let input = MenuInput(
+            location: location,
+            folder: folder?.path(percentEncoded: false) ?? "/",
+            items: items.map(Self.selectedItem),
+            hasPendingPaste: !SharedStore.loadPending().isEmpty
+        )
+        let nodes = MenuBuilder.build(input, settings: settings, environment: Self.environment)
+        commands = []
+        log.info("menu kind=\(menuKind.rawValue) folder=\(input.folder, privacy: .public) items=\(items.count) -> \(nodes.map(\.title).joined(separator: "|"), privacy: .public)")
+        guard !nodes.isEmpty else { return nil }
+        let menu = NSMenu(title: "")
+        nodes.forEach { menu.addItem(makeItem($0)) }
+        return menu
+    }
+
+    private func makeItem(_ node: MenuNode) -> NSMenuItem {
+        if node.content == .separator { return .separator() }
+        let item = NSMenuItem(title: node.title, action: nil, keyEquivalent: "")
+        switch node.icon {
+        case .symbol(let name): item.image = NSImage(systemSymbolName: name, accessibilityDescription: nil)
+        case .app(let bundleID):
+            if let url = NSWorkspace.shared.urlForApplication(withBundleIdentifier: bundleID) {
+                let icon = NSWorkspace.shared.icon(forFile: url.path)
+                icon.size = NSSize(width: 16, height: 16)
+                item.image = icon
+            }
+        case nil: break
+        }
+        switch node.content {
+        case .command(let command):
+            item.action = #selector(runCommand(_:))
+            item.target = self
+            item.tag = commands.count
+            commands.append(command)
+        case .submenu(let children):
+            let submenu = NSMenu(title: node.title)
+            children.forEach { submenu.addItem(makeItem($0)) }
+            item.submenu = submenu
+        case .separator: break
+        }
+        return item
+    }
+
+    @objc private func runCommand(_ sender: NSMenuItem) {
+        guard commands.indices.contains(sender.tag) else { return }
+        let envelope = CommandEnvelope(command: commands[sender.tag], folder: snapshot.folder, items: snapshot.items)
+        log.info("perform \(envelope.command.action.rawValue, privacy: .public)")
+        CommandSender.send(envelope)
+    }
+
+    private static let environment = MenuEnvironment(
+        folderExists: { FileManager.default.fileExists(atPath: $0) },
+        displayName: { FileManager.default.displayName(atPath: $0) },
+        isAppInstalled: { NSWorkspace.shared.urlForApplication(withBundleIdentifier: $0) != nil }
+    )
+
+    /// 只读元数据，不打开文件。读不到时按 URL 的目录标记处理。
+    private static func selectedItem(_ url: URL) -> SelectedItem {
+        let values = try? url.resourceValues(forKeys: [.isDirectoryKey, .isHiddenKey, .hasHiddenExtensionKey])
+        return SelectedItem(
+            path: url.path(percentEncoded: false),
+            isDirectory: values?.isDirectory ?? url.hasDirectoryPath,
+            isHidden: values?.isHidden ?? url.lastPathComponent.hasPrefix("."),
+            isExtensionHidden: values?.hasHiddenExtension ?? false
+        )
+    }
+}
+
+/// 把请求交给 agent。agent 不可用时直接打开主程序，由它显示后台服务状态。
+enum CommandSender {
+    private static let log = Logger(subsystem: ServiceNames.extensionBundleID, category: "xpc")
+
+    static func send(_ envelope: CommandEnvelope) {
+        guard let data = try? envelope.encoded() else { return }
+        nonisolated(unsafe) let connection = NSXPCConnection(machServiceName: ServiceNames.command)
+        connection.remoteObjectInterface = NSXPCInterface(with: AgentXPC.self)
+        connection.resume()
+        let proxy = connection.remoteObjectProxyWithErrorHandler { error in
+            log.error("Agent unavailable: \(error.localizedDescription, privacy: .public)")
+            connection.invalidate()
+            openMainApp()
+        } as? AgentXPC
+        proxy?.submit(data) { accepted in
+            if !accepted { log.error("Request \(envelope.requestID, privacy: .public) was not accepted") }
+            connection.invalidate()
+        }
+    }
+
+    /// 扩展在 `RightKit.app/Contents/PlugIns/RightKitFinder.appex`。
+    static func openMainApp() {
+        let appURL = Bundle.main.bundleURL.deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+        let configuration = NSWorkspace.OpenConfiguration()
+        configuration.arguments = ["--agent-unavailable"]
+        NSWorkspace.shared.openApplication(at: appURL, configuration: configuration)
+    }
+}
