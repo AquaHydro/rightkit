@@ -65,7 +65,6 @@ RightKit 是 SwiftUI 主程序加 Finder Sync 扩展，访达的右键菜单由�
    - 样式：`website/src/styles.css`（`.finder`、`.menu`、`.mi`、`.ric`、`.file`、`.toast`、`.fake-cursor`）
    - 行为：`website/src/main.js` 的 `buildMenu()` 按 `F-061` 生成菜单，`act` 里是各动作的效果（新建进入重命名样式、复制移动时图标飞向侧栏、状态条提示）
    - 演示数据：`website/content.json` 的 `demo` 部分（文件「笔记.md」「季度报告.docx」「封面.png」「项目资料」，侧栏「下载」「桌面」「文稿」）
-   - 参考：`website/video/sample.html` 是一段已经做好的 12.5 秒样片，演示了怎么引用 `styles.css`、怎么用 `renderAt(t)` 驱动同一套菜单。可以借鉴时间轴写法，正式工程按 skill 的起步工程重建。
    - `reuseMode` 写 `website-adapter`，并注明「网页模拟的访达菜单，外观按 menu-system.html」。
 2. **设置窗口、进度窗口、哈希窗口**：只能用真实录屏，**不要用网页手绘 SwiftUI 窗口**。我会在 Mac 上录好放进 `website/video/film/recordings/`。没有录屏时先跳过这些镜头，在交付说明里列出来。
 3. **不要修改** `website/src/`、`website/assets/` 和应用源码。需要改的样式放在视频工程里覆盖。

@@ -11,6 +11,3 @@ xcuserdata/
 
 # 官网构建产物（python3 website/build.py）
 website/dist/
-
-# 介绍视频的渲染结果（node website/video/render.mjs）
-website/video/out/

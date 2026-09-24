@@ -36,15 +36,3 @@ python3 website/tools/export_images.py
 ```sh
 node website/tools/render_og.mjs
 ```
-
-## 介绍视频
-
-`video/` 里是用官网样式做的介绍视频。每个场景是一个 HTML 页面，画面只由时间决定，`render.mjs` 逐帧截图后用 ffmpeg 编码。
-
-```sh
-open website/video/sample.html                        # 在浏览器里实时预览，空格暂停，左右键跳 1 秒
-node website/video/render.mjs --still 2 6.8           # 导出这两个时间点的截图，检查画面
-node website/video/render.mjs                         # 导出 website/video/out/sample.mp4（1920 × 1080，60fps）
-```
-
-需要 Playwright 和带 libx264 的 ffmpeg（`brew install ffmpeg`）。样式直接引用 `src/styles.css`，官网改了颜色或菜单外观，重新渲染就能同步。输出在 `video/out/`，不入库。
