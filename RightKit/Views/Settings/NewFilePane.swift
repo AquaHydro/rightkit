@@ -38,7 +38,11 @@ struct NewFilePane: View {
                 }
                 .onMove { model.settings.newItems.move(fromOffsets: $0, toOffset: $1) }
             } header: {
-                Text(L("文件类型"))
+                HStack {
+                    Text(L("文件类型"))
+                    Spacer()
+                    Button(L("添加模板…"), action: addTemplate)
+                }
             } footer: {
                 HStack {
                     Text(L("拖动可调整菜单中的顺序。"))
@@ -46,7 +50,6 @@ struct NewFilePane: View {
                         .foregroundStyle(.secondary)
                     Spacer()
                     Button(L("恢复默认")) { model.settings.resetNewFilePage() }
-                    Button(L("添加模板…"), action: addTemplate)
                 }
             }
         }

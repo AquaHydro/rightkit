@@ -11,7 +11,17 @@ struct GeneralPane: View {
         @Bindable var model = model
         Pane {
             Section {
-                ExtensionStatusRow(confirmingRestart: $confirmingRestart)
+                ExtensionStatusCard(restart: { confirmingRestart = true })
+            }
+
+            MonitoredFoldersSection()
+
+            Section(L("功能")) {
+                FeatureGroupToggles(showsIcons: true)
+                Toggle(isOn: $model.settings.confirmPermanentDelete) {
+                    RowLabel(title: L("彻底删除前二次确认"), caption: L("受保护位置的拒绝提示不受这个开关影响。"),
+                             symbol: "exclamationmark.triangle", tint: .intentDanger)
+                }
             }
 
             Section(L("外观")) {
@@ -29,30 +39,20 @@ struct GeneralPane: View {
                 } label: {
                     RowLabel(title: L("语言"), symbol: "globe", tint: .intentGo)
                 }
-                Toggle(isOn: $model.settings.showMenuBarIcon) {
-                    RowLabel(title: L("显示菜单栏图标"), symbol: "menubar.rectangle", tint: .intentInspect)
-                }
                 Toggle(isOn: $model.settings.showMenuIcons) {
                     RowLabel(title: L("在菜单项中显示图标"), symbol: "photo", tint: .intentLook)
                 }
             }
 
-            Section {
+            Section(L("启动与菜单栏")) {
                 Toggle(isOn: $model.settings.launchAtLogin) {
                     RowLabel(title: L("登录时启动"), caption: L("让 RightKit 随登录运行，右键操作即点即用。"),
                              symbol: "power", tint: .intentCreate)
                 }
-            }
-
-            Section(L("功能")) {
-                FeatureGroupToggles(showsIcons: true)
-                Toggle(isOn: $model.settings.confirmPermanentDelete) {
-                    RowLabel(title: L("彻底删除前二次确认"), caption: L("受保护位置的拒绝提示不受这个开关影响。"),
-                             symbol: "exclamationmark.triangle", tint: .intentDanger)
+                Toggle(isOn: $model.settings.showMenuBarIcon) {
+                    RowLabel(title: L("显示菜单栏图标"), symbol: "menubar.rectangle", tint: .intentInspect)
                 }
             }
-
-            MonitoredFoldersSection()
         }
         .alert(L("重新启动访达？"), isPresented: $confirmingRestart) {
             Button(L("重新启动")) { FinderControl.restart() }
@@ -87,37 +87,59 @@ struct FeatureGroupToggles: View {
     }
 }
 
-/// F-001：状态点旁边一定有文字，一个区块最多一个突出按钮。
-struct ExtensionStatusRow: View {
+extension ExtensionStatus {
+    var caption: String {
+        switch self {
+        case .disabled: L("在“系统设置 → 通用 → 登录项与扩展”中打开 RightKit 的访达扩展，右键菜单才会出现。")
+        case .backgroundBlocked: L("请在“系统设置 → 通用 → 登录项与扩展 → 允许在后台”中打开 RightKit。")
+        case .notRunning: L("重启一次访达，菜单就会出现。")
+        case .enabled: L("一切就绪，去访达里右键试试。")
+        }
+    }
+
+    /// Riko 的表情头像，见 docs/design/brand-character.md 第 6 条。
+    var avatar: String {
+        switch self {
+        case .enabled: "StatusReady"
+        case .notRunning: "StatusSleepy"
+        case .disabled, .backgroundBlocked: "StatusPuzzled"
+        }
+    }
+
+    var needsSystemSettings: Bool { self == .disabled || self == .backgroundBlocked }
+}
+
+/// F-001：扩展状态卡片，设置「通用」页和欢迎窗口共用。
+/// 头像只是辅助，状态永远有文字；一个区块最多一个突出按钮。
+struct ExtensionStatusCard: View {
     @Environment(AppModel.self) private var model
-    @Binding var confirmingRestart: Bool
+    /// 为 nil 时不提供重启访达（欢迎窗口），系统设置按钮也改为普通样式，突出样式留给「开始使用」。
+    var restart: (() -> Void)?
 
     var body: some View {
         let status = model.extensionStatus
-        HStack(alignment: .center, spacing: 12) {
+        HStack(spacing: 12) {
+            CharacterAvatar(name: status.avatar, size: 56)
+                .id(status.avatar)
+                .transition(.opacity)
             VStack(alignment: .leading, spacing: 2) {
-                HStack(spacing: 6) {
-                    Image(systemName: "circle.fill")
-                        .font(.system(size: 8))
-                        .foregroundStyle(status.isHealthy ? Color.green : Color.secondary)
-                        .contentTransition(.symbolEffect(.replace))
-                        .accessibilityHidden(true)
-                    Text(status.title).font(.title3.weight(.semibold))
-                }
-                Text(status == .backgroundBlocked
-                     ? L("请在“系统设置 → 通用 → 登录项与扩展 → 允许在后台”中打开 RightKit。")
-                     : L("如果菜单项没有立即出现，请重启一次访达。"))
+                Text(status.title).font(.headline)
+                Text(status.caption)
                     .font(.callout)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
             }
             .accessibilityElement(children: .combine)
-            Spacer()
-            if status == .disabled || status == .backgroundBlocked {
-                Button(L("打开系统设置")) { FinderControl.openSettings(for: status) }
-                    .buttonStyle(.borderedProminent)
-            } else {
-                Button(L("重启访达")) { confirmingRestart = true }
+            Spacer(minLength: 0)
+            if status.needsSystemSettings {
+                if restart == nil {
+                    Button(L("打开系统设置")) { FinderControl.openSettings(for: status) }
+                } else {
+                    Button(L("打开系统设置")) { FinderControl.openSettings(for: status) }
+                        .buttonStyle(.borderedProminent)
+                }
+            } else if let restart {
+                Button(L("重启访达"), action: restart)
             }
         }
         .animation(.default, value: status)
@@ -152,7 +174,14 @@ struct MonitoredFoldersSection: View {
                 }
             }
             if model.settings.monitoredFolders.isEmpty {
-                Text(L("没有监视目录，访达菜单不会出现。")).foregroundStyle(.secondary)
+                HStack(spacing: 16) {
+                    Image("EmptyFolders").accessibilityHidden(true)
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(L("没有监视目录，访达菜单不会出现。")).font(.headline)
+                        Button(L("添加文件夹…"), action: add)
+                    }
+                }
+                .padding(.vertical, 4)
             }
         } header: {
             HStack {

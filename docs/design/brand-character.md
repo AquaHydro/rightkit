@@ -1,6 +1,6 @@
 # 品牌角色设定
 
-用于官网、社交媒体等对外物料的角色立绘。App 里只有欢迎窗口使用立绘（主立绘，圆形裁切放在 `#2A2B31` 底上）；设置窗口、关于弹出层、菜单栏和访达菜单都不放角色，界面视觉以 [DESIGN.md](../../DESIGN.md) 为准。
+用于官网、社交媒体等对外物料的角色立绘。App 里 Riko 出现在欢迎窗口、关于弹出层、设置「通用」页的扩展状态卡片（按状态换表情），以及「没有监视目录」的空状态；普通设置行、菜单栏和访达菜单都不放角色。具体规则以 [DESIGN.md](../../DESIGN.md) 为准。
 
 ## 角色来源
 
@@ -182,7 +182,7 @@ No text, no letters, no logos, no UI elements, no watermark.
 - 缩到 56 px 圆形时，三种表情一眼能分清。
 - 发卡在观者右侧刘海上，箭头朝左上，三条珊瑚线在右下；手指数目正确。
 - 「zz」和问号只画成图形，不出现字母；小白鼠只有观者右侧那只耳朵是珊瑚色。
-- 定稿后放到 `website/assets/character/`，由我导出 56、112 px 两档放进 App。
+- 定稿后放到 `website/assets/character/`，导出 56、112、168 px 三档放进 App（`StatusReady`、`StatusSleepy`、`StatusPuzzled`）。
 
 ## 导出
 

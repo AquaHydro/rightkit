@@ -1,0 +1,23 @@
+{
+  "images": [
+    {
+      "filename": "StatusPuzzled.png",
+      "idiom": "universal",
+      "scale": "1x"
+    },
+    {
+      "filename": "StatusPuzzled@2x.png",
+      "idiom": "universal",
+      "scale": "2x"
+    },
+    {
+      "filename": "StatusPuzzled@3x.png",
+      "idiom": "universal",
+      "scale": "3x"
+    }
+  ],
+  "info": {
+    "author": "xcode",
+    "version": 1
+  }
+}
