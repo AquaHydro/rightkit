@@ -150,14 +150,17 @@ struct CharacterAvatar: View {
 
 /// 列表行末尾的移除按钮。
 struct RemoveButton: View {
+    let itemName: String
     let action: () -> Void
+
+    private var accessibilityTitle: String { "\(L("移除")) \(itemName)" }
 
     var body: some View {
         Button(action: action) {
             Image(systemName: "minus.circle")
         }
         .buttonStyle(.borderless)
-        .help(L("移除"))
-        .accessibilityLabel(L("移除"))
+        .help(accessibilityTitle)
+        .accessibilityLabel(accessibilityTitle)
     }
 }

@@ -6,6 +6,7 @@ import UniformTypeIdentifiers
 struct NewFilePane: View {
     @Environment(AppModel.self) private var model
     @State private var importFailed = false
+    @State private var importTask: Task<Void, Never>?
 
     var body: some View {
         @Bindable var model = model
@@ -32,7 +33,7 @@ struct NewFilePane: View {
                             }
                         }
                         if case .custom(let template) = item.kind {
-                            RemoveButton { remove(template) }
+                            RemoveButton(itemName: template.name) { remove(template) }
                         }
                     }
                 }
@@ -41,7 +42,11 @@ struct NewFilePane: View {
                 HStack {
                     Text(L("文件类型"))
                     Spacer()
-                    Button(L("添加模板…"), action: addTemplate)
+                    if importTask == nil {
+                        Button(L("添加模板…"), action: addTemplate)
+                    } else {
+                        Button(L("取消")) { importTask?.cancel() }
+                    }
                 }
             } footer: {
                 HStack {
@@ -55,6 +60,7 @@ struct NewFilePane: View {
         }
         .disabled(!model.settings.groups.newFile)
         .alert(L("无法导入模板。"), isPresented: $importFailed) { Button(L("好")) {} }
+        .onDisappear { importTask?.cancel() }
     }
 
     private func addTemplate() {
@@ -64,11 +70,28 @@ struct NewFilePane: View {
         panel.prompt = L("添加")
         guard panel.runModal() == .OK, let url = panel.url else { return }
         guard let name = askTemplateName(default: Naming.removingExtension(url.lastPathComponent)) else { return }
-        do {
-            let template = try TemplateLibrary.importTemplate(from: url, name: name)
-            model.settings.newItems.append(NewItemEntry(kind: .custom(template), enabled: true))
-        } catch {
-            importFailed = true
+        guard importTask == nil else { return }
+
+        importFailed = false
+        importTask = Task { @MainActor in
+            var uncommittedTemplate: CustomTemplate?
+            defer {
+                if let uncommittedTemplate { TemplateLibrary.remove(uncommittedTemplate) }
+                importTask = nil
+            }
+            do {
+                let template = try await TemplateLibrary.importTemplate(from: url, name: name)
+                uncommittedTemplate = template
+                try Task.checkCancellation()
+                model.settings.newItems.append(NewItemEntry(kind: .custom(template), enabled: true))
+                uncommittedTemplate = nil
+            } catch is CancellationError {
+                // 用户取消或页面关闭不显示失败提醒。
+            } catch FileEngineError.cancelled {
+                // copyfile 的协作式取消使用文件引擎错误返回。
+            } catch {
+                importFailed = true
+            }
         }
     }
 

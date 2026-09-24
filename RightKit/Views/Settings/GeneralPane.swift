@@ -220,21 +220,24 @@ struct FolderRow: View {
     var body: some View {
         let refreshed = FolderStore.refreshed(entry)
         let exists = FolderStore.exists(refreshed)
+        let title = exists ? FolderStore.displayName(refreshed) : (refreshed.path as NSString).lastPathComponent
         HStack(spacing: 12) {
             if let isOn, showsToggle {
-                Toggle(isOn: isOn) { EmptyView() }.labelsHidden()
+                Toggle(isOn: isOn) { EmptyView() }
+                    .labelsHidden()
+                    .accessibilityLabel(title)
             }
             if exists {
                 FileIcon(path: refreshed.path)
             } else {
                 RowIcon(symbol: "questionmark.folder", tint: .intentInspect)
             }
-            RowLabel(title: exists ? FolderStore.displayName(refreshed) : (refreshed.path as NSString).lastPathComponent,
+            RowLabel(title: title,
                      caption: exists ? refreshed.path : L("该文件夹已不存在。"),
                      monospacedCaption: exists)
                 .textSelection(.enabled)
             Spacer()
-            RemoveButton(action: remove)
+            RemoveButton(itemName: title, action: remove)
         }
     }
 }

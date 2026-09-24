@@ -1,0 +1,1 @@
+../RightKit/Services/TemplateLibrary.swift

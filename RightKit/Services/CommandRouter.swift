@@ -9,6 +9,7 @@ final class CommandRouter {
     private let model: AppModel
     private let windows: WindowOpener
     private let progress: ProgressCenter
+    private var pasteInProgress = false
 
     init(model: AppModel, windows: WindowOpener, progress: ProgressCenter) {
         self.model = model
@@ -62,9 +63,15 @@ final class CommandRouter {
 
         case .paste:
             guard let folder = destinationFolder(request) else { return Alerts.showFailure(for: action) }
-            let pending = model.pendingPaste.map { URL(filePath: $0) }
-            model.setPending([])
-            await transfer(pending, to: folder, mode: .move, action: .paste)
+            guard !pasteInProgress else { return }
+            let pendingPaths = model.pendingPaste
+            guard !pendingPaths.isEmpty else { return }
+            pasteInProgress = true
+            defer { pasteInProgress = false }
+            let outcome = await transfer(pendingPaths.map { URL(filePath: $0) }, to: folder, mode: .move, action: .paste)
+            if model.pendingPaste == pendingPaths {
+                model.setPending(outcome.remaining.map { $0.path(percentEncoded: false) })
+            }
 
         case .copyTo, .moveTo:
             let mode: FileEngine.TransferMode = action == .copyTo ? .copy : .move
@@ -188,12 +195,13 @@ final class CommandRouter {
 
     // MARK: 传输
 
-    private func transfer(_ items: [URL], to folder: URL, mode: FileEngine.TransferMode, action: CommandAction) async {
-        guard !items.isEmpty else { return }
+    @discardableResult
+    private func transfer(_ items: [URL], to folder: URL, mode: FileEngine.TransferMode, action: CommandAction) async -> BatchWorker.Outcome {
+        guard !items.isEmpty else { return BatchWorker.Outcome() }
         let title = mode == .copy
             ? (items.count == 1 ? L("正在复制“%@”…", items[0].lastPathComponent) : L("正在复制 %d 个项目…", items.count))
             : (items.count == 1 ? L("正在移动“%@”…", items[0].lastPathComponent) : L("正在移动 %d 个项目…", items.count))
-        await batch(action, items, title: title, measure: mode == .copy || !items.allSatisfy { FileEngine.isSameVolume($0.path(percentEncoded: false), folder.path(percentEncoded: false)) }) { item, progress in
+        return await batch(action, items, title: title, measure: mode == .copy || !items.allSatisfy { FileEngine.isSameVolume($0.path(percentEncoded: false), folder.path(percentEncoded: false)) }) { item, progress in
             _ = try FileEngine.transfer(item, to: folder, mode: mode, progress: progress)
         }
     }
@@ -242,38 +250,20 @@ final class CommandRouter {
     }
 
     /// 逐项在后台执行，统计结果后只弹一条汇总。给了标题的操作会登记进度（F-075）。
+    @discardableResult
     private func batch(_ action: CommandAction, _ items: [URL], title: String?, measure: Bool,
-                       _ work: @escaping @Sendable (URL, OperationProgress) throws -> Void) async {
-        guard !items.isEmpty else { return }
+                       _ work: @escaping @Sendable (URL, OperationProgress) throws -> Void) async -> BatchWorker.Outcome {
+        guard !items.isEmpty else { return BatchWorker.Outcome() }
         let entry = title.map { progress.begin($0) }
         let tracker = entry?.progress ?? OperationProgress()
-        let counts = await Task.detached { () -> (succeeded: Int, failed: Int) in
-            // 按字节时先量总量，否则按项数。
-            if measure {
-                tracker.addTotal(items.reduce(0) { $0 + FileEngine.size(of: $1) })
-            } else {
-                tracker.addTotal(Int64(items.count))
-            }
-            var succeeded = 0, failed = 0
-            for item in items {
-                if tracker.isCancelled { break }
-                tracker.setCurrent(item.lastPathComponent)
-                do {
-                    try work(item, tracker)
-                    succeeded += 1
-                } catch FileEngineError.cancelled {
-                    break
-                } catch {
-                    failed += 1
-                }
-                if !measure { tracker.addCompleted(1) }
-            }
-            return (succeeded, failed)
+        let outcome = await Task.detached { () -> BatchWorker.Outcome in
+            BatchWorker.run(items, measure: measure, progress: tracker, work: work)
         }.value
         if let entry { progress.end(entry) }
-        if let message = Messages.summary(for: action, succeeded: counts.succeeded, failed: counts.failed, cancelled: tracker.isCancelled) {
+        if let message = Messages.summary(for: action, succeeded: outcome.succeeded, failed: outcome.failed, cancelled: outcome.cancelled) {
             Alerts.show(message)
         }
+        return outcome
     }
 
     private func report(_ action: CommandAction, _ results: [URL: Bool]) {

@@ -52,7 +52,9 @@ private struct OpenToolRow: View {
     var body: some View {
         let appURL = OpenToolDetector.appURL(tool.bundleID)
         HStack(spacing: 12) {
-            Toggle(isOn: $tool.enabled) { EmptyView() }.labelsHidden()
+            Toggle(isOn: $tool.enabled) { EmptyView() }
+                .labelsHidden()
+                .accessibilityLabel(tool.name)
             if let appURL {
                 FileIcon(path: appURL.path(percentEncoded: false))
             } else {
@@ -66,7 +68,7 @@ private struct OpenToolRow: View {
             }
             .labelsHidden()
             .fixedSize()
-            RemoveButton(action: remove)
+            RemoveButton(itemName: tool.name, action: remove)
         }
     }
 }

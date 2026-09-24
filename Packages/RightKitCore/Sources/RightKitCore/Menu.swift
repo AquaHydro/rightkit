@@ -168,9 +168,12 @@ public enum MenuBuilder {
     }
 
     static func toolboxNodes(_ items: [SelectedItem], settings: Settings) -> [MenuNode] {
+        let tools = enabledTools(settings)
+        guard !tools.isEmpty else { return [] }
         var nodes: [MenuNode] = []
         var lastGroup: Int?
-        for tool in enabledTools(settings) where applies(tool, to: items) {
+        let selection = SelectionSummary(items)
+        for tool in tools where selection.applies(tool) {
             if let lastGroup, lastGroup != tool.group { nodes.append(.separator) }
             lastGroup = tool.group
             nodes.append(leaf(title(of: tool, items: items, settings: settings), tool.symbol, Command(CommandAction(tool))))
@@ -180,23 +183,43 @@ public enum MenuBuilder {
 
     /// 工具箱内部的上下文匹配表（features.md）。
     public static func applies(_ tool: ToolboxCommand, to items: [SelectedItem]) -> Bool {
-        guard !items.isEmpty else { return false }
-        let files = items.filter(\.isFile).count
-        let folders = items.filter(\.isFolder).count
-        let images = items.filter(\.isImage).count
-        switch tool {
-        case .copyPath, .copyName, .aliasToDesktop, .airDrop, .grantWrite, .toggleHidden, .deletePermanently:
-            return true
-        case .newFolderFromName, .hash, .toggleExtension:
-            return files > 0
-        case .convertImage, .macIconset, .iosIconset:
-            return images > 0
-        case .setWallpaper:
-            return items.count == 1 && images == 1
-        case .setFolderIcon:
-            return (items.count == 1 && (folders == 1 || images == 1)) || (items.count == 2 && folders == 1 && images == 1)
-        case .dissolveFolder:
-            return folders == items.count
+        SelectionSummary(items).applies(tool)
+    }
+
+    private struct SelectionSummary {
+        let count: Int
+        let files: Int
+        let folders: Int
+        let images: Int
+
+        init(_ items: [SelectedItem]) {
+            count = items.count
+            var files = 0, folders = 0, images = 0
+            for item in items {
+                if item.isFolder { folders += 1 } else { files += 1 }
+                if item.isImage { images += 1 }
+            }
+            self.files = files
+            self.folders = folders
+            self.images = images
+        }
+
+        func applies(_ tool: ToolboxCommand) -> Bool {
+            guard count > 0 else { return false }
+            switch tool {
+            case .copyPath, .copyName, .aliasToDesktop, .airDrop, .grantWrite, .toggleHidden, .deletePermanently:
+                return true
+            case .newFolderFromName, .hash, .toggleExtension:
+                return files > 0
+            case .convertImage, .macIconset, .iosIconset:
+                return images > 0
+            case .setWallpaper:
+                return count == 1 && images == 1
+            case .setFolderIcon:
+                return (count == 1 && (folders == 1 || images == 1)) || (count == 2 && folders == 1 && images == 1)
+            case .dissolveFolder:
+                return folders == count
+            }
         }
     }
 
