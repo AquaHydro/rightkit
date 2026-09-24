@@ -8,3 +8,6 @@ xcuserdata/
 .env.*
 *.p12
 *.p8
+
+# 官网构建产物（python3 website/build.py）
+website/dist/

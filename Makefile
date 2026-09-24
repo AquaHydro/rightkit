@@ -2,7 +2,7 @@ DERIVED := .build/DerivedData
 APP := $(DERIVED)/Build/Products/Debug/RightKit.app
 XCODEBUILD := xcodebuild -project RightKit.xcodeproj -scheme RightKit -derivedDataPath $(DERIVED) -allowProvisioningUpdates
 
-.PHONY: generate build test verify run release release-unsigned
+.PHONY: generate build test verify run release release-unsigned website website-serve
 
 generate:
 	xcodegen generate
@@ -32,3 +32,11 @@ release-unsigned:
 # 自动化环境跳过登录项注册。
 run: build
 	open --env RIGHTKIT_SKIP_LOGIN_ITEM=1 $(APP)
+
+# 官网：生成 website/dist，中文在 /，英文在 /en/。只用 Python 标准库。
+website:
+	python3 website/build.py
+
+# 本地预览官网：http://localhost:8000
+website-serve: website
+	python3 -m http.server 8000 --directory website/dist

@@ -1,0 +1,10 @@
+{
+  "_comment": "占位配置。域名和下载地址定下来后只改这里。",
+  "url": "https://rightkit.example",
+  "download": "https://rightkit.example/download/RightKit.dmg",
+  "github": "https://github.com/AquaHydro/rightkit",
+  "releases": "https://github.com/AquaHydro/rightkit/releases",
+  "issues": "https://github.com/AquaHydro/rightkit/issues",
+  "version": "0.1.1",
+  "year": "2026"
+}
