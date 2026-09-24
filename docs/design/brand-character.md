@@ -123,6 +123,32 @@ Soft flat shading, clean vector-like look, no ground shadow (the website draws i
 | 工具箱 | `she opens a small coral toolbox full of tiny tools (ruler, magnifier, tag, hash symbol block), the white mouse helps from inside the box` |
 | 空状态、出错 | `she sits on a folder looking puzzled, the white mouse holds a tiny question-mark sign` |
 
+### 5. 应用欢迎窗口
+
+用在 App 首次启动的欢迎窗口，显示成 160 pt 的圆形头像。和官网素材不同，这张**不要透明背景**，直接画在图标底色上：透明图里的白色外套放进浅色窗口会没有轮廓，而圆形炭灰底和应用图标是同一个样子。
+
+参考图（按顺序上传）：
+
+1. `RightKit/Resources/AppIcon.icon/Assets/character.png`：发色、呆毛、发卡的基准。
+2. `website/assets/character/sheet.png`：设定表，服装和小白鼠。
+3. `website/assets/character/main.png`：画风和脸型，新图要和它像同一个画师画的，但动作不同。
+
+```text
+[固定风格段落]
+Welcome greeting avatar for the app's first-launch window. Bust-up portrait, facing the viewer, head slightly tilted, warm welcoming smile with eyes open, one hand raised beside her face in a small friendly wave (palm toward viewer, five clear fingers). The white mouse sits on her shoulder on the viewer's left and also waves one tiny paw.
+Solid flat charcoal background #2A2B31 filling the whole canvas, with a very soft coral glow behind her head. Soft coral rim light on hair and hoodie edges so the white hoodie separates clearly from the dark background.
+Composition for a circular crop: square 1:1, 1024 x 1024, face centered slightly above the middle, the whole head including the ahoge and the hair clip inside the central circle with at least 8% margin, waving hand and mouse also inside the circle. Nothing important in the four corners.
+No text, no letters, no logos, no UI elements, no watermark.
+```
+
+检查：
+
+- 发卡在观者右侧的刘海上，箭头朝左上，三条珊瑚线在右下。
+- 挥手的那只手是五根手指。
+- 在 160 px 圆形裁切下，呆毛、发卡、小白鼠都没有被切掉，脸在圆心略偏上。
+- 背景是纯色 `#2A2B31`，没有渐变色带，边缘和 App 里的圆形底色能接上。
+- 定稿后放到 `website/assets/character/welcome.png`，再导出 160 和 320 px 替换 `RightKit/Resources/Assets.xcassets/WelcomeCharacter.imageset`。
+
 ## 导出
 
 | 物料 | 格式 |

@@ -255,7 +255,7 @@ macOS 26 用 **Liquid Glass** 把“功能层”（工具栏、侧栏、菜单�
 
 - 首次启动时打开一个普通窗口（没有父窗口，所以也不是 sheet），单页，不做多步向导。
 - 内容自上而下：Riko 主立绘 160 pt，裁成圆形放在 `ink` 底色上（白色外套在浅色窗口里也有轮廓，和图标一致）；“欢迎使用 RightKit”、一句说明；扩展状态卡片；是否显示菜单栏图标的开关；“稍后设置”与 `.borderedProminent` 的“开始使用”。
-- 立绘是静态图，资源 `WelcomeCharacter`（1x 160 px、2x 320 px，从 `website/assets/character/main.png` 导出），不做浮动动画。
+- 立绘是静态图，资源 `WelcomeCharacter`（1x 160 px、2x 320 px，目前临时从 `website/assets/character/main.png` 导出，专用图按[品牌角色设定](docs/design/brand-character.md)第 5 条提示词生成后替换），不做浮动动画。
 - 扩展状态卡片：符号（已启用是绿色 `checkmark.circle.fill`，其他是灰色 `puzzlepiece.extension`）、状态文字和说明；需要时右侧一个普通样式的“打开系统设置”，突出样式留给“开始使用”。状态变化用 `.symbolEffect(.replace)` 和 `.animation(.default)`。
 - 这是设置窗口以外唯一出现角色的界面；关于弹出层仍用应用图标。
 - 之后的功能提示交给 TipKit，不再回到欢迎窗口。
