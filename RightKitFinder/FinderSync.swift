@@ -98,7 +98,7 @@ final class FinderSync: FIFinderSync, @unchecked Sendable {
         if node.content == .separator { return .separator() }
         let item = NSMenuItem(title: node.title, action: nil, keyEquivalent: "")
         switch node.icon {
-        case .symbol(let name): item.image = NSImage(systemSymbolName: name, accessibilityDescription: nil)
+        case .symbol(let name): item.image = NSImage(systemSymbolName: name, accessibilityDescription: nil).map(Self.menuSymbol)
         case .app(let bundleID):
             if let url = NSWorkspace.shared.urlForApplication(withBundleIdentifier: bundleID) {
                 item.image = Self.menuSized(NSWorkspace.shared.icon(forFile: url.path))
@@ -122,6 +122,31 @@ final class FinderSync: FIFinderSync, @unchecked Sendable {
         case .separator: break
         }
         return item
+    }
+
+    /// 访达收到的 SF Symbol 会被压成不带模板标记的黑色位图，深色模式下看不清。
+    /// 这里先按当前系统外观涂成菜单文字色，再标记为模板：访达认模板时由它着色（含高亮行），不认时颜色也已经对了。
+    /// 外观读全局 `AppleInterfaceStyle`，扩展进程自己的 `effectiveAppearance` 可能停在启动时的外观。
+    private static func menuSymbol(_ symbol: NSImage) -> NSImage {
+        let isDark = UserDefaults.standard.string(forKey: "AppleInterfaceStyle") == "Dark"
+        let size = symbol.size
+        guard let rep = NSBitmapImageRep(
+            bitmapDataPlanes: nil, pixelsWide: Int(size.width * 2), pixelsHigh: Int(size.height * 2),
+            bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false,
+            colorSpaceName: .deviceRGB, bytesPerRow: 0, bitsPerPixel: 0
+        ) else { return symbol }
+        rep.size = size
+        NSGraphicsContext.saveGraphicsState()
+        NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: rep)
+        let rect = NSRect(origin: .zero, size: size)
+        symbol.draw(in: rect)
+        NSColor(white: isDark ? 1 : 0, alpha: 0.85).set()
+        rect.fill(using: .sourceAtop)
+        NSGraphicsContext.restoreGraphicsState()
+        let image = NSImage(size: size)
+        image.addRepresentation(rep)
+        image.isTemplate = true
+        return image
     }
 
     /// 彩色图标统一缩到菜单的 16 pt，和 SF Symbol 对齐。

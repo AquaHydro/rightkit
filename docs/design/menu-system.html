@@ -202,7 +202,7 @@ body:not(.annot) .tag { visibility: hidden; }
 <table>
   <tr><th>元素</th><th>浅色 / 深色</th><th>高亮行</th><th>规则</th></tr>
   <tr><td>文字</td><td>系统 <code>labelColor</code>，自动切换</td><td>白色</td><td>只设 <code>title</code>，不用 <code>attributedTitle</code> 改颜色、字重或字号；不靠颜色、粗细或 emoji 传达含义。</td></tr>
-  <tr><td>SF Symbol</td><td>模板图，与文字同色</td><td>随文字变白</td><td>用 <code>NSImage(systemSymbolName:)</code> 的默认模板渲染；不设 <code>isTemplate = false</code>，不配调色板或多色。</td></tr>
+  <tr><td>SF Symbol</td><td>模板图，与文字同色</td><td>随文字变白</td><td>访达会把扩展传来的 SF Symbol 压成不带模板标记的位图，直接传会在深色下显示成黑色。扩展先按全局 <code>AppleInterfaceStyle</code> 涂成菜单文字色（深色为白 85%，浅色为黑 85%），再设 <code>isTemplate = true</code>。不配调色板或多色。</td></tr>
   <tr><td>彩色图标</td><td>不随浅色 / 深色变化</td><td>保持原色</td><td>跟随系统「图标与小组件样式」（默认、深色、透明、着色），与访达里同一文件的图标一致；不自己换图、加底板或描边。</td></tr>
   <tr><td>分隔线、背景、高亮</td><td>系统绘制</td><td>系统强调色</td><td>不设置 <code>NSMenu</code> 外观；强调色随用户设置。</td></tr>
 </table>
