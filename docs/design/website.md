@@ -137,6 +137,7 @@ Hero 里的访达窗口用 HTML 和 CSS 绘制。窗口里有 4 个项目：一�
 | `main.png` | 备用头像 | 已导出，页面暂未使用 |
 | `hero-dark.webp`、`hero-light.webp` | 备用 | 页面未使用 |
 | `sheet.png` | 生图基准，不上网页 | 已入库 |
+| `website/assets/apps/*.png` | 「在应用中打开」里终端、Ghostty、Visual Studio Code、Xcode 的真实图标 | 已用，按 macOS 图标网格导出 64 和 128。来源和权利人见 `website/assets/apps/SOURCES.md`，页脚写明商标归属。Apple 的两个图标正式上线前要确认符合 Apple 商标使用指南 |
 | 应用图标 | favicon、导航、分享图 | 从 `RightKit/Resources/AppIcon.icon` 合成，导出 64、180、512 |
 | `public/img/og.jpg` | 1200 × 630 分享图 | 由 `website/tools/og.html` 渲染（`node website/tools/render_og.mjs`，需要 Playwright） |
 | 应用截图或录屏 | 真实访达菜单和设置窗口 | 待做，需要在 Mac 上截取。首屏已经用 HTML 模拟菜单，截图以后可以放进功能分区 |

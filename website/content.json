@@ -99,10 +99,22 @@
         "note": "路径里有空格、引号也没关系。",
         "imgAlt": "Riko 用钥匙形状的光标打开一个应用窗口",
         "apps": [
-          "终端",
-          "Ghostty",
-          "Visual Studio Code",
-          "Xcode"
+          {
+            "name": "终端",
+            "icon": "terminal"
+          },
+          {
+            "name": "Ghostty",
+            "icon": "ghostty"
+          },
+          {
+            "name": "Visual Studio Code",
+            "icon": "vscode"
+          },
+          {
+            "name": "Xcode",
+            "icon": "xcode"
+          }
         ]
       },
       "toolbox": {
@@ -429,7 +441,8 @@
       "releases": "更新日志",
       "issues": "反馈问题",
       "character": "角色 Riko",
-      "copyright": "© {year} RightKit"
+      "copyright": "© {year} RightKit",
+      "trademarks": "终端和 Xcode 是 Apple Inc. 的商标，Visual Studio Code 是 Microsoft Corporation 的商标，Ghostty 图标归 Ghostty 项目所有。"
     },
     "demo": {
       "windowTitle": "桌面",
@@ -647,10 +660,22 @@
         "note": "Spaces and quotes in paths are handled safely.",
         "imgAlt": "Riko unlocks an app window with a key-shaped cursor",
         "apps": [
-          "Terminal",
-          "Ghostty",
-          "Visual Studio Code",
-          "Xcode"
+          {
+            "name": "Terminal",
+            "icon": "terminal"
+          },
+          {
+            "name": "Ghostty",
+            "icon": "ghostty"
+          },
+          {
+            "name": "Visual Studio Code",
+            "icon": "vscode"
+          },
+          {
+            "name": "Xcode",
+            "icon": "xcode"
+          }
         ]
       },
       "toolbox": {
@@ -977,7 +1002,8 @@
       "releases": "Release notes",
       "issues": "Report an issue",
       "character": "Meet Riko",
-      "copyright": "© {year} RightKit"
+      "copyright": "© {year} RightKit",
+      "trademarks": "Terminal and Xcode are trademarks of Apple Inc. Visual Studio Code is a trademark of Microsoft Corporation. The Ghostty icon belongs to the Ghostty project."
     },
     "demo": {
       "windowTitle": "Desktop",

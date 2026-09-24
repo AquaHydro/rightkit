@@ -186,7 +186,7 @@
         <h2 id="open-title" class="reveal">{{ t.sections.open.title }}</h2>
         <p class="body reveal">{{ t.sections.open.body }}</p>
         <ul class="apps reveal">
-          {% for app in t.sections.open.apps %}<li><span class="app-ic app-{{ loop.index }}" aria-hidden="true"></span>{{ app }}</li>{% endfor %}
+          {% for app in t.sections.open.apps %}<li><img class="app-ic" src="{{ base }}img/apps/{{ app.icon }}-64.webp" srcset="{{ base }}img/apps/{{ app.icon }}-128.webp 2x" width="32" height="32" alt="" loading="lazy" decoding="async">{{ app.name }}</li>{% endfor %}
         </ul>
         <p class="note reveal">{{ t.sections.open.note }}</p>
       </div>
@@ -316,7 +316,7 @@
       <a href="{{ site.issues }}">{{ t.footer.issues }}</a>
       <a href="{{ base }}{{ t.alt.href|raw }}" hreflang="{{ t.alt.lang }}" lang="{{ t.alt.lang }}">{{ t.alt.label }}</a>
     </nav>
-    <p class="copyright">{{ t.footer.copyright }}</p>
+    <p class="copyright">{{ t.footer.copyright }}<br><span class="trademarks">{{ t.footer.trademarks }}</span></p>
   </div>
   <p class="footer-mark" aria-hidden="true">RightKit</p>
 </footer>

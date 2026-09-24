@@ -292,16 +292,8 @@ h3 { font-size: 17px; line-height: 1.35; font-weight: 700; }
 .folder-ic { width: 16px; height: 12px; border-radius: 2px 3px 3px 3px; background: linear-gradient(#6cc4fb, #3fa6ee); }
 
 .apps { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
-.apps li { display: inline-flex; align-items: center; gap: 10px; height: 44px; padding: 0 16px 0 8px; border-radius: 12px; background: #fff; box-shadow: 0 0 0 1px var(--line-paper); font-size: 14px; font-weight: 600; }
-.app-ic { width: 28px; height: 28px; border-radius: 7px; position: relative; }
-.app-1 { background: #1c1c1e; box-shadow: inset 0 0 0 1px #48484a; }
-.app-1::after { content: ">_"; position: absolute; inset: 0; display: grid; place-items: center; font: 700 10px/1 var(--font-mono); color: #5f5; }
-.app-2 { background: linear-gradient(135deg, #3b3f5c, #1c1e2b); }
-.app-2::after { content: ""; position: absolute; left: 8px; top: 7px; width: 12px; height: 14px; border-radius: 6px 6px 3px 3px; background: #e8e8f0; }
-.app-3 { background: linear-gradient(135deg, #2fa1f1, #0a67c4); }
-.app-3::after { content: ""; position: absolute; inset: 8px 7px; border: 3px solid #fff; border-left-color: transparent; border-radius: 3px; transform: skewY(-10deg); }
-.app-4 { background: linear-gradient(135deg, #5ec2fb, #1476e0); }
-.app-4::after { content: ""; position: absolute; left: 7px; top: 12px; width: 14px; height: 4px; border-radius: 2px; background: #fff; transform: rotate(-45deg); box-shadow: 0 0 0 1px #0a4fa8; }
+.apps li { display: inline-flex; align-items: center; gap: 10px; height: 48px; padding: 0 16px 0 8px; border-radius: 12px; background: #fff; box-shadow: 0 0 0 1px var(--line-paper); font-size: 14px; font-weight: 600; }
+.app-ic { width: 32px; height: 32px; flex: none; filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.18)); }
 
 /* Toolbox */
 .toolbox-head { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 32px; align-items: end; }
@@ -382,6 +374,7 @@ h3 { font-size: 17px; line-height: 1.35; font-weight: 700; }
 .footer-links a { color: var(--on-ink-2); text-decoration: none; }
 .footer-links a:hover { color: var(--on-ink); }
 .copyright { width: 100%; font-size: 13px; color: var(--on-ink-2); }
+.trademarks { display: inline-block; margin-top: 6px; font-size: 12px; opacity: 0.8; }
 .footer-mark { margin-top: 32px; font: 900 clamp(80px, 21vw, 300px)/0.78 var(--font-display); letter-spacing: -0.05em; text-align: center; color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, 0.14); white-space: nowrap; user-select: none; }
 
 /* Motion. Only transform and opacity animate. */
