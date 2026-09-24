@@ -1,7 +1,7 @@
 import RightKitCore
 import SwiftUI
 
-/// 关于弹出层（设置窗口右上角）：Riko 头像、版本、标语和项目链接。
+/// 关于弹出层（设置窗口右上角）：应用图标（Q 版 Riko）、版本、标语和项目链接。
 struct AboutPane: View {
     private var version: String {
         let info = Bundle.main.infoDictionary
@@ -12,7 +12,10 @@ struct AboutPane: View {
 
     var body: some View {
         VStack(spacing: 12) {
-            CharacterAvatar(name: "WelcomeCharacter", size: 96)
+            Image(nsImage: NSApp.applicationIconImage)
+                .resizable()
+                .frame(width: 96, height: 96)
+                .accessibilityHidden(true)
             VStack(spacing: 4) {
                 Text("RightKit")
                     .font(.title2.weight(.semibold))
