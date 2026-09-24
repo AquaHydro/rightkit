@@ -23,9 +23,9 @@
 | 性格 | 开朗、手快、靠得住的小帮手，可爱但不幼稚 |
 | 年龄感 | 二十出头 |
 | 发型 | 蓬松的层次短发，长度到肩，碎发略乱 |
-| 眼睛 | 深炭灰，带珊瑚色小高光，脸颊有粉色腮红，对应图标里的竖条眼和腮红 |
+| 眼睛 | 深红棕色瞳孔，带亮高光，脸颊有粉色腮红。Q 版用图标里的竖条眼 |
 | 服装 | 奶白色宽松连帽外套，帽檐和袖口有炭灰 `#2A2B31` 滚边；胸前小口袋插一支铅笔和一张折角文件卡 |
-| 伙伴 | 一只圆滚滚的小白鼠，只有右耳是珊瑚色，暗指「鼠标右键」 |
+| 伙伴 | 一只圆滚滚的小白鼠，只有画面右侧那只耳朵是珊瑚色，暗指「鼠标右键」 |
 | 画风 | 干净的现代动画风：线条清爽，赛璐璐上色加柔和渐变，珊瑚色轮廓光。介于图标的扁平 Q 版和精致插画之间 |
 
 ## 用色
@@ -47,6 +47,8 @@
 - 图里不生成文字、字母和 Logo。标题、标语在网页上用 HTML 排版，方便改文案和做中英双语。
 - 不出现苹果 Logo 或访达笑脸图标，文件夹画成普通蓝色文件夹。
 - 立绘和小插图要透明背景：API 设 `background: "transparent"`，在 ChatGPT 里直接说要透明 PNG。
+- 透明素材不画地面阴影，阴影由网页用 CSS 画，否则浅色阴影在深色背景上会变成光圈。
+- 同一组 Q 版小插图用同一尺寸画布（1024 × 1536），头顶和脚底位置对齐。
 - 发卡和手指最容易画崩，用局部编辑修，修完对照图标检查箭头方向和三条横线。
 
 ## 提示词
@@ -60,9 +62,9 @@ Character: "Riko", the mascot of RightKit, a macOS right-click menu utility.
 A cheerful, quick-handed young woman, early 20s, friendly and capable.
 Hair: fluffy shoulder-length layered bob with soft messy strands, coral gradient from peach-coral #FF8F6C at the roots to rose-pink #FF5175 at the tips, one big curled ahoge on top of the head.
 Signature hair clip on the right side of the bangs: a small white rounded-square clip showing a black mouse cursor arrow with a white outline, next to three short coral horizontal lines like a context menu.
-Eyes: dark charcoal eyes with small coral highlights, soft pink blush on the cheeks, small warm smile.
+Eyes: deep reddish-brown eyes with bright highlights, soft pink blush on the cheeks, small warm smile.
 Outfit: oversized ivory-white hoodie with charcoal #2A2B31 trim on the hood edge and cuffs, a small chest pocket holding a pencil and a folded-corner file card.
-Companion: a tiny round white mouse (the animal) with only its right ear colored coral, sitting on her shoulder.
+Companion: a tiny round white mouse (the animal) with only the ear on the viewer's right side colored coral, sitting on her shoulder.
 Art style: clean modern anime illustration, crisp lineart, cel shading with soft gradients, gentle coral rim light, polished key-visual quality, cute but not childish. Keep the hair shape, hair color and hair clip exactly as in the reference image.
 No text, no letters, no logos, no watermark.
 ```
@@ -110,7 +112,7 @@ Q 版，风格贴近图标，透明背景。把 `{场景}` 换成下表中的一
 [固定风格段落]
 Chibi version of the character (2.5 head-body ratio), matching the app icon style: simple vertical-line eyes, round blush. Full body, transparent background.
 Scene: {场景}
-Soft flat shading, clean vector-like look, small drop shadow under her feet.
+Soft flat shading, clean vector-like look, no ground shadow (the website draws it).
 ```
 
 | 分区 | 场景 |
@@ -127,6 +129,8 @@ Soft flat shading, clean vector-like look, small drop shadow under her feet.
 | --- | --- |
 | 官网 Hero | WebP，约 2400 × 900 |
 | 立绘、小插图 | 透明 PNG 或 WebP |
+
+官网用到的素材清单、当前状态和官网设计见[官网设计](website.md)。
 
 ## 参考
 
