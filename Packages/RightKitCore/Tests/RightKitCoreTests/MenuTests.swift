@@ -130,6 +130,12 @@ import Testing
         #expect(!allNil(menu(.items, [file("a.png")])))
     }
 
+    @Test func concreteThingsUseRealIcons() {
+        let newFile = menu(.container)[0].children
+        #expect(newFile.allSatisfy { if case .fileType = $0.icon { true } else { false } })
+        #expect(newFile.first?.icon == .fileType(extension: settings.newItems.first { $0.enabled }!.fileExtension))
+    }
+
     // MARK: 工具箱表
 
     @Test func toolboxForFolder() {

@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RightKit 右键菜单设计系统</title>
+<style>
+/* 令牌取自 DESIGN.md；菜单本身由系统绘制，这里的尺寸只用于示意。 */
+:root {
+  --font: -apple-system, "SF Pro", "PingFang SC", system-ui, sans-serif;
+  --mono: "SF Mono", ui-monospace, Menlo, monospace;
+  --primary: #ff7973;
+  --primary-grad: linear-gradient(135deg, #ff8f6c, #ff5175);
+}
+/* 浅色值与深色值成对出现；深色取 Apple 系统色的深色变体。 */
+:root, .force-light {
+  color-scheme: light;
+  --accent: #007aff;
+  --surface: #ffffff;
+  --sunken: #f6f6f6;
+  --text: rgba(0,0,0,.85);
+  --text-2: rgba(0,0,0,.50);
+  --sep: rgba(0,0,0,.10);
+  --desktop: linear-gradient(160deg, #dfe6ee, #c9d3de);
+  --menu-bg: rgba(246,246,246,.80);
+  --menu-hi: #007aff;
+  /* 意图色：只用于文档与设置里的标注，不进入真实菜单。 */
+  --i-copy: #007aff;
+  --i-send: #00a3bf;
+  --i-inspect: #8e8e93;
+  --i-make: #34c759;
+  --i-look: #af52de;
+  --i-danger: #ff383c;
+  --i-nav: #ff8d28;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme=light]) {
+    color-scheme: dark;
+    --accent: #0a84ff; --surface: #1e1e1e; --sunken: #282828;
+    --text: rgba(255,255,255,.85); --text-2: rgba(255,255,255,.55); --sep: rgba(255,255,255,.10);
+    --desktop: linear-gradient(160deg, #2b3440, #161b22); --menu-bg: rgba(40,40,40,.80); --menu-hi: #0a84ff;
+    --i-copy: #0a84ff; --i-send: #5ac8f5; --i-inspect: #98989d; --i-make: #30d158;
+    --i-look: #bf5af2; --i-danger: #ff4245; --i-nav: #ff9230;
+  }
+}
+:root[data-theme=dark], .force-dark {
+  color-scheme: dark;
+  --accent: #0a84ff; --surface: #1e1e1e; --sunken: #282828;
+  --text: rgba(255,255,255,.85); --text-2: rgba(255,255,255,.55); --sep: rgba(255,255,255,.10);
+  --desktop: linear-gradient(160deg, #2b3440, #161b22); --menu-bg: rgba(40,40,40,.80); --menu-hi: #0a84ff;
+  --i-copy: #0a84ff; --i-send: #5ac8f5; --i-inspect: #98989d; --i-make: #30d158;
+  --i-look: #bf5af2; --i-danger: #ff4245; --i-nav: #ff9230;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font: 13px/1.55 var(--font); color: var(--text); background: var(--surface); }
+main { max-width: 1040px; margin: 0 auto; padding: 32px 24px 80px; }
+header { display: flex; gap: 16px; align-items: center; margin-bottom: 8px; }
+.logo { width: 44px; height: 44px; border-radius: 10px; background: var(--primary-grad); display: grid; place-items: center; color: #fff; font-weight: 700; }
+h1 { font-size: 26px; line-height: 32px; font-weight: 600; margin: 0; }
+h2 { font-size: 22px; line-height: 26px; font-weight: 600; margin: 48px 0 12px; padding-top: 20px; border-top: 1px solid var(--sep); }
+h3 { font-size: 15px; line-height: 20px; font-weight: 600; margin: 24px 0 8px; }
+p, li { max-width: 72ch; }
+.lead { color: var(--text-2); margin: 4px 0 0; }
+nav.toc { display: flex; flex-wrap: wrap; gap: 6px; margin: 20px 0 0; }
+nav.toc a, .chip { font-size: 11px; padding: 3px 10px; border-radius: 9999px; background: var(--sunken); color: var(--text); text-decoration: none; }
+code { font: 12px var(--mono); background: var(--sunken); padding: 1px 5px; border-radius: 4px; }
+table { border-collapse: collapse; width: 100%; margin: 8px 0; font-size: 12px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--sep); vertical-align: top; }
+td:first-child, th:first-child { white-space: nowrap; }
+th { font-weight: 600; color: var(--text-2); font-size: 11px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.card { background: var(--sunken); border-radius: 10px; padding: 14px; }
+.card h4 { margin: 0 0 4px; font-size: 13px; display: flex; align-items: center; gap: 8px; }
+.card p { margin: 4px 0 0; color: var(--text-2); font-size: 12px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; flex: none; display: inline-block; }
+.swatch { height: 44px; border-radius: 6px; margin-bottom: 6px; border: 1px solid var(--sep); }
+.do, .dont { border-left: 3px solid var(--i-make); padding: 6px 12px; margin: 6px 0; background: var(--sunken); border-radius: 0 6px 6px 0; }
+.dont { border-color: var(--i-danger); }
+.yes { color: var(--i-make); font-weight: 600; } .no { color: var(--text-2); }
+/* 菜单示意 */
+.playground { display: grid; grid-template-columns: 260px 1fr; gap: 24px; align-items: start; }
+@media (max-width: 720px) { .playground { grid-template-columns: 1fr; } }
+.controls label { display: block; margin: 4px 0; }
+.controls fieldset { border: 0; padding: 0; margin: 0 0 14px; }
+.controls legend { font-weight: 600; font-size: 11px; color: var(--text-2); margin-bottom: 4px; }
+.stage { display: grid; gap: 12px; }
+.pane { display: flex; gap: 8px; align-items: flex-start; overflow-x: auto; padding: 36px 24px 24px; border-radius: 10px; background: var(--desktop); color: var(--text); min-height: 300px; position: relative; }
+.pane::before { content: attr(data-label); position: absolute; top: 10px; left: 14px; font-size: 11px; color: var(--text-2); }
+.menu { position: relative; flex: none; min-width: 232px; padding: 5px; border-radius: 12px; background: var(--menu-bg); backdrop-filter: blur(30px) saturate(1.6); -webkit-backdrop-filter: blur(30px) saturate(1.6); border: .5px solid var(--sep); box-shadow: 0 8px 30px rgba(0,0,0,.2); }
+.mi { display: flex; align-items: center; gap: 8px; height: 24px; padding: 0 10px; border-radius: 6px; cursor: default; white-space: nowrap; position: relative; }
+.mi:hover, .mi.open { background: var(--menu-hi); color: #fff; }
+/* 高亮行里单色符号随文字变白，彩色图标保持原色。 */
+.mi:hover .ic, .mi.open .ic { opacity: 1; }
+.mi .ic { width: 16px; text-align: center; font-size: 11px; opacity: .8; font-family: var(--mono); }
+.mi .t { flex: 1; }
+.mi .chev { opacity: .6; }
+.mi .tag { width: 3px; height: 14px; border-radius: 2px; margin-left: -6px; }
+.msep { height: 1px; background: var(--sep); margin: 5px 10px; }
+.mhead { font-size: 11px; color: var(--text-2); padding: 2px 10px; }
+.ric { width: 16px; height: 16px; flex: none; border-radius: 3px; display: grid; place-items: center; font: 700 9px/1 var(--font); color: #fff; }
+.ric.doc { border-radius: 2px 5px 2px 2px; background: #fff; color: #555; box-shadow: inset 0 0 0 1px rgba(0,0,0,.15); font-size: 7px; }
+.ric.docx { background: #185abd; } .ric.xlsx { background: #107c41; } .ric.pptx { background: #c43e1c; }
+.ric.folder, .ric.downloads, .ric.desktop, .ric.documents { background: #5ab8f5; border-radius: 2px 2px 3px 3px; font-size: 8px; }
+.ric.terminal { background: #222; color: #3f3; font-family: var(--mono); }
+.ric.vscode { background: #0a78d7; }
+body:not(.annot) .tag { visibility: hidden; }
+.theme { margin-left: auto; }
+.theme button { font: inherit; font-size: 11px; border: 0; padding: 4px 10px; border-radius: 9999px; background: var(--sunken); color: var(--text); cursor: pointer; }
+.theme button[aria-pressed=true] { background: var(--accent); color: #fff; }
+</style>
+</head>
+<body class="annot">
+<main>
+<header>
+  <div class="logo" aria-hidden="true">R</div>
+  <div>
+    <h1>右键菜单设计系统</h1>
+    <p class="lead">RightKit · 访达上下文菜单 · 基于 DESIGN.md 与 MenuBuilder 提取，v0.2 提案</p>
+  </div>
+  <div class="theme" role="group" aria-label="外观">
+    <button data-t="auto" aria-pressed="true">跟随系统</button>
+    <button data-t="light" aria-pressed="false">浅色</button>
+    <button data-t="dark" aria-pressed="false">深色</button>
+  </div>
+</header>
+<nav class="toc">
+  <a href="#principles">原则</a><a href="#intents">意图分类</a><a href="#playground">交互预览</a>
+  <a href="#anatomy">结构与令牌</a><a href="#appearance">外观适配</a><a href="#copy">文案语法</a><a href="#matrix">场景矩阵</a>
+  <a href="#danger">危险操作</a><a href="#rules">Do / Don't</a><a href="#diff">相对现状的变化</a>
+</nav>
+
+<h2 id="principles">原则</h2>
+<div class="grid">
+  <div class="card"><h4>一眼看出目的</h4><p>每一项只属于一种意图。意图决定分组、位置和动词，用户扫一眼分组就知道这一块是干什么的。</p></div>
+  <div class="card"><h4>只出现相关项</h4><p>菜单内容由选择决定。永远不出现的项比灰掉的项好：不渲染禁用态。</p></div>
+  <div class="card"><h4>像系统自带的一样</h4><p>材质、高亮、字体、阴影、深色模式都交给 NSMenu。品牌不进入菜单。</p></div>
+  <div class="card"><h4>危险永远在底部</h4><p>破坏性操作固定在最后一组，靠位置与“…”提示，不靠颜色。</p></div>
+  <div class="card"><h4>零等待</h4><p><code>menu(for:)</code> 只读快照、同步构建。无动画、无 I/O、无网络。</p></div>
+</div>
+
+<h2 id="intents">意图分类</h2>
+<p>把菜单项按“用户想做什么”分成七类。意图色<strong>只用于本文档和设置窗口的标注</strong>；真实菜单里图标是单色 SF Symbol，由系统着色。</p>
+<div class="grid" id="intentCards"></div>
+
+<h2 id="playground">交互预览</h2>
+<p>选择场景，菜单按 <code>MenuBuilder</code> 的规则生成（逻辑直接移植自 <code>applies(_:to:)</code>）。左侧色条是意图标注，可关闭。浅色、深色两种外观同时渲染，用来对照图标与文字的显示效果。</p>
+<div class="playground">
+  <div class="controls">
+    <fieldset><legend>右键位置 / 选择</legend><div id="scenarios"></div></fieldset>
+    <fieldset><legend>状态</legend>
+      <label><input type="checkbox" id="paste"> 有待粘贴的剪切项</label>
+      <label><input type="checkbox" id="icons" checked> 在菜单项中显示图标</label>
+      <label><input type="checkbox" id="confirm" checked> 彻底删除前确认</label>
+      <label><input type="checkbox" id="annot" checked> 显示意图标注</label>
+      <label><input type="checkbox" id="proposal" checked> 使用 v0.2 分组提案</label>
+    </fieldset>
+  </div>
+  <div class="stage" id="stage" aria-live="polite">
+    <div class="pane force-light" data-label="浅色外观"></div>
+    <div class="pane force-dark" data-label="深色外观"></div>
+  </div>
+</div>
+
+<h2 id="anatomy">结构与令牌</h2>
+<h3>元素</h3>
+<table>
+  <tr><th>元素</th><th>模型</th><th>规则</th></tr>
+  <tr><td>命令项</td><td><code>.command(Command)</code></td><td>动词短语；可带 16 pt 图标；无快捷键（访达扩展不支持）。</td></tr>
+  <tr><td>子菜单</td><td><code>.submenu([MenuNode])</code></td><td>名词；只一层；≤ 约 7 项，超过用分隔线分组；空子菜单不出现。</td></tr>
+  <tr><td>分隔线</td><td><code>.separator</code></td><td>只用于意图边界；不出现在首尾，不连续出现。</td></tr>
+  <tr><td>图标</td><td><code>.symbol</code> / <code>.app(bundleID:)</code></td><td>指向具体事物用真实彩色图标（应用、文档类型、文件夹），抽象动作用单色 SF Symbol。同组要么都有，要么都没有。</td></tr>
+</table>
+<h3 id="icons">图标选择</h3>
+<p>判定方法：菜单项的宾语能在访达里看到吗？看得到就用它自己的图标，看不到就用 SF Symbol。真实图标由系统按当前安装的应用提供，例如装了 Microsoft Office 时 .docx 就是蓝色的 Word 文档图标。</p>
+<table>
+  <tr><th>宾语</th><th>图标</th><th>模型</th><th>来源（扩展内）</th><th>用在</th></tr>
+  <tr><td>应用</td><td><span class="ric vscode">⌘</span></td><td><code>.app(bundleID:)</code></td><td><code>NSWorkspace.icon(forFile: 应用路径)</code></td><td>在应用中打开</td></tr>
+  <tr><td>文档类型</td><td><span class="ric docx">W</span></td><td><code>.fileType(extension:)</code></td><td><code>NSWorkspace.icon(for: UTType)</code></td><td>新建文件（内置与自定义模板）</td></tr>
+  <tr><td>具体文件夹</td><td><span class="ric downloads">↓</span></td><td><code>.file(path:)</code></td><td><code>NSWorkspace.icon(forFile:)</code></td><td>常用目录、复制到、移动到的目标</td></tr>
+  <tr><td>动作 / 分类</td><td><code>scissors</code></td><td><code>.symbol</code></td><td>SF Symbol，单色，系统着色</td><td>剪切、工具箱、子菜单标题、“选择文件夹…”</td></tr>
+</table>
+<ul>
+  <li>彩色图标统一缩放到 16 pt，与 SF Symbol 对齐；不加描边、不加底色。</li>
+  <li>子菜单标题永远用 SF Symbol——它是分类，不是某个具体事物。</li>
+  <li>取不到真实图标（应用被卸载、类型未登记）时退回系统通用文档或文件夹图标，不留空位。</li>
+  <li>“在菜单项中显示图标”关闭时，彩色图标同样隐藏。</li>
+</ul>
+<h3>示意尺寸（系统绘制，仅供 mock）</h3>
+<table>
+  <tr><th>令牌</th><th>值</th><th>用途</th></tr>
+  <tr><td><code>menu.row-height</code></td><td>24 px</td><td>菜单行高</td></tr>
+  <tr><td><code>menu.icon</code></td><td>16 px</td><td>SF Symbol / 应用图标</td></tr>
+  <tr><td><code>menu.inset</code></td><td>5 px 外 / 10 px 内</td><td>面板内边距 / 行内边距</td></tr>
+  <tr><td><code>menu.radius</code></td><td>12 px 面板 / 6 px 高亮</td><td>Liquid Glass 面板与选中胶囊</td></tr>
+  <tr><td><code>typography.body-md</code></td><td>13 / 16 px, 400</td><td>菜单项文字</td></tr>
+</table>
+<h3>颜色</h3>
+<div class="grid" id="swatches"></div>
+
+<h2 id="appearance">外观适配</h2>
+<p>访达菜单画在访达进程里，永远跟随<strong>系统</strong>外观；RightKit 设置里的「主题」只作用于 RightKit 自己的窗口，不影响菜单。</p>
+<table>
+  <tr><th>元素</th><th>浅色 / 深色</th><th>高亮行</th><th>规则</th></tr>
+  <tr><td>文字</td><td>系统 <code>labelColor</code>，自动切换</td><td>白色</td><td>只设 <code>title</code>，不用 <code>attributedTitle</code> 改颜色、字重或字号；不靠颜色、粗细或 emoji 传达含义。</td></tr>
+  <tr><td>SF Symbol</td><td>模板图，与文字同色</td><td>随文字变白</td><td>用 <code>NSImage(systemSymbolName:)</code> 的默认模板渲染；不设 <code>isTemplate = false</code>，不配调色板或多色。</td></tr>
+  <tr><td>彩色图标</td><td>不随浅色 / 深色变化</td><td>保持原色</td><td>跟随系统「图标与小组件样式」（默认、深色、透明、着色），与访达里同一文件的图标一致；不自己换图、加底板或描边。</td></tr>
+  <tr><td>分隔线、背景、高亮</td><td>系统绘制</td><td>系统强调色</td><td>不设置 <code>NSMenu</code> 外观；强调色随用户设置。</td></tr>
+</table>
+<p class="lead">实测（macOS 26，2026-09-24）：终端、下载文件夹、.docx、.txt 的 <code>NSWorkspace</code> 图标在 <code>aqua</code> 与 <code>darkAqua</code> 下绘制结果逐像素相同，跨进程归档后也相同。</p>
+<h3>发布前自检</h3>
+<ul>
+  <li>浅色、深色各右键一次：空白处、单张图片、单个文件夹。</li>
+  <li>辅助功能：增强对比度、减少透明度开启时文字仍清楚。</li>
+  <li>强调色改成非蓝色（例如石墨色）：高亮行里的文字与符号仍可读。</li>
+  <li>「图标与小组件样式」设为深色、着色：彩色图标与访达窗口里的一致。</li>
+  <li>关闭「在菜单项中显示图标」：纯文字菜单仍能看懂。</li>
+</ul>
+
+<h2 id="copy">文案语法</h2>
+<table>
+  <tr><th>类型</th><th>语法</th><th>正例</th><th>反例</th></tr>
+  <tr><td>命令项</td><td>动词 + 宾语</td><td>拷贝路径、设为壁纸</td><td>路径拷贝、壁纸</td></tr>
+  <tr><td>子菜单</td><td>名词，或“动词 + 到”表示去向</td><td>工具箱、新建文件、复制到</td><td>更多…、其他</td></tr>
+  <tr><td>需要进一步输入</td><td>结尾加“…”（全角省略号）</td><td>选择文件夹…、转换图片…</td><td>转换图片...（三个句点）</td></tr>
+  <tr><td>切换</td><td>写出执行后的结果；混合选择时写“A/B”</td><td>隐藏所选 / 显示所选 / 隐藏/显示所选</td><td>切换隐藏</td></tr>
+  <tr><td>用户命名</td><td>原样使用用户写的名称，不翻译</td><td>“项目资料”</td><td>—</td></tr>
+  <tr><td>标点</td><td>标题不加句号；用中文全角括号</td><td>文件信息（哈希）…</td><td>文件信息(哈希)。</td></tr>
+</table>
+<p>判定“…”的唯一标准：点击后是否还要用户再做选择或确认。例：“设置文件夹图标”在同时选中文件夹和图片时不加“…”，只选中其一时加。</p>
+
+<h2 id="matrix">场景矩阵</h2>
+<p>工具箱命令在各选择下是否出现（<span class="yes">●</span> 出现）。由 <code>applies(_:to:)</code> 生成。</p>
+<div id="matrix-table"></div>
+
+<h2 id="danger">危险操作</h2>
+<ul>
+  <li>危险组固定在工具箱最后，前面必有分隔线；即使只剩危险项也保持在末尾。</li>
+  <li>菜单项不着红色，不加 destructive 样式——菜单由系统绘制，位置本身就是信号。</li>
+  <li>不可撤销的操作（彻底删除）默认带“…”并弹确认；确认框不设默认按钮，Esc 取消。</li>
+  <li>可撤销但会改变结构的操作（解散文件夹）不确认，但也放在危险组。</li>
+</ul>
+
+<h2 id="rules">Do / Don't</h2>
+<div class="do">Do 按意图分组，组内按使用频率排序，组与组之间一条分隔线。</div>
+<div class="do">Do 在切换项的标题里写出点击后的结果。</div>
+<div class="do">Do 让关闭图标后的纯文字菜单仍然自足。</div>
+<div class="dont">Don't 显示禁用或灰掉的菜单项——不相关就不出现。</div>
+<div class="dont">Don't 嵌套第二层子菜单，或把一两项包进子菜单。</div>
+<div class="dont">Don't 给菜单项自定义颜色、字体、背景或意图色。</div>
+<div class="dont">Don't 在 <code>menu(for:)</code> 里读文件、算哈希或访问网络。</div>
+
+<h2 id="diff">相对现状的变化（v0.2 提案）</h2>
+<table>
+  <tr><th>方面</th><th>现状（v0.1）</th><th>提案</th><th>代码影响</th></tr>
+  <tr><td>顶层分组</td><td>无分隔线，平铺</td><td>按“创建 · 前往 · 移动 · 工具箱”分组，组间分隔线</td><td><code>buildNodes</code> 在意图切换处插入 <code>.separator</code></td></tr>
+  <tr><td>工具箱分组</td><td>5 组，按功能归类，第 2、4 组各 5 项且意图混杂</td><td>6 组按意图：拷贝 / 发送 / 查看与属性 / 创建 / 外观 / 危险</td><td>只改 <code>ToolboxCommand.group</code></td></tr>
+  <tr><td>文件信息（哈希）</td><td>与发送、权限同组</td><td>归入“查看与属性”</td><td>同上</td></tr>
+  <tr><td>授予写入权限</td><td>与发送同组</td><td>归入“查看与属性”</td><td>同上</td></tr>
+  <tr><td>具体事物的图标</td><td>只有“在应用中打开”用应用图标；新建文件与文件夹目标用通用 <code>doc</code> / <code>folder</code> 符号</td><td>新建文件用文档类型图标（Word、Excel…），文件夹目标用它在访达里的图标</td><td>已实现：<code>MenuIcon.fileType</code> / <code>.file</code></td></tr>
+  <tr><td>意图标注</td><td>无</td><td>设置窗口工具箱列表按意图分节，使用意图色圆点</td><td><code>ToolboxPane</code></td></tr>
+</table>
+</main>
+
+<script>
+const INTENTS = {
+  create: { name: "创建", en: "Create", color: "--i-make", desc: "在当前位置产生新东西：粘贴、新建文件、根据文件名新建文件夹、生成图标集。" },
+  nav:    { name: "前往", en: "Go", color: "--i-nav", desc: "打开另一个位置或应用：常用目录、在应用中打开。" },
+  copy:   { name: "拷贝", en: "Copy", color: "--i-copy", desc: "把信息放进剪贴板，不改变文件：拷贝路径、拷贝名称。" },
+  send:   { name: "移动与发送", en: "Move & Send", color: "--i-send", desc: "把文件送到别处：剪切、复制到、移动到、替身到桌面、隔空投送。" },
+  inspect:{ name: "查看与属性", en: "Inspect", color: "--i-inspect", desc: "读或改元数据，不改内容：哈希、权限、隐藏、扩展名。" },
+  look:   { name: "外观", en: "Appearance", color: "--i-look", desc: "改变某物的样子：设为壁纸、设置文件夹图标。" },
+  danger: { name: "危险", en: "Destructive", color: "--i-danger", desc: "移除或拆散，难以恢复：解散文件夹、彻底删除。永远在最后。" },
+};
+
+// 工具箱命令：v01 是现状分组（Catalog.swift），v02 是提案分组。
+const TOOLS = [
+  ["copyPath", "拷贝路径", "link", "copy", 1, 1],
+  ["copyName", "拷贝名称", "character.cursor.ibeam", "copy", 1, 1],
+  ["newFolderFromName", "根据文件名新建文件夹", "folder.badge.plus", "create", 2, 4],
+  ["aliasToDesktop", "发送替身到桌面", "arrowshape.turn.up.right", "send", 2, 2],
+  ["airDrop", "隔空投送", "dot.radiowaves.left.and.right", "send", 2, 2],
+  ["grantWrite", "授予写入权限", "lock.open", "inspect", 2, 3],
+  ["hash", "文件信息（哈希）…", "number", "inspect", 2, 3],
+  ["toggleHidden", "隐藏所选", "eye.slash", "inspect", 3, 3],
+  ["toggleExtension", "隐藏扩展名", "doc.badge.ellipsis", "inspect", 3, 3],
+  ["convertImage", "转换图片…", "photo.on.rectangle", "create", 4, 4],
+  ["macIconset", "生成 macOS 图标集", "macwindow", "create", 4, 4],
+  ["iosIconset", "生成 iOS 图标集", "iphone", "create", 4, 4],
+  ["setWallpaper", "设为壁纸", "photo", "look", 4, 5],
+  ["setFolderIcon", "设置文件夹图标…", "folder.badge.gearshape", "look", 4, 5],
+  ["dissolveFolder", "解散文件夹", "folder.badge.minus", "danger", 5, 6],
+  ["deletePermanently", "彻底删除…", "trash", "danger", 5, 6],
+].map(([id, title, symbol, intent, v01, v02]) => ({ id, title, symbol, intent, v01, v02 }));
+
+// 移植自 MenuBuilder.applies(_:to:)。
+function applies(id, items) {
+  if (!items.length) return false;
+  const files = items.filter(t => t !== "folder").length;
+  const folders = items.filter(t => t === "folder").length;
+  const images = items.filter(t => t === "image").length;
+  const n = items.length;
+  switch (id) {
+    case "newFolderFromName": case "hash": case "toggleExtension": return files > 0;
+    case "convertImage": case "macIconset": case "iosIconset": return images > 0;
+    case "setWallpaper": return n === 1 && images === 1;
+    case "setFolderIcon": return (n === 1 && (folders === 1 || images === 1)) || (n === 2 && folders === 1 && images === 1);
+    case "dissolveFolder": return folders === n;
+    default: return true;
+  }
+}
+
+const SCENARIOS = [
+  ["空白处", []], ["单个文件", ["file"]], ["单张图片", ["image"]], ["单个文件夹", ["folder"]],
+  ["文件夹 + 图片", ["folder", "image"]], ["多个文件", ["file", "file"]], ["多个文件夹", ["folder", "folder"]],
+];
+const $ = s => document.querySelector(s);
+let scenario = 1;
+
+$("#scenarios").innerHTML = SCENARIOS.map(([n], i) =>
+  `<label><input type="radio" name="sc" value="${i}" ${i === scenario ? "checked" : ""}> ${n}</label>`).join("");
+
+function node(title, symbol, intent, children) { return { title, symbol, intent, children }; }
+const SEP = { sep: true };
+// 真实彩色图标的示意：浏览器取不到系统图标，用近似色块代替。
+function real(title, cls, glyph, intent = "create") { return { title, real: cls, glyph, intent }; }
+
+function build() {
+  const items = SCENARIOS[scenario][1];
+  const none = !items.length, oneFolder = items.length === 1 && items[0] === "folder";
+  const proposal = $("#proposal").checked, confirm = $("#confirm").checked;
+  const top = [];
+  const push = (group, n) => top.push({ group, n });
+  if ($("#paste").checked && (none || oneFolder)) push(1, node("粘贴", "doc.on.clipboard", "create"));
+  if (none || oneFolder) push(1, node("新建文件", "doc.badge.plus", "create", [
+    real("文本文档", "doc", "txt"), real("Markdown", "doc", "md"), real("Word 文档", "docx", "W"),
+    real("Excel 表格", "xlsx", "X"), real("PowerPoint 演示文稿", "pptx", "P")]));
+  if (none) push(2, node("常用目录", "star", "nav", [real("下载", "downloads", "↓", "nav"), real("项目资料", "folder", "", "nav")]));
+  push(2, node("在应用中打开", "arrow.up.forward.app", "nav", [real("终端", "terminal", ">_", "nav"), real("Visual Studio Code", "vscode", "⌘", "nav")]));
+  if (none) push(2, node("拷贝当前路径", "link", "copy"));
+  if (!none) {
+    const dest = [real("桌面", "desktop", "▭", "send"), real("文稿", "documents", "≡", "send"), SEP, node("选择文件夹…", "folder.badge.questionmark", "send")];
+    push(3, node("剪切", "scissors", "send"));
+    push(3, node("复制到", "plus.rectangle.on.folder", "send", dest));
+    push(3, node("移动到", "arrow.forward.folder", "send", dest));
+    const kids = [];
+    let last;
+    TOOLS.filter(t => applies(t.id, items))
+      .sort((a, b) => (proposal ? a.v02 - b.v02 : a.v01 - b.v01))
+      .forEach(t => {
+        const g = proposal ? t.v02 : t.v01;
+        if (last !== undefined && last !== g) kids.push(SEP);
+        last = g;
+        let title = t.title;
+        if (t.id === "deletePermanently" && !confirm) title = "彻底删除";
+        if (t.id === "setFolderIcon" && items.length === 2) title = "设置文件夹图标";
+        kids.push(node(title, t.symbol, t.intent));
+      });
+    if (kids.length) push(4, node("工具箱", "wrench.and.screwdriver", "inspect", kids));
+  }
+  // 提案：顶层按意图分组，组间插分隔线。
+  const out = [];
+  top.forEach((e, i) => {
+    if (proposal && i > 0 && top[i - 1].group !== e.group) out.push(SEP);
+    out.push(e.n);
+  });
+  return out;
+}
+
+function renderMenu(nodes, depth = 0) {
+  const icons = $("#icons").checked;
+  const el = document.createElement("div");
+  el.className = "menu";
+  el.setAttribute("role", "menu");
+  nodes.forEach(n => {
+    if (n.sep) { el.insertAdjacentHTML("beforeend", `<div class="msep" role="separator"></div>`); return; }
+    const row = document.createElement("div");
+    row.className = "mi";
+    row.setAttribute("role", "menuitem");
+    row.title = n.real ? "真实图标：" + n.real : n.symbol;
+    row.innerHTML = `<span class="tag" style="background:var(${INTENTS[n.intent].color})"></span>` +
+      (icons ? (n.real ? `<span class="ric ${n.real}" aria-hidden="true">${n.glyph}</span>` : `<span class="ic" aria-hidden="true">◇</span>`) : "") +
+      `<span class="t">${n.title}</span>` + (n.children ? `<span class="chev">›</span>` : "");
+    if (n.children && depth === 0) {
+      row.setAttribute("aria-haspopup", "menu");
+      row.addEventListener("mouseenter", () => openSub(row, n.children));
+    } else if (depth === 0) {
+      row.addEventListener("mouseenter", () => openSub(row, null));
+    }
+    el.appendChild(row);
+  });
+  return el;
+}
+
+function openSub(row, children) {
+  const stage = row.closest(".pane");
+  stage.querySelectorAll(".menu.sub").forEach(m => m.remove());
+  stage.querySelectorAll(".mi.open").forEach(m => m.classList.remove("open"));
+  if (!children) return;
+  row.classList.add("open");
+  const sub = renderMenu(children, 1);
+  sub.classList.add("sub");
+  sub.style.marginTop = row.offsetTop - 5 + "px";
+  stage.appendChild(sub);
+}
+
+function render() {
+  const nodes = build();
+  document.querySelectorAll("#stage .pane").forEach(pane => {
+    pane.innerHTML = "";
+    const menu = renderMenu(nodes);
+    pane.appendChild(menu);
+    // 默认展开一个带图标的子菜单：有选择时展开工具箱，否则展开新建文件。
+    const open = nodes.find(n => n.title === "工具箱") || nodes.find(n => n.title === "新建文件");
+    if (open) openSub([...menu.children].find(r => r.textContent.includes(open.title)), open.children);
+  });
+  document.body.classList.toggle("annot", $("#annot").checked);
+}
+
+document.querySelectorAll(".controls input").forEach(i => i.addEventListener("change", () => {
+  if (i.name === "sc") scenario = +i.value;
+  render();
+}));
+
+document.querySelectorAll(".theme button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll(".theme button").forEach(x => x.setAttribute("aria-pressed", x === b));
+  if (b.dataset.t === "auto") document.documentElement.removeAttribute("data-theme");
+  else document.documentElement.dataset.theme = b.dataset.t;
+}));
+
+$("#intentCards").innerHTML = Object.values(INTENTS).map(i =>
+  `<div class="card"><h4><span class="dot" style="background:var(${i.color})"></span>${i.name} <span class="chip">${i.en}</span></h4><p>${i.desc}</p></div>`).join("");
+
+$("#swatches").innerHTML = [
+  ["primary", "--primary", "品牌珊瑚，仅图标与本页"], ["accent", "--accent", "系统强调色，菜单高亮"],
+  ["surface", "--surface", "窗口背景"], ["sunken", "--sunken", "分组背景"], ["separator", "--sep", "分隔线"],
+  ...Object.values(INTENTS).map(i => [`intent.${i.en.toLowerCase().replace(/ & /g, "-")}`, i.color, `${i.name}（仅标注）`]),
+].map(([n, v, d]) => `<div><div class="swatch" style="background:var(${v})"></div><code>${n}</code><div class="lead" style="font-size:11px">${d}</div></div>`).join("");
+
+$("#matrix-table").innerHTML = `<table><tr><th>命令</th><th>意图</th>${SCENARIOS.slice(1).map(s => `<th>${s[0]}</th>`).join("")}</tr>` +
+  TOOLS.map(t => `<tr><td>${t.title}</td><td><span class="dot" style="background:var(${INTENTS[t.intent].color})"></span> ${INTENTS[t.intent].name}</td>` +
+    SCENARIOS.slice(1).map(s => applies(t.id, s[1]) ? `<td class="yes">●</td>` : `<td class="no">—</td>`).join("") + "</tr>").join("") + "</table>";
+
+render();
+</script>
+</body>
+</html>

@@ -68,9 +68,14 @@ public struct MenuEnvironment: Sendable {
     }
 }
 
+/// 菜单项指向具体事物（应用、文档类型、文件夹）时用它的真实彩色图标，抽象动作用 SF Symbol。
 public enum MenuIcon: Equatable, Sendable {
     case symbol(String)
     case app(bundleID: String)
+    /// 该扩展名的文档图标，由默认打开它的应用提供（如 Word、Excel）。
+    case fileType(extension: String)
+    /// 文件夹在访达里的图标，包括下载、桌面等特殊文件夹和自定义图标。
+    case file(path: String)
 }
 
 public struct MenuNode: Equatable, Sendable {
@@ -118,12 +123,12 @@ public enum MenuBuilder {
         }
         if groups.newFile, isNone || isOneFolder {
             let children = settings.newItems.filter(\.enabled).map { item in
-                leaf(item.title + (settings.askFileName ? "…" : ""), "doc", Command(.newFile, item.id))
+                MenuNode(title: item.title + (settings.askFileName ? "…" : ""), icon: .fileType(extension: item.fileExtension), content: .command(Command(.newFile, item.id)))
             }
             if !children.isEmpty { nodes.append(submenu(L("新建文件"), "doc.badge.plus", children)) }
         }
         if groups.favorites, isNone {
-            let children = folders(settings.favorites, env).map { leaf(env.displayName($0.path), "folder", Command(.openFolder, $0.id.uuidString)) }
+            let children = folders(settings.favorites, env).map { folderLeaf($0, Command(.openFolder, $0.id.uuidString), env) }
             if !children.isEmpty { nodes.append(submenu(L("常用目录"), "star", children)) }
         }
         if groups.openIn {
@@ -143,7 +148,7 @@ public enum MenuBuilder {
         if groups.copyMove {
             let targets = folders(settings.sendTo, env)
             func transfer(_ title: String, _ symbol: String, _ action: CommandAction) -> MenuNode {
-                var children = targets.map { leaf(env.displayName($0.path), "folder", Command(action, $0.id.uuidString)) }
+                var children = targets.map { folderLeaf($0, Command(action, $0.id.uuidString), env) }
                 if !children.isEmpty { children.append(.separator) }
                 children.append(leaf(L("选择文件夹…"), "folder.badge.questionmark", Command(action)))
                 return submenu(title, symbol, children)
@@ -239,6 +244,10 @@ public enum MenuBuilder {
 
     static func leaf(_ title: String, _ symbol: String, _ command: Command) -> MenuNode {
         MenuNode(title: title, icon: .symbol(symbol), content: .command(command))
+    }
+
+    static func folderLeaf(_ entry: FolderEntry, _ command: Command, _ env: MenuEnvironment) -> MenuNode {
+        MenuNode(title: env.displayName(entry.path), icon: .file(path: entry.path), content: .command(command))
     }
 
     static func submenu(_ title: String, _ symbol: String, _ children: [MenuNode]) -> MenuNode {

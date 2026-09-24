@@ -2,6 +2,7 @@ import AppKit
 import FinderSync
 import os
 import RightKitCore
+import UniformTypeIdentifiers
 
 /// 只读当次的菜单快照、组装菜单、把点击交给主程序（technical.md 扩展）。
 /// 访达在主线程调用这些方法；设置通知也回到主线程处理。
@@ -100,10 +101,12 @@ final class FinderSync: FIFinderSync, @unchecked Sendable {
         case .symbol(let name): item.image = NSImage(systemSymbolName: name, accessibilityDescription: nil)
         case .app(let bundleID):
             if let url = NSWorkspace.shared.urlForApplication(withBundleIdentifier: bundleID) {
-                let icon = NSWorkspace.shared.icon(forFile: url.path)
-                icon.size = NSSize(width: 16, height: 16)
-                item.image = icon
+                item.image = Self.menuSized(NSWorkspace.shared.icon(forFile: url.path))
             }
+        case .fileType(let ext):
+            item.image = Self.menuSized(NSWorkspace.shared.icon(for: UTType(filenameExtension: ext) ?? .data))
+        case .file(let path):
+            item.image = Self.menuSized(NSWorkspace.shared.icon(forFile: path))
         case nil: break
         }
         switch node.content {
@@ -119,6 +122,12 @@ final class FinderSync: FIFinderSync, @unchecked Sendable {
         case .separator: break
         }
         return item
+    }
+
+    /// 彩色图标统一缩到菜单的 16 pt，和 SF Symbol 对齐。
+    private static func menuSized(_ icon: NSImage) -> NSImage {
+        icon.size = NSSize(width: 16, height: 16)
+        return icon
     }
 
     @objc private func runCommand(_ sender: NSMenuItem) {
