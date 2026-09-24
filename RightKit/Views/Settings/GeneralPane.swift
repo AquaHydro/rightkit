@@ -14,32 +14,41 @@ struct GeneralPane: View {
                 ExtensionStatusRow(confirmingRestart: $confirmingRestart)
             }
 
-            Section {
-                Picker(L("主题"), selection: $model.settings.theme) {
+            Section(L("外观")) {
+                Picker(selection: $model.settings.theme) {
                     Text(L("跟随系统")).tag(Theme.system)
                     Text(L("浅色")).tag(Theme.light)
                     Text(L("深色")).tag(Theme.dark)
+                } label: {
+                    RowLabel(title: L("主题"), symbol: "circle.lefthalf.filled")
                 }
-                .pickerStyle(.segmented)
-                Picker(L("语言"), selection: $model.settings.language) {
+                Picker(selection: $model.settings.language) {
                     Text(L("跟随系统")).tag(AppLanguage.system)
                     Text("English").tag(AppLanguage.english)
                     Text("简体中文").tag(AppLanguage.simplifiedChinese)
+                } label: {
+                    RowLabel(title: L("语言"), symbol: "globe", tint: .intentGo)
                 }
-                .pickerStyle(.segmented)
+                Toggle(isOn: $model.settings.showMenuBarIcon) {
+                    RowLabel(title: L("显示菜单栏图标"), symbol: "menubar.rectangle", tint: .intentInspect)
+                }
+                Toggle(isOn: $model.settings.showMenuIcons) {
+                    RowLabel(title: L("在菜单项中显示图标"), symbol: "photo", tint: .intentLook)
+                }
+            }
+
+            Section {
                 Toggle(isOn: $model.settings.launchAtLogin) {
-                    Text(L("登录时启动"))
-                    Text(L("让 RightKit 随登录运行，右键操作即点即用。"))
+                    RowLabel(title: L("登录时启动"), caption: L("让 RightKit 随登录运行，右键操作即点即用。"),
+                             symbol: "power", tint: .intentCreate)
                 }
-                Toggle(L("显示菜单栏图标"), isOn: $model.settings.showMenuBarIcon)
-                Toggle(L("在菜单项中显示图标"), isOn: $model.settings.showMenuIcons)
             }
 
             Section(L("功能")) {
-                FeatureGroupToggles()
+                FeatureGroupToggles(showsIcons: true)
                 Toggle(isOn: $model.settings.confirmPermanentDelete) {
-                    Text(L("彻底删除前二次确认"))
-                    Text(L("受保护位置的拒绝提示不受这个开关影响。"))
+                    RowLabel(title: L("彻底删除前二次确认"), caption: L("受保护位置的拒绝提示不受这个开关影响。"),
+                             symbol: "exclamationmark.triangle", tint: .intentDanger)
                 }
             }
 
@@ -54,17 +63,27 @@ struct GeneralPane: View {
     }
 }
 
-/// 五个功能组开关，设置页和菜单栏共用同一组值（F-005、F-006）。
+/// 五个功能组开关，设置页和菜单栏共用同一组值（F-005、F-006）。菜单栏菜单里不带图标块。
 struct FeatureGroupToggles: View {
     @Environment(AppModel.self) private var model
+    var showsIcons = false
 
     var body: some View {
         @Bindable var model = model
-        Toggle(L("新建文件"), isOn: $model.settings.groups.newFile)
-        Toggle(L("剪切和粘贴"), isOn: $model.settings.groups.cutPaste)
-        Toggle(L("复制到和移动到"), isOn: $model.settings.groups.copyMove)
-        Toggle(L("常用目录"), isOn: $model.settings.groups.favorites)
-        Toggle(L("在应用中打开"), isOn: $model.settings.groups.openIn)
+        toggle(L("新建文件"), "doc.badge.plus", .intentCreate, $model.settings.groups.newFile)
+        toggle(L("剪切和粘贴"), "scissors", .intentSend, $model.settings.groups.cutPaste)
+        toggle(L("复制到和移动到"), "arrow.forward.folder", .intentSend, $model.settings.groups.copyMove)
+        toggle(L("常用目录"), "star", .intentGo, $model.settings.groups.favorites)
+        toggle(L("在应用中打开"), "arrow.up.forward.app", .intentGo, $model.settings.groups.openIn)
+    }
+
+    @ViewBuilder
+    private func toggle(_ title: String, _ symbol: String, _ tint: Color, _ isOn: Binding<Bool>) -> some View {
+        if showsIcons {
+            Toggle(isOn: isOn) { RowLabel(title: title, symbol: symbol, tint: tint) }
+        } else {
+            Toggle(title, isOn: isOn)
+        }
     }
 }
 
@@ -83,7 +102,7 @@ struct ExtensionStatusRow: View {
                         .foregroundStyle(status.isHealthy ? Color.green : Color.secondary)
                         .contentTransition(.symbolEffect(.replace))
                         .accessibilityHidden(true)
-                    Text(status.title).bold()
+                    Text(status.title).font(.title3.weight(.semibold))
                 }
                 Text(status == .backgroundBlocked
                      ? L("请在“系统设置 → 通用 → 登录项与扩展 → 允许在后台”中打开 RightKit。")
@@ -172,27 +191,19 @@ struct FolderRow: View {
     var body: some View {
         let refreshed = FolderStore.refreshed(entry)
         let exists = FolderStore.exists(refreshed)
-        HStack(spacing: 8) {
+        HStack(spacing: 12) {
             if let isOn, showsToggle {
                 Toggle(isOn: isOn) { EmptyView() }.labelsHidden()
             }
             if exists {
                 FileIcon(path: refreshed.path)
             } else {
-                Image(systemName: "questionmark.folder")
-                    .frame(width: 20, height: 20)
-                    .foregroundStyle(.secondary)
-                    .accessibilityHidden(true)
+                RowIcon(symbol: "questionmark.folder", tint: .intentInspect)
             }
-            VStack(alignment: .leading, spacing: 2) {
-                Text(exists ? FolderStore.displayName(refreshed) : (refreshed.path as NSString).lastPathComponent)
-                Text(exists ? refreshed.path : L("该文件夹已不存在。"))
-                    .font(.callout.monospaced())
-                    .foregroundStyle(.secondary)
-                    .lineLimit(1)
-                    .truncationMode(.middle)
-                    .textSelection(.enabled)
-            }
+            RowLabel(title: exists ? FolderStore.displayName(refreshed) : (refreshed.path as NSString).lastPathComponent,
+                     caption: exists ? refreshed.path : L("该文件夹已不存在。"),
+                     monospacedCaption: exists)
+                .textSelection(.enabled)
             Spacer()
             RemoveButton(action: remove)
         }

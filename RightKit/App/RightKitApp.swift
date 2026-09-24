@@ -14,10 +14,14 @@ struct RightKitApp: App {
         .defaultLaunchBehavior(.presented)
         .restorationBehavior(.disabled)
 
-        Settings {
+        Window("RightKit", id: WindowID.settings) {
             SettingsView()
                 .environment(delegate.model)
         }
+        .windowResizability(.contentMinSize)
+        .windowToolbarStyle(.unified)
+        .restorationBehavior(.disabled)
+        .defaultLaunchBehavior(.suppressed)
 
         MenuBarExtra(isInserted: Bindable(delegate.model).settings.showMenuBarIcon) {
             MenuBarContent(windows: delegate.windows)

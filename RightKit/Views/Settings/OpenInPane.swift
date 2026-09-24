@@ -51,19 +51,14 @@ private struct OpenToolRow: View {
 
     var body: some View {
         let appURL = OpenToolDetector.appURL(tool.bundleID)
-        HStack(spacing: 8) {
+        HStack(spacing: 12) {
             Toggle(isOn: $tool.enabled) { EmptyView() }.labelsHidden()
             if let appURL {
                 FileIcon(path: appURL.path(percentEncoded: false))
             } else {
-                Image(systemName: "questionmark.app.dashed").frame(width: 20, height: 20).foregroundStyle(.secondary)
+                RowIcon(symbol: "questionmark.app.dashed", tint: .intentInspect)
             }
-            VStack(alignment: .leading, spacing: 2) {
-                Text(tool.name)
-                if appURL == nil {
-                    Text(L("“%@”已不在系统中。", tool.name)).font(.callout).foregroundStyle(.secondary)
-                }
-            }
+            RowLabel(title: tool.name, caption: appURL == nil ? L("“%@”已不在系统中。", tool.name) : nil)
             Spacer()
             Picker(L("角色"), selection: $tool.role) {
                 Text(L("编辑器")).tag(OpenToolRole.editor)

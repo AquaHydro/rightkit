@@ -43,6 +43,11 @@ typography:
     fontSize: 15px
     fontWeight: 600
     lineHeight: 20px
+  row-title:
+    fontFamily: SF Pro, PingFang SC
+    fontSize: 15px
+    fontWeight: 500
+    lineHeight: 20px
   label-lg:
     fontFamily: SF Pro, PingFang SC
     fontSize: 13px
@@ -87,8 +92,11 @@ components:
   settings-row:
     backgroundColor: "{colors.surface}"
     textColor: "{colors.on-surface}"
-    typography: "{typography.body-md}"
-    height: 36px
+    typography: "{typography.row-title}"
+    height: 44px
+  settings-row-icon:
+    rounded: 7px
+    size: 26px
   settings-row-dark:
     backgroundColor: "{colors.surface-dark}"
     textColor: "{colors.on-surface-dark}"
@@ -119,7 +127,7 @@ RightKit 是一个常驻后台的 macOS 工具：用户几乎只在访达右键�
 
 1. **菜单快而准。** 右键弹出不能等，只在用户配置的监视目录内出现与当前选择相关的命令。
 2. **像系统自带的一样。** 设置、菜单栏、对话框全部用系统组件，让 Liquid Glass、深色模式、强调色、“减少透明度”“增强对比度”、macOS 27 的玻璃透明度滑块都自动生效，不写一行适配代码。
-3. **品牌只在该出现的地方出现。** 珊瑚色渐变只属于应用图标、欢迎窗口和关于页。
+3. **品牌只在该出现的地方出现。** 珊瑚色渐变只属于应用图标、欢迎窗口和关于弹出层。
 
 基线：**最低 macOS 26**，不为更早系统保留回退路径。macOS 27 专属 API（例如 `.reorderable()`、`.confirmationDialog(item:)`）等最低版本提升后再用，在此之前不写 `#available` 分支。
 
@@ -127,7 +135,7 @@ RightKit 是一个常驻后台的 macOS 工具：用户几乎只在访达右键�
 
 **所有界面颜色来自系统语义色**，代码里用 `Color(nsColor: .labelColor)`、`.secondary`、`.separator` 这类语义名，不写色值。前置区的色值是浅色和深色外观下的 sRGB 预览，只用于文档和对比度检查。深色值以 `-dark` 后缀给出。
 
-- **Primary（珊瑚）** `primary` `#ff7973`，渐变从 `primary-start` `#ff8f6c` 到 `primary-end` `#ff5175`。这是品牌色，只用于应用图标、欢迎窗口、关于页和对外物料，**不进入任何控件**。
+- **Primary（珊瑚）** `primary` `#ff7973`，渐变从 `primary-start` `#ff8f6c` 到 `primary-end` `#ff5175`。这是品牌色，只用于应用图标、欢迎窗口、关于弹出层和对外物料，**不进入任何控件**。
 - **Accent（强调色）** 不在 Asset Catalog 里设置 AccentColor。控件用 `Color.accentColor`，跟随用户的系统强调色；前置区的 `accent` `#007aff` 只是“多色”默认下的预览占位。
   - 为什么不用珊瑚当强调色：HIG 允许单色界面把品牌色设为强调色，但白字要在按钮上达到 4.5:1，珊瑚需要压到约 `#e2123d`，这已经和 `systemRed` 几乎相同，而红色在本产品里专指“彻底删除”。同一颜色表达两种意思违反 HIG 的颜色一致性原则。
   - 另外，App 强调色只在用户选“多色”时生效，用户选了别的颜色会被覆盖，自定义强调色的收益本来就小。
@@ -136,7 +144,7 @@ RightKit 是一个常驻后台的 macOS 工具：用户几乎只在访达右键�
   - `neutral` 灰：扩展未启用或未运行。
   - `warning` 橙：受保护位置提示的符号。
   - `error` 红：只用于失败状态的符号。彻底删除按钮不染红，原因见 Components 的对话框规则。
-- **设置分栏图标** 用单色 SF Symbol，由工具栏按系统规则着色，不加彩色底块。
+- **设置行图标块**：每个设置行前一个 26 pt 圆角块，SF Symbol 用意图色，底色是同色 18% 透明度。意图色与访达菜单同一套（[菜单设计系统](docs/design/menu-system.html)）：创建绿、前往橙、拷贝蓝、移动与发送青、查看灰、外观紫、危险红，代码里是 `Color.intentCreate` 等系统色别名。文件夹、应用、文件类型行直接用访达里的真实图标，不加色块。颜色只是辅助，行标题永远写清含义。
 - **对比度**：主文字 `on-surface` 在两种外观下都高于 4.5:1。突出按钮的白字在默认蓝 `#007aff` 上约 4.0:1，这是 Apple 自己的组合，保持原样，由系统在“增强对比度”下处理。`on-surface-secondary` 是 Apple 原值，浅色下约 3.9:1，只用于 11 px 以上的辅助说明，不再调淡。系统色在“增强对比度”下会自动加深，这是不自定义颜色的另一个理由。
 
 ## Typography
@@ -146,11 +154,12 @@ RightKit 是一个常驻后台的 macOS 工具：用户几乎只在访达右键�
 | Token | SwiftUI | 用途 |
 | --- | --- | --- |
 | `headline-display` | `.largeTitle` 加 `.semibold` | 欢迎窗口标题 |
-| `headline-lg` | `.title2` 加 `.semibold` | 关于页产品名 |
+| `headline-lg` | `.title2` 加 `.semibold` | 关于弹出层产品名 |
 | `headline-md` | `.headline`（对话框标题由系统排版） | 窗口内小节标题 |
-| `label-lg` | `.body.bold()` | 扩展状态行 |
+| `row-title` | `.title3.weight(.medium)` | 设置行标题 |
+| `label-lg` | `.title3.weight(.semibold)` | 扩展状态行 |
 | `body-md` | `.body` | 设置项、菜单项、按钮 |
-| `body-sm` | `.callout` 或 `Form` 行的第二个 `Text` | 设置项说明 |
+| `body-sm` | `.callout` 加 `.secondary` | 设置行说明、分组脚注、路径（`.callout.monospaced()`） |
 | `label-sm` | `.caption` | 版本号、文件大小、算法名 |
 | `mono-md` | `.body.monospaced()` | 哈希、路径、文件名 |
 
@@ -163,7 +172,7 @@ RightKit 是一个常驻后台的 macOS 工具：用户几乎只在访达右键�
 布局由 `Form(.grouped)`、`List`、系统窗口决定，下面的间距只在极少数自绘位置使用（欢迎窗口、哈希窗口内部）。
 
 - `xs` 4 px：符号与文字；`sm` 8 px：行内元素；`md` 12 px：带边框控件周围的最小留白（HIG 建议约 12 pt）；`lg` 20 px：窗口内容边距；`xl` 32 px：欢迎窗口大块留白。
-- **设置窗口**：标准 `Settings` 场景，窗口高度随当前分栏内容变化，不可缩放，最小化和缩放按钮由系统置灰。
+- **设置窗口**：普通 `Window` 场景，可自由缩放。最小 420 × 360，理想 640 × 620，`.windowResizability(.contentMinSize)`；内容超出时 `Form` 自己滚动，标题栏固定。窗口窄时工具栏放不下的项目由系统收进溢出菜单，不自己做换行。
 - **小窗口**（哈希、二维码、欢迎）：`Window` 或 `WindowGroup(for:)`，`.windowResizability(.contentSize)`，内容决定尺寸。不写死窗口尺寸。
 - macOS 27 起窗口圆角更紧、工具栏统一在顶部、侧栏延伸到窗口边缘。全部使用系统容器即可自动获得，不要自己画窗口边框或圆角。
 
@@ -188,17 +197,20 @@ macOS 26 用 **Liquid Glass** 把“功能层”（工具栏、侧栏、菜单�
 
 ### 设置窗口
 
-- `Settings { TabView { … } }`，每个分栏一个 `Tab`，工具栏按钮不可自定义且始终显示当前分栏。分栏顺序：通用、新建文件、在应用中打开、常用目录、发送到、工具箱、关于。
-- 窗口标题随分栏变化；重新打开时回到上次的分栏（`@AppStorage` 记住选中项）。
-- 每个分栏内是 `Form { Section { … } }.formStyle(.grouped)`。
+- 布局参考 magpie 主界面：标题栏左侧是系统红绿灯和标题「RightKit」，中间是分段标签，右侧是图标按钮；下面是一张张分组卡片。全部用系统组件实现：`Window` 加 `.windowToolbarStyle(.unified)`，分段标签是 `ToolbarItem(placement: .principal)` 里的 `Picker(.segmented)`，玻璃由系统绘制。
+- 分栏只有五个，窄窗口也放得下：通用、新建文件、打开方式、目录（常用目录和发送到两个分组）、工具箱。「关于」是右上角 `info.circle` 按钮打开的弹出层，不占分栏。
+- 窗口标题固定为「RightKit」；重新打开时回到上次的分栏（`@AppStorage` 记住选中项）。
+- 每个分栏内是 `Form { Section { … } }.formStyle(.grouped)`：一个分组一张卡片，行间发丝线，分组标题在卡片外。
 - 「重启访达」放在「通用」的扩展状态区。「退出 RightKit」只放在菜单栏菜单。设置窗口只放设置。
-- RightKit 是 `LSUIElement` 应用，没有 App 菜单，所以从菜单栏打开设置时用 `SettingsLink`，并先激活应用，否则窗口会出现在其他应用后面。用户再次从访达或启动台打开 RightKit 时，直接打开设置窗口。
+- RightKit 是 `LSUIElement` 应用，没有 App 菜单，所以打开设置统一走 `openWindow(id: "settings")`，并先激活应用，否则窗口会出现在其他应用后面。用户再次从访达或启动台打开 RightKit 时，直接打开设置窗口。
 - 「通用」还显示监视目录列表。首次只有当前用户主目录；用户可添加或移除目录，不能添加 `/` 或系统目录。说明文字是「RightKit 仅在这些文件夹及其子文件夹的访达菜单中显示。」
 
 ### 设置行
 
-- 开关：`Toggle(isOn:) { Text("登录时启动"); Text("让 RightKit 随登录运行，右键操作即点即用。") }`，第二个 `Text` 自动成为次要说明。
-- 二到三个互斥选项用 `Picker` 的 `.segmented` 样式（主题：跟随系统、浅色、深色；语言：跟随系统、English、简体中文），更多选项用默认菜单样式。
+- 行标签统一用 `RowLabel(title:caption:symbol:tint:)`：图标块、`row-title` 标题、可选的 `.callout` 说明。放在 `Toggle`、`Picker` 的标签位置，控件由 `Form` 放在右侧。
+- 开关：`Toggle(isOn:) { RowLabel(title: "登录时启动", caption: "让 RightKit 随登录运行，右键操作即点即用。", symbol: "power", tint: .intentCreate) }`。
+- 选项：`Picker` 默认菜单样式（主题、语言），和 magpie 的下拉框一致，窄窗口下不会被挤压。分段样式只用于标题栏的分栏。
+- 菜单栏菜单里的同一组开关不带图标块，保持系统菜单的样子。
 - 可排序列表（新建类型、工具箱）：macOS 26 用 `List` 加 `.onMove`；最低版本提升到 27 后换成 `.reorderable()`。拖动把手、动画都由系统提供。
 - 禁用：`.disabled(true)`，文字和控件同时变灰；功能组关闭时，其下属设置整体禁用而不是隐藏。
 
@@ -296,14 +308,14 @@ macOS 26 用 **Liquid Glass** 把“功能层”（工具栏、侧栏、菜单�
 - 状态永远有文字，不只靠颜色。
 - 所有功能可只用键盘完成（完全键盘访问）；不覆盖系统快捷键。
 - 自绘元素（状态点、欢迎窗口图标）提供 `accessibilityLabel`。
-- 在浅色、深色、增强对比度三种外观下各检查一次设置窗口和哈希窗口。
+- 在浅色、深色、增强对比度三种外观下各检查一次设置窗口和哈希窗口；设置窗口还要在最小尺寸和拉宽后各检查一次。
 
 ## Do's and Don'ts
 
 - Do 用系统组件，让 Liquid Glass、深色、强调色自动生效。
 - Do 让菜单只显示与当前选择相关的命令，并把危险操作放在最后一组。
 - Do 给彻底删除确认写清对象和后果，不设默认按钮。
-- Do 把品牌色留给图标、欢迎窗口和关于页。
+- Do 把品牌色留给图标、欢迎窗口和关于弹出层。
 - Don't 设置自定义 AccentColor，也不要把珊瑚色用在按钮或开关上。
 - Don't 在内容层或列表上加 `.glassEffect()`，不做玻璃叠玻璃。
 - Don't 提供表面材质开关，也不为 macOS 26 以前的系统写回退。

@@ -1,7 +1,7 @@
 import RightKitCore
 import SwiftUI
 
-/// 关于页：品牌色只出现在图标里。
+/// 关于弹出层（设置窗口右上角）：品牌色只出现在图标里。
 struct AboutPane: View {
     private var version: String {
         let info = Bundle.main.infoDictionary
@@ -25,10 +25,9 @@ struct AboutPane: View {
             Text(L("访达右键菜单工具。新建文件、复制移动、在应用中打开，以及一组文件工具。"))
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.secondary)
-                .frame(maxWidth: 360)
                 .fixedSize(horizontal: false, vertical: true)
         }
-        .padding(32)
-        .frame(width: 540)
+        .padding(24)
+        .frame(width: 320)
     }
 }

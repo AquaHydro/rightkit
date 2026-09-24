@@ -12,11 +12,11 @@ struct NewFilePane: View {
         Pane {
             Section {
                 Toggle(isOn: $model.settings.openAfterCreate) {
-                    Text(L("创建后自动打开文件"))
-                    Text(L("使用该文件类型的默认应用打开。"))
+                    RowLabel(title: L("创建后自动打开文件"), caption: L("使用该文件类型的默认应用打开。"),
+                             symbol: "arrow.up.forward.app", tint: .intentGo)
                 }
                 Toggle(isOn: $model.settings.askFileName) {
-                    Text(L("创建前询问文件名"))
+                    RowLabel(title: L("创建前询问文件名"), symbol: "character.cursor.ibeam", tint: .intentCopy)
                 }
             }
 
@@ -24,9 +24,12 @@ struct NewFilePane: View {
                 ForEach($model.settings.newItems) { $item in
                     HStack(spacing: 8) {
                         Toggle(isOn: $item.enabled) {
-                            Text(item.title)
-                            Text(item.fileExtension.isEmpty ? L("无扩展名") : "." + item.fileExtension)
-                                .monospaced()
+                            HStack(spacing: 12) {
+                                FileIcon(fileExtension: item.fileExtension)
+                                RowLabel(title: item.title,
+                                         caption: item.fileExtension.isEmpty ? L("无扩展名") : "." + item.fileExtension,
+                                         monospacedCaption: true)
+                            }
                         }
                         if case .custom(let template) = item.kind {
                             RemoveButton { remove(template) }

@@ -1,19 +1,15 @@
 import AppKit
 import SwiftUI
 
-/// SwiftUI 的 `openSettings`、`openWindow` 只能从视图环境里拿到。
+/// SwiftUI 的 `openWindow` 只能从视图环境里拿到。
 /// 应用启动时放一个看不见的桥接窗口，取到后供 AppKit 一侧（XPC、菜单栏、重新打开）调用。
 @MainActor @Observable
 final class WindowOpener {
-    fileprivate var openSettingsAction: OpenSettingsAction?
     fileprivate var openWindowAction: OpenWindowAction?
     private var pending: [() -> Void] = []
 
     func openSettings() {
-        perform { [weak self] in
-            NSApp.activate()
-            self?.openSettingsAction?()
-        }
+        open(id: WindowID.settings)
     }
 
     func open(id: String) {
@@ -31,7 +27,7 @@ final class WindowOpener {
     }
 
     private func perform(_ body: @escaping () -> Void) {
-        if openSettingsAction == nil { pending.append(body) } else { body() }
+        if openWindowAction == nil { pending.append(body) } else { body() }
     }
 
     fileprivate func bridgeReady() {
@@ -43,14 +39,12 @@ final class WindowOpener {
 
 struct WindowBridge: View {
     let opener: WindowOpener
-    @Environment(\.openSettings) private var openSettings
     @Environment(\.openWindow) private var openWindow
 
     var body: some View {
         Color.clear
             .frame(width: 1, height: 1)
             .onAppear {
-                opener.openSettingsAction = openSettings
                 opener.openWindowAction = openWindow
                 // 桥接窗口本身不显示。
                 DispatchQueue.main.async {
@@ -65,6 +59,7 @@ struct WindowBridge: View {
 
 enum WindowID {
     static let bridge = "rightkit-bridge"
+    static let settings = "settings"
     static let welcome = "welcome"
     static let hash = "hash"
     static let qrCode = "qrcode"

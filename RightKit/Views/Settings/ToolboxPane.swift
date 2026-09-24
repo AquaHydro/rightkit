@@ -11,13 +11,7 @@ struct ToolboxPane: View {
             Section {
                 ForEach($model.settings.toolbox) { $entry in
                     Toggle(isOn: $entry.enabled) {
-                        HStack(spacing: 8) {
-                            Image(systemName: entry.command.symbol)
-                                .frame(width: 22)
-                                .foregroundStyle(.secondary)
-                                .accessibilityHidden(true)
-                            Text(entry.command.settingsTitle)
-                        }
+                        RowLabel(title: entry.command.settingsTitle, symbol: entry.command.symbol, tint: entry.command.intentTint)
                     }
                 }
                 .onMove { model.settings.toolbox.move(fromOffsets: $0, toOffset: $1) }
@@ -32,6 +26,20 @@ struct ToolboxPane: View {
                     Button(L("恢复默认")) { model.settings.resetToolboxPage() }
                 }
             }
+        }
+    }
+}
+
+extension ToolboxCommand {
+    /// 意图分类见 docs/design/menu-system.html。
+    var intentTint: Color {
+        switch self {
+        case .copyPath, .copyName: .intentCopy
+        case .newFolderFromName, .convertImage, .macIconset, .iosIconset: .intentCreate
+        case .aliasToDesktop, .airDrop: .intentSend
+        case .grantWrite, .hash, .toggleHidden, .toggleExtension: .intentInspect
+        case .setWallpaper, .setFolderIcon: .intentLook
+        case .dissolveFolder, .deletePermanently: .intentDanger
         }
     }
 }
