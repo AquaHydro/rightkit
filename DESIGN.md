@@ -27,6 +27,7 @@ colors:
   warning-dark: "#ff9230"
   neutral: "#8e8e93"
   neutral-dark: "#98989d"
+  ink: "#2a2b31"
 typography:
   headline-display:
     fontFamily: SF Pro, PingFang SC
@@ -127,7 +128,7 @@ RightKit 是一个常驻后台的 macOS 工具：用户几乎只在访达右键�
 
 1. **菜单快而准。** 右键弹出不能等，只在用户配置的监视目录内出现与当前选择相关的命令。
 2. **像系统自带的一样。** 设置、菜单栏、对话框全部用系统组件，让 Liquid Glass、深色模式、强调色、“减少透明度”“增强对比度”、macOS 27 的玻璃透明度滑块都自动生效，不写一行适配代码。
-3. **品牌只在该出现的地方出现。** 珊瑚色渐变只属于应用图标、欢迎窗口和关于弹出层。
+3. **品牌只在该出现的地方出现。** 珊瑚色和角色只属于应用图标、欢迎窗口和关于弹出层。
 
 基线：**最低 macOS 26**，不为更早系统保留回退路径。macOS 27 专属 API（例如 `.reorderable()`、`.confirmationDialog(item:)`）等最低版本提升后再用，在此之前不写 `#available` 分支。
 
@@ -135,7 +136,8 @@ RightKit 是一个常驻后台的 macOS 工具：用户几乎只在访达右键�
 
 **所有界面颜色来自系统语义色**，代码里用 `Color(nsColor: .labelColor)`、`.secondary`、`.separator` 这类语义名，不写色值。前置区的色值是浅色和深色外观下的 sRGB 预览，只用于文档和对比度检查。深色值以 `-dark` 后缀给出。
 
-- **Primary（珊瑚）** `primary` `#ff7973`，渐变从 `primary-start` `#ff8f6c` 到 `primary-end` `#ff5175`。这是品牌色，只用于应用图标、欢迎窗口、关于弹出层和对外物料，**不进入任何控件**。对外物料的角色立绘见[品牌角色设定](docs/design/brand-character.md)。
+- **Primary（珊瑚）** `primary` `#ff7973`，渐变从 `primary-start` `#ff8f6c` 到 `primary-end` `#ff5175`。这是品牌色，也是角色的发色，只用于应用图标、欢迎窗口、关于弹出层和对外物料，**不进入任何控件**。
+- **Ink（炭灰）** `ink` `#2a2b31`：应用图标底色，也是官网深色区块的 `--ink`。只用于图标和对外物料，界面背景仍用系统色。对外物料的角色立绘见[品牌角色设定](docs/design/brand-character.md)。
 - **Accent（强调色）** 不在 Asset Catalog 里设置 AccentColor。控件用 `Color.accentColor`，跟随用户的系统强调色；前置区的 `accent` `#007aff` 只是“多色”默认下的预览占位。
   - 为什么不用珊瑚当强调色：HIG 允许单色界面把品牌色设为强调色，但白字要在按钮上达到 4.5:1，珊瑚需要压到约 `#e2123d`，这已经和 `systemRed` 几乎相同，而红色在本产品里专指“彻底删除”。同一颜色表达两种意思违反 HIG 的颜色一致性原则。
   - 另外，App 强调色只在用户选“多色”时生效，用户选了别的颜色会被覆盖，自定义强调色的收益本来就小。
@@ -225,7 +227,7 @@ macOS 26 用 **Liquid Glass** 把“功能层”（工具栏、侧栏、菜单�
 - `MenuBarExtra("RightKit", systemImage: …)` 使用默认的菜单样式，不用 `.window` 面板。HIG 要求菜单栏项点开显示菜单而不是弹出面板，除非功能复杂到菜单放不下，RightKit 不属于这种情况。
 - 内容自上而下：扩展状态（不可点的文字行）；分隔线；五个功能组开关（`Toggle`，在菜单里显示为勾选项）；分隔线；“设置…”⌘,；“退出 RightKit”⌘Q。
 - 是否显示由用户决定。首次启动的欢迎窗口里提供这个开关。菜单栏项随时可能被系统隐藏，任何功能都不能只依赖它。
-- 图标用单色模板图像（光标加三条线，来自应用图标的前景层），24 pt 菜单栏高度内居中，系统负责着色。
+- 图标用单色模板图像（光标加三条线，来自应用图标发卡层 `badge.png` 的图形），24 pt 菜单栏高度内居中，系统负责着色。
 
 ### 访达右键菜单
 
@@ -275,7 +277,8 @@ macOS 26 用 **Liquid Glass** 把“功能层”（工具栏、侧栏、菜单�
 
 ## Iconography
 
-- **应用图标**：用 Icon Composer 维护。背景层是珊瑚渐变（`primary-start` 到 `primary-end`），前景层是光标与三条菜单线；提供方形、无遮罩的矢量图层，不预先烘焙高光、阴影或圆角，由系统生成 Liquid Glass 效果，并在 Icon Composer 里标注默认、深色和单色外观。
+- **应用图标**：用 Icon Composer 维护。底色是纯色 `ink`，上面两个玻璃图层：角色层 `character.png`（[品牌角色](docs/design/brand-character.md)的 Q 版头像）和发卡层 `badge.png`（光标加三条珊瑚短线）。图层方形、无遮罩，不预先烘焙高光或圆角，阴影和 Liquid Glass 由系统生成。
+  - 待办：`icon.json` 还没有深色、Clear、Tinted 外观的专门配置，角色层是全彩位图，需要在 Icon Composer 和真机上检查这几种外观，以及 16、32 px 下发卡是否清晰。
 - **界面符号**：全部 SF Symbols。常见动作用系统同款符号（拷贝用 `doc.on.doc`，删除用 `trash`），状态变化用 `.symbolEffect`。
 - 不用 emoji，不画自定义图标，除非 SF Symbols 里确实没有对应概念。
 

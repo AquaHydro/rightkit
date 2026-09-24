@@ -20,7 +20,7 @@ struct GeneralPane: View {
                     Text(L("浅色")).tag(Theme.light)
                     Text(L("深色")).tag(Theme.dark)
                 } label: {
-                    RowLabel(title: L("主题"), symbol: "circle.lefthalf.filled")
+                    RowLabel(title: L("主题"), symbol: "circle.lefthalf.filled", tint: .intentLook)
                 }
                 Picker(selection: $model.settings.language) {
                     Text(L("跟随系统")).tag(AppLanguage.system)
