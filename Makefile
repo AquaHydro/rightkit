@@ -2,7 +2,7 @@ DERIVED := .build/DerivedData
 APP := $(DERIVED)/Build/Products/Debug/RightKit.app
 XCODEBUILD := xcodebuild -project RightKit.xcodeproj -scheme RightKit -derivedDataPath $(DERIVED) -allowProvisioningUpdates
 
-.PHONY: generate build test verify run
+.PHONY: generate build test verify run release release-unsigned
 
 generate:
 	xcodegen generate
@@ -20,6 +20,14 @@ verify: test build
 	python3 scripts/check_office_templates.py
 	python3 scripts/check_intents.py $(APP)
 	git diff --check
+
+# Developer ID 签名、公证、钉票并打 DMG。公证凭据见 scripts/release/release.sh。
+release:
+	scripts/release/release.sh
+
+# 只归档、导出、打包并检查签名，不提交公证。
+release-unsigned:
+	SKIP_NOTARIZE=1 scripts/release/release.sh
 
 # 自动化环境跳过登录项注册。
 run: build

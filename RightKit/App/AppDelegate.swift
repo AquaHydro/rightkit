@@ -33,6 +33,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let router = self.router
         let server = CommandServer { router.handle($0) }
         server.onCheckInChange = { [weak self] reachable in self?.model.refreshExtensionStatus(agentReachable: reachable) }
+        server.onAgentUnreachable = { [weak self] in self?.registerAgent(repair: true) }
         server.start()
         self.server = server
         refreshStatus()
@@ -68,9 +69,24 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     /// agent 持有 XPC 服务名；已注册时不重复。
-    private func registerAgent() {
+    /// `repair` 用于连不上 agent 的情况：后台项目数据库可能还记着旧签名的启动约束，
+    /// 先等注销完成再重新注册，让系统按当前签名重新记录。
+    private func registerAgent(repair: Bool = false) {
         let service = SMAppService.agent(plistName: ServiceNames.agentPlist)
-        guard service.status != .enabled else { return }
+        guard repair || service.status != .enabled else { return }
+        guard repair, service.status == .enabled else { return register(service) }
+        log.notice("Agent unreachable while registered; re-registering")
+        service.unregister { [weak self] error in
+            if let error { self?.log.error("Agent unregister failed: \(error.localizedDescription, privacy: .public)") }
+            Task { @MainActor in
+                self?.register(SMAppService.agent(plistName: ServiceNames.agentPlist))
+                // 之前挂住的签到不会再有回应，换一条新连接。
+                self?.server?.checkIn()
+            }
+        }
+    }
+
+    private func register(_ service: SMAppService) {
         do {
             try service.register()
         } catch {

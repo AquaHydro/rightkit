@@ -14,6 +14,9 @@ final class CommandServer: NSObject, NSXPCListenerDelegate, AppXPC, @unchecked S
     /// agent 是否已收下 endpoint。
     @MainActor private(set) var isCheckedIn = false
     @MainActor var onCheckInChange: ((Bool) -> Void)?
+    /// 连不上 agent 时调用，只调用一次。后台项目数据库可能认为已注册，launchd 里却没有这个任务。
+    @MainActor var onAgentUnreachable: (() -> Void)?
+    @MainActor private var reportedUnreachable = false
 
     init(onRequest: @escaping @MainActor @Sendable (ValidatedRequest) -> Void) {
         self.onRequest = onRequest
@@ -29,6 +32,10 @@ final class CommandServer: NSObject, NSXPCListenerDelegate, AppXPC, @unchecked S
         listener.delegate = self
         listener.resume()
         checkIn()
+        Task { @MainActor [weak self] in
+            try? await Task.sleep(for: .seconds(5))
+            self?.reportUnreachable()
+        }
     }
 
     /// 连接 agent 并签到。agent 被 launchd 按需拉起；断开后稍后重试。
@@ -60,11 +67,19 @@ final class CommandServer: NSObject, NSXPCListenerDelegate, AppXPC, @unchecked S
     private func sendEndpoint(over connection: NSXPCConnection) {
         let proxy = connection.remoteObjectProxyWithErrorHandler { [weak self] error in
             self?.log.error("Check-in failed: \(error.localizedDescription, privacy: .public)")
+            Task { @MainActor in self?.reportUnreachable() }
         } as? AgentXPC
         proxy?.checkIn(listener.endpoint) { [weak self] accepted in
             self?.log.info("Checked in with agent: \(accepted)")
             self?.setCheckedIn(accepted)
         }
+    }
+
+    /// 任务存在但每次都启动失败时，签到既没有回应也没有错误，所以另设超时。
+    @MainActor private func reportUnreachable() {
+        guard !isCheckedIn, !reportedUnreachable else { return }
+        reportedUnreachable = true
+        onAgentUnreachable?()
     }
 
     private func setCheckedIn(_ value: Bool) {

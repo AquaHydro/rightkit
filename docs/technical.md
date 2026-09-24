@@ -83,7 +83,13 @@
 - 文本服务注册 Google 翻译、百度翻译和生成二维码，输入类型是字符串。
 - App Intents 只暴露功能规格里的 9 个动作。
 
-证书、描述文件和发布渠道不在这一阶段决定。私钥和 API key 不要进仓库。
+## 发布
+
+在官网直接分发，不上 Mac App Store。用 Developer ID Application 签名，开启强化运行时，经公证后钉票，打成 DMG。`make release` 执行整个流程（`scripts/release/release.sh`），`make release-unsigned` 跳过公证，只用来检查签名。
+
+- 导出方式 `developer-id`，自动签名。App Group 用 `group.` 前缀，所以主程序和扩展必须带 Developer ID 描述文件，并由描述文件授权这个 App Group；`scripts/release/check_signature.sh` 会检查这一点。
+- 公证凭据保存在钥匙串的 notarytool 配置 `RightKit` 里，也可以用 `NOTARY_PROFILE` 换成别的名字。App 专用密码、私钥和 API key 都不进仓库。
+- 后台项目数据库会记下 agent 注册时的签名约束。换了签名以后，比如从开发签名换到 Developer ID，launchd 会以 `Launch Constraint Violation` 拒绝启动 agent。所以主程序在签到失败或 5 秒内没有签到成功时，先等注销完成，再重新注册一次，然后重新签到。
 
 ## 构建与验证入口
 

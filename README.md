@@ -21,6 +21,7 @@ RightKit 是 macOS 访达的右键菜单工具。用户用它新建文件、把�
 ```sh
 make verify   # 生成工程、运行全部测试和文档、文案、模板、Intent 检查
 make run      # 构建 Debug 版并启动（跳过登录项注册）
+make release  # Developer ID 签名、公证并打 DMG，产物在 .build/release/
 ```
 
 首次运行后，在「系统设置 → 通用 → 登录项与扩展」里打开 RightKit 的访达扩展。
