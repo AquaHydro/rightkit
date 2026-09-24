@@ -10,12 +10,14 @@ struct WelcomeView: View {
     var body: some View {
         @Bindable var model = model
         VStack(spacing: 20) {
-            // 立绘放在图标底色的圆里，白色外套在浅色窗口上也有轮廓。
+            // 立绘自带图标底色，裁成圆形。
             Image("WelcomeCharacter")
                 .resizable()
                 .frame(width: 160, height: 160)
                 .background(Color.brandInk)
                 .clipShape(.circle)
+                // 圆形底部是白色外套，浅色窗口里靠发丝线画出边界。
+                .overlay(Circle().strokeBorder(.separator))
                 .accessibilityLabel(L("RightKit 角色"))
             VStack(spacing: 8) {
                 Text(L("欢迎使用 RightKit"))
