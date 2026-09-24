@@ -149,6 +149,41 @@ No text, no letters, no logos, no UI elements, no watermark.
 - 背景是纯色 `#2A2B31`，没有渐变色带，边缘和 App 里的圆形底色能接上。
 - 定稿后放到 `website/assets/character/welcome.png`，再导出 160 和 320 px 替换 `RightKit/Resources/Assets.xcassets/WelcomeCharacter.imageset`。
 
+### 6. 扩展状态表情头像
+
+用在设置「通用」页顶部的扩展状态卡片，显示成 56 pt 的圆形头像，表情跟着状态变。三张是一组，构图、背景、光线和[第 5 条](#5-应用欢迎窗口)欢迎图完全一致，只改表情和手势，切换时才不会跳。
+
+参考图（按顺序上传）：
+
+1. `website/assets/character/welcome.png`：构图、背景、光线、画风的基准，三张都以它为底。
+2. `RightKit/Resources/AppIcon.icon/Assets/character.png`：发色、呆毛、发卡。
+3. `website/assets/character/sheet.png`：服装和小白鼠。
+
+共用段落（接在固定风格段落后面）：
+
+```text
+Status avatar, one of a set of three expression variants based on the attached welcome image. Keep EXACTLY the same framing, camera distance, head position and size, hair shape, outfit, lighting and background as the welcome image; only the facial expression, the raised hand gesture and the mouse's pose change.
+Tighter head-and-shoulders crop than the welcome image is NOT allowed; the face must stay in the same place so the three variants can crossfade without jumping.
+It will be displayed very small (56 pt circle), so the expression must read clearly at that size: bold, simple, exaggerated facial expression, clear eye shapes, readable hand silhouette.
+Solid flat charcoal background #2A2B31 filling the whole canvas, very soft coral glow behind her head, soft coral rim light on hair and hoodie edges.
+Square 1:1, 1024 x 1024, face centered slightly above the middle, head with ahoge and hair clip, the raised hand and the mouse all inside the central circle with at least 8% margin. Nothing important in the four corners.
+No text, no letters, no logos, no UI elements, no watermark.
+```
+
+| 文件 | 状态 | 表情段落 |
+| --- | --- | --- |
+| `status-ready.png` | 已启用 | `Expression: bright confident smile, eyes closed in happy upturned arcs, cheeks blushing. Gesture: her raised hand makes a clear OK sign (thumb and index finger forming a circle, other three fingers up). The mouse gives a tiny thumbs-up with its paw, small sparkle next to it.` |
+| `status-sleepy.png` | 未运行 | `Expression: drowsy and sleepy, half-closed droopy eyes, small yawn with mouth slightly open, one tiny tear at the corner of the eye. Gesture: her raised hand gently rubs one eye with a loose fist. The mouse is curled up asleep on her shoulder with a small "zz" bubble drawn as simple shapes, not letters.` |
+| `status-puzzled.png` | 未启用、后台服务已关闭 | `Expression: puzzled and slightly worried, eyebrows raised and tilted, eyes wide, small wavy closed mouth, head tilted a bit more. Gesture: her raised index finger touches her cheek in a thinking pose. The mouse holds up a tiny white sign with a coral question mark shape on it.` |
+
+检查：
+
+- 三张叠在一起来回切换，脸、头发轮廓和发卡位置不跳。
+- 缩到 56 px 圆形时，三种表情一眼能分清。
+- 发卡在观者右侧刘海上，箭头朝左上，三条珊瑚线在右下；手指数目正确。
+- 「zz」和问号只画成图形，不出现字母；小白鼠只有观者右侧那只耳朵是珊瑚色。
+- 定稿后放到 `website/assets/character/`，由我导出 56、112 px 两档放进 App。
+
 ## 导出
 
 | 物料 | 格式 |
