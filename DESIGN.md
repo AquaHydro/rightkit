@@ -27,6 +27,7 @@ colors:
   warning-dark: "#ff9230"
   neutral: "#8e8e93"
   neutral-dark: "#98989d"
+  ink: "#2a2b31"
 typography:
   headline-display:
     fontFamily: SF Pro, PingFang SC
@@ -45,14 +46,16 @@ typography:
     lineHeight: 20px
   row-title:
     fontFamily: SF Pro, PingFang SC
-    fontSize: 15px
-    fontWeight: 500
-    lineHeight: 20px
+    fontSize: 13px
+    fontWeight: 400
+    lineHeight: 16px
   label-lg:
     fontFamily: SF Pro, PingFang SC
     fontSize: 13px
     fontWeight: 700
     lineHeight: 16px
+  avatar:
+    rounded: 9999px
   body-md:
     fontFamily: SF Pro, PingFang SC
     fontSize: 13px
@@ -93,10 +96,10 @@ components:
     backgroundColor: "{colors.surface}"
     textColor: "{colors.on-surface}"
     typography: "{typography.row-title}"
-    height: 44px
+    height: 36px
   settings-row-icon:
-    rounded: 7px
-    size: 26px
+    rounded: 6px
+    size: 24px
   settings-row-dark:
     backgroundColor: "{colors.surface-dark}"
     textColor: "{colors.on-surface-dark}"
@@ -127,7 +130,7 @@ RightKit 是一个常驻后台的 macOS 工具：用户几乎只在访达右键�
 
 1. **菜单快而准。** 右键弹出不能等，只在用户配置的监视目录内出现与当前选择相关的命令。
 2. **像系统自带的一样。** 设置、菜单栏、对话框全部用系统组件，让 Liquid Glass、深色模式、强调色、“减少透明度”“增强对比度”、macOS 27 的玻璃透明度滑块都自动生效，不写一行适配代码。
-3. **品牌只在该出现的地方出现。** 珊瑚色渐变只属于应用图标、欢迎窗口和关于弹出层。
+3. **品牌只在该出现的地方出现。** 珊瑚色不进入任何控件。角色 Riko 的立绘只出现在欢迎窗口、扩展状态卡片和「没有监视目录」空状态；关于弹出层用应用图标（Q 版 Riko）。
 
 基线：**最低 macOS 26**，不为更早系统保留回退路径。macOS 27 专属 API（例如 `.reorderable()`、`.confirmationDialog(item:)`）等最低版本提升后再用，在此之前不写 `#available` 分支。
 
@@ -135,7 +138,8 @@ RightKit 是一个常驻后台的 macOS 工具：用户几乎只在访达右键�
 
 **所有界面颜色来自系统语义色**，代码里用 `Color(nsColor: .labelColor)`、`.secondary`、`.separator` 这类语义名，不写色值。前置区的色值是浅色和深色外观下的 sRGB 预览，只用于文档和对比度检查。深色值以 `-dark` 后缀给出。
 
-- **Primary（珊瑚）** `primary` `#ff7973`，渐变从 `primary-start` `#ff8f6c` 到 `primary-end` `#ff5175`。这是品牌色，只用于应用图标、欢迎窗口、关于弹出层和对外物料，**不进入任何控件**。对外物料的角色立绘见[品牌角色设定](docs/design/brand-character.md)。
+- **Primary（珊瑚）** `primary` `#ff7973`，渐变从 `primary-start` `#ff8f6c` 到 `primary-end` `#ff5175`。这是品牌色，也是角色的发色，只用于应用图标、欢迎窗口、关于弹出层和对外物料，**不进入任何控件**。
+- **Ink（炭灰）** `ink` `#2a2b31`：应用图标底色，也是官网深色区块的 `--ink`。只用于图标、角色头像的底和对外物料，界面背景仍用系统色。对外物料的角色立绘见[品牌角色设定](docs/design/brand-character.md)。
 - **Accent（强调色）** 不在 Asset Catalog 里设置 AccentColor。控件用 `Color.accentColor`，跟随用户的系统强调色；前置区的 `accent` `#007aff` 只是“多色”默认下的预览占位。
   - 为什么不用珊瑚当强调色：HIG 允许单色界面把品牌色设为强调色，但白字要在按钮上达到 4.5:1，珊瑚需要压到约 `#e2123d`，这已经和 `systemRed` 几乎相同，而红色在本产品里专指“彻底删除”。同一颜色表达两种意思违反 HIG 的颜色一致性原则。
   - 另外，App 强调色只在用户选“多色”时生效，用户选了别的颜色会被覆盖，自定义强调色的收益本来就小。
@@ -144,7 +148,7 @@ RightKit 是一个常驻后台的 macOS 工具：用户几乎只在访达右键�
   - `neutral` 灰：扩展未启用或未运行。
   - `warning` 橙：受保护位置提示的符号。
   - `error` 红：只用于失败状态的符号。彻底删除按钮不染红，原因见 Components 的对话框规则。
-- **设置行图标块**：每个设置行前一个 26 pt 圆角块，SF Symbol 用意图色，底色是同色 18% 透明度。意图色与访达菜单同一套（[菜单设计系统](docs/design/menu-system.html)）：创建绿、前往橙、拷贝蓝、移动与发送青、查看灰、外观紫、危险红，代码里是 `Color.intentCreate` 等系统色别名。文件夹、应用、文件类型行直接用访达里的真实图标，不加色块。颜色只是辅助，行标题永远写清含义。
+- **设置行图标块**：每个设置行前一个 24 pt、圆角 6 pt 的实色块，底色是意图色的 `.gradient`，SF Symbol 是白色，和系统设置一样，在浅色和深色下都清楚。意图色与访达菜单同一套（[菜单设计系统](docs/design/menu-system.html)）：创建绿、前往橙、拷贝蓝、移动与发送青、查看灰、外观紫、危险红，代码里是 `Color.intentCreate` 等系统色别名。文件夹、应用、文件类型行直接用访达里的真实图标，不加色块。颜色只是辅助，行标题永远写清含义。
 - **对比度**：主文字 `on-surface` 在两种外观下都高于 4.5:1。突出按钮的白字在默认蓝 `#007aff` 上约 4.0:1，这是 Apple 自己的组合，保持原样，由系统在“增强对比度”下处理。`on-surface-secondary` 是 Apple 原值，浅色下约 3.9:1，只用于 11 px 以上的辅助说明，不再调淡。系统色在“增强对比度”下会自动加深，这是不自定义颜色的另一个理由。
 
 ## Typography
@@ -156,8 +160,8 @@ RightKit 是一个常驻后台的 macOS 工具：用户几乎只在访达右键�
 | `headline-display` | `.largeTitle` 加 `.semibold` | 欢迎窗口标题 |
 | `headline-lg` | `.title2` 加 `.semibold` | 关于弹出层产品名 |
 | `headline-md` | `.headline`（对话框标题由系统排版） | 窗口内小节标题 |
-| `row-title` | `.title3.weight(.medium)` | 设置行标题 |
-| `label-lg` | `.title3.weight(.semibold)` | 扩展状态行 |
+| `row-title` | `.body` | 设置行标题，和系统设置同一字号 |
+| `label-lg` | `.headline` | 扩展状态卡片标题 |
 | `body-md` | `.body` | 设置项、菜单项、按钮 |
 | `body-sm` | `.callout` 加 `.secondary` | 设置行说明、分组脚注、路径（`.callout.monospaced()`） |
 | `label-sm` | `.caption` | 版本号、文件大小、算法名 |
@@ -201,7 +205,9 @@ macOS 26 用 **Liquid Glass** 把“功能层”（工具栏、侧栏、菜单�
 - 分栏只有五个，窄窗口也放得下：通用、新建文件、打开方式、目录（常用目录和发送到两个分组）、工具箱。「关于」是右上角 `info.circle` 按钮打开的弹出层，不占分栏。
 - 窗口标题固定为「RightKit」；重新打开时回到上次的分栏（`@AppStorage` 记住选中项）。
 - 每个分栏内是 `Form { Section { … } }.formStyle(.grouped)`：一个分组一张卡片，行间发丝线，分组标题在卡片外。
-- 「重启访达」放在「通用」的扩展状态区。「退出 RightKit」只放在菜单栏菜单。设置窗口只放设置。
+- 「通用」页自上而下：扩展状态卡片、监视目录、功能、外观（主题、语言、在菜单项中显示图标）、启动与菜单栏（登录时启动、显示菜单栏图标）。决定菜单出不出现的两项放最上面。
+- 分组里的按钮位置统一：添加类按钮（添加文件夹…、添加模板…、检测已安装工具、添加应用…）放在分组标题右侧；「恢复默认」放在分组脚注右侧。
+- 「重启访达」放在「通用」的扩展状态卡片。「退出 RightKit」只放在菜单栏菜单。设置窗口只放设置。
 - RightKit 是 `LSUIElement` 应用，没有 App 菜单，所以打开设置统一走 `openWindow(id: "settings")`，并先激活应用，否则窗口会出现在其他应用后面。用户再次从访达或启动台打开 RightKit 时，直接打开设置窗口。
 - 「通用」还显示监视目录列表。首次只有当前用户主目录；用户可添加或移除目录，不能添加 `/` 或系统目录。说明文字是「RightKit 仅在这些文件夹及其子文件夹的访达菜单中显示。」
 
@@ -212,20 +218,24 @@ macOS 26 用 **Liquid Glass** 把“功能层”（工具栏、侧栏、菜单�
 - 选项：`Picker` 默认菜单样式（主题、语言），和 magpie 的下拉框一致，窄窗口下不会被挤压。分段样式只用于标题栏的分栏。
 - 菜单栏菜单里的同一组开关不带图标块，保持系统菜单的样子。
 - 可排序列表（新建类型、工具箱）：macOS 26 用 `List` 加 `.onMove`；最低版本提升到 27 后换成 `.reorderable()`。拖动把手、动画都由系统提供。
+- 工具箱按访达菜单的五组分成五个分组（拷贝、文件、显示与隐藏、图片与图标、解散与删除），只能组内拖动，设置里的结构就是菜单的结构。
+- 空状态：「没有监视目录」时放 Q 版 Riko（资源 `EmptyFolders`，高 96 pt，来自 `feature-empty-error.png`）、说明和「添加文件夹…」。其他空列表只用一行次要文字。
 - 禁用：`.disabled(true)`，文字和控件同时变灰；功能组关闭时，其下属设置整体禁用而不是隐藏。
 
 ### 扩展状态
 
 - 是否启用只读 `FIFinderSyncController.isExtensionEnabled`，打开设置用 `FIFinderSyncController.showExtensionManagementInterface()`，登录启动用 `SMAppService.mainApp`。已启用和未运行用扩展心跳区分，规则见功能规格。
-- 三种状态：扩展已启用（绿点，动作“重启访达”）、未启用（灰点，动作“打开系统设置”）、未运行（灰点，动作“重启访达”）。一个区块最多一个 `.borderedProminent` 按钮。
-- 状态点用 `Image(systemName: "circle.fill")` 着色，旁边一定有状态文字。状态切换用 `.contentTransition(.symbolEffect(.replace))`。
+- 组件 `ExtensionStatusCard`，设置「通用」页和欢迎窗口共用：左侧 56 pt Riko 圆形头像，右侧 `.headline` 状态和 `.callout` 说明，最右一个按钮。
+- 头像随状态换表情：已启用 `StatusReady`（比 OK）、未运行 `StatusSleepy`（犯困）、未启用和后台服务已关闭 `StatusPuzzled`（疑惑）。提示词见[品牌角色设定](docs/design/brand-character.md)第 6 条。头像对读屏隐藏，含义全部由文字表达。
+- 切换状态时头像淡入淡出（`.transition(.opacity)` 加 `.animation(.default)`），减少动态效果下系统自动收敛。
+- 按钮：需要系统设置时是“打开系统设置”，设置页里用 `.borderedProminent`，欢迎窗口里用普通样式（突出样式留给“开始使用”）；其他状态设置页里是“重启访达”，欢迎窗口里不放按钮。
 
 ### 菜单栏菜单
 
 - `MenuBarExtra("RightKit", systemImage: …)` 使用默认的菜单样式，不用 `.window` 面板。HIG 要求菜单栏项点开显示菜单而不是弹出面板，除非功能复杂到菜单放不下，RightKit 不属于这种情况。
 - 内容自上而下：扩展状态（不可点的文字行）；分隔线；五个功能组开关（`Toggle`，在菜单里显示为勾选项）；分隔线；“设置…”⌘,；“退出 RightKit”⌘Q。
 - 是否显示由用户决定。首次启动的欢迎窗口里提供这个开关。菜单栏项随时可能被系统隐藏，任何功能都不能只依赖它。
-- 图标用单色模板图像（光标加三条线，来自应用图标的前景层），24 pt 菜单栏高度内居中，系统负责着色。
+- 图标用单色模板图像（光标加三条线，来自应用图标发卡层 `badge.png` 的图形），24 pt 菜单栏高度内居中，系统负责着色。
 
 ### 访达右键菜单
 
@@ -252,7 +262,13 @@ macOS 26 用 **Liquid Glass** 把“功能层”（工具栏、侧栏、菜单�
 ### 欢迎窗口
 
 - 首次启动时打开一个普通窗口（没有父窗口，所以也不是 sheet），单页，不做多步向导。
-- 内容：应用图标 96 pt（`NSApp.applicationIconImage`，自动取当前外观的分层图标）、“欢迎使用 RightKit”、一句说明、“稍后设置”与 `.borderedProminent` 的“开始使用”、是否显示菜单栏图标的开关。
+- 内容自上而下：Riko 主立绘 160 pt（`CharacterAvatar`：图片自带 `ink` 底色，裁成圆形，外加一圈 `.separator` 发丝线，浅色窗口里圆形底部的白色外套也有边界）；“欢迎使用 RightKit”、一句说明；扩展状态卡片；是否显示菜单栏图标的开关；“稍后设置”与 `.borderedProminent` 的“开始使用”。
+- 立绘是静态图，资源 `WelcomeCharacter`（1x 160 px、2x 320 px，从 `website/assets/character/welcome.png` 导出，提示词见[品牌角色设定](docs/design/brand-character.md)第 5 条），不做浮动动画。
+- 扩展状态卡片见上文「扩展状态」，放在浅色圆角底上。
+
+### 关于弹出层
+
+- 应用图标 96 pt（`NSApp.applicationIconImage`，即 Q 版 Riko，自动取当前外观的分层图标）、「RightKit」、版本号、标语「右键一下，就办好了。」、一句说明，最下面是 GitHub 和「反馈问题」两个链接。
 - 之后的功能提示交给 TipKit，不再回到欢迎窗口。
 
 ## Finder 菜单
@@ -275,7 +291,8 @@ macOS 26 用 **Liquid Glass** 把“功能层”（工具栏、侧栏、菜单�
 
 ## Iconography
 
-- **应用图标**：用 Icon Composer 维护。背景层是珊瑚渐变（`primary-start` 到 `primary-end`），前景层是光标与三条菜单线；提供方形、无遮罩的矢量图层，不预先烘焙高光、阴影或圆角，由系统生成 Liquid Glass 效果，并在 Icon Composer 里标注默认、深色和单色外观。
+- **应用图标**：用 Icon Composer 维护。底色是纯色 `ink`，上面两个玻璃图层：角色层 `character.png`（[品牌角色](docs/design/brand-character.md)的 Q 版头像）和发卡层 `badge.png`（光标加三条珊瑚短线）。图层方形、无遮罩，不预先烘焙高光或圆角，阴影和 Liquid Glass 由系统生成。
+  - 待办：`icon.json` 还没有深色、Clear、Tinted 外观的专门配置，角色层是全彩位图，需要在 Icon Composer 和真机上检查这几种外观，以及 16、32 px 下发卡是否清晰。
 - **界面符号**：全部 SF Symbols。常见动作用系统同款符号（拷贝用 `doc.on.doc`，删除用 `trash`），状态变化用 `.symbolEffect`。
 - 不用 emoji，不画自定义图标，除非 SF Symbols 里确实没有对应概念。
 
@@ -307,7 +324,7 @@ macOS 26 用 **Liquid Glass** 把“功能层”（工具栏、侧栏、菜单�
 - 使用系统颜色、文本样式和组件，“增强对比度”“减少透明度”“减少动态效果”和 macOS 27 的玻璃透明度滑块都能自动生效。
 - 状态永远有文字，不只靠颜色。
 - 所有功能可只用键盘完成（完全键盘访问）；不覆盖系统快捷键。
-- 自绘元素（状态点、欢迎窗口图标）提供 `accessibilityLabel`。
+- 角色头像和插画是装饰，对读屏隐藏；它们表达的状态必须同时写成文字。
 - 在浅色、深色、增强对比度三种外观下各检查一次设置窗口和哈希窗口；设置窗口还要在最小尺寸和拉宽后各检查一次。
 
 ## Do's and Don'ts
@@ -315,7 +332,7 @@ macOS 26 用 **Liquid Glass** 把“功能层”（工具栏、侧栏、菜单�
 - Do 用系统组件，让 Liquid Glass、深色、强调色自动生效。
 - Do 让菜单只显示与当前选择相关的命令，并把危险操作放在最后一组。
 - Do 给彻底删除确认写清对象和后果，不设默认按钮。
-- Do 把品牌色留给图标、欢迎窗口和关于弹出层。
+- Do 把珊瑚色和 Riko 留给图标、欢迎窗口、扩展状态卡片、关于弹出层和「没有监视目录」空状态。
 - Don't 设置自定义 AccentColor，也不要把珊瑚色用在按钮或开关上。
 - Don't 在内容层或列表上加 `.glassEffect()`，不做玻璃叠玻璃。
 - Don't 提供表面材质开关，也不为 macOS 26 以前的系统写回退。

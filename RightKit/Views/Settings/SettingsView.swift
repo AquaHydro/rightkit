@@ -62,17 +62,17 @@ struct Pane<Content: View>: View {
     }
 }
 
-/// 行首的意图色图标块，颜色与访达菜单的意图分类一致（docs/design/menu-system.html）。
+/// 行首的意图色图标块：实色底加白色符号，和系统设置一致；颜色与访达菜单的意图分类一致（docs/design/menu-system.html）。
 struct RowIcon: View {
     let symbol: String
     let tint: Color
 
     var body: some View {
         Image(systemName: symbol)
-            .font(.system(size: 13, weight: .medium))
-            .foregroundStyle(tint)
-            .frame(width: 26, height: 26)
-            .background(tint.opacity(0.18), in: .rect(cornerRadius: 7))
+            .font(.system(size: 12, weight: .semibold))
+            .foregroundStyle(.white)
+            .frame(width: 24, height: 24)
+            .background(tint.gradient, in: .rect(cornerRadius: 6))
             .accessibilityHidden(true)
     }
 }
@@ -86,10 +86,10 @@ struct RowLabel: View {
     var monospacedCaption = false
 
     var body: some View {
-        HStack(spacing: 12) {
+        HStack(spacing: 10) {
             if let symbol { RowIcon(symbol: symbol, tint: tint) }
             VStack(alignment: .leading, spacing: 2) {
-                Text(title).font(.title3.weight(.medium))
+                Text(title)
                 if let caption {
                     Text(caption)
                         .font(monospacedCaption ? .callout.monospaced() : .callout)
@@ -112,6 +112,9 @@ extension Color {
     static let intentInspect = Color.gray
     static let intentLook = Color.purple
     static let intentDanger = Color.red
+
+    /// 品牌炭灰，只用于角色头像的底（DESIGN.md `ink`）。
+    static let brandInk = Color(red: 0x2A / 255, green: 0x2B / 255, blue: 0x31 / 255)
 }
 
 /// 行首的文件夹、应用或文件类型图标，和访达菜单用同一来源。
@@ -124,7 +127,23 @@ struct FileIcon: View {
     var body: some View {
         Image(nsImage: image)
             .resizable()
-            .frame(width: 26, height: 26)
+            .frame(width: 24, height: 24)
+            .accessibilityHidden(true)
+    }
+}
+
+/// Riko 圆形头像：图片自带图标底色，外加发丝线，浅色窗口里白色外套也有边界。
+struct CharacterAvatar: View {
+    let name: String
+    let size: CGFloat
+
+    var body: some View {
+        Image(name)
+            .resizable()
+            .frame(width: size, height: size)
+            .background(Color.brandInk)
+            .clipShape(.circle)
+            .overlay(Circle().strokeBorder(.separator))
             .accessibilityHidden(true)
     }
 }

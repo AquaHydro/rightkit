@@ -17,18 +17,18 @@ struct OpenInPane: View {
                     Text(L("还没有打开工具。")).foregroundStyle(.secondary)
                 }
             } header: {
-                Text(L("打开工具"))
-            } footer: {
                 HStack {
-                    Text(L("终端打开所在文件夹，编辑器打开所选项目。"))
-                        .font(.callout)
-                        .foregroundStyle(.secondary)
+                    Text(L("打开工具"))
                     Spacer()
                     Button(L("检测已安装工具")) {
                         model.settings.openTools = OpenToolDetector.detect(adding: model.settings.openTools)
                     }
                     Button(L("添加应用…"), action: addApp)
                 }
+            } footer: {
+                Text(L("终端打开所在文件夹，编辑器打开所选项目。"))
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
             }
         }
         .disabled(!model.settings.groups.openIn)

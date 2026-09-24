@@ -65,22 +65,6 @@
         }
       }
     },
-    "RightKit 图标": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "RightKit icon"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "RightKit 图标"
-          }
-        }
-      }
-    },
     "Shell 脚本": {
       "localizations": {
         "en": {
@@ -157,6 +141,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "“%@”已不在系统中。"
+          }
+        }
+      }
+    },
+    "一切就绪，去访达里右键试试。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All set. Try right-clicking in Finder."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一切就绪，去访达里右键试试。"
           }
         }
       }
@@ -385,6 +385,22 @@
         }
       }
     },
+    "反馈问题": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Report an Issue"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "反馈问题"
+          }
+        }
+      }
+    },
     "发送到": {
       "localizations": {
         "en": {
@@ -465,6 +481,22 @@
         }
       }
     },
+    "右键一下，就办好了。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Right-click. Done."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "右键一下，就办好了。"
+          }
+        }
+      }
+    },
     "后台服务已关闭": {
       "localizations": {
         "en": {
@@ -477,6 +509,54 @@
           "stringUnit": {
             "state": "translated",
             "value": "后台服务已关闭"
+          }
+        }
+      }
+    },
+    "启动与菜单栏": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Startup & Menu Bar"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "启动与菜单栏"
+          }
+        }
+      }
+    },
+    "图片与图标": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Images & Icons"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "图片与图标"
+          }
+        }
+      }
+    },
+    "在“系统设置 → 通用 → 登录项与扩展”中打开 RightKit 的访达扩展，右键菜单才会出现。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn on the RightKit Finder extension in System Settings → General → Login Items & Extensions to see the right-click menu."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在“系统设置 → 通用 → 登录项与扩展”中打开 RightKit 的访达扩展，右键菜单才会出现。"
           }
         }
       }
@@ -621,22 +701,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "好"
-          }
-        }
-      }
-    },
-    "如果菜单项没有立即出现，请重启一次访达。": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "If the menu items don’t appear right away, restart Finder once."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "如果菜单项没有立即出现，请重启一次访达。"
           }
         }
       }
@@ -865,6 +929,22 @@
         }
       }
     },
+    "拖动可在分组内调整顺序。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Drag to reorder within a group."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拖动可在分组内调整顺序。"
+          }
+        }
+      }
+    },
     "拖动可调整菜单中的顺序。": {
       "localizations": {
         "en": {
@@ -877,22 +957,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "拖动可调整菜单中的顺序。"
-          }
-        }
-      }
-    },
-    "拖动可调整顺序。解散文件夹和彻底删除始终在菜单最后。": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Drag to reorder. Dissolve Folder and Delete Permanently always stay at the end of the menu."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "拖动可调整顺序。解散文件夹和彻底删除始终在菜单最后。"
           }
         }
       }
@@ -989,6 +1053,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "授予写入权限"
+          }
+        }
+      }
+    },
+    "文件": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Files"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "文件"
           }
         }
       }
@@ -1565,6 +1645,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "无法转换图片。"
+          }
+        }
+      }
+    },
+    "显示与隐藏": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show & Hide"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示与隐藏"
           }
         }
       }
@@ -2225,6 +2321,22 @@
         }
       }
     },
+    "解散与删除": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dissolve & Delete"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "解散与删除"
+          }
+        }
+      }
+    },
     "解散文件夹": {
       "localizations": {
         "en": {
@@ -2781,6 +2893,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "部分项目无法完成。"
+          }
+        }
+      }
+    },
+    "重启一次访达，菜单就会出现。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restart Finder once and the menu will appear."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重启一次访达，菜单就会出现。"
           }
         }
       }

@@ -37,7 +37,7 @@
 body { margin: 0; font: 14px/1.55 var(--font); color: var(--text); background: var(--page); }
 main { max-width: 1080px; margin: 0 auto; padding: 32px 24px 80px; }
 header.top { display: flex; align-items: center; gap: 16px; }
-.logo { width: 44px; height: 44px; border-radius: 10px; background: var(--primary-grad); display: grid; place-items: center; color: #fff; font-weight: 700; }
+.logo { width: 44px; height: 44px; display: block; }
 h1 { font-size: 26px; line-height: 32px; font-weight: 600; margin: 0; }
 h2 { font-size: 20px; font-weight: 600; margin: 48px 0 12px; padding-top: 20px; border-top: 1px solid var(--sep); }
 h3 { font-size: 15px; font-weight: 600; margin: 24px 0 8px; }
@@ -109,7 +109,7 @@ th { font-weight: 600; color: var(--text-2); font-size: 12px; }
 .win .bar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; height: 52px; padding: 0 12px 0 16px; flex: none; }
 .lights { display: flex; gap: 8px; } .lights i { width: 12px; height: 12px; border-radius: 50%; display: block; }
 .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; }
-.brand .mini { width: 20px; height: 20px; border-radius: 5px; background: var(--primary-grad); }
+.brand .mini { width: 20px; height: 20px; background: url(../../website/public/img/app-icon-64.png) center / contain no-repeat; }
 .win .tools { justify-self: end; display: flex; gap: 2px; }
 .win .body { flex: 1; overflow: auto; padding: 4px 16px 16px; }
 .win .foot { flex: none; display: flex; align-items: center; gap: 12px; padding: 10px 20px; border-top: 1px solid var(--sep); font-size: 13px; color: var(--text-2); }
@@ -144,10 +144,11 @@ th { font-weight: 600; color: var(--text-2); font-size: 12px; }
 <body>
 <main>
 <header class="top">
-  <div class="logo">R</div>
+  <img class="logo" src="../../website/public/img/app-icon-180.png" alt="RightKit 图标">
   <div>
     <h1>设置界面设计系统</h1>
     <p class="lead">从 RightKit 设置窗口和 DESIGN.md 中提取，参考 magpie 主界面改写。重点是清晰易读，窗口可自由缩放。</p>
+    <p class="lead"><strong>注意：</strong>2026-09-25 起行图标改为实色块、行标题改为系统设置字号、扩展状态改为带 Riko 表情的卡片、工具箱按五组分节。本页的示意还没有同步，冲突时以 DESIGN.md 为准。</p>
   </div>
   <div class="spacer"></div>
   <div class="theme-toggle">
@@ -295,7 +296,7 @@ th { font-weight: 600; color: var(--text-2); font-size: 12px; }
 <h2>规则</h2>
 <div class="do">每个分组一张卡片，行与行之间只用发丝线分隔；分组标题放在卡片外面。</div>
 <div class="do">窗口可缩放：内容区滚动，标题栏和底栏固定不动。窄窗口时控件移到标题下方，而不是截断文字。</div>
-<div class="do">行首图标用 18% 透明度的着色底块，颜色表示含义（蓝：通用，绿：新建，红：有破坏性）。</div>
+<div class="do">行首图标用 18% 透明度的着色底块，颜色表示意图，与访达菜单一致（创建绿、前往橙、拷贝蓝、移动与发送青、查看灰、外观紫、危险红）。</div>
 <div class="dont">不要在下拉框里用低于 4.5:1 对比度的标签文字，也不要只靠颜色表达状态。</div>
 <div class="dont">不要写死窗口尺寸；SwiftUI 里用 <code>.frame(minWidth: 380, idealWidth: 680, minHeight: 360)</code> 加 <code>.windowResizability(.contentMinSize)</code>。</div>
 </main>

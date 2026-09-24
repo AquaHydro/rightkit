@@ -1,7 +1,7 @@
 import RightKitCore
 import SwiftUI
 
-/// 首次启动的欢迎窗口，单页。
+/// 首次启动的欢迎窗口，单页：Riko、说明、启用访达扩展、菜单栏开关。
 struct WelcomeView: View {
     @Environment(AppModel.self) private var model
     @Environment(\.dismissWindow) private var dismissWindow
@@ -10,10 +10,7 @@ struct WelcomeView: View {
     var body: some View {
         @Bindable var model = model
         VStack(spacing: 20) {
-            Image(nsImage: NSApp.applicationIconImage)
-                .resizable()
-                .frame(width: 96, height: 96)
-                .accessibilityLabel(L("RightKit 图标"))
+            CharacterAvatar(name: "WelcomeCharacter", size: 160)
             VStack(spacing: 8) {
                 Text(L("欢迎使用 RightKit"))
                     .font(.largeTitle.weight(.semibold))
@@ -22,6 +19,10 @@ struct WelcomeView: View {
                     .foregroundStyle(.secondary)
                     .frame(maxWidth: 380)
             }
+            ExtensionStatusCard()
+                .padding(12)
+                .background(.quaternary.opacity(0.5), in: .rect(cornerRadius: 10))
+                .frame(width: 400)
             Toggle(L("显示菜单栏图标"), isOn: $model.settings.showMenuBarIcon)
                 .toggleStyle(.checkbox)
             HStack(spacing: 12) {
