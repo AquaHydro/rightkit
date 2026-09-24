@@ -1,0 +1,317 @@
+<!doctype html>
+<!--
+  Product intro sample, 1920 × 1080. Reuses the website's tokens and components from ../src/styles.css.
+  Every frame is a pure function of time: render.mjs calls window.renderAt(seconds) and takes a screenshot.
+  Open this file in a browser to preview it in real time (Space pauses, ← → step 1 s).
+-->
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<title>RightKit Sample</title>
+<link rel="stylesheet" href="../src/styles.css">
+<style>
+@font-face { font-family: "Nunito"; font-weight: 200 1000; src: url("../public/fonts/nunito-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2000-206F; }
+@font-face { font-family: "Geist Mono"; font-weight: 500; src: url("../public/fonts/geist-mono-latin-500.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2000-206F; }
+
+:root {
+  /* Noto Sans SC stands in for PingFang SC when rendering on Linux. */
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Noto Sans SC", sans-serif;
+  --font-display: "Nunito", ui-rounded, "SF Pro Rounded", -apple-system, "PingFang SC", "Noto Sans SC", sans-serif;
+}
+*, *::before, *::after { animation: none !important; transition: none !important; }
+html, body { margin: 0; overflow: hidden; background: #000; }
+.frame { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: var(--ink); color: var(--on-ink); }
+.frame .grid-bg { mask-image: radial-gradient(ellipse 70% 70% at 50% 45%, #000 30%, transparent 80%); }
+.layer { position: absolute; inset: 0; will-change: transform, opacity; }
+.glow-lg { position: absolute; width: 1100px; height: 1100px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 121, 115, 0.3), rgba(255, 81, 117, 0.07) 45%, transparent 70%); }
+
+/* 1. Title */
+.title { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.title > * { will-change: transform, opacity; }
+.app-icon { position: relative; width: 216px; height: 216px; }
+.app-icon img { width: 100%; filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.45)); }
+/* The icon PNG keeps the macOS grid padding; the ring traces the visible squircle. */
+.ping { position: absolute; left: 50%; top: 50%; width: 176px; height: 176px; margin: -88px 0 0 -88px; border-radius: 40px; border: 3px solid rgba(255, 255, 255, 0.9); opacity: 0; }
+.ping.coral { border-color: var(--coral); }
+.title .kicker { margin-top: 30px; font-size: 20px; }
+.title .kicker-line { width: 44px; height: 2px; }
+.title .wordmark { margin-top: 26px; font-size: 172px; }
+.title .tagline { margin-top: 30px; font-size: 68px; }
+
+/* 2. Demo */
+.caption { position: absolute; left: 150px; top: 132px; width: 900px; }
+.caption .section-label { margin: 0; font-size: 20px; }
+.caption h2 { margin: 26px 0 0; font-size: 66px; line-height: 1.15; }
+.rig { position: absolute; left: 150px; top: 356px; width: 520px; height: 400px; transform-origin: 0 0; }
+.rig .finder { width: 500px; -webkit-backdrop-filter: none; backdrop-filter: none; background: rgba(30, 31, 36, 0.94); }
+.rig .menu { position: absolute; animation: none; -webkit-backdrop-filter: none; backdrop-filter: none; background: rgba(44, 45, 51, 0.97); }
+.rig .fake-cursor { position: absolute; opacity: 1; transform-origin: 3px 3px; }
+.rig .toast { opacity: 1; }
+.riko { position: absolute; right: 30px; bottom: -80px; width: 800px; -webkit-mask-image: linear-gradient(#000 80%, transparent 99%); mask-image: linear-gradient(#000 80%, transparent 99%); }
+.riko img { width: 100%; }
+
+/* 3. End card */
+.end { display: flex; align-items: center; padding-left: 170px; }
+.end-copy { position: relative; z-index: 2; }
+.end-copy > * { will-change: transform, opacity; }
+.end .brand-row { display: flex; align-items: center; gap: 22px; font: 900 64px/1 var(--font-display); letter-spacing: -0.02em; }
+.end .brand-row img { width: 92px; height: 92px; }
+.end .brand-row .dot { color: var(--coral); }
+.end .tagline { margin-top: 34px; font-size: 92px; line-height: 1.12; }
+.end .fineprint { margin-top: 34px; font-size: 26px; }
+.end .btn { margin-top: 40px; height: 76px; padding: 0 38px; font-size: 26px; gap: 12px; }
+.end .btn .ic { width: 28px; height: 28px; }
+.end-art { position: absolute; right: 90px; top: 150px; width: 780px; }
+.end-art img { width: 100%; }
+</style>
+</head>
+<body>
+<svg class="sprite" aria-hidden="true">
+  <symbol id="i-doc-plus" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M12 11v6M9 14h6"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></symbol>
+  <symbol id="i-app" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M10 14l5-5M10.5 9H15v4.5"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9.5 6 6 6-6 6"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3.5 7.5a2 2 0 0 1 2-2h3.8l2 2h7.2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z"/><path d="M3.5 10h17"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19.5h14"/></symbol>
+</svg>
+
+<div class="frame" data-frame>
+  <div class="grid-bg"></div>
+  <div class="glow-lg" data-glow></div>
+
+  <!-- 1. Title -->
+  <div class="layer title" data-title>
+    <div class="app-icon" data-t="0">
+      <img src="../public/img/app-icon-512.png" alt="">
+      <span class="ping" data-ping="0"></span><span class="ping coral" data-ping="1"></span>
+    </div>
+    <p class="kicker" data-t="1"><span class="kicker-line"></span>RIGHT-CLICK, DONE<span class="kicker-line"></span></p>
+    <span class="wordmark" data-t="2">RightKit<span class="dot">.</span></span>
+    <span class="tagline" data-t="3">右键一下，<em>就办好了。</em></span>
+  </div>
+
+  <!-- 2. Demo: right-click on the desktop, New File > Markdown -->
+  <div class="layer" data-demo>
+    <div class="riko" data-riko><img src="../assets/character/hero-character.png" alt=""></div>
+    <div class="caption" data-caption>
+      <p class="section-label"><span>// 01</span>新建</p>
+      <h2>在哪里右键，就在哪里新建。</h2>
+    </div>
+    <div class="rig" data-rig>
+      <div class="finder">
+        <div class="finder-bar"><span class="lights"><i></i><i></i><i></i></span><span class="finder-title">桌面</span></div>
+        <div class="finder-body">
+          <aside class="finder-side">
+            <p>个人收藏</p>
+            <ul>
+              <li><svg class="ic"><use href="#i-folder"/></svg>下载</li>
+              <li class="current"><svg class="ic"><use href="#i-folder"/></svg>桌面</li>
+              <li><svg class="ic"><use href="#i-folder"/></svg>文稿</li>
+            </ul>
+          </aside>
+          <div class="finder-content">
+            <ul class="files">
+              <li><span class="file"><span class="file-icon"><span class="doc" data-ext="md" data-label="md"></span></span><span class="file-name">笔记.md</span></span></li>
+              <li><span class="file"><span class="file-icon"><span class="doc" data-ext="docx" data-label="docx"></span></span><span class="file-name">季度报告.docx</span></span></li>
+              <li><span class="file"><span class="file-icon"><span class="thumb"></span></span><span class="file-name">封面.png</span></span></li>
+              <li><span class="file"><span class="file-icon"><span class="folder-shape"></span></span><span class="file-name">项目资料</span></span></li>
+              <li data-new><span class="file selected renaming" data-new-file><span class="file-icon"><span class="doc" data-ext="md" data-label="md"></span></span><span class="file-name">未命名.md</span></span></li>
+            </ul>
+            <div class="toast" data-toast>已创建「未命名.md」</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu" data-menu="0">
+        <div class="mi" data-row="0"><svg class="ic"><use href="#i-doc-plus"/></svg><span class="t">新建文件</span><svg class="ic chev"><use href="#i-chevron"/></svg></div>
+        <div class="mi"><svg class="ic"><use href="#i-star"/></svg><span class="t">常用目录</span><svg class="ic chev"><use href="#i-chevron"/></svg></div>
+        <div class="mi"><svg class="ic"><use href="#i-app"/></svg><span class="t">在应用中打开</span><svg class="ic chev"><use href="#i-chevron"/></svg></div>
+        <div class="mi"><svg class="ic"><use href="#i-link"/></svg><span class="t">拷贝当前路径</span></div>
+      </div>
+      <div class="menu" data-menu="1">
+        <div class="mi"><span class="ric doc" style="--c:#8e8e93"></span><span class="t">文本文档</span></div>
+        <div class="mi" data-row="1"><span class="ric doc" style="--c:#3a3a3c"></span><span class="t">Markdown</span></div>
+        <div class="mi"><span class="ric doc" style="--c:#7d5bd6"></span><span class="t">RTF 文稿</span></div>
+        <div class="mi"><span class="ric doc" style="--c:#185abd"></span><span class="t">Word 文档</span></div>
+        <div class="mi"><span class="ric doc" style="--c:#107c41"></span><span class="t">Excel 工作簿</span></div>
+        <div class="mi"><span class="ric doc" style="--c:#c43e1c"></span><span class="t">PowerPoint 演示文稿</span></div>
+      </div>
+      <div class="fake-cursor" data-cursor></div>
+    </div>
+  </div>
+
+  <!-- 3. End card, same layout as the website's download section -->
+  <div class="layer end" data-end>
+    <div class="end-art" data-end-art><img src="../assets/character/cta-character.png" alt=""></div>
+    <div class="end-copy">
+      <div class="brand-row" data-e="0"><img src="../public/img/app-icon-512.png" alt=""><span>RightKit<span class="dot">.</span></span></div>
+      <p class="tagline" data-e="1">右键，<br><em>就办好了。</em></p>
+      <p class="fineprint" data-e="2">免费 · 开源 · 需要 macOS 26 或更高版本</p>
+      <span class="btn btn-primary" data-e="3"><svg class="ic"><use href="#i-download"/></svg>下载 RightKit</span>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  "use strict";
+  const $ = (s) => document.querySelector(s);
+  const $$ = (s) => [...document.querySelectorAll(s)];
+
+  // The website's single easing curve, cubic-bezier(0.16, 1, 0.3, 1), plus an ease-in-out for cursor travel.
+  function bezier(x1, y1, x2, y2) {
+    const a = (p1, p2) => 1 - 3 * p2 + 3 * p1, b = (p1, p2) => 3 * p2 - 6 * p1, c = (p1) => 3 * p1;
+    const at = (t, p1, p2) => ((a(p1, p2) * t + b(p1, p2)) * t + c(p1)) * t;
+    const slope = (t, p1, p2) => 3 * a(p1, p2) * t * t + 2 * b(p1, p2) * t + c(p1);
+    return (x) => {
+      if (x <= 0) return 0;
+      if (x >= 1) return 1;
+      let t = x;
+      for (let i = 0; i < 8; i++) {
+        const s = slope(t, x1, x2);
+        if (Math.abs(s) < 1e-6) break;
+        t -= (at(t, x1, x2) - x) / s;
+      }
+      return at(Math.min(1, Math.max(0, t)), y1, y2);
+    };
+  }
+  const easeOut = bezier(0.16, 1, 0.3, 1);
+  const travel = bezier(0.45, 0, 0.2, 1);
+  const clamp = (v) => Math.min(1, Math.max(0, v));
+  const prog = (t, start, dur) => clamp((t - start) / dur);
+  const mix = (a, b, p) => a + (b - a) * p;
+  const set = (el, opacity, transform = "none") => { el.style.opacity = opacity; el.style.transform = transform; };
+
+  // Cursor keyframes in rig coordinates: [time, x, y]. Right-click at 5.2 s, New File > Markdown at 7.05 s.
+  const path = [
+    [4.3, 560, 360], [5.15, 250, 232], [5.75, 305, 250], [6.35, 470, 250], [6.7, 480, 276], [7.3, 480, 276], [8.2, 560, 340],
+  ];
+  const clicks = [5.2, 7.05];
+  function cursorAt(t) {
+    if (t <= path[0][0]) return path[0].slice(1);
+    for (let i = 1; i < path.length; i++) {
+      const [t1, x1, y1] = path[i];
+      const [t0, x0, y0] = path[i - 1];
+      if (t <= t1) { const p = travel((t - t0) / (t1 - t0)); return [mix(x0, x1, p), mix(y0, y1, p)]; }
+    }
+    return path.at(-1).slice(1);
+  }
+
+  const RIG_SCALE = 1.7;
+  const frame = $("[data-frame]");
+  const glow = $("[data-glow]");
+  const titleParts = $$("[data-t]");
+  const pings = $$("[data-ping]");
+  const demo = $("[data-demo]");
+  const riko = $("[data-riko]");
+  const caption = $("[data-caption]");
+  const rig = $("[data-rig]");
+  const menu0 = $('[data-menu="0"]');
+  const menu1 = $('[data-menu="1"]');
+  const row0 = $('[data-row="0"]');
+  const row1 = $('[data-row="1"]');
+  const cursor = $("[data-cursor]");
+  const newItem = $("[data-new]");
+  const newFile = $("[data-new-file]");
+  const toast = $("[data-toast]");
+  const end = $("[data-end]");
+  const endArt = $("[data-end-art]");
+  const endParts = $$("[data-e]");
+
+  // Menus open where the cursor clicked; the submenu hangs off the menu's right edge, as in main.js.
+  const menuAt = { x: 250, y: 232 };
+  Object.assign(menu0.style, { left: `${menuAt.x}px`, top: `${menuAt.y}px`, transformOrigin: "0 0" });
+  const menuWidth = () => menu0.offsetWidth;
+  Object.assign(menu1.style, { left: `${menuAt.x + menuWidth() - 3}px`, top: `${menuAt.y}px`, transformOrigin: "0 12px" });
+
+  const DURATION = 12.5;
+
+  function renderAt(t) {
+    // Background glow drifts from the centre (title) to Riko (demo) to the end card art.
+    const g1 = easeOut(prog(t, 3.3, 1.2)), g2 = easeOut(prog(t, 9.4, 1.2));
+    glow.style.transform = `translate(${mix(mix(410, 1080, g1), 1060, g2)}px, ${mix(mix(-40, 60, g1), 40, g2)}px)`;
+
+    // 1. Title: icon, kicker, wordmark and tagline rise in with a stagger, the icon pings, then all lift away.
+    const out1 = easeOut(prog(t, 3.3, 0.8));
+    titleParts.forEach((el, i) => {
+      const p = easeOut(prog(t, 0.25 + i * 0.12, 0.9));
+      const lift = i === 0 ? `scale(${mix(0.72, 1, p)})` : "";
+      set(el, p * (1 - out1), `translateY(${(1 - p) * 36 - out1 * 60}px) ${lift}`);
+    });
+    pings.forEach((el, i) => {
+      const p = prog(t, 1.7 + i * 0.12, 0.7);
+      const s = mix(1, 1.4, easeOut(p));
+      set(el, p > 0 && p < 1 ? (1 - p) * 0.8 : 0, `scale(${s})`);
+    });
+
+    // 2. Demo: caption, Finder window and Riko enter together.
+    const inD = (d) => easeOut(prog(t, 3.75 + d, 0.9));
+    const out2 = easeOut(prog(t, 9.2, 0.7));
+    demo.style.opacity = 1 - out2;
+    set(caption, inD(0), `translateY(${(1 - inD(0)) * 36}px)`);
+    set(rig, inD(0.1), `translateY(${(1 - inD(0.1)) * 36}px) scale(${RIG_SCALE * mix(0.97, 1, inD(0.1)) * mix(1, 0.97, out2)})`);
+    const float = Math.sin(((t - 3.75) / 7) * Math.PI * 2) * 8;
+    set(riko, inD(0.15), `translate(${(1 - inD(0.15)) * 48}px, ${-float}px)`);
+
+    // Cursor and menus.
+    const [cx, cy] = cursorAt(t);
+    const press = clicks.some((c) => t >= c && t < c + 0.18) ? 0.85 : 1;
+    cursor.style.opacity = prog(t, 4.3, 0.25) * (1 - prog(t, 8.4, 0.3));
+    cursor.style.transform = `translate(${cx}px, ${cy}px) scale(${press})`;
+
+    const closed = t >= 7.15;
+    const m0 = easeOut(prog(t, 5.25, 0.22));
+    set(menu0, closed ? 0 : m0, `scale(${mix(0.96, 1, m0)})`);
+    menu0.style.visibility = t < 5.25 || closed ? "hidden" : "visible";
+    row0.classList.toggle("active", t >= 5.75 && !closed);
+    const m1 = easeOut(prog(t, 5.9, 0.2));
+    set(menu1, closed ? 0 : m1, `scale(${mix(0.96, 1, m1)})`);
+    menu1.style.visibility = t < 5.9 || closed ? "hidden" : "visible";
+    row1.classList.toggle("active", t >= 6.62 && !closed);
+
+    // New file pops in and sits in the rename state; the status bar confirms it.
+    newItem.style.visibility = t >= 7.15 ? "visible" : "hidden";
+    const pop = easeOut(prog(t, 7.15, 0.5));
+    set(newFile, pop, `scale(${mix(0.6, 1, pop)})`);
+    newFile.classList.toggle("renaming", t < 8.6);
+    const tp = easeOut(prog(t, 7.3, 0.4));
+    set(toast, tp * (1 - prog(t, 8.9, 0.25)), `translateY(${(1 - tp) * 8}px)`);
+
+    // 3. End card.
+    endParts.forEach((el, i) => {
+      const p = easeOut(prog(t, 9.6 + i * 0.12, 0.9));
+      set(el, p, `translateY(${(1 - p) * 36}px)`);
+    });
+    const ea = easeOut(prog(t, 9.75, 1));
+    const bob = Math.sin(((t - 9.75) / 6.5) * Math.PI * 2) * 8;
+    set(endArt, ea, `translate(${(1 - ea) * 48}px, ${-bob * ea}px)`);
+    end.style.visibility = t >= 9.5 ? "visible" : "hidden";
+    frame.dataset.t = t.toFixed(3);
+  }
+
+  window.DURATION = DURATION;
+  window.renderAt = renderAt;
+  renderAt(0);
+
+  // Live preview when opened directly in a browser.
+  if (!navigator.webdriver) {
+    let start = performance.now(), paused = false, at = 0;
+    const tick = (now) => {
+      if (!paused) { at = ((now - start) / 1000) % (DURATION + 1); renderAt(at); }
+      requestAnimationFrame(tick);
+    };
+    addEventListener("keydown", (e) => {
+      if (e.key === " ") { paused = !paused; start = performance.now() - at * 1000; }
+      if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+        at = Math.max(0, at + (e.key === "ArrowRight" ? 1 : -1));
+        start = performance.now() - at * 1000;
+        renderAt(at);
+      }
+    });
+    requestAnimationFrame(tick);
+  }
+})();
+</script>
+</body>
+</html>
