@@ -135,7 +135,7 @@ RightKit 是一个常驻后台的 macOS 工具：用户几乎只在访达右键�
 
 **所有界面颜色来自系统语义色**，代码里用 `Color(nsColor: .labelColor)`、`.secondary`、`.separator` 这类语义名，不写色值。前置区的色值是浅色和深色外观下的 sRGB 预览，只用于文档和对比度检查。深色值以 `-dark` 后缀给出。
 
-- **Primary（珊瑚）** `primary` `#ff7973`，渐变从 `primary-start` `#ff8f6c` 到 `primary-end` `#ff5175`。这是品牌色，只用于应用图标、欢迎窗口、关于弹出层和对外物料，**不进入任何控件**。
+- **Primary（珊瑚）** `primary` `#ff7973`，渐变从 `primary-start` `#ff8f6c` 到 `primary-end` `#ff5175`。这是品牌色，只用于应用图标、欢迎窗口、关于弹出层和对外物料，**不进入任何控件**。对外物料的角色立绘见[品牌角色设定](docs/design/brand-character.md)。
 - **Accent（强调色）** 不在 Asset Catalog 里设置 AccentColor。控件用 `Color.accentColor`，跟随用户的系统强调色；前置区的 `accent` `#007aff` 只是“多色”默认下的预览占位。
   - 为什么不用珊瑚当强调色：HIG 允许单色界面把品牌色设为强调色，但白字要在按钮上达到 4.5:1，珊瑚需要压到约 `#e2123d`，这已经和 `systemRed` 几乎相同，而红色在本产品里专指“彻底删除”。同一颜色表达两种意思违反 HIG 的颜色一致性原则。
   - 另外，App 强调色只在用户选“多色”时生效，用户选了别的颜色会被覆盖，自定义强调色的收益本来就小。
