@@ -65,6 +65,54 @@
         }
       }
     },
+    "RightKit 角色": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKit character"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKit 角色"
+          }
+        }
+      }
+    },
+    "在“系统设置 → 通用 → 登录项与扩展”中打开 RightKit 的访达扩展，右键菜单才会出现。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn on the RightKit Finder extension in System Settings → General → Login Items & Extensions to see the right-click menu."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在“系统设置 → 通用 → 登录项与扩展”中打开 RightKit 的访达扩展，右键菜单才会出现。"
+          }
+        }
+      }
+    },
+    "现在就可以在访达里右键试试。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Try right-clicking in Finder now."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "现在就可以在访达里右键试试。"
+          }
+        }
+      }
+    },
     "RightKit 图标": {
       "localizations": {
         "en": {
