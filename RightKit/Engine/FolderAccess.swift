@@ -41,7 +41,21 @@ final class FolderAccess: Sendable {
 
     func isAuthorized(_ url: URL) -> Bool {
         let path = PathRules.standardized(url.path(percentEncoded: false))
-        return roots.withLock { PathRules.isInsideAny(path, of: Array($0)) }
+        let authorizedRoots = roots.withLock { Array($0).filter { $0 != "/" } }
+        if PathRules.isInsideAny(path, of: authorizedRoots) { return true }
+        // 快捷指令可能提供不同路径的同一目录（例如系统的 /.nofollow 视图）。
+        // 由文件系统确认关系，不通过删前缀或猜路径扩大授权范围。
+        return authorizedRoots.contains { root in
+            var relationship = FileManager.URLRelationship.other
+            do {
+                try FileManager.default.getRelationship(&relationship,
+                    ofDirectoryAt: URL(filePath: root, directoryHint: .isDirectory).resolvingSymlinksInPath(),
+                    toItemAt: url.resolvingSymlinksInPath())
+                return relationship == .same || relationship == .contains
+            } catch {
+                return false
+            }
+        }
     }
 
     /// 第一个不在任何已授权文件夹内的项目。

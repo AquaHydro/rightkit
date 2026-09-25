@@ -1,0 +1,86 @@
+{
+  "system": "macOS 27.0 (26A428)",
+  "baseCommit": "61a89f5e32c56d633e34d4cc8b3ed6a62f2645c4",
+  "channel": "direct, Developer ID signed",
+  "welcomeChange": {
+    "before": {
+      "monitor": [
+        "/Users/liao"
+      ],
+      "favorites": [
+        "Downloads",
+        "Desktop",
+        "Documents"
+      ],
+      "sendTo": [
+        "Downloads",
+        "Desktop",
+        "Documents"
+      ]
+    },
+    "after": {
+      "monitor": [
+        "/Users/liao/Desktop"
+      ],
+      "favorites": [
+        "Desktop"
+      ],
+      "sendTo": [
+        "Desktop"
+      ]
+    },
+    "uiVerified": true,
+    "originalSettingsRestored": true
+  },
+  "shortcuts": {
+    "name": "RightKit  20260926",
+    "bundleID": "app.rightkit.mac",
+    "beforeFix": "RightKit 无权访问“allowed”。",
+    "observedInputPath": "/.nofollow/Users/liao/RKAcceptance-20260926/allowed",
+    "afterFixAuthorizedOutput": "/Users/liao/RKAcceptance-20260926/allowed/input 2.png",
+    "unauthorizedMessage": "RightKit 无权访问“denied”。",
+    "unauthorizedFiles": [
+      "input.png"
+    ],
+    "inputSHA256": "155cbaa89c0cb85cb3726da0bc94aa45192329e01f2c2d0bb4f5ea081ce3e6ba",
+    "originalInputUnchanged": true
+  },
+  "pending": [
+    "V-081 official Release"
+  ],
+  "backgroundDisabled": {
+    "result": "Passed",
+    "action": "Finder > 工具箱 > 拷贝名称",
+    "fallback": "通用 / 后台服务已关闭",
+    "restored": true,
+    "restoredClipboard": "RKAcceptance-20260926.txt"
+  },
+  "beforeRelogin": {
+    "consoleSession": "liao             console      Sep 24 02:53 ",
+    "settingsSHA256": "4fd4022431cde060a7faafe9fdd01a9b56e61c557033030cc4378b0335370fbb",
+    "monitor": "/Users/liao",
+    "fixtures": [
+      "/Users/liao/RKAcceptance-20260926/allowed",
+      "/private/tmp/RKAcceptance-20260926/denied"
+    ],
+    "app": "/Applications/RightKit.app",
+    "resume": "After user logs in, verify same saved grant without reauthorization via Finder create/copy/move/delete only test-created files in home/Desktop/Documents; confirm denied output remains denied. Then clean test fixtures."
+  },
+  "afterRelogin": {
+    "consoleSession": "liao             console      Sep 26 01:47 ",
+    "settingsSHA256": "4fd4022431cde060a7faafe9fdd01a9b56e61c557033030cc4378b0335370fbb",
+    "settingsUnchanged": true,
+    "create": "Passed: allowed/未命名.txt created via Finder",
+    "copy": "Passed: test file copied to Documents; original retained before move",
+    "move": "Passed: original moved to Desktop",
+    "delete": "Passed: newly created 未命名.txt deleted via RightKit confirmation",
+    "reauthorizationPrompts": false,
+    "extensionStatus": "访达扩展已启用",
+    "channel": "direct"
+  },
+  "cleanup": {
+    "localTestFilesRemoved": true,
+    "shortcutRetained": "RightKit  20260926; removal syncs across iCloud devices",
+    "appAndSettingsBackups": "Trash"
+  }
+}

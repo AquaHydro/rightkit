@@ -139,3 +139,31 @@ macOS 27.0（26A428），构建提交 `8e2be71` 加本次 `FolderStore.refreshed
 
 - `V-080`：重新登录后授权仍然有效；欢迎窗口「更改…」后，默认常用目录跟着更新（需要再次清空配置，回到全新状态）。
 - `V-083`：在快捷指令里运行动作；在系统设置里停用后台项目后点菜单。这一步要改系统设置，Claude 不操作。
+
+
+## 2026-09-26 剩余项目补验（Codex 电脑操控）
+
+- 系统：macOS 27.0（26A428）；基线 `61a89f5`，官网版 Developer ID 签名，运行于 `/Applications/RightKit.app`。原设置先备份，欢迎流程验收后恢复。商店版本轮未重新运行。
+- `V-080` 欢迎窗口「更改…」通过：全新设置授权 `/Users/liao`，默认常用目录和发送到均为下载、桌面、文稿；点「更改…」选 `/Users/liao/Desktop` 后，监视目录与两套默认列表均只剩桌面。检查了实际欢迎窗口、目录页和保存的 JSON。重新登录仍未执行。
+- `V-083` 快捷指令：在快捷指令 App 新建 `RightKit  20260926`，确认动作标识为 `app.rightkit.mac.NewFileIntent` 与 `app.rightkit.mac.ConvertImageIntent`。新建 TXT 成功，但转换主目录授权范围内的图片报「RightKit 无权访问“allowed”。」，重启主程序仍能复现。
+- 临时诊断确认系统传入 `/.nofollow/Users/liao/...`；与正常路径的目录具有相同文件系统标识，但路径字符串不同。修复为先开始访问 IntentFile，再在路径不匹配时调用公开的 `FileManager.getRelationship` 判断同一目录或包含关系，读取失败仍拒绝。没有剥离系统前缀，也没有扩大为任意位置可写。临时路径日志已移除。
+- 修复后用同一个快捷指令在签名沙盒构建中复测：授权目录生成 `input 2.png`，原图保留；未授权的 `/private/tmp/RKAcceptance-20260926/denied` 弹出「RightKit 无权访问“denied”。」，该目录只保留输入图片，SHA-256 与原始测试图相同。结果见 [结构化证据](evidence/device-2026-09-26/followup-results.json)。
+- 新增目录别名的授权边界测试，覆盖同一目录、子目录、无关目录、不存在目录和无授权。`make test` 和 `make verify` 全部通过（双渠道构建、文档、213 条文案、Office 模板和 9 个 Intent）；`make release-unsigned` 的三个 target 签名检查通过。
+- 尚未完成：系统设置停用后台项目后的 Finder 菜单回退（开关页面已定位，尚未修改）、退出并重新登录、首个正式 Release 的更新检查。`V-080`、`V-083` 不提前打勾。
+
+
+### 后台项目关闭补验
+
+- 用户确认后，在系统设置的「登录项 → 后台 App 活动」中关闭官网版 RightKit，另一个 RightKit 项保持开启。关闭前官网版主程序已退出，扩展仍运行。
+- 在 `/Users/liao/RKAcceptance-20260926/allowed` 右键 `RKAcceptance-20260926.txt` → 工具箱 → 拷贝名称。日志 01:45:10 记录扩展 `perform copyName`、`Agent unavailable`，随后主程序新进程 29666 启动。实际窗口打开「通用」，显示「后台服务已关闭」及系统设置按钮。[截图](evidence/device-2026-09-26/v083-background-disabled.png)。
+- 恢复同一后台开关后，状态自动变为「访达扩展已启用」。再次点拷贝名称，日志 01:46:13 有主程序 `handle copyName items=1`，剪贴板为 `RKAcceptance-20260926.txt`。[菜单和回退日志](evidence/device-2026-09-26/v083-background.log)。
+- `V-083` 剩余项完成，标为 Passed。`V-080` 仍只差真正退出并重新登录，需要用户重新完成登录后继续验证；不会用重启 App 代替。
+
+
+### 重新登录补验（V-080）
+
+- 用户退出并重新登录，`who` 的 console 会话由 `Sep 24 02:53` 变为 `Sep 26 01:47`。登录后主程序未运行，官网版扩展已运行。保存的设置 SHA-256 仍为 `4fd4022431cde060a7faafe9fdd01a9b56e61c557033030cc4378b0335370fbb`，未重新选择授权目录。
+- 在主目录内的验收目录通过访达菜单复制 `RKAcceptance-20260926.txt` 到文稿，成功拉起主程序并完成复制；源仍在。随后移动源到桌面，源消失、桌面文件存在。空白处新建 `未命名.txt` 成功，经 RightKit 确认框彻底删除后文件消失。全程没有系统文件夹权限请求。
+- 删除确认第一次被电脑工具的辅助功能树误读为隐藏窗口，因此取消并重启主程序重试；第二次截图确认对话框内容，点击确认后核对文件不存在。此项不以命令发送日志代替删除结果。
+- 通用页显示 `/Users/liao`，没有重新授权提示，扩展状态为「访达扩展已启用」。[截图](evidence/device-2026-09-26/v080-relogin-enabled.png)、[菜单与命令日志](evidence/device-2026-09-26/v080-relogin.log)、[结构化结果](evidence/device-2026-09-26/followup-results.json)。本轮补验为官网版；结合此前双渠道验收，`V-080` 标为 Passed。
+- 本轮创建的本机测试目录以及桌面、文稿的测试文件已清理。快捷指令 `RightKit  20260926` 保留，因为系统提示删除会同步到所有 iCloud 设备；旧 App 和设置备份仍在废纸篓。`V-081` 继续等待正式 Release。

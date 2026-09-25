@@ -32,4 +32,25 @@ import Testing
     @Test func entryWithoutBookmarkCannotBeActivated() {
         #expect(FolderAccess().activate(FolderEntry(path: "/Users/tester")) == nil)
     }
+
+    @Test func filesystemAliasesKeepTheSameAuthorizationBoundary() throws {
+        let fm = FileManager.default
+        let base = fm.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        defer { try? fm.removeItem(at: base) }
+        let root = base.appendingPathComponent("authorized")
+        let child = root.appendingPathComponent("child")
+        let outside = base.appendingPathComponent("outside")
+        let alias = base.appendingPathComponent("alias")
+        try fm.createDirectory(at: child, withIntermediateDirectories: true)
+        try fm.createDirectory(at: outside, withIntermediateDirectories: true)
+        try fm.createSymbolicLink(at: alias, withDestinationURL: root)
+        let access = FolderAccess()
+        access.grant(root)
+        #expect(access.isAuthorized(alias))
+        #expect(access.isAuthorized(alias.appendingPathComponent("child")))
+        #expect(!access.isAuthorized(outside))
+        #expect(!access.isAuthorized(base.appendingPathComponent("missing")))
+        #expect(!FolderAccess().isAuthorized(alias))
+    }
+
 }
