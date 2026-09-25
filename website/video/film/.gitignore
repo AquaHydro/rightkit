@@ -1,0 +1,8 @@
+node_modules/
+renders/
+dist/
+.build/
+assets/*.wav
+!assets/sfx/
+assets/sfx/soft-ui-click.wav
+vertical/assets/

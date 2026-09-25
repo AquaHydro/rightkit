@@ -1,0 +1,100 @@
+{
+  "inputs": {
+    "../../content.json": {
+      "bytes": 34767,
+      "imports": []
+    },
+    "src/site-adapter.jsx": {
+      "bytes": 4860,
+      "imports": [
+        {
+          "path": "node:fs",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "node:path",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../../content.json",
+          "kind": "import-statement",
+          "original": "../../../content.json"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/film.jsx": {
+      "bytes": 13571,
+      "imports": [
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react-dom/server",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "src/site-adapter.jsx",
+          "kind": "import-statement",
+          "original": "./site-adapter.jsx"
+        },
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    }
+  },
+  "outputs": {
+    ".build/film.cjs": {
+      "imports": [
+        {
+          "path": "react",
+          "kind": "require-call",
+          "external": true
+        },
+        {
+          "path": "react-dom/server",
+          "kind": "require-call",
+          "external": true
+        },
+        {
+          "path": "node:fs",
+          "kind": "require-call",
+          "external": true
+        },
+        {
+          "path": "node:path",
+          "kind": "require-call",
+          "external": true
+        },
+        {
+          "path": "react/jsx-runtime",
+          "kind": "require-call",
+          "external": true
+        }
+      ],
+      "exports": [],
+      "entryPoint": "src/film.jsx",
+      "inputs": {
+        "src/film.jsx": {
+          "bytesInOutput": 19701
+        },
+        "src/site-adapter.jsx": {
+          "bytesInOutput": 3858
+        },
+        "../../content.json": {
+          "bytesInOutput": 39767
+        }
+      },
+      "bytes": 64919
+    }
+  }
+}
