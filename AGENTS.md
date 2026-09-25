@@ -23,8 +23,8 @@
 
 ## 安全边界
 
-- 不要修改、覆盖、重新签名或替换 `/Applications/RightKit.app`。
-- 不要读写已经安装的 RightKit 的配置、模板、常用目录和开关。
+- 日常开发不要修改、覆盖、重新签名或替换 `/Applications/RightKit.app`，也不要读写已经安装的 RightKit 的配置、模板、常用目录和开关。
+- 例外：执行 `TASK.md` 里的真机验收时，可以把本仓库构建的 RightKit 装进 `/Applications/RightKit.app`、启动它，并把 `~/Library/Containers` 和 `~/Library/Group Containers` 里的 `app.rightkit.*` 移到废纸篓，以得到全新安装状态。
 - 本仓库的官网版应用使用 `app.rightkit.mac`，扩展使用 `app.rightkit.mac.finder`；商店版应用使用 `app.rightkit.mac.store`，扩展使用 `app.rightkit.mac.store.finder`。
 - 测试只用临时目录和测试自己创建的文件。永久删除只能删除这些文件。
 

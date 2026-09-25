@@ -52,10 +52,12 @@ enum FolderStore {
     }
 
     /// 按 bookmark 更新路径。进了废纸篓的文件夹算不存在，保留原路径。
+    /// 必须带 `.withSecurityScope`：沙盒里不带时，主目录的 bookmark 会解析成应用容器 `~/Library/Containers/<id>/Data`。
     static func refreshed(_ entry: FolderEntry) -> FolderEntry {
         guard let data = entry.bookmark else { return entry }
         var stale = false
-        guard let url = try? URL(resolvingBookmarkData: data, options: [.withoutUI, .withoutMounting], bookmarkDataIsStale: &stale)
+        guard let url = try? URL(resolvingBookmarkData: data, options: [.withSecurityScope, .withoutUI, .withoutMounting],
+                                 bookmarkDataIsStale: &stale)
         else { return entry }
         let path = PathRules.standardized(url.path(percentEncoded: false))
         guard !isInTrash(path) else { return entry }

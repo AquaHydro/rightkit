@@ -194,29 +194,12 @@ final class AppModel {
             status = .disabled
         } else if !agentReachable || SMAppService.agent(plistName: ServiceNames.agentPlist).status == .requiresApproval {
             status = .backgroundBlocked
-        } else if AppModel.extensionIsRunning() {
+        } else if SharedStore.heartbeatIsAlive() {
             status = .enabled
         } else {
             status = .notRunning
         }
         if status != extensionStatus { extensionStatus = status }
-    }
-
-    /// 心跳里记录的进程仍在运行，且确实是扩展进程。
-    static func extensionIsRunning() -> Bool {
-        guard let beat = SharedStore.readHeartbeat(), beat.pid > 0 else { return false }
-        return processName(beat.pid) == "RightKitFinder"
-    }
-
-    /// 沙盒拒绝 `proc_name` 和向其他进程发信号，但允许用 sysctl 读进程表。进程不存在时返回 nil。
-    static func processName(_ pid: pid_t) -> String? {
-        var info = kinfo_proc()
-        var size = MemoryLayout<kinfo_proc>.stride
-        var mib: [Int32] = [CTL_KERN, KERN_PROC, KERN_PROC_PID, pid]
-        guard sysctl(&mib, u_int(mib.count), &info, &size, nil, 0) == 0, size > 0 else { return nil }
-        return withUnsafeBytes(of: info.kp_proc.p_comm) { raw in
-            String(decoding: raw.prefix { $0 != 0 }, as: UTF8.self)
-        }
     }
 
     // MARK: 待粘贴
