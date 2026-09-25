@@ -70,13 +70,13 @@
 
 ## 设置
 
-设置是 App Group 里的一个 JSON 文件，编码使用 `schemaVersion`。当前版本是 `1`。写入要原子替换。读到无法识别的文件时，把原文件留成备份并使用默认值，不要崩溃。
+设置是 App Group 里的一个 JSON 文件，编码使用 `schemaVersion`。当前版本是 `2`（沙盒版新增授权状态，`1` 不迁移）。写入要原子替换。读到无法识别的文件时，把原文件留成备份并使用默认值，不要崩溃。
 
 模型包含：主题、语言、三个启动开关、彻底删除确认、五个功能组、监视目录、新建类型、自定义模板、打开工具、常用目录、发送到、工具箱顺序和开关、欢迎窗口是否已显示。
 
 用户选择的文件夹和应用保存 bookmark 或 bundle ID，不保存可能失效后还继续使用的裸路径。监视目录、常用目录和发送到文件夹不见了，按功能规格显示「该文件夹已不存在。」
 
-扩展在自己的初始化里，向 App Group 写心跳：时间和扩展进程号。主程序检查该进程仍在运行且确实是 `RightKitFinder`，以此判断本次登录中扩展是否在运行，区分「已启用」和「未运行」。
+扩展在自己的初始化里，向 App Group 写心跳：时间和扩展进程号。主程序检查该进程仍在运行且确实是 `RightKitFinder`，以此判断本次登录中扩展是否在运行，区分「已启用」和「未运行」。沙盒不允许向其他进程发信号或调用 `proc_name`，所以用 `sysctl` 的 `KERN_PROC_PID` 读进程名。
 
 主程序修改设置后发出 Darwin 通知「App Group 加 `.settings`」（不带数据）。扩展收到后重读设置并更新 `directoryURLs`。这只是“设置变了”的提醒，不传命令。
 
@@ -85,14 +85,15 @@
 普通 App 进程不能自己发布带名字的 XPC 服务，只有 launchd 管理的任务可以。因此由主程序包内的 `RightKitAgent` 通过 LaunchAgent 的 `MachServices` 发布名为「App Group 加 `.command`」的本应用专用 XPC 服务。服务名是 App Group 的直接子名，沙盒里的扩展和主程序可以直接查找。agent 按需启动，launchd 只在有人查找这个服务时才运行它，不在登录时自动运行。消息包含 schema 版本、请求 ID、发出时间、动作、目标 URL 列表和可选参数。
 
 - 主程序每次启动都注册 agent（已注册时不重复），然后连接 agent，交出一个匿名 `NSXPCListener` 的 endpoint。agent 把扩展的请求原样转交这个 endpoint。
-- 主程序没有交出 endpoint 时，agent 用 `NSWorkspace` 启动主程序，最多等 3 秒。
+- 主程序没有交出 endpoint 时，agent 启动主程序，最多等 3 秒。
+- 沙盒进程启动其他应用时，系统会丢掉启动参数，所以启动原因用本渠道 scheme 的固定网址表达（`AppURLAction`）：`activate` 把主程序带到前台，`background` 表示 agent 在后台拉起、不开设置窗口，`agent-unavailable` 让主程序打开「通用」页。扩展和 agent 都用 `NSWorkspace.open(_:withApplicationAt:configuration:)` 指定打开自己所在的主程序包，不交给 LaunchServices 挑选同 scheme 的其他副本。网址只有这三个动作，不带命令或路径；主程序忽略其他网址。
 - agent 的监听用 `setConnectionCodeSigningRequirement` 只接受签名标识为本渠道的扩展或主程序、且开发团队与 agent 自身一致的进程；主程序的匿名监听只接受本渠道的 agent。团队标识从自身签名读取，不写死。验证失败立即断开。
 - XPC 方法只接收一个编码后的请求信封和一个结果回复。先检查信封大小、版本和字段类型，再解码 URL；不要把不受信任的数据直接当作路径使用。
 - 请求 ID 重复时忽略后到的一条。
 - 超过 30 秒的请求拒绝执行。
 - URL 必须是文件 URL。拒绝之后，主程序显示该动作自己的失败提示。
 - 不要用分布式通知接收命令，也不要执行消息里带来的路径字符串。
-- 协作式激活下，访达在前台时主程序自己调用 `activate()` 会被拒绝。会弹出窗口或对话框的命令（`Command.presentsUI`），扩展先经 LaunchServices 打开本渠道 scheme 的 `://activate` 网址（如 `rightkit://activate`），再发送命令。这个网址只让系统把主程序带到前台，不携带任何命令或路径。
+- 协作式激活下，访达在前台时主程序自己调用 `activate()` 会被拒绝。会弹出窗口或对话框的命令（`Command.presentsUI`），扩展先打开本渠道的 `activate` 网址（如 `rightkit://activate`），再发送命令。
 
 ## 文件操作
 

@@ -169,7 +169,7 @@ struct MonitoredFoldersSection: View {
     var body: some View {
         Section {
             ForEach(model.settings.monitoredFolders) { entry in
-                FolderRow(entry: entry, showsToggle: false) {
+                FolderRow(entry: entry, showsToggle: false, reauthorize: { reauthorize(entry) }) {
                     model.settings.monitoredFolders.removeAll { $0.id == entry.id }
                 }
             }
@@ -205,21 +205,31 @@ struct MonitoredFoldersSection: View {
         guard let url = Alerts.chooseFolder(prompt: L("添加")) else { return }
         let path = url.path(percentEncoded: false)
         guard PathRules.canMonitor(path, home: FolderStore.home) else { return rejected = path }
-        guard !model.settings.monitoredFolders.contains(where: { PathRules.standardized($0.path) == PathRules.standardized(path) }) else { return }
-        model.settings.monitoredFolders.append(FolderStore.entry(for: url))
+        model.addMonitoredFolder(url)
+    }
+
+    /// F-080：面板停在原来的位置，重新选中后替换这一行。
+    private func reauthorize(_ entry: FolderEntry) {
+        guard let url = Alerts.chooseFolder(prompt: L("授权"), startingAt: URL(filePath: entry.path, directoryHint: .isDirectory)) else { return }
+        let path = url.path(percentEncoded: false)
+        guard PathRules.canMonitor(path, home: FolderStore.home) else { return rejected = path }
+        model.reauthorize(entry, in: \.monitoredFolders, with: url)
     }
 }
 
-/// 文件夹列表的一行：图标、显示名、路径，失效时显示提示。
+/// 文件夹列表的一行：图标、显示名、路径，失效或需要重新授权时显示提示。
 struct FolderRow: View {
     let entry: FolderEntry
     var showsToggle = true
     var isOn: Binding<Bool>?
+    /// F-080：需要重新授权时显示「重新授权…」。
+    var reauthorize: (() -> Void)?
     let remove: () -> Void
 
     var body: some View {
         let refreshed = FolderStore.refreshed(entry)
         let exists = FolderStore.exists(refreshed)
+        let needsAuthorization = exists && entry.needsAuthorization
         let title = exists ? FolderStore.displayName(refreshed) : (refreshed.path as NSString).lastPathComponent
         HStack(spacing: 12) {
             if let isOn, showsToggle {
@@ -227,16 +237,19 @@ struct FolderRow: View {
                     .labelsHidden()
                     .accessibilityLabel(title)
             }
-            if exists {
+            if exists, !needsAuthorization {
                 FileIcon(path: refreshed.path)
             } else {
                 RowIcon(symbol: "questionmark.folder", tint: .intentInspect)
             }
             RowLabel(title: title,
-                     caption: exists ? refreshed.path : L("该文件夹已不存在。"),
-                     monospacedCaption: exists)
+                     caption: !exists ? L("该文件夹已不存在。") : needsAuthorization ? L("需要重新授权。") : refreshed.path,
+                     monospacedCaption: exists && !needsAuthorization)
                 .textSelection(.enabled)
             Spacer()
+            if needsAuthorization, let reauthorize {
+                Button(L("重新授权…"), action: reauthorize)
+            }
             RemoveButton(itemName: title, action: remove)
         }
     }

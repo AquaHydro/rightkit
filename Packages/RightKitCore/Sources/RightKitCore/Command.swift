@@ -128,8 +128,26 @@ public struct ChannelIdentifiers: Equatable, Sendable {
     /// XPC 服务名必须是 App Group 的直接子名，沙盒里的扩展才能查找。
     public var command: String { appGroup + ".command" }
     public var settingsChanged: String { appGroup + ".settings" }
-    /// 只用来让系统把主程序带到前台，不带任何命令。
-    public var activationURL: URL? { URL(string: urlScheme + "://activate") }
+    /// 主程序专用网址。只表达启动或激活的原因，不带命令或路径。
+    public func url(for action: AppURLAction) -> URL? { URL(string: urlScheme + "://" + action.rawValue) }
+
+    /// 本渠道 scheme 的网址对应的动作；其他网址返回 nil。
+    public func action(of url: URL) -> AppURLAction? {
+        guard url.scheme?.lowercased() == urlScheme.lowercased(), let host = url.host() else { return nil }
+        return AppURLAction(rawValue: host.lowercased())
+    }
+
+    public var activationURL: URL? { url(for: .activate) }
+}
+
+/// 扩展和 agent 打开主程序时用的网址动作（technical.md 通信）。沙盒进程启动其他应用时，系统会丢掉启动参数，所以改用网址。
+public enum AppURLAction: String, CaseIterable, Sendable {
+    /// 让系统把主程序带到前台。
+    case activate
+    /// agent 在后台拉起主程序，不开窗口。
+    case background
+    /// 扩展连不上 agent，主程序打开设置的「通用」页。
+    case agentUnavailable = "agent-unavailable"
 }
 
 /// 当前进程所属渠道的标识。主程序、扩展和 agent 的 Info.plist 都带这三项。

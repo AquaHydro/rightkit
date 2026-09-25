@@ -65,6 +65,22 @@
         }
       }
     },
+    "RightKit 无权访问“%@”。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKit can’t access “%@”."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKit 无权访问“%@”。"
+          }
+        }
+      }
+    },
     "Shell 脚本": {
       "localizations": {
         "en": {
@@ -1053,6 +1069,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "授予写入权限"
+          }
+        }
+      }
+    },
+    "授权": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Authorize"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "授权"
           }
         }
       }
@@ -2561,6 +2593,22 @@
         }
       }
     },
+    "请在设置里把它所在的文件夹加入监视目录。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In Settings, add the folder that contains it to Monitored Folders."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请在设置里把它所在的文件夹加入监视目录。"
+          }
+        }
+      }
+    },
     "跟随系统": {
       "localizations": {
         "en": {
@@ -2961,6 +3009,22 @@
         }
       }
     },
+    "重新授权…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Authorize Again…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重新授权…"
+          }
+        }
+      }
+    },
     "隐藏/显示所选": {
       "localizations": {
         "en": {
@@ -3069,6 +3133,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "隔空投送"
+          }
+        }
+      }
+    },
+    "需要重新授权。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Needs authorization again."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "需要重新授权。"
           }
         }
       }

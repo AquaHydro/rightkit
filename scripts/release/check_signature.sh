@@ -1,5 +1,5 @@
 #!/bin/zsh
-# 检查导出的 app：Developer ID、强化运行时、时间戳、没有调试权限，四个部件的签名标识和 App Group 正确。
+# 检查导出的 app：Developer ID、强化运行时、时间戳、没有调试权限、都开了沙盒，三个部件的签名标识和 App Group 正确。
 set -euo pipefail
 app=$1
 fail() { echo "error: $*" >&2; exit 1; }
@@ -15,6 +15,7 @@ check() {
   [[ $info == *"Timestamp="* ]] || fail "$target has no secure timestamp"
   local ents; ents=$(codesign -d --entitlements - --xml "$target" 2>/dev/null)
   [[ $ents != *"get-task-allow"* ]] || fail "$target has get-task-allow"
+  [[ $ents == *"<key>com.apple.security.app-sandbox</key><true/>"* ]] || fail "$target is not sandboxed"
   # App Group 用团队 ID 前缀，不需要描述文件授权（technical.md 发布渠道与标识）。
   if [[ $needs_group == yes ]]; then
     [[ $ents == *"<string>Q9C87Z9H4G.app.rightkit.mac</string>"* ]] || fail "$target lacks the app group"
@@ -23,7 +24,7 @@ check() {
 }
 check "$app" app.rightkit.mac yes
 check "$app/Contents/PlugIns/RightKitFinder.appex" app.rightkit.mac.finder yes
-check "$app/Contents/MacOS/RightKitAgent" app.rightkit.mac.agent no
+check "$app/Contents/MacOS/RightKitAgent" app.rightkit.mac.agent yes
 plist="$app/Contents/Library/LaunchAgents/app.rightkit.mac.agent.plist"
 [[ -f $plist ]] || fail "agent plist missing"
 [[ $(/usr/libexec/PlistBuddy -c "Print :Label" "$plist") == app.rightkit.mac.agent ]] || fail "agent label mismatch"

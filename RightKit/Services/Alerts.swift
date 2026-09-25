@@ -91,15 +91,16 @@ extension Alerts {
         NSApp.activate()
     }
 
-    static func chooseFolder(prompt: String) -> URL? {
+    /// 面板选中的项目在本次运行内可以访问，登记为已授权（F-080）。
+    static func chooseFolder(prompt: String, startingAt directory: URL? = nil) -> URL? {
         let panel = NSOpenPanel()
         panel.canChooseDirectories = true
         panel.canChooseFiles = false
         panel.canCreateDirectories = true
         panel.allowsMultipleSelection = false
         panel.prompt = prompt
-        bringToFront()
-        return panel.runModal() == .OK ? panel.url : nil
+        panel.directoryURL = directory
+        return runPanel(panel)
     }
 
     static func chooseImage() -> URL? {
@@ -107,7 +108,19 @@ extension Alerts {
         panel.canChooseDirectories = false
         panel.allowedContentTypes = [.image]
         panel.prompt = L("选择")
+        return runPanel(panel)
+    }
+
+    private static func runPanel(_ panel: NSOpenPanel) -> URL? {
         bringToFront()
-        return panel.runModal() == .OK ? panel.url : nil
+        guard panel.runModal() == .OK, let url = panel.url else { return nil }
+        FolderAccess.shared.grant(url)
+        return url
+    }
+
+    /// F-080：要读写的项目不在任何已授权文件夹内。
+    static func showUnauthorized(_ url: URL) {
+        show(L("RightKit 无权访问“%@”。", FileManager.default.displayName(atPath: url.path(percentEncoded: false))),
+             informative: L("请在设置里把它所在的文件夹加入监视目录。"))
     }
 }

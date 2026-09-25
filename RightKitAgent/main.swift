@@ -70,11 +70,11 @@ final class Agent: NSObject, NSXPCListenerDelegate, @unchecked Sendable {
             let isFirstWaiter = self.waiters.isEmpty
             let id = UUID()
             self.waiters[id] = body
-            if isFirstWaiter {
+            if isFirstWaiter, let url = ServiceNames.current.url(for: .background) {
+                // 沙盒会丢掉启动参数，用网址告诉主程序这是后台拉起；指定打开自己所在的主程序包。
                 let configuration = NSWorkspace.OpenConfiguration()
                 configuration.activates = false
-                configuration.arguments = ["--background"]
-                NSWorkspace.shared.openApplication(at: self.appURL, configuration: configuration) { _, error in
+                NSWorkspace.shared.open([url], withApplicationAt: self.appURL, configuration: configuration) { _, error in
                     if let error { self.log.error("Launch failed: \(error.localizedDescription, privacy: .public)") }
                 }
             }

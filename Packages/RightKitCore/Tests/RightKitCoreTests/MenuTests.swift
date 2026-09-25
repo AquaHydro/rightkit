@@ -9,7 +9,7 @@ import Testing
     let env = MenuEnvironment(folderExists: { !$0.hasSuffix("Gone") }, isAppInstalled: { $0 != "com.microsoft.VSCode" })
 
     init() {
-        settings = Settings.makeDefault(home: "/Users/tester") { _ in true }
+        settings = Settings.afterAuthorizing(home: "/Users/tester") { _ in true }
         settings.openTools = OpenTool.known
         settings.sendTo.append(FolderEntry(path: "/Users/tester/Gone"))
     }
@@ -73,6 +73,13 @@ import Testing
         #expect(!menu(.container, folder: "/Volumes/Other/sub", settings: s).isEmpty)
         s.monitoredFolders = []
         #expect(menu(.container, settings: s).isEmpty, "移除主目录后不显示")
+    }
+
+    @Test func foldersNeedingAuthorizationHaveNoMenu() {
+        var s = settings
+        s.monitoredFolders[0].needsAuthorization = true
+        #expect(menu(.container, settings: s).isEmpty, "F-080：需要重新授权的目录不注册")
+        #expect(menu(.items, [file("a.txt")], settings: s).isEmpty)
     }
 
     @Test func toolbarOnlyHasSettings() {
@@ -207,7 +214,7 @@ import AppKit
 
 @Suite struct SymbolTests {
     @Test func everyMenuSymbolExists() {
-        var settings = Settings.makeDefault(home: "/Users/t") { _ in true }
+        var settings = Settings.afterAuthorizing(home: "/Users/t") { _ in true }
         settings.openTools = OpenTool.known
         let env = MenuEnvironment(folderExists: { _ in true }, isAppInstalled: { _ in true })
         let inputs = [

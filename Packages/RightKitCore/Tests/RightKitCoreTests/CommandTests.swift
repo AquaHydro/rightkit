@@ -102,6 +102,17 @@ import Testing
         #expect(ids.command == "Q9C87Z9H4G.app.rightkit.mac.store.command")
         #expect(ids.settingsChanged == "Q9C87Z9H4G.app.rightkit.mac.store.settings")
         #expect(ids.activationURL?.absoluteString == "rightkit-store://activate")
+        #expect(ids.url(for: .agentUnavailable)?.absoluteString == "rightkit-store://agent-unavailable")
+    }
+
+    @Test func urlActionsRoundTripAndRejectOtherSchemes() throws {
+        let ids = ChannelIdentifiers(appBundleID: "app.rightkit.mac", appGroup: "T.app.rightkit.mac", urlScheme: "rightkit")
+        for action in AppURLAction.allCases {
+            #expect(ids.action(of: try #require(ids.url(for: action))) == action)
+        }
+        for other in ["rightkit-store://activate", "rightkit://unknown", "https://activate", "rightkit:///activate"] {
+            #expect(ids.action(of: try #require(URL(string: other))) == nil, "\(other)")
+        }
     }
 
     @Test func missingOrEmptyKeysAreRejected() {

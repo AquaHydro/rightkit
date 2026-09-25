@@ -6,28 +6,60 @@ import Testing
     let home = "/Users/tester"
 
     @Test func freshDefaultsMatchFeatureTable() {
-        let s = Settings.makeDefault(home: home) { _ in true }
+        let s = Settings()
         #expect(s.theme == .system && s.language == .system)
-        #expect(s.launchAtLogin && s.showMenuBarIcon && s.showMenuIcons && s.confirmPermanentDelete)
+        #expect(!s.launchAtLogin, "F-005：登录时启动由用户自己打开")
+        #expect(s.showMenuBarIcon && s.showMenuIcons && s.confirmPermanentDelete)
         #expect(s.groups == FeatureGroups())
-        #expect(s.monitoredFolders.map(\.path) == [home])
+        #expect(s.monitoredFolders.isEmpty && s.favorites.isEmpty && s.sendTo.isEmpty, "F-080：授权前没有任何文件夹")
         #expect(s.newItems.filter(\.enabled).map(\.fileExtension) == ["txt", "md", "rtf", "docx", "xlsx", "pptx"])
         #expect(s.newItems.map(\.fileExtension) == BuiltinType.allCases.map(\.rawValue))
         #expect(!s.openAfterCreate && !s.askFileName)
+        #expect(s.toolbox.count == 16 && s.toolbox.allSatisfy { $0.enabled })
+        #expect(!s.welcomeShown && !s.standardFoldersAdded)
+    }
+
+    @Test func authorizingHomeAddsStandardFolders() {
+        let s = Settings.afterAuthorizing(home: home) { _ in true }
+        #expect(s.monitoredFolders.map(\.path) == [home])
         #expect(s.favorites.map(\.path) == ["Downloads", "Desktop", "Documents"].map { "\(home)/\($0)" })
         #expect(s.sendTo.map(\.path) == s.favorites.map(\.path))
         #expect(s.favorites.allSatisfy { $0.enabled })
-        #expect(s.toolbox.count == 16 && s.toolbox.allSatisfy { $0.enabled })
-        #expect(!s.welcomeShown)
+        #expect(s.standardFoldersAdded)
     }
 
     @Test func missingStandardFoldersAreSkipped() {
-        let s = Settings.makeDefault(home: home) { !$0.hasSuffix("Desktop") }
+        let s = Settings.afterAuthorizing(home: home) { !$0.hasSuffix("Desktop") }
         #expect(s.favorites.map(\.path) == ["\(home)/Downloads", "\(home)/Documents"])
     }
 
+    @Test func standardFoldersOnlyInsideAuthorizedFolders() {
+        var s = Settings()
+        s.monitoredFolders = [FolderEntry(path: "\(home)/Documents")]
+        s.addStandardFoldersIfNeeded(home: home) { _ in true }
+        #expect(s.favorites.map(\.path) == ["\(home)/Documents"])
+        #expect(s.standardFoldersAdded)
+
+        // 只在第一次授权后补一次。
+        s.monitoredFolders.append(FolderEntry(path: home))
+        s.favorites = []
+        s.addStandardFoldersIfNeeded(home: home) { _ in true }
+        #expect(s.favorites.isEmpty)
+    }
+
+    @Test func standardFoldersWaitForAnUsableFolder() {
+        var s = Settings()
+        s.addStandardFoldersIfNeeded(home: home) { _ in true }
+        #expect(!s.standardFoldersAdded, "还没有监视目录")
+        var entry = FolderEntry(path: home)
+        entry.needsAuthorization = true
+        s.monitoredFolders = [entry]
+        s.addStandardFoldersIfNeeded(home: home) { _ in true }
+        #expect(!s.standardFoldersAdded && s.favorites.isEmpty, "需要重新授权的目录不算")
+    }
+
     @Test func roundTripsThroughJSON() throws {
-        var s = Settings.makeDefault(home: home) { _ in true }
+        var s = Settings.afterAuthorizing(home: home) { _ in true }
         s.newItems.append(NewItemEntry(kind: .custom(CustomTemplate(name: "周报", storedFileName: "a.key", fileExtension: "key")), enabled: true))
         s.openTools = [OpenTool.known[0]]
         let decoded = try JSONDecoder().decode(Settings.self, from: JSONEncoder().encode(s))

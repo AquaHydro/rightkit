@@ -17,6 +17,10 @@ private struct FolderListSection: View {
     @Environment(AppModel.self) private var model
     let kind: Kind
 
+    private var list: WritableKeyPath<Settings, [FolderEntry]> {
+        kind == .favorites ? \.favorites : \.sendTo
+    }
+
     private var entries: Binding<[FolderEntry]> {
         @Bindable var model = model
         return kind == .favorites ? $model.settings.favorites : $model.settings.sendTo
@@ -25,7 +29,7 @@ private struct FolderListSection: View {
     var body: some View {
         Section {
             ForEach(entries) { $entry in
-                FolderRow(entry: entry, isOn: $entry.enabled) {
+                FolderRow(entry: entry, isOn: $entry.enabled, reauthorize: { reauthorize(entry) }) {
                     entries.wrappedValue.removeAll { $0.id == entry.id }
                 }
             }
@@ -51,8 +55,12 @@ private struct FolderListSection: View {
 
     private func add() {
         guard let url = Alerts.chooseFolder(prompt: L("添加")) else { return }
-        let path = PathRules.standardized(url.path(percentEncoded: false))
-        guard !entries.wrappedValue.contains(where: { PathRules.standardized($0.path) == path }) else { return }
-        entries.wrappedValue.append(FolderStore.entry(for: url))
+        model.addFolder(url, to: list)
+    }
+
+    /// F-080：面板停在原来的位置，重新选中后替换这一行。
+    private func reauthorize(_ entry: FolderEntry) {
+        guard let url = Alerts.chooseFolder(prompt: L("授权"), startingAt: URL(filePath: entry.path, directoryHint: .isDirectory)) else { return }
+        model.reauthorize(entry, in: list, with: url)
     }
 }

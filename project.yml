@@ -58,7 +58,8 @@ targets:
         INFOPLIST_FILE: RightKit/Info.plist
         CODE_SIGN_ENTITLEMENTS: RightKit/RightKit.entitlements
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
-        ENABLE_APP_SANDBOX: NO
+        ENABLE_APP_SANDBOX: YES
+        ENABLE_USER_SELECTED_FILES: readwrite
       configs:
         AppStore:
           SWIFT_ACTIVE_COMPILATION_CONDITIONS: $(inherited) APP_STORE
@@ -107,6 +108,7 @@ targets:
         INFOPLIST_FILE: RightKitAgent/Info.plist
         CREATE_INFOPLIST_SECTION_IN_BINARY: YES
         CODE_SIGN_ENTITLEMENTS: RightKitAgent/RightKitAgent.entitlements
+        ENABLE_APP_SANDBOX: YES
         SKIP_INSTALL: YES
   RightKitTests:
     type: bundle.unit-test
