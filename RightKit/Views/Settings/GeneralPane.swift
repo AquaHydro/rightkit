@@ -1,3 +1,4 @@
+import AppKit
 import FinderSync
 import RightKitCore
 import ServiceManagement
@@ -55,7 +56,14 @@ struct GeneralPane: View {
             }
         }
         .alert(L("重新启动访达？"), isPresented: $confirmingRestart) {
-            Button(L("重新启动")) { FinderControl.restart() }
+            Button(L("重新启动")) {
+                Task {
+                    let restarted = await FinderControl.restart()
+                    guard !restarted else { return }
+                    Alerts.show(L("无法重新启动访达。"),
+                                informative: L("请在“系统设置 → 隐私与安全性 → 自动化”中允许 RightKit 控制访达，或按住 Option 键右键点按程序坞中的访达，选择“重新开启”。"))
+                }
+            }
             Button(L("取消"), role: .cancel) {}
         } message: {
             Text(L("访达会短暂关闭并重新打开。"))
@@ -155,9 +163,36 @@ enum FinderControl {
         }
     }
 
-    /// 结束访达进程，由系统把它重新打开。
-    static func restart() {
-        NSRunningApplication.runningApplications(withBundleIdentifier: "com.apple.finder").forEach { $0.forceTerminate() }
+    private static let finderID = "com.apple.finder"
+
+    /// F-001：请访达正常退出，等它退出后重新打开。退出靠 Apple Event，需要只针对访达的临时例外；
+    /// 沙盒会拦截 `forceTerminate()` 的信号。用户拒绝自动化授权或访达没有退出时返回 false。
+    @MainActor
+    static func restart() async -> Bool {
+        guard let finder = NSRunningApplication.runningApplications(withBundleIdentifier: finderID).first else {
+            return await launchFinder()
+        }
+        // 先问清自动化授权。第一次会弹系统询问，阻塞到用户回答，所以放到后台。
+        let permission = await Task.detached { () -> OSStatus in
+            let target = NSAppleEventDescriptor(bundleIdentifier: finderID)
+            guard let address = target.aeDesc else { return OSStatus(errAEEventNotPermitted) }
+            return AEDeterminePermissionToAutomateTarget(address, AEEventClass(kCoreEventClass), AEEventID(kAEQuitApplication), true)
+        }.value
+        guard permission == OSStatus(noErr) else { return false }
+        guard finder.terminate() else { return false }
+        for _ in 0..<50 where !finder.isTerminated {
+            try? await Task.sleep(for: .milliseconds(100))
+        }
+        guard finder.isTerminated else { return false }
+        return await launchFinder()
+    }
+
+    @MainActor
+    private static func launchFinder() async -> Bool {
+        guard let url = NSWorkspace.shared.urlForApplication(withBundleIdentifier: finderID) else { return false }
+        let configuration = NSWorkspace.OpenConfiguration()
+        configuration.activates = false
+        return (try? await NSWorkspace.shared.openApplication(at: url, configuration: configuration)) != nil
     }
 }
 

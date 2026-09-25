@@ -1,0 +1,24 @@
+{
+  "sourceLanguage": "zh-Hans",
+  "strings": {
+    "NSAppleEventsUsageDescription": {
+      "comment": "F-001 重启访达时的自动化授权说明",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKit asks Finder to restart only after you confirm, so its context menu can take effect."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKit 只在你确认后请访达重新启动，让右键菜单生效。"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

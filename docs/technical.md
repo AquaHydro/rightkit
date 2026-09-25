@@ -36,7 +36,7 @@
 
 三个 target 都启用 App Sandbox，entitlements 如下：
 
-- 主程序：`app-sandbox`、`application-groups`、`files.user-selected.read-write`、`files.bookmarks.app-scope`，以及只针对 `com.apple.finder` 的 `temporary-exception.apple-events`（`F-001` 重启访达）。官网版另加 `network.client`（`F-081`）。商店版不加网络权限。
+- 主程序：`app-sandbox`、`application-groups`、`files.user-selected.read-write`、`files.bookmarks.app-scope`，以及只针对 `com.apple.finder` 的 `temporary-exception.apple-events` 和强化运行时要求的 `automation.apple-events`（`F-001` 重启访达）。Info.plist 带 `NSAppleEventsUsageDescription`，英文在 `RightKit/Resources/InfoPlist.xcstrings`。官网版另加 `network.client`（`F-081`）。商店版不加网络权限。
 - 扩展：`app-sandbox`、`application-groups`。扩展不改文件，也不需要文件权限。
 - agent：`app-sandbox`、`application-groups`。XPC 服务名必须是 App Group 的直接子名，扩展和主程序才能在沙盒里查找它。
 
@@ -114,7 +114,7 @@
 ## 系统集成
 
 - 登录项使用 `SMAppService.mainApp`，只在用户打开「登录时启动」后注册（`F-005`，商店审核指南 2.4.5(iii)）。
-- 重启访达：`NSRunningApplication.terminate()` 让访达正常退出，它通过 Apple Event 完成，所以需要只针对 `com.apple.finder` 的 Apple Events 临时例外和 `NSAppleEventsUsageDescription`。等访达进程结束后，用 `NSWorkspace.openApplication` 按 bundle ID 重新打开访达。`terminate()` 返回失败或几秒内访达没有退出，按 `F-001` 提示。沙盒会拦截 `forceTerminate()` 发出的信号，所以不再使用它。
+- 重启访达：先在后台调用 `AEDeterminePermissionToAutomateTarget`（退出事件，允许询问用户）确认自动化授权，再用 `NSRunningApplication.terminate()` 让访达正常退出。它通过 Apple Event 完成，所以需要只针对 `com.apple.finder` 的 Apple Events 临时例外和 `NSAppleEventsUsageDescription`。等访达进程结束后，用 `NSWorkspace.openApplication` 按 bundle ID 重新打开访达。`terminate()` 返回失败或几秒内访达没有退出，按 `F-001` 提示。沙盒会拦截 `forceTerminate()` 发出的信号，所以不再使用它。
 - 扩展状态使用 `FIFinderSyncController.isExtensionEnabled`。
 - 打开扩展设置使用 `FIFinderSyncController.showExtensionManagementInterface()`。
 - 文本服务注册 Google 翻译、百度翻译和生成二维码，输入类型是字符串。

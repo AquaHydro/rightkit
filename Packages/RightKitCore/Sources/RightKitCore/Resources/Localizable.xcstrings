@@ -1,6 +1,22 @@
 {
   "sourceLanguage": "zh-Hans",
   "strings": {
+    "%@ 已授权": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” authorized"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 已授权"
+          }
+        }
+      }
+    },
     "Excel 工作簿": {
       "localizations": {
         "en": {
@@ -61,6 +77,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "RightKit 仅在这些文件夹及其子文件夹的访达菜单中显示。"
+          }
+        }
+      }
+    },
+    "RightKit 只能在你授权的文件夹里新建、复制和整理文件。建议授权个人主文件夹。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKit can only create, copy, and organize files in folders you authorize. Authorizing your home folder is recommended."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKit 只能在你授权的文件夹里新建、复制和整理文件。建议授权个人主文件夹。"
           }
         }
       }
@@ -1089,6 +1121,38 @@
         }
       }
     },
+    "授权…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Authorize…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "授权…"
+          }
+        }
+      }
+    },
+    "授权访问个人文件夹": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Authorize Your Personal Folder"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "授权访问个人文件夹"
+          }
+        }
+      }
+    },
     "文件": {
       "localizations": {
         "en": {
@@ -1681,6 +1745,22 @@
         }
       }
     },
+    "无法重新启动访达。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn’t restart Finder."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法重新启动访达。"
+          }
+        }
+      }
+    },
     "显示与隐藏": {
       "localizations": {
         "en": {
@@ -1741,6 +1821,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "显示菜单栏图标"
+          }
+        }
+      }
+    },
+    "更改…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Change…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "更改…"
           }
         }
       }
@@ -2589,6 +2685,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "请在“系统设置 → 通用 → 登录项与扩展 → 允许在后台”中打开 RightKit。"
+          }
+        }
+      }
+    },
+    "请在“系统设置 → 隐私与安全性 → 自动化”中允许 RightKit 控制访达，或按住 Option 键右键点按程序坞中的访达，选择“重新开启”。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allow RightKit to control Finder in System Settings → Privacy & Security → Automation, or Option-right-click Finder in the Dock and choose Relaunch."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请在“系统设置 → 隐私与安全性 → 自动化”中允许 RightKit 控制访达，或按住 Option 键右键点按程序坞中的访达，选择“重新开启”。"
           }
         }
       }
