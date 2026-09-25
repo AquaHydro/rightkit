@@ -15,7 +15,7 @@
 | 语言 | 先做中文版。标题按 skill 的规则，英文短标题和中文标题各一个 span。中文版定稿后，再用 `website/content.json` 里的 `en` 文案做一版英文 |
 | 旁白 | 不做，只有配乐和音效。`audioExceptionReason` 不需要填，音乐和音效照常入轨 |
 | 结尾链接 | 官网域名还是占位值（`website/site.json` 里的 `rightkit.example`），画面上**不出现网址**。结尾写「免费 · 开源 · 需要 macOS 26 或更高版本」 |
-| 工程目录 | `website/video/film/`。用 `--style repo --repo .` 初始化。`node_modules/`、`renders/` 和各类渲染产物加进 `.gitignore`，源码、`plan.json` 和 `evidence/` 提交 |
+| 工程目录 | `website/video/film/`。用 `--style repo --repo .` 初始化。`node_modules/` 和各类渲染产物加进 `.gitignore`。源码、`plan.json`、`evidence/` 和定稿的成片 MP4（`renders/rightkit-intro-*.mp4`）提交 |
 
 ## 2. 产品一句话
 
