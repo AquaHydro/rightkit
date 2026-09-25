@@ -89,3 +89,32 @@ import Testing
         }
     }
 }
+
+@Suite struct ChannelIdentifierTests {
+    @Test func derivesEveryNameFromInfoPlist() throws {
+        let info: [String: Any] = ["RKAppBundleID": "app.rightkit.mac.store",
+                                   "RKAppGroup": "Q9C87Z9H4G.app.rightkit.mac.store",
+                                   "RKURLScheme": "rightkit-store"]
+        let ids = try #require(ChannelIdentifiers(infoDictionary: info))
+        #expect(ids.extensionBundleID == "app.rightkit.mac.store.finder")
+        #expect(ids.agentBundleID == "app.rightkit.mac.store.agent")
+        #expect(ids.agentPlist == "app.rightkit.mac.store.agent.plist")
+        #expect(ids.command == "Q9C87Z9H4G.app.rightkit.mac.store.command")
+        #expect(ids.settingsChanged == "Q9C87Z9H4G.app.rightkit.mac.store.settings")
+        #expect(ids.activationURL?.absoluteString == "rightkit-store://activate")
+    }
+
+    @Test func missingOrEmptyKeysAreRejected() {
+        let full: [String: Any] = ["RKAppBundleID": "app.rightkit.mac", "RKAppGroup": "Q9C87Z9H4G.app.rightkit.mac",
+                                   "RKURLScheme": "rightkit"]
+        #expect(ChannelIdentifiers(infoDictionary: full) != nil)
+        for key in full.keys {
+            var missing = full
+            missing.removeValue(forKey: key)
+            #expect(ChannelIdentifiers(infoDictionary: missing) == nil, "\(key)")
+            var empty = full
+            empty[key] = ""
+            #expect(ChannelIdentifiers(infoDictionary: empty) == nil, "\(key)")
+        }
+    }
+}

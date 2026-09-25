@@ -22,10 +22,10 @@
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>app.rightkit.mac</string>
+			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>rightkit</string>
+				<string>$(RK_URL_SCHEME)</string>
 			</array>
 		</dict>
 	</array>
@@ -91,6 +91,12 @@
 			</array>
 		</dict>
 	</array>
+	<key>RKAppBundleID</key>
+	<string>$(RK_APP_ID)</string>
+	<key>RKAppGroup</key>
+	<string>$(RK_APP_GROUP)</string>
+	<key>RKURLScheme</key>
+	<string>$(RK_URL_SCHEME)</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>© 2026 氢氧根</string>
 </dict>

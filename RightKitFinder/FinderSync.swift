@@ -204,7 +204,7 @@ enum CommandSender {
     /// 协作式激活下，主程序自己调用 `activate()` 会被拒绝；由扩展经 LaunchServices 打开专用网址来激活它。
     static func bringMainAppForward() {
         NSApp.yieldActivation(toApplicationWithBundleIdentifier: ServiceNames.appBundleID)
-        guard let url = URL(string: "rightkit://activate") else { return }
+        guard let url = ServiceNames.activationURL else { return }
         NSWorkspace.shared.open(url, configuration: NSWorkspace.OpenConfiguration())
     }
 

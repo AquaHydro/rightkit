@@ -2,11 +2,11 @@ import AppKit
 import os
 import RightKitCore
 
-/// 持有 `group.app.rightkit.mac.command`，把扩展的请求转交主程序（technical.md 通信）。
+/// 持有「App Group 加 `.command`」这个 XPC 服务名，把扩展的请求转交主程序（technical.md 通信）。
 final class Agent: NSObject, NSXPCListenerDelegate, @unchecked Sendable {
     private let log = Logger(subsystem: ServiceNames.agentBundleID, category: "agent")
     // 以下状态只在 queue 上读写。
-    private let queue = DispatchQueue(label: "app.rightkit.mac.agent")
+    private let queue = DispatchQueue(label: ServiceNames.agentBundleID)
     private var app: NSXPCConnection?
     private var waiters: [UUID: @Sendable (NSXPCConnection?) -> Void] = [:]
     private let team = CodeSigning.ownTeamIdentifier()

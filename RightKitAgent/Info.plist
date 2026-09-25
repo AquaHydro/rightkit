@@ -10,5 +10,11 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>RKAppBundleID</key>
+	<string>$(RK_APP_ID)</string>
+	<key>RKAppGroup</key>
+	<string>$(RK_APP_GROUP)</string>
+	<key>RKURLScheme</key>
+	<string>$(RK_URL_SCHEME)</string>
 </dict>
 </plist>

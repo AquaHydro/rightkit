@@ -23,10 +23,12 @@
 | App Group | `Q9C87Z9H4G.app.rightkit.mac` | `Q9C87Z9H4G.app.rightkit.mac.store` |
 | XPC 服务名 | App Group 加 `.command` | App Group 加 `.command` |
 | 设置变化通知 | App Group 加 `.settings` | App Group 加 `.settings` |
+| 激活网址 scheme | `rightkit` | `rightkit-store` |
+| 构建配置 | `Debug`、`Release` | `Debug-AppStore`、`Release-AppStore`，scheme `RightKit App Store` |
 
 不要改成 `com.rightkit.app`。所有 target 用同一个开发团队签名。App Group 用团队 ID 前缀而不是 `group.` 前缀：agent 是没有 bundle 的命令行程序，无法嵌入描述文件，而 macOS 15 起 `group.` 前缀的 App Group 需要描述文件授权或从商店安装。
 
-这些标识按渠道由构建设置写进各 target 的 Info.plist，代码从 Info.plist 读取，`RightKitCore` 和 Swift 源码里不写死 bundle ID、App Group 或服务名。
+这些标识由构建设置 `RK_APP_ID`、`RK_APP_GROUP`、`RK_URL_SCHEME` 按构建配置决定，写进三个 target 的 Info.plist（键 `RKAppBundleID`、`RKAppGroup`、`RKURLScheme`）和 entitlements。代码经 `ServiceNames` 从 Info.plist 读取，Swift 源码里不写死 bundle ID、App Group 或服务名。agent 的 launchd 配置由构建脚本从 `RightKitAgent/LaunchAgent.plist` 模板生成，文件名是 agent 的 bundle ID 加 `.plist`。
 
 0.1 版官网版的设置在旧的 `group.app.rightkit.mac` 容器里，沙盒版读不到，不做迁移，首次启动按新用户处理。
 
@@ -90,7 +92,7 @@
 - 超过 30 秒的请求拒绝执行。
 - URL 必须是文件 URL。拒绝之后，主程序显示该动作自己的失败提示。
 - 不要用分布式通知接收命令，也不要执行消息里带来的路径字符串。
-- 协作式激活下，访达在前台时主程序自己调用 `activate()` 会被拒绝。会弹出窗口或对话框的命令（`Command.presentsUI`），扩展先经 LaunchServices 打开 `rightkit://activate`，再发送命令。这个网址只让系统把主程序带到前台，不携带任何命令或路径。
+- 协作式激活下，访达在前台时主程序自己调用 `activate()` 会被拒绝。会弹出窗口或对话框的命令（`Command.presentsUI`），扩展先经 LaunchServices 打开本渠道 scheme 的 `://activate` 网址（如 `rightkit://activate`），再发送命令。这个网址只让系统把主程序带到前台，不携带任何命令或路径。
 
 ## 文件操作
 

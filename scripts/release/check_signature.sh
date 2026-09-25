@@ -15,15 +15,18 @@ check() {
   [[ $info == *"Timestamp="* ]] || fail "$target has no secure timestamp"
   local ents; ents=$(codesign -d --entitlements - --xml "$target" 2>/dev/null)
   [[ $ents != *"get-task-allow"* ]] || fail "$target has get-task-allow"
+  # App Group 用团队 ID 前缀，不需要描述文件授权（technical.md 发布渠道与标识）。
   if [[ $needs_group == yes ]]; then
-    [[ $ents == *"group.app.rightkit.mac"* ]] || fail "$target lacks the app group"
-    security cms -D -i "$target/Contents/embedded.provisionprofile" 2>/dev/null | grep -q "group.app.rightkit.mac" \
-      || fail "$target provisioning profile does not authorize the app group"
+    [[ $ents == *"<string>Q9C87Z9H4G.app.rightkit.mac</string>"* ]] || fail "$target lacks the app group"
   fi
   echo "ok  $identifier"
 }
 check "$app" app.rightkit.mac yes
 check "$app/Contents/PlugIns/RightKitFinder.appex" app.rightkit.mac.finder yes
 check "$app/Contents/MacOS/RightKitAgent" app.rightkit.mac.agent no
-[[ -f "$app/Contents/Library/LaunchAgents/app.rightkit.mac.agent.plist" ]] || fail "agent plist missing"
+plist="$app/Contents/Library/LaunchAgents/app.rightkit.mac.agent.plist"
+[[ -f $plist ]] || fail "agent plist missing"
+[[ $(/usr/libexec/PlistBuddy -c "Print :Label" "$plist") == app.rightkit.mac.agent ]] || fail "agent label mismatch"
+/usr/libexec/PlistBuddy -c "Print :MachServices:Q9C87Z9H4G.app.rightkit.mac.command" "$plist" >/dev/null \
+  || fail "agent plist does not publish Q9C87Z9H4G.app.rightkit.mac.command"
 echo "Signature check passed."

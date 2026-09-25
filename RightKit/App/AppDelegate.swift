@@ -57,7 +57,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         return false
     }
 
-    /// `rightkit://activate` 只用来让系统把主程序带到前台，不带任何命令。
+    /// `ServiceNames.activationURL` 只用来让系统把主程序带到前台，不带任何命令。
     func application(_ application: NSApplication, open urls: [URL]) {
         NSApp.activate()
     }
