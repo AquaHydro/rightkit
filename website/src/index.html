@@ -254,11 +254,17 @@
       <h2 id="pricing-title" class="reveal">{{ t.sections.pricing.title }}</h2>
       <p class="body reveal">{{ t.sections.pricing.body }}</p>
       <ul class="plans">
-        {% for plan in t.sections.pricing.plans %}<li class="plan reveal{% if plan.primary %} plan-primary{% endif %}">
-          <h3>{{ plan.name }}</h3>
-          <p class="price">{{ plan.price }}<span>{{ plan.unit }}</span></p>
-          <ul>{% for f in plan.features %}<li><svg class="ic"><use href="#i-check"/></svg>{{ f }}</li>{% endfor %}</ul>
-          {% if plan.primary %}<a class="btn btn-primary" href="{{ site.download }}"><svg class="ic"><use href="#i-download"/></svg>{{ plan.cta }}</a>{% else %}<a class="btn btn-outline" href="{{ site.github }}"><svg class="ic ic-fill"><use href="#i-github"/></svg>{{ plan.cta }}</a>{% endif %}
+        {% for plan in t.sections.pricing.plans %}<li class="plan reveal{% if plan.primary %} plan-primary{% endif %}" data-plan>
+          <div class="plan-art" aria-hidden="true">
+            <img src="{{ base }}img/{{ plan.art }}-840.webp" srcset="{{ base }}img/{{ plan.art }}-420.webp 420w, {{ base }}img/{{ plan.art }}-840.webp 840w" sizes="(max-width: 1080px) min(82vw, 360px), 400px" width="840" height="1260" alt="" loading="lazy" decoding="async">
+            <video src="{{ base }}video/{{ plan.art }}.mp4" muted loop playsinline preload="none" disablepictureinpicture tabindex="-1"></video>
+          </div>
+          <div class="plan-body">
+            <h3><span>0{{ loop.index }}</span>{{ plan.name }}</h3>
+            <p class="price">{{ plan.price }}<span>{{ plan.unit }}</span></p>
+            <ul>{% for f in plan.features %}<li><svg class="ic"><use href="#i-check"/></svg>{{ f }}</li>{% endfor %}</ul>
+            {% if plan.primary %}<a class="btn btn-primary" href="{{ site.download }}"><svg class="ic"><use href="#i-download"/></svg>{{ plan.cta }}</a>{% else %}{% if plan.github %}<a class="btn btn-outline" href="{{ site.github }}"><svg class="ic ic-fill"><use href="#i-github"/></svg>{{ plan.cta }}</a>{% else %}{% if site.appStore %}<a class="btn btn-outline" href="{{ site.appStore }}">{{ plan.cta }}</a>{% else %}<span class="btn btn-outline btn-soon" aria-disabled="true">{{ plan.soon }}</span>{% endif %}{% endif %}{% endif %}
+          </div>
         </li>{% endfor %}
       </ul>
     </div>

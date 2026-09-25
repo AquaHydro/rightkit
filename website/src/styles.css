@@ -327,21 +327,38 @@ h3 { font-size: 17px; line-height: 1.35; font-weight: 700; }
 .card p { margin-top: 6px; font-size: 14.5px; color: var(--on-paper-2); }
 .ink .card p { color: var(--on-ink-2); }
 
-/* Pricing */
-.plans { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 44px; max-width: 880px; }
-.plan { display: flex; flex-direction: column; padding: 28px; border-radius: 20px; background: #fff; box-shadow: 0 0 0 1px var(--line-paper); }
-.plan-primary { background: var(--ink); color: var(--on-ink); box-shadow: 0 30px 60px -30px rgba(42, 43, 49, 0.6); position: relative; overflow: hidden; }
-.plan-primary::before { content: ""; position: absolute; right: -80px; top: -80px; width: 240px; height: 240px; border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 121, 115, 0.35), transparent); pointer-events: none; }
-.plan h3 { font: 500 12px/1 var(--font-mono); letter-spacing: 0.2em; text-transform: uppercase; color: var(--coral-ink); }
-.plan-primary h3 { color: var(--coral); }
-.price { display: flex; align-items: baseline; gap: 12px; margin-top: 14px; font: 900 48px/1 var(--font-display); letter-spacing: -0.02em; }
+/* Pricing: full-bleed art cards; the still turns into a short loop on hover */
+.plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin-top: 44px; }
+.plan {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: flex; flex-direction: column;
+  border-radius: 20px; background: var(--paper); color: var(--on-paper);
+  box-shadow: 0 0 0 1px var(--line-paper), 0 24px 60px -32px rgba(42, 43, 49, 0.3);
+}
+.plan-primary { background: var(--ink); color: var(--on-ink); box-shadow: 0 30px 60px -30px rgba(42, 43, 49, 0.6); }
+/* The art sits above the copy instead of behind it, so text never lands on a face or a prop. */
+.plan-art { position: relative; aspect-ratio: 1; overflow: hidden; }
+.plan-art img, .plan-art video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 0.9s var(--ease-out); }
+.plan-art video { opacity: 0; transition: opacity 0.4s ease, transform 0.9s var(--ease-out); }
+.plan.playing .plan-art video { opacity: 1; }
+.plan:hover .plan-art img, .plan:hover .plan-art video { transform: scale(1.025); }
+.plan-art::after { content: ""; position: absolute; inset: auto 0 -1px; height: 36%; background: linear-gradient(to bottom, transparent, var(--paper) 88%); }
+.plan-primary .plan-art::after { background: linear-gradient(to bottom, transparent, var(--ink) 88%); }
+.plan-body { position: relative; flex: 1; display: flex; flex-direction: column; margin-top: -40px; padding: 0 28px 28px; }
+.plan h3 { display: flex; gap: 12px; font: 500 12px/1 var(--font-mono); letter-spacing: 0.2em; text-transform: uppercase; color: var(--on-paper); }
+.plan-primary h3 { color: var(--on-ink); }
+.plan h3 span { color: var(--coral-ink); }
+.plan-primary h3 span { color: var(--coral); }
+.price { display: flex; align-items: baseline; gap: 12px; margin-top: 14px; font: 900 52px/1 var(--font-display); letter-spacing: -0.02em; }
 .price span { font: 600 14px/1 var(--font); letter-spacing: 0; color: var(--on-paper-2); }
 .plan-primary .price span { color: var(--on-ink-2); }
-.plan ul { display: grid; gap: 10px; margin: 24px 0 28px; font-size: 15px; }
+.plan ul { display: grid; gap: 6px; margin: 18px 0 22px; font-size: 15px; }
 .plan li { display: flex; align-items: center; gap: 10px; }
 .plan li .ic { color: var(--coral-ink); }
 .plan-primary li .ic { color: var(--coral); }
-.plan .btn { margin-top: auto; align-self: flex-start; }
+.plan .btn { align-self: flex-start; margin-top: auto; }
+.btn-soon { cursor: default; color: var(--on-paper-2); background: rgba(255, 255, 255, 0.7); }
+.btn-soon:hover, .btn-soon:active { transform: none; border-color: var(--line-paper); }
 
 /* Download */
 .cta { background: var(--ink-3); overflow: hidden; }
@@ -402,6 +419,14 @@ h3 { font-size: 17px; line-height: 1.35; font-weight: 700; }
   .nav-actions { margin-left: auto; }
   .cards-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .tool-group:nth-child(n) { grid-column: span 12; }
+  /* Narrow screens: a swipeable row that bleeds to the screen edge and shows the next card. */
+  .plans {
+    grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: min(360px, 82vw); gap: 14px;
+    margin-inline: calc(var(--gutter) * -1); padding: 0 var(--gutter) 40px; margin-bottom: -40px;
+    overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); scrollbar-width: none;
+  }
+  .plans::-webkit-scrollbar { display: none; }
+  .plan { scroll-snap-align: start; }
 }
 @media (max-width: 860px) {
   .hero { min-height: 0; padding-top: 96px; }
@@ -415,7 +440,6 @@ h3 { font-size: 17px; line-height: 1.35; font-weight: 700; }
   .feature-art { width: min(64%, 280px); }
   .toolbox-head { grid-template-columns: 1fr 120px; align-items: start; }
   .toolbox-art { width: 120px; }
-  .plans { grid-template-columns: 1fr; }
   .faq-head { position: static; }
   .faq-art { display: flex; align-items: center; gap: 16px; width: auto; }
   .faq-art img { width: 110px; }

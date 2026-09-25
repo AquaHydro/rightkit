@@ -2,13 +2,14 @@
 """Export web images from the PNG masters in website/assets.
 
 Run after the character art or the app icon changes, then commit the output in
-website/public/img. Requires Pillow (pip install pillow); the site build itself
-does not.
+website/public/img and website/public/video. Requires Pillow (pip install pillow)
+and ffmpeg for the videos; the site build itself needs neither.
 """
 
 from __future__ import annotations
 
 import json
+import subprocess
 from pathlib import Path
 
 from PIL import Image, ImageChops, ImageDraw
@@ -28,7 +29,23 @@ CHARACTER = {
     "feature-open-app": ("feature-open-app.png", (320, 640)),
     "feature-toolbox": ("feature-toolbox.png", (320, 640)),
     "feature-empty-error": ("feature-empty-error.png", (240, 480)),
+    "pricing-free": ("pricing-free.png", (420, 840)),
+    "pricing-store": ("pricing-store.png", (420, 840)),
+    "pricing-oss": ("pricing-oss.png", (420, 840)),
 }
+
+# Pricing card loops in website/assets/video, played on hover. The poster is the
+# matching still above, which is also the first frame of the loop.
+VIDEOS = ("pricing-free", "pricing-store", "pricing-oss")
+
+
+def export_videos() -> None:
+    target = ROOT / "website/public/video"
+    target.mkdir(exist_ok=True)
+    for name in VIDEOS:
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", ROOT / f"website/assets/video/{name}.mp4",
+                        "-an", "-c:v", "libx264", "-crf", "28", "-preset", "slow", "-pix_fmt", "yuv420p",
+                        "-movflags", "+faststart", target / f"{name}.mp4"], check=True)
 
 
 def export_character() -> None:
@@ -96,7 +113,8 @@ def main() -> None:
     export_character()
     export_icon()
     export_app_icons()
-    for path in sorted(OUT.rglob("*.*")):
+    export_videos()
+    for path in sorted([*OUT.rglob("*.*"), *(ROOT / "website/public/video").glob("*.mp4")]):
         print(f"{path.relative_to(ROOT)}  {path.stat().st_size // 1024} KB")
 
 

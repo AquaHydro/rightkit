@@ -191,33 +191,48 @@
         "id": "pricing",
         "num": "07",
         "label": "价格",
-        "title": "免费，并且开源。",
-        "body": "没有内购，没有账号，也没有功能限制。",
+        "title": "免费开源，也可以支持一下。",
+        "body": "两个版本功能完全相同，源代码都在 GitHub 公开。官网版免费；商店版 1 美元，由 App Store 负责更新，也是对开发的一点支持。",
         "plans": [
           {
-            "name": "RightKit",
-            "price": "¥0",
-            "unit": "永久免费",
+            "name": "官网版",
+            "price": "免费",
+            "unit": "全部功能",
             "features": [
-              "全部功能",
-              "中英双语界面",
-              "源代码在 GitHub 公开"
+              "全部功能，没有限制",
+              "从 GitHub Release 下载 DMG",
+              "应用内检查新版本"
             ],
             "cta": "下载 RightKit",
-            "href": "download",
+            "art": "pricing-free",
             "primary": true
+          },
+          {
+            "name": "商店版",
+            "price": "$1",
+            "unit": "一次买断",
+            "features": [
+              "和官网版功能相同",
+              "由 App Store 自动更新",
+              "支持 RightKit 继续开发"
+            ],
+            "cta": "在 App Store 购买",
+            "soon": "即将上架 App Store",
+            "art": "pricing-store",
+            "primary": false
           },
           {
             "name": "一起参与",
             "price": "开源",
             "unit": "欢迎贡献",
             "features": [
-              "在 GitHub 点 Star",
+              "源代码在 GitHub 公开",
               "反馈问题和建议",
               "提交代码和翻译"
             ],
             "cta": "前往 GitHub",
-            "href": "github",
+            "art": "pricing-oss",
+            "github": true,
             "primary": false
           }
         ]
@@ -400,7 +415,7 @@
       "items": [
         {
           "q": "RightKit 收费吗？",
-          "a": "不收费。全部功能免费使用，源代码在 GitHub 公开。"
+          "a": "官网版免费，全部功能都能用，源代码在 GitHub 公开。Mac App Store 上的商店版售价 1 美元，功能相同，由 App Store 负责更新，购买就是对开发的支持。"
         },
         {
           "q": "需要什么系统？",
@@ -803,33 +818,48 @@
         "id": "pricing",
         "num": "07",
         "label": "Pricing",
-        "title": "Free and open source.",
-        "body": "No in-app purchases, no account and no feature limits.",
+        "title": "Free and open source. Or chip in a dollar.",
+        "body": "Both versions have the same features, and the source code is on GitHub. The direct download is free. The Mac App Store version costs $1, updates through the App Store and helps fund development.",
         "plans": [
           {
-            "name": "RightKit",
+            "name": "Direct download",
             "price": "$0",
             "unit": "Free forever",
             "features": [
-              "Every feature",
-              "English and Chinese interface",
-              "Source code on GitHub"
+              "Every feature, no limits",
+              "DMG from GitHub Releases",
+              "Checks for updates in the app"
             ],
             "cta": "Download RightKit",
-            "href": "download",
+            "art": "pricing-free",
             "primary": true
+          },
+          {
+            "name": "Mac App Store",
+            "price": "$1",
+            "unit": "One-time purchase",
+            "features": [
+              "Same features as the free version",
+              "Updates through the App Store",
+              "Helps keep RightKit going"
+            ],
+            "cta": "Buy on the App Store",
+            "soon": "Coming soon to the App Store",
+            "art": "pricing-store",
+            "primary": false
           },
           {
             "name": "Get involved",
             "price": "Open",
             "unit": "Contributions welcome",
             "features": [
-              "Star the project on GitHub",
+              "Source code on GitHub",
               "Report issues and ideas",
               "Contribute code and translations"
             ],
             "cta": "Go to GitHub",
-            "href": "github",
+            "art": "pricing-oss",
+            "github": true,
             "primary": false
           }
         ]
@@ -1012,7 +1042,7 @@
       "items": [
         {
           "q": "Does RightKit cost anything?",
-          "a": "No. Every feature is free, and the source code is on GitHub."
+          "a": "The direct download is free, with every feature, and the source code is on GitHub. The Mac App Store version costs $1, has the same features and updates through the App Store. Buying it supports development."
         },
         {
           "q": "Which macOS do I need?",

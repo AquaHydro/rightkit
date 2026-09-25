@@ -1,5 +1,5 @@
 {
-  "_comment": "暂用 yiliang.app 子域名；下载固定跳转 GitHub 最新正式 Release。仓库私有期间反馈走邮件（contact）。",
+  "_comment": "暂用 yiliang.app 子域名；下载固定跳转 GitHub 最新正式 Release。仓库私有期间反馈走邮件（contact）。appStore 留空时价格区显示「即将上架」，上架后填商店链接。",
   "url": "https://rightkit.yiliang.app",
   "download": "https://github.com/AquaHydro/rightkit/releases/latest",
   "github": "https://github.com/AquaHydro/rightkit",
@@ -7,5 +7,6 @@
   "issues": "https://github.com/AquaHydro/rightkit/issues",
   "contact": "mailto:contact@yiliang.me",
   "version": "0.1.1",
-  "year": "2026"
+  "year": "2026",
+  "appStore": ""
 }
