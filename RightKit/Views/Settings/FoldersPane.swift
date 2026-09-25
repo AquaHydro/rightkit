@@ -17,7 +17,7 @@ private struct FolderListSection: View {
     @Environment(AppModel.self) private var model
     let kind: Kind
 
-    private var list: WritableKeyPath<Settings, [FolderEntry]> {
+    private var list: WritableKeyPath<RightKitCore.Settings, [FolderEntry]> {
         kind == .favorites ? \.favorites : \.sendTo
     }
 
