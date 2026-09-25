@@ -35,7 +35,7 @@ rm -rf "$intermediates"
 
 pkg=$(print -l "$export_dir"/*.pkg(N) | head -1)
 [[ -n $pkg ]] || { echo "error: no .pkg exported" >&2; exit 1; }
-pkgutil --check-signature "$pkg" | head -3
+pkgutil --check-signature "$pkg" | sed -n "1,5p"
 
 # 从 .pkg 里取出 app 检查签名（V-082）。
 expanded=$out/expanded
