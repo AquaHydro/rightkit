@@ -167,3 +167,11 @@ macOS 27.0（26A428），构建提交 `8e2be71` 加本次 `FolderStore.refreshed
 - 删除确认第一次被电脑工具的辅助功能树误读为隐藏窗口，因此取消并重启主程序重试；第二次截图确认对话框内容，点击确认后核对文件不存在。此项不以命令发送日志代替删除结果。
 - 通用页显示 `/Users/liao`，没有重新授权提示，扩展状态为「访达扩展已启用」。[截图](evidence/device-2026-09-26/v080-relogin-enabled.png)、[菜单与命令日志](evidence/device-2026-09-26/v080-relogin.log)、[结构化结果](evidence/device-2026-09-26/followup-results.json)。本轮补验为官网版；结合此前双渠道验收，`V-080` 标为 Passed。
 - 本轮创建的本机测试目录以及桌面、文稿的测试文件已清理。快捷指令 `RightKit  20260926` 保留，因为系统提示删除会同步到所有 iCloud 设备；旧 App 和设置备份仍在废纸篓。`V-081` 继续等待正式 Release。
+
+
+### db020c2 快捷指令真机回归
+
+- 在 macOS 27.0 上对 `db020c22e17e76561c0324a47eb954c951e6c259` 运行 `make release-unsigned`，Developer ID 签名检查通过。安装到 `/Applications/RightKit.app`，主程序二进制 SHA-256 与新导出产物一致，保持已有主目录授权。未修改功能代码。
+- 在真实快捷指令 App 中运行保留的 `RightKit  20260926`：未授权的 `/private/tmp/RKAcceptance-20260926/denied/input.png` 被拒绝，提示「RightKit 无权访问“denied”。」，目录仍只有原始图片；改选授权范围内的 `~/RKAcceptance-20260926/allowed/input.png`，成功得到 `input 2.png`，两个输入图的 SHA-256 均未改变，新建 TXT 动作也成功。
+- [授权成功截图](evidence/device-2026-09-26/db020c2-shortcut-allowed.png)、[未授权拒绝截图](evidence/device-2026-09-26/db020c2-shortcut-denied.png)、[结构化结果](evidence/device-2026-09-26/db020c2-shortcuts.json)。本次复跑的是此前触发 `/.nofollow` 问题的原始流程，未加入临时日志再次采集运行时 URL；不把终端模拟当作快捷指令验收。商店渠道未重跑。
+- 测试文件已清理，快捷指令保留；安装的官网版已更新到 db020c2。
