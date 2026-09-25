@@ -1,0 +1,61 @@
+{
+  "ready": false,
+  "cached": false,
+  "engine": "browser",
+  "missing": [
+    "ffmpeg",
+    "ffprobe",
+    "package:playwright",
+    "package:esbuild",
+    "package:react",
+    "package:react-dom"
+  ],
+  "warnings": [],
+  "fingerprint": "09421ae8def0d3f21ff4cb38eb0a4c68f2da35b07017271b4b1ebaa07ea949c7",
+  "details": {
+    "schema": 2,
+    "engine": "browser",
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "versions": {
+      "python": {
+        "path": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "version": "3.9.6"
+      },
+      "node": {
+        "path": "/opt/homebrew/bin/node",
+        "version": "v26.8.2"
+      },
+      "npm": {
+        "path": "/opt/homebrew/bin/npm",
+        "version": "11.19.1"
+      }
+    },
+    "packages": {
+      "playwright": {
+        "missing": true,
+        "error": "Cannot find module 'playwright/package.json'\nRequire stack:\n- /Users/liao/Documents/rightkit/website/video/film/[eval]"
+      },
+      "esbuild": {
+        "missing": true,
+        "error": "Cannot find module 'esbuild/package.json'\nRequire stack:\n- /Users/liao/Documents/rightkit/website/video/film/[eval]"
+      },
+      "react": {
+        "missing": true,
+        "error": "Cannot find module 'react/package.json'\nRequire stack:\n- /Users/liao/Documents/rightkit/website/video/film/[eval]"
+      },
+      "react-dom": {
+        "missing": true,
+        "error": "Cannot find module 'react-dom/package.json'\nRequire stack:\n- /Users/liao/Documents/rightkit/website/video/film/[eval]"
+      }
+    },
+    "manifests": {
+      "package.json": "3f6cea066519aa7348c4a47b23bc15a067e227fc3edad3b2d7ecae430bf9ce61"
+    },
+    "browserEnv": {
+      "PLAYWRIGHT_BROWSERS_PATH": null,
+      "HYPERFRAMES_CHROME_PATH": null
+    }
+  },
+  "browser": null,
+  "next": "Read references/onboarding.md for only the reported engine/platform gaps, install them, then rerun with --force."
+}

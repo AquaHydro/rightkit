@@ -1,0 +1,165 @@
+{
+  "scope": {
+    "versions": "0.1.1",
+    "platforms": [
+      "macos-desktop"
+    ]
+  },
+  "platformsNotCovered": [
+    "只展示 macOS 访达里的用法；没有 CLI、移动端、服务端"
+  ],
+  "excluded": [
+    "F-003",
+    "F-052 不实现，未出现"
+  ],
+  "features": [
+    {
+      "shot": "title",
+      "feature": "访达的右键菜单，多了一套工具",
+      "benefit": "RightKit 给访达的右键菜单加上新建文件、复制到、移动到、在应用中打开和一组文件工具。",
+      "status": "已发布",
+      "release": "0.1.1",
+      "source": [
+        "repo:docs/features.md",
+        "repo:website/content.json"
+      ],
+      "component": [
+        "website/src/styles.css .ticker"
+      ],
+      "demoState": "website/content.json demo：用户 riko，/Users/riko/Desktop，文件 笔记.md、季度报告.docx、封面.png、项目资料",
+      "limits": ""
+    },
+    {
+      "shot": "new",
+      "feature": "在哪里右键，就在哪里新建",
+      "benefit": "在访达窗口空白处右键，选「新建文件」里的类型，文件直接建在当前文件夹，并进入重命名。再建一次同名文件，会自动变成「未命名 2.md」，不覆盖。",
+      "status": "已发布",
+      "release": "0.1.1",
+      "source": [
+        "repo:docs/features.md#L70",
+        "repo:docs/features.md#L180",
+        "repo:docs/features.md#L95"
+      ],
+      "component": [
+        "website/src/index.html .finder",
+        "website/src/main.js buildMenu() iconHTML() displayName()",
+        "website/content.json demo",
+        "website/src/index.html .types (类型标签)",
+        "website/assets/character/hero-character.png (public/img/hero-character-1120.webp)"
+      ],
+      "demoState": "website/content.json demo：用户 riko，/Users/riko/Desktop，文件 笔记.md、季度报告.docx、封面.png、项目资料",
+      "limits": "网页模拟的访达菜单，不是系统真实绘制"
+    },
+    {
+      "shot": "send",
+      "feature": "常用的文件夹，一步就到",
+      "benefit": "选中「季度报告.docx」，右键「复制到」，子菜单列出设定好的文件夹，点「文稿」就复制过去。空白处的「常用目录」可以直接在访达里打开这些文件夹。",
+      "status": "已发布",
+      "release": "0.1.1",
+      "source": [
+        "repo:docs/features.md#L141",
+        "repo:docs/features.md#L143",
+        "repo:docs/features.md#L139"
+      ],
+      "component": [
+        "website/src/index.html .finder",
+        "website/src/main.js buildMenu()，flyTo() 的轨迹与曲线",
+        "website/content.json demo.toast",
+        "feature-copy-move-640.webp"
+      ],
+      "demoState": "website/content.json demo：用户 riko，/Users/riko/Desktop，文件 笔记.md、季度报告.docx、封面.png、项目资料",
+      "limits": "网页模拟的访达菜单，不是系统真实绘制"
+    },
+    {
+      "shot": "open",
+      "feature": "直接在终端或编辑器里打开",
+      "benefit": "选中文件夹用 Visual Studio Code 打开，打开的是这个文件夹；选中文件用终端打开，打开的是文件所在的「桌面」。首次启动会自动找到终端、Ghostty、Visual Studio Code 和 Xcode。",
+      "status": "已发布",
+      "release": "0.1.1",
+      "source": [
+        "repo:docs/features.md#L111",
+        "repo:docs/features.md#L124",
+        "repo:docs/features.md#L126"
+      ],
+      "component": [
+        "website/src/index.html .finder",
+        "website/src/main.js buildMenu()",
+        "website/src/index.html .apps（app 图标，来源见 website/assets/apps/SOURCES.md）",
+        "feature-open-app-640.webp"
+      ],
+      "demoState": "website/content.json demo：用户 riko，/Users/riko/Desktop，文件 笔记.md、季度报告.docx、封面.png、项目资料",
+      "limits": "网页模拟的访达菜单，不是系统真实绘制"
+    },
+    {
+      "shot": "toolbox",
+      "feature": "16 个小工具，只显示用得上的",
+      "benefit": "工具箱里有 16 个命令，但只列出对当前选择有用的：选「封面.png」能看到转换图片和两种图标集，选「项目资料」则出现解散文件夹。",
+      "status": "已发布",
+      "release": "0.1.1",
+      "source": [
+        "repo:docs/features.md#L162",
+        "repo:docs/features.md#L180",
+        "repo:website/content.json"
+      ],
+      "component": [
+        "website/src/index.html .finder",
+        "website/src/main.js buildMenu() 工具箱按 for 过滤",
+        "feature-toolbox-640.webp"
+      ],
+      "demoState": "website/content.json demo：用户 riko，/Users/riko/Desktop，文件 笔记.md、季度报告.docx、封面.png、项目资料",
+      "limits": "网页模拟的访达菜单，不是系统真实绘制"
+    },
+    {
+      "shot": "safe",
+      "feature": "右键很快，也很稳",
+      "benefit": "「彻底删除」默认先确认；系统目录和主目录不能通过 RightKit 删除；新建、复制、移动遇到重名自动编号。",
+      "status": "已发布",
+      "release": "0.1.1",
+      "source": [
+        "repo:docs/features.md#L236",
+        "repo:docs/features.md#L254",
+        "repo:docs/features.md#L143"
+      ],
+      "component": [
+        "website/src/index.html #trust .card",
+        "website/content.json sections.trust.items[0..2]"
+      ],
+      "demoState": "website/content.json demo：用户 riko，/Users/riko/Desktop，文件 笔记.md、季度报告.docx、封面.png、项目资料",
+      "limits": ""
+    },
+    {
+      "shot": "more",
+      "feature": "聚焦和快捷指令里也能用",
+      "benefit": "RightKit 向聚焦和快捷指令提供 9 个动作，不开右键菜单也能用。",
+      "status": "已发布",
+      "release": "0.1.1",
+      "source": [
+        "repo:docs/features.md#L275",
+        "repo:RightKit/Intents/Intents.swift"
+      ],
+      "component": [
+        "RightKit/Intents/Intents.swift 的 9 个 title"
+      ],
+      "demoState": "website/content.json demo：用户 riko，/Users/riko/Desktop，文件 笔记.md、季度报告.docx、封面.png、项目资料",
+      "limits": ""
+    },
+    {
+      "shot": "end",
+      "feature": "右键，就办好了。",
+      "benefit": "RightKit 免费、开源，需要 macOS 26 或更高版本。",
+      "status": "已发布",
+      "release": "0.1.1",
+      "source": [
+        "repo:website/content.json",
+        "repo:docs/design/website.md"
+      ],
+      "component": [
+        "website/src/index.html #download 布局",
+        "cta-character-960.webp",
+        ".btn-primary"
+      ],
+      "demoState": "website/content.json demo：用户 riko，/Users/riko/Desktop，文件 笔记.md、季度报告.docx、封面.png、项目资料",
+      "limits": ""
+    }
+  ]
+}

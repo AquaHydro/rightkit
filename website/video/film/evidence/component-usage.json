@@ -1,0 +1,184 @@
+{
+  "skipped": [
+    {
+      "shot": "进度窗口特写（F-075）",
+      "reason": "website/video/film/recordings/ 没有录屏，按 brief 不用网页手绘 SwiftUI 窗口"
+    },
+    {
+      "shot": "设置窗口、哈希窗口",
+      "reason": "同上，缺录屏"
+    }
+  ],
+  "shots": [
+    {
+      "shotId": "brand",
+      "featureEntry": "品牌开场",
+      "components": [
+        "website/public/img/app-icon-512.png",
+        "website/public/fonts/nunito-latin.woff2"
+      ],
+      "styleEntries": [
+        "website/src/styles.css (.wordmark .dot .tagline em, .clip-ping 波纹参数)"
+      ],
+      "stateDriver": "src/timeline.js data-pop / data-ring",
+      "adapters": [],
+      "reuseMode": "brand-asset",
+      "exceptions": []
+    },
+    {
+      "shotId": "title",
+      "featureEntry": "字卡",
+      "components": [
+        "website/src/styles.css .ticker"
+      ],
+      "styleEntries": [
+        "website/src/styles.css"
+      ],
+      "stateDriver": "src/timeline.js data-ticker",
+      "adapters": [],
+      "reuseMode": "website-style",
+      "exceptions": [
+        "跑马灯文字改用 content.json 的菜单名和工具箱命令名，没有用 content.json 的 ticker，因为其中「拷贝到」与应用菜单「复制到」不一致"
+      ]
+    },
+    {
+      "shotId": "new",
+      "featureEntry": "F-010 / F-061 新建文件",
+      "components": [
+        "website/src/index.html .finder",
+        "website/src/main.js buildMenu() iconHTML() displayName()",
+        "website/content.json demo",
+        "website/src/index.html .types (类型标签)",
+        "website/assets/character/hero-character.png (public/img/hero-character-1120.webp)"
+      ],
+      "styleEntries": [
+        "website/src/styles.css (.finder .menu .mi .ric .file .toast .fake-cursor .grid-bg .glow)",
+        "src/layout.css (film layout overrides only)"
+      ],
+      "stateDriver": "src/timeline.js：data-menu / data-win(active, selected, renaming) / data-pop / data-toast / cursor path",
+      "adapters": [
+        "src/site-adapter.jsx"
+      ],
+      "reuseMode": "website-adapter",
+      "note": "网页模拟的访达菜单，外观按 docs/design/menu-system.html；访达右键菜单由系统绘制，无法在浏览器导入原组件（brief 第 5 节已授权）。",
+      "exceptions": []
+    },
+    {
+      "shotId": "send",
+      "featureEntry": "F-031 / F-032 / F-030 复制到与常用目录",
+      "components": [
+        "website/src/index.html .finder",
+        "website/src/main.js buildMenu()，flyTo() 的轨迹与曲线",
+        "website/content.json demo.toast",
+        "feature-copy-move-640.webp"
+      ],
+      "styleEntries": [
+        "website/src/styles.css (.finder .menu .mi .ric .file .toast .fake-cursor .grid-bg .glow)",
+        "src/layout.css (film layout overrides only)"
+      ],
+      "stateDriver": "src/timeline.js data-fly 复刻 flyTo() 的 520ms cubic-bezier(0.5,0,0.2,1)、侧栏 .flash",
+      "adapters": [
+        "src/site-adapter.jsx"
+      ],
+      "reuseMode": "website-adapter",
+      "note": "网页模拟的访达菜单，外观按 docs/design/menu-system.html；访达右键菜单由系统绘制，无法在浏览器导入原组件（brief 第 5 节已授权）。",
+      "exceptions": []
+    },
+    {
+      "shotId": "open",
+      "featureEntry": "F-020 / F-023 在应用中打开",
+      "components": [
+        "website/src/index.html .finder",
+        "website/src/main.js buildMenu()",
+        "website/src/index.html .apps（app 图标，来源见 website/assets/apps/SOURCES.md）",
+        "feature-open-app-640.webp"
+      ],
+      "styleEntries": [
+        "website/src/styles.css (.finder .menu .mi .ric .file .toast .fake-cursor .grid-bg .glow)",
+        "src/layout.css (film layout overrides only)"
+      ],
+      "stateDriver": "src/timeline.js；toast 文案按 main.js openApp() 的规则：终端对文件打开所在目录「桌面」",
+      "adapters": [
+        "src/site-adapter.jsx"
+      ],
+      "reuseMode": "website-adapter",
+      "note": "网页模拟的访达菜单，外观按 docs/design/menu-system.html；访达右键菜单由系统绘制，无法在浏览器导入原组件（brief 第 5 节已授权）。",
+      "exceptions": []
+    },
+    {
+      "shotId": "toolbox",
+      "featureEntry": "F-040 / F-061 工具箱",
+      "components": [
+        "website/src/index.html .finder",
+        "website/src/main.js buildMenu() 工具箱按 for 过滤",
+        "feature-toolbox-640.webp"
+      ],
+      "styleEntries": [
+        "website/src/styles.css (.finder .menu .mi .ric .file .toast .fake-cursor .grid-bg .glow)",
+        "src/layout.css (film layout overrides only)"
+      ],
+      "stateDriver": "src/timeline.js；对比卡片是同一 buildMenu() 输出的静态 .menu",
+      "adapters": [
+        "src/site-adapter.jsx"
+      ],
+      "reuseMode": "website-adapter",
+      "note": "网页模拟的访达菜单，外观按 docs/design/menu-system.html；访达右键菜单由系统绘制，无法在浏览器导入原组件（brief 第 5 节已授权）。",
+      "exceptions": [
+        "对比阶段把两份子菜单并排，是编排镜头，不是访达里的真实状态"
+      ]
+    },
+    {
+      "shotId": "safe",
+      "featureEntry": "F-051 / F-073 / 重名规则",
+      "components": [
+        "website/src/index.html #trust .card",
+        "website/content.json sections.trust.items[0..2]"
+      ],
+      "styleEntries": [
+        "website/src/styles.css .card .card-ic .paper"
+      ],
+      "stateDriver": "src/timeline.js data-in",
+      "adapters": [],
+      "reuseMode": "website-adapter",
+      "exceptions": [
+        "卡片只保留图标和标题，去掉正文以控制阅读量"
+      ]
+    },
+    {
+      "shotId": "more",
+      "featureEntry": "F-074 聚焦与快捷指令",
+      "components": [
+        "RightKit/Intents/Intents.swift 的 9 个 title"
+      ],
+      "styleEntries": [
+        "website/src/styles.css tokens"
+      ],
+      "stateDriver": "src/timeline.js data-in",
+      "adapters": [
+        "src/site-adapter.jsx intentTitles"
+      ],
+      "reuseMode": "source-text",
+      "exceptions": [
+        "快捷指令界面本身没有录屏，只展示动作名"
+      ]
+    },
+    {
+      "shotId": "end",
+      "featureEntry": "下载区",
+      "components": [
+        "website/src/index.html #download 布局",
+        "cta-character-960.webp",
+        ".btn-primary"
+      ],
+      "styleEntries": [
+        "website/src/styles.css .cta .cta-glow .btn"
+      ],
+      "stateDriver": "src/timeline.js data-in / data-float",
+      "adapters": [],
+      "reuseMode": "website-adapter",
+      "exceptions": [
+        "按钮只是样式，画面上没有网址"
+      ]
+    }
+  ]
+}

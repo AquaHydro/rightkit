@@ -1,0 +1,81 @@
+{
+  "music": {
+    "method": "code-original",
+    "script": "audio/score.py",
+    "duration": 59.5,
+    "bpm": 120,
+    "firstBeat": 0.0,
+    "key": "A major",
+    "chords": "A(add9) E(add9) F#m7 D6/9，每小节一个",
+    "sections": {
+      "intro": "0-3.5 铺底和弦 + 图标出现时的铃音动机",
+      "groove": "3.5-44.5 鼓组进入（第 7 拍），拨弦琶音、贝斯",
+      "breakdown": "44.5-50.5 半速鼓，琶音变稀",
+      "build": "50.5-53.5 十六分沙锤",
+      "end": "53.5-59.5 动机再现，56s 结束和弦，1.2s 淡出"
+    },
+    "seed": 2026,
+    "output": "assets/music.wav"
+  },
+  "sfx": [
+    {
+      "role": "点击（右键、菜单选择）",
+      "file": "assets/sfx/soft-ui-click.wav",
+      "method": "downloaded",
+      "source": "Pixabay「Soft UI Click」by Universfield",
+      "page": "https://pixabay.com/sound-effects/film-special-effects-soft-ui-click-147352/",
+      "download": "https://cdn.pixabay.com/download/audio/2023/04/23/audio_fe24ce0581.mp3",
+      "license": "Pixabay Content License https://pixabay.com/service/license-summary/",
+      "edit": "从 0.14s 起截 0.4s，48 kHz 单声道，尾部 0.1s 淡出；syncOffset 0.015"
+    },
+    {
+      "role": "左键选中",
+      "file": "assets/sfx/click-alt.wav",
+      "method": "bundled-original",
+      "assetId": "click-alt",
+      "fallbackReason": "Pixabay 详情页触发 Cloudflare 真人验证，自动化无法继续访问；只拿到了点击音。已查候选：Clean Minimal Pop、Thin Swoosh、UI Success Chime、Reward Chime"
+    },
+    {
+      "role": "子菜单展开 tick",
+      "file": "assets/sfx/toggle.wav",
+      "method": "bundled-original",
+      "assetId": "toggle",
+      "fallbackReason": "Pixabay 详情页触发 Cloudflare 真人验证，自动化无法继续访问；只拿到了点击音。已查候选：Clean Minimal Pop、Thin Swoosh、UI Success Chime、Reward Chime"
+    },
+    {
+      "role": "新文件出现",
+      "file": "assets/sfx/pop.wav",
+      "method": "bundled-original",
+      "assetId": "pop",
+      "fallbackReason": "Pixabay 详情页触发 Cloudflare 真人验证，自动化无法继续访问；只拿到了点击音。已查候选：Clean Minimal Pop、Thin Swoosh、UI Success Chime、Reward Chime"
+    },
+    {
+      "role": "转场、图标飞向侧栏",
+      "file": "assets/sfx/whoosh.wav",
+      "method": "bundled-original",
+      "assetId": "whoosh",
+      "fallbackReason": "Pixabay 详情页触发 Cloudflare 真人验证，自动化无法继续访问；只拿到了点击音。已查候选：Clean Minimal Pop、Thin Swoosh、UI Success Chime、Reward Chime"
+    },
+    {
+      "role": "工具箱对比、结尾转场",
+      "file": "assets/sfx/sweep.wav",
+      "method": "bundled-original",
+      "assetId": "sweep",
+      "fallbackReason": "Pixabay 详情页触发 Cloudflare 真人验证，自动化无法继续访问；只拿到了点击音。已查候选：Clean Minimal Pop、Thin Swoosh、UI Success Chime、Reward Chime"
+    },
+    {
+      "role": "复制完成",
+      "file": "assets/sfx/success.wav",
+      "method": "bundled-original",
+      "assetId": "success",
+      "fallbackReason": "Pixabay 详情页触发 Cloudflare 真人验证，自动化无法继续访问；只拿到了点击音。已查候选：Clean Minimal Pop、Thin Swoosh、UI Success Chime、Reward Chime"
+    },
+    {
+      "role": "放心用卡片",
+      "file": "assets/sfx/resolve.wav",
+      "method": "bundled-original",
+      "assetId": "resolve",
+      "fallbackReason": "Pixabay 详情页触发 Cloudflare 真人验证，自动化无法继续访问；只拿到了点击音。已查候选：Clean Minimal Pop、Thin Swoosh、UI Success Chime、Reward Chime"
+    }
+  ]
+}

@@ -24,7 +24,7 @@ MARKDOWN_LINK = re.compile(r"(?<!!)\[[^\]]+\]\(([^)]+)\)")
 
 
 def markdown_files() -> list[Path]:
-    files = [path for path in ROOT.rglob("*.md") if ".git" not in path.parts]
+    files = [path for path in ROOT.rglob("*.md") if not {".git", "node_modules"} & set(path.parts)]
     return sorted(files)
 
 
