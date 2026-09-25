@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="{{ t.lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ t.privacy.title }} · RightKit</title>
+<meta name="description" content="{{ t.privacy.intro }}">
+<meta name="theme-color" content="#2A2B31">
+<meta name="color-scheme" content="light dark">
+<link rel="canonical" href="{{ site.url }}{{ t.path }}privacy/">
+<link rel="alternate" hreflang="{{ t.lang }}" href="{{ site.url }}{{ t.path }}privacy/">
+<link rel="alternate" hreflang="{{ t.alt.lang }}" href="{{ site.url }}{{ t.alt.path }}privacy/">
+<link rel="icon" type="image/png" sizes="64x64" href="{{ base }}img/app-icon-64.png">
+<link rel="apple-touch-icon" href="{{ base }}img/app-icon-180.png">
+<link rel="stylesheet" href="{{ base }}styles.css">
+</head>
+<body>
+<header class="nav scrolled">
+  <div class="nav-inner">
+    <a class="brand" href="{{ base }}{{ t.privacy.home|raw }}">
+      <img src="{{ base }}img/app-icon-64.png" width="28" height="28" alt="">
+      <span>RightKit</span>
+    </a>
+    <div class="nav-actions" style="margin-left: auto">
+      <a class="lang" href="{{ base }}{{ t.alt.href|raw }}privacy/" hreflang="{{ t.alt.lang }}" lang="{{ t.alt.lang }}" aria-label="{{ t.nav.language }}">{{ t.alt.short }}</a>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="band paper legal">
+  <article class="wrap legal-body">
+    <h1>{{ t.privacy.title }}</h1>
+    <p class="legal-updated">{{ t.privacy.updated }}</p>
+    <p>{{ t.privacy.intro }}</p>
+    {% for section in t.privacy.sections %}
+    <h2>{{ section.title }}</h2>
+    {% for p in section.body %}<p>{{ p }}</p>{% endfor %}
+    {% endfor %}
+    <p><a href="{{ site.issues }}">{{ t.footer.issues }}</a></p>
+  </article>
+</main>
+</body>
+</html>

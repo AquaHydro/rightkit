@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build the RightKit website into website/dist.
 
-Standard library only. Renders src/index.html once per language in content.json
+Standard library only. Renders src/index.html and src/privacy.html once per language in content.json
 and copies the static files next to it.
 
 Template syntax:
@@ -116,7 +116,9 @@ def render(nodes: list, scope: dict) -> str:
 def main() -> int:
     site = json.loads((ROOT / "site.json").read_text(encoding="utf-8"))
     content = json.loads((ROOT / "content.json").read_text(encoding="utf-8"))
-    tree = parse((SRC / "index.html").read_text(encoding="utf-8"))
+    # Each page is rendered once per language under <language path><sub-path>.
+    pages = {"": parse((SRC / "index.html").read_text(encoding="utf-8")),
+             "privacy/": parse((SRC / "privacy.html").read_text(encoding="utf-8"))}
 
     if DIST.exists():
         shutil.rmtree(DIST)
@@ -124,15 +126,16 @@ def main() -> int:
     for name in ("styles.css", "main.js"):
         shutil.copy2(SRC / name, DIST / name)
 
-    for key, strings in content.items():
-        depth = len([part for part in strings["path"].split("/") if part])
-        # Relative asset paths keep the site working under a sub-path such as GitHub Pages.
-        scope = {"site": site, "t": strings, "base": "../" * depth}
-        page = render(tree, scope)
-        target = DIST / strings["path"].strip("/") / "index.html"
-        target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text(page, encoding="utf-8")
-        print(f"built {target.relative_to(ROOT)}")
+    for strings in content.values():
+        for sub, tree in pages.items():
+            path = strings["path"] + sub
+            depth = len([part for part in path.split("/") if part])
+            # Relative asset paths keep the site working under a sub-path such as GitHub Pages.
+            scope = {"site": site, "t": strings, "base": "../" * depth}
+            target = DIST / path.strip("/") / "index.html"
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(render(tree, scope), encoding="utf-8")
+            print(f"built {target.relative_to(ROOT)}")
     return 0
 
 

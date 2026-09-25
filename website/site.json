@@ -1,6 +1,6 @@
 {
-  "_comment": "官网域名待定；下载固定跳转 GitHub 最新正式 Release。",
-  "url": "https://rightkit.example",
+  "_comment": "暂用 yiliang.app 子域名；下载固定跳转 GitHub 最新正式 Release。",
+  "url": "https://rightkit.yiliang.app",
   "download": "https://github.com/AquaHydro/rightkit/releases/latest",
   "github": "https://github.com/AquaHydro/rightkit",
   "releases": "https://github.com/AquaHydro/rightkit/releases",

@@ -4,7 +4,7 @@ APP := $(DERIVED)/Build/Products/Debug/RightKit.app
 XCODE_FLAGS ?=
 XCODEBUILD := xcodebuild -project RightKit.xcodeproj -scheme RightKit -derivedDataPath $(DERIVED) -allowProvisioningUpdates $(XCODE_FLAGS)
 
-.PHONY: generate build build-appstore test verify run release release-unsigned release-appstore upload-appstore website website-serve
+.PHONY: generate build build-appstore test verify run release release-unsigned release-appstore upload-appstore website website-serve website-deploy
 
 generate:
 	xcodegen generate
@@ -54,3 +54,7 @@ website:
 # 本地预览官网：http://localhost:8000
 website-serve: website
 	python3 -m http.server 8000 --directory website/dist
+
+# 部署官网到 Cloudflare Pages 项目 rightkit（https://rightkit.yiliang.app）。第一次会打开浏览器登录。
+website-deploy: website
+	npx -y wrangler@latest pages deploy website/dist --project-name rightkit --branch main

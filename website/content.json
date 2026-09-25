@@ -440,6 +440,7 @@
       "github": "GitHub",
       "releases": "更新日志",
       "issues": "反馈问题",
+      "privacy": "隐私政策",
       "character": "角色 Riko",
       "copyright": "© {year} RightKit",
       "trademarks": "终端和 Xcode 是 Apple Inc. 的商标，Visual Studio Code 是 Microsoft Corporation 的商标，Ghostty 图标归 Ghostty 项目所有。"
@@ -558,6 +559,56 @@
         "shown": "已显示「{name}」",
         "dissolved": "已解散「{name}」，里面的项目移到了这里。"
       }
+    },
+    "privacy": {
+      "title": "隐私政策",
+      "home": "",
+      "updated": "最后更新：2026 年 9 月 25 日",
+      "intro": "RightKit 不收集、不存储、也不上传你的任何个人数据。没有账号、广告和使用统计。",
+      "sections": [
+        {
+          "title": "你的文件",
+          "body": [
+            "新建、拷贝、移动、转换图片、计算哈希等操作都在你的 Mac 上完成，文件不会离开本机。RightKit 运行在 App Sandbox 里，只能访问你授权的文件夹。"
+          ]
+        },
+        {
+          "title": "设置",
+          "body": [
+            "模板、常用目录和各项开关只保存在本机。卸载 RightKit 时可以一并删除。"
+          ]
+        },
+        {
+          "title": "二维码",
+          "body": [
+            "二维码在本机生成，文本不会上传。"
+          ]
+        },
+        {
+          "title": "翻译",
+          "body": [
+            "使用「使用 Google 翻译」或「使用百度翻译」时，RightKit 会把你选中的文本放进网址，用默认浏览器打开对应的翻译网站。文本由浏览器发给该网站，适用该网站的隐私政策。RightKit 本身不发送也不保存这段文本。"
+          ]
+        },
+        {
+          "title": "检查更新（仅官网版）",
+          "body": [
+            "官网版会向 GitHub 查询最新版本号。这次请求不带任何个人信息，但 GitHub 会像处理普通网页访问一样看到你的 IP 地址。可以在设置里关闭自动检查更新。App Store 版不做这个请求，由 App Store 负责更新。"
+          ]
+        },
+        {
+          "title": "本网站",
+          "body": [
+            "本网站是静态页面，不使用 Cookie，也没有统计和追踪脚本。托管服务商可能为了安全和运维记录常规访问日志。"
+          ]
+        },
+        {
+          "title": "变更和联系",
+          "body": [
+            "本政策如有变更，会更新这个页面和上面的日期。有任何问题，请在 GitHub 上提交 Issue。"
+          ]
+        }
+      ]
     }
   },
   "en": {
@@ -1001,6 +1052,7 @@
       "github": "GitHub",
       "releases": "Release notes",
       "issues": "Report an issue",
+      "privacy": "Privacy",
       "character": "Meet Riko",
       "copyright": "© {year} RightKit",
       "trademarks": "Terminal and Xcode are trademarks of Apple Inc. Visual Studio Code is a trademark of Microsoft Corporation. The Ghostty icon belongs to the Ghostty project."
@@ -1119,6 +1171,56 @@
         "shown": "Showed “{name}”",
         "dissolved": "Dissolved “{name}”. Its contents moved here."
       }
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "home": "en/",
+      "updated": "Last updated: September 25, 2026",
+      "intro": "RightKit does not collect, store, or upload any of your personal data. There are no accounts, ads, or usage analytics.",
+      "sections": [
+        {
+          "title": "Your files",
+          "body": [
+            "Creating, copying, moving, converting images, computing hashes and every other file action happens on your Mac. Your files never leave it. RightKit runs in the App Sandbox and can only access folders you authorize."
+          ]
+        },
+        {
+          "title": "Settings",
+          "body": [
+            "Templates, favorite folders and preferences are stored only on your Mac. You can remove them when you uninstall RightKit."
+          ]
+        },
+        {
+          "title": "QR codes",
+          "body": [
+            "QR codes are generated on your Mac. The text is never uploaded."
+          ]
+        },
+        {
+          "title": "Translation",
+          "body": [
+            "When you use the Google Translate or Baidu Translate service, RightKit puts the selected text in a link and opens that translation website in your default browser. Your browser sends the text to that website, and its privacy policy applies. RightKit itself does not send or keep the text."
+          ]
+        },
+        {
+          "title": "Update checks (website version only)",
+          "body": [
+            "The website version asks GitHub for the latest version number. The request contains no personal information, but GitHub sees your IP address as with any web request. You can turn off automatic update checks in Settings. The App Store version makes no such request; the App Store handles updates."
+          ]
+        },
+        {
+          "title": "This website",
+          "body": [
+            "This website is a static site. It uses no cookies and no analytics or tracking scripts. The hosting provider may keep standard access logs for security and operations."
+          ]
+        },
+        {
+          "title": "Changes and contact",
+          "body": [
+            "If this policy changes, this page and the date above will be updated. For any questions, open an issue on GitHub."
+          ]
+        }
+      ]
     }
   }
 }

@@ -4,7 +4,7 @@
 
 ## 上架前必须完成
 
-- [ ] 官网域名：定下后替换 `website/site.json` 的 `url`。下载入口已接到 GitHub 最新 Release，两个渠道的反馈入口均使用项目 Issues。
+- [ ] 官网暂用 `https://rightkit.yiliang.app`（Cloudflare Pages 项目 `rightkit`，`make website-deploy` 部署）。App Store Connect 的隐私政策网址填 `https://rightkit.yiliang.app/privacy/`，技术支持网址填官网或 GitHub Issues。以后换正式域名时改 `website/site.json` 的 `url` 并重新部署。
 - [ ] 在 App Store Connect 新建 App：bundle ID `app.rightkit.mac.store`，类别「工具」，定价，中英文简介、关键词和截图，隐私问卷（不收集数据；翻译只是打开浏览器），年龄分级。
 - [ ] 送审备注：为什么需要授权文件夹；只针对访达的 Apple Events 例外只用于用户确认后重启访达，让扩展生效；怎样在「系统设置 → 通用 → 登录项与扩展」里打开访达扩展；审核人员的演示步骤。
 - [ ] 上传商店版：本机 `make upload-appstore`，或推标签后由 Release 工作流上传；确认通过 App Store Connect 的自动校验。
