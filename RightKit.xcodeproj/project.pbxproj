@@ -53,6 +53,7 @@
 		8C5B03ABBCFA12928BFA73C4 /* FinderSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5DA73B6D2F00EDA5731699 /* FinderSync.swift */; };
 		90F7F522B825ABE7DF040AFA /* SharedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB08D34EF86EF59867216D9 /* SharedStore.swift */; };
 		96B8249E516B9711D949A84E /* WindowOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B122DAA02C5895DA0E610EB /* WindowOpener.swift */; };
+		97175D01A462294386875793 /* FolderStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6161934CEE4DBACBC8F943A7 /* FolderStoreTests.swift */; };
 		A09D51CDD37161079D103E41 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C0FEEC0B2535C6286767C5 /* WelcomeView.swift */; };
 		A102A2F955EE1AB46F425B1A /* FileEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CE7AC6BD9AFF524D1A9390 /* FileEngineTests.swift */; };
 		A86D55563B09C1F7C1897D52 /* CommandServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4643A4F8FC2B5F1ED205A209 /* CommandServer.swift */; };
@@ -143,6 +144,7 @@
 		52C80A8B2CC5363F1EB19A88 /* NewFilePane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFilePane.swift; sourceTree = "<group>"; };
 		6030A866732808330080ABD1 /* FolderAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderAccess.swift; sourceTree = "<group>"; };
 		60CE7AC6BD9AFF524D1A9390 /* FileEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileEngineTests.swift; sourceTree = "<group>"; };
+		6161934CEE4DBACBC8F943A7 /* FolderStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderStoreTests.swift; sourceTree = "<group>"; };
 		63C250896FBFB3AFF3E16E4F /* Template.pptx */ = {isa = PBXFileReference; path = Template.pptx; sourceTree = "<group>"; };
 		6B122DAA02C5895DA0E610EB /* WindowOpener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowOpener.swift; sourceTree = "<group>"; };
 		70F1FAA02131BA5975A483A8 /* SharedStoreSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStoreSource.swift; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 				DA95B7E784366AB055BBC06D /* BatchWorkerTests.swift */,
 				60CE7AC6BD9AFF524D1A9390 /* FileEngineTests.swift */,
 				1DD3E32510A85737E5C4E970 /* FolderAccessTests.swift */,
+				6161934CEE4DBACBC8F943A7 /* FolderStoreTests.swift */,
 				01232FDD3FC278BD75E5C981 /* QRCodeTests.swift */,
 				70F1FAA02131BA5975A483A8 /* SharedStoreSource.swift */,
 				99C45432A38940B4A2C1AC9D /* TemplateLibrarySource.swift */,
@@ -666,6 +669,7 @@
 				6B1DE68FE236CD06A8E39D92 /* FolderAccess.swift in Sources */,
 				2568B02AE90DAA622AAA7E7D /* FolderAccessTests.swift in Sources */,
 				581EC9B2510286837E63855D /* FolderStore.swift in Sources */,
+				97175D01A462294386875793 /* FolderStoreTests.swift in Sources */,
 				57C83D048CB183BB8185C577 /* ImageTools.swift in Sources */,
 				77973A679721CC6C5AAE8F45 /* QRCode.swift in Sources */,
 				8222AAF44407ACE2FA9C807B /* QRCodeTests.swift in Sources */,

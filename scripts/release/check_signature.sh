@@ -5,7 +5,7 @@
 #
 # 两个渠道都检查：三个部件的签名标识、团队、沙盒、App Group、没有调试权限、agent 的 launchd 配置。
 # 官网版另查 Developer ID、强化运行时、时间戳和网络权限；商店版另查 Apple Distribution、没有网络权限，
-# 以及二进制里没有检查更新和 GitHub 的字符串。
+# 以及二进制里没有检查更新和外部下载入口。
 set -euo pipefail
 app=$1
 channel=${2:-direct}
@@ -62,8 +62,8 @@ if [[ $channel == direct ]]; then
 else
   [[ -z $network ]] || fail "App Store build must not have network.client"
   for binary in "$app/Contents/MacOS/RightKit" "$app/Contents/MacOS/RightKitAgent" "$app/Contents/PlugIns/RightKitFinder.appex/Contents/MacOS/RightKitFinder"; do
-    if grep -a -q -e "api.github.com" -e "github.com" "$binary"; then
-      fail "$binary mentions GitHub; update checks and GitHub links belong to the direct build only"
+    if grep -a -q -e "api.github.com" -e "github.com/AquaHydro/rightkit/releases" "$binary"; then
+      fail "$binary contains an external update endpoint; only the direct build may check for updates"
     fi
   done
 fi

@@ -273,8 +273,9 @@ struct FolderRow: View {
 
     var body: some View {
         let refreshed = FolderStore.refreshed(entry)
-        let exists = FolderStore.exists(refreshed)
-        let needsAuthorization = exists && entry.needsAuthorization
+        let state = FolderStore.state(refreshed)
+        let exists = state == .available
+        let needsAuthorization = state == .needsAuthorization
         let title = exists ? FolderStore.displayName(refreshed) : (refreshed.path as NSString).lastPathComponent
         HStack(spacing: 12) {
             if let isOn, showsToggle {
@@ -288,7 +289,7 @@ struct FolderRow: View {
                 RowIcon(symbol: "questionmark.folder", tint: .intentInspect)
             }
             RowLabel(title: title,
-                     caption: !exists ? L("该文件夹已不存在。") : needsAuthorization ? L("需要重新授权。") : refreshed.path,
+                     caption: needsAuthorization ? L("需要重新授权。") : !exists ? L("该文件夹已不存在。") : refreshed.path,
                      monospacedCaption: exists && !needsAuthorization)
                 .textSelection(.enabled)
             Spacer()

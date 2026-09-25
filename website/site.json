@@ -1,7 +1,7 @@
 {
-  "_comment": "占位配置。域名和下载地址定下来后只改这里。",
+  "_comment": "官网域名待定；下载固定跳转 GitHub 最新正式 Release。",
   "url": "https://rightkit.example",
-  "download": "https://rightkit.example/download/RightKit.dmg",
+  "download": "https://github.com/AquaHydro/rightkit/releases/latest",
   "github": "https://github.com/AquaHydro/rightkit",
   "releases": "https://github.com/AquaHydro/rightkit/releases",
   "issues": "https://github.com/AquaHydro/rightkit/issues",

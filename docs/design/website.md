@@ -152,7 +152,7 @@ Hero 里的访达窗口用 HTML 和 CSS 绘制。窗口里有 4 个项目：一�
 - 不引入前端框架和第三方脚本。字体自托管：Nunito（拉丁字母子集，可变字重）和 Geist Mono，许可证在 `public/fonts/`。中文走系统字体。
 - 语言：导航和页脚都有切换链接，页面声明 `hreflang`。不根据浏览器语言自动跳转，也不弹切换提示。
 - 首屏立绘用 `fetchpriority="high"` 并预加载，其余图片懒加载。
-- 占位值：域名 `https://rightkit.example`、下载地址、GitHub 链接和版本号都在 `site.json`，定下来后只改这一个文件。
+- 官网域名 `https://rightkit.example` 仍待确定；下载已固定跳转 GitHub 最新 Release。域名、下载地址、GitHub 链接和版本号统一放在 `site.json`。
 - 性能预算：首屏传输量不超过 500KB，移动端 LCP 在 2.5 秒以内。2026-09 本地实测首屏约 280KB（未压缩）。
 
 ## 验收

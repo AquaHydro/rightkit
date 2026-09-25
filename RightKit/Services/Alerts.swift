@@ -91,7 +91,7 @@ extension Alerts {
         NSApp.activate()
     }
 
-    /// 面板选中的项目在本次运行内可以访问，登记为已授权（F-080）。
+    /// 临时选择只供当前操作使用；加入设置列表时由 AppModel 保存长期授权（F-080）。
     static func chooseFolder(prompt: String, startingAt directory: URL? = nil) -> URL? {
         let panel = NSOpenPanel()
         panel.canChooseDirectories = true
@@ -114,7 +114,6 @@ extension Alerts {
     private static func runPanel(_ panel: NSOpenPanel) -> URL? {
         bringToFront()
         guard panel.runModal() == .OK, let url = panel.url else { return nil }
-        FolderAccess.shared.grant(url)
         return url
     }
 

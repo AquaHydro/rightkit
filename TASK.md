@@ -4,7 +4,7 @@
 
 ## 上架前必须完成
 
-- [ ] 官网域名：定下后替换 `website/site.json` 的 `url` 和 `download`，以及 `RightKit/Views/Settings/AboutPane.swift` 里商店版「反馈问题」的占位地址 `https://rightkit.example`。
+- [ ] 官网域名：定下后替换 `website/site.json` 的 `url`。下载入口已接到 GitHub 最新 Release，两个渠道的反馈入口均使用项目 Issues。
 - [ ] 在 App Store Connect 新建 App：bundle ID `app.rightkit.mac.store`，类别「工具」，定价，中英文简介、关键词和截图，隐私问卷（不收集数据；翻译只是打开浏览器），年龄分级。
 - [ ] 送审备注：为什么需要授权文件夹；只针对访达的 Apple Events 例外只用于用户确认后重启访达，让扩展生效；怎样在「系统设置 → 通用 → 登录项与扩展」里打开访达扩展；审核人员的演示步骤。
 - [ ] 上传商店版：本机 `make upload-appstore`，或推标签后由 Release 工作流上传；确认通过 App Store Connect 的自动校验。
@@ -32,7 +32,7 @@
 ## 官网版发布
 
 - [ ] 第一个 GitHub Release：由 Release 工作流在推标签时自动创建（见上一节）。标签是 `v` 加三段数字，并且等于 `MARKETING_VERSION`。
-- [ ] 官网下载按钮指向 `https://github.com/AquaHydro/rightkit/releases/latest`；商店版上架后，旁边放商店链接。
+- [ ] 商店版上架后，在官网下载按钮旁放商店链接。
 
 ## 已知问题
 

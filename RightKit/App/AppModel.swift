@@ -74,7 +74,7 @@ final class AppModel {
             entries.map { entry in
                 if let active = FolderAccess.shared.activate(entry) { return active }
                 var copy = entry
-                copy.needsAuthorization = FolderStore.exists(entry)
+                copy.needsAuthorization = FolderStore.state(entry) != .missing
                 return copy
             }
         }
@@ -116,7 +116,10 @@ final class AppModel {
     private func authorizedEntry(for url: URL) -> FolderEntry {
         FolderAccess.shared.grant(url)
         let entry = FolderStore.entry(for: url)
-        return FolderAccess.shared.activate(entry) ?? entry
+        if let active = FolderAccess.shared.activate(entry) { return active }
+        var failed = entry
+        failed.needsAuthorization = true
+        return failed
     }
 
     /// 补上的默认文件夹还没有 bookmark，此时已在授权文件夹内，可以创建。
@@ -124,7 +127,10 @@ final class AppModel {
         entries.map { entry in
             guard entry.bookmark == nil else { return entry }
             let made = FolderStore.makeEntry(entry)
-            return FolderAccess.shared.activate(made) ?? made
+            if let active = FolderAccess.shared.activate(made) { return active }
+            var failed = made
+            failed.needsAuthorization = FolderStore.state(made) != .missing
+            return failed
         }
     }
 

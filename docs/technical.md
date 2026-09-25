@@ -42,7 +42,8 @@
 
 文件访问（`F-080`）：
 
-- 用户经 `NSOpenPanel` 选择的文件夹保存为 security-scoped bookmark（`.withSecurityScope`）。主程序启动时解析全部监视目录、常用目录和发送到的 bookmark，并在整个运行期间保持 `startAccessingSecurityScopedResource()`。解析失败或 bookmark 过期又无法刷新时，标为需要重新授权。
+- 用户加入监视目录、常用目录或发送到列表的文件夹保存为 security-scoped bookmark（`.withSecurityScope`）。主程序启动时解析全部监视目录、常用目录和发送到的 bookmark，并在整个运行期间保持 `startAccessingSecurityScopedResource()`。解析失败或 bookmark 过期又无法刷新时，标为需要重新授权。目录状态读取保留错误类型，只有明确不存在才显示丢失，权限拒绝或无法确认时仍提供重新授权入口。
+- 临时文件夹或图片选择不登记到 `FolderAccess`，只用面板返回的 URL 完成当前操作。长期授权只由加入设置列表的操作保存。
 - 扩展传来的 URL 只有落在某个已授权文件夹内时才执行，判断放在命令分派入口的同一处，不在每个命令里各写一遍。
 - 沙盒里 `homeDirectoryForCurrentUser`、`URL.homeDirectory`、`URL.desktopDirectory` 指向应用容器。真实主目录用 `getpwuid(getuid())` 取得，桌面等位置由它拼出。`F-009` 和 `F-073` 里的「主目录」都指真实主目录。
 - 快捷指令的 `IntentFile` 自带对文件本身的访问权；写到源文件旁边前，同样检查所在文件夹是否已授权。
@@ -134,7 +135,7 @@
 商店版：
 
 - 使用编译条件 `APP_STORE` 和商店版标识构建，导出方式 `app-store-connect`，用 Apple Distribution 签名，导出 `.pkg`。`make release-appstore` 执行归档、导出和检查（`scripts/release/release_appstore.sh`），`make upload-appstore` 在检查通过后上传 App Store Connect，使用 Xcode 里登录的账号。
-- 二进制里不能有检查更新的代码、GitHub 链接和网络权限。`scripts/release/check_signature.sh <app> appstore` 检查这一点，并和官网版共用标识、沙盒、App Group 和 agent 配置的检查。
+- 二进制里不能有检查更新的代码、GitHub API 或 Release 下载入口和网络权限。反馈按钮可通过浏览器打开项目 GitHub Issues。`scripts/release/check_signature.sh <app> appstore` 检查这一点，并和官网版共用标识、沙盒、App Group 和 agent 配置的检查。
 - 主程序和扩展各带一份 `PrivacyInfo.xcprivacy`：不跟踪、不收集数据；UserDefaults 用于本应用自己的偏好（`CA92.1`），主程序读取用户选中文件的时间戳用于哈希一致性检查（`3B52.1`）。用到新的需声明原因的 API 时同步更新。
 - 商店版收费，官网版免费。商店版的应用内文案和链接都不提官网版或免费下载。
 - 送审说明要写清：为什么需要用户授权文件夹；为什么需要控制访达的 Apple Events 例外（只用来在用户确认后重启访达，让扩展生效）；怎样在系统设置里打开访达扩展。
