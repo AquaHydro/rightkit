@@ -1,0 +1,52 @@
+Timestamp               Ty Process[PID:TID]
+2026-09-26 01:45:03.700 Df RightKitFinder[29124:3ace77] [app.rightkit.mac.finder:menu] menu kind=0 folder=/Users/liao/RKAcceptance-20260926/allowed/ items=1 -> 在应用中打开[终端|Ghostty|Visual Studio Code|Xcode]|剪切|复制到[下载|桌面|文稿|—|选择文件夹…]|移动到[下载|桌面|文稿|—|选择文件夹…]|工具箱[拷贝路径|拷贝名称|—|根据文件名新建文件夹|发送替身到桌面|隔空投送|授予写入权限|文件信息（哈希）…|—|隐藏所选|隐藏扩展名|—|彻底删除…]
+2026-09-26 01:45:10.215 Df RightKitFinder[29124:3ace77] [app.rightkit.mac.finder:menu] perform copyName
+2026-09-26 01:45:10.216 E  RightKitFinder[29124:3ae046] [app.rightkit.mac.finder:xpc] Agent unavailable: 无法与帮助程序通信。
+2026-09-26 01:45:10.360 Df RightKitFinder[29125:3acd04] [app.rightkit.mac.finder:menu] Monitoring /Users/liao
+2026-09-26 01:45:10.360 Df RightKitFinder[29124:3accfc] [app.rightkit.mac.finder:menu] Monitoring /Users/liao
+2026-09-26 01:45:10.511 E  RightKit[29666:3ae04e] [app.rightkit.mac:app] Agent registration failed: 未能完成该操作。Operation not permitted, status 2
+2026-09-26 01:45:10.515 E  RightKit[29666:3ae0a0] [app.rightkit.mac:xpc] Agent connection invalidated
+2026-09-26 01:45:10.515 E  RightKit[29666:3ae0a0] [app.rightkit.mac:xpc] Check-in failed: 无法与帮助程序通信。
+2026-09-26 01:45:10.750 E  RightKit[29666:3ae04e] [app.rightkit.mac:app] Agent registration failed: 未能完成该操作。Operation not permitted, status 2
+2026-09-26 01:45:15.856 E  RightKit[29666:3ae0e1] [app.rightkit.mac:xpc] Agent connection invalidated
+2026-09-26 01:45:15.856 E  RightKit[29666:3ae0e1] [app.rightkit.mac:xpc] Check-in failed: 无法与帮助程序通信。
+2026-09-26 01:45:21.198 E  RightKit[29666:3ae0dd] [app.rightkit.mac:xpc] Agent connection invalidated
+2026-09-26 01:45:21.198 E  RightKit[29666:3ae0dd] [app.rightkit.mac:xpc] Check-in failed: 无法与帮助程序通信。
+2026-09-26 01:45:26.538 E  RightKit[29666:3ae058] [app.rightkit.mac:xpc] Agent connection invalidated
+2026-09-26 01:45:26.538 E  RightKit[29666:3ae0a0] [app.rightkit.mac:xpc] Check-in failed: 无法与帮助程序通信。
+2026-09-26 01:45:31.881 E  RightKit[29666:3ae058] [app.rightkit.mac:xpc] Agent connection invalidated
+2026-09-26 01:45:31.881 E  RightKit[29666:3ae0e3] [app.rightkit.mac:xpc] Check-in failed: 无法与帮助程序通信。
+2026-09-26 01:45:37.132 E  RightKit[29666:3ae058] [app.rightkit.mac:xpc] Agent connection invalidated
+2026-09-26 01:45:37.132 E  RightKit[29666:3ae058] [app.rightkit.mac:xpc] Check-in failed: 无法与帮助程序通信。
+2026-09-26 01:45:42.472 E  RightKit[29666:3ae278] [app.rightkit.mac:xpc] Agent connection invalidated
+2026-09-26 01:45:42.472 E  RightKit[29666:3ae0e3] [app.rightkit.mac:xpc] Check-in failed: 无法与帮助程序通信。
+2026-09-26 01:45:45.237 E  launchd[1:3ae246] [app.rightkit.mac.agent:] Unknown key for plist importer (key: _Quarantined type: bool)
+2026-09-26 01:45:45.237 E  launchd[1:3ae246] [app.rightkit.mac.agent:] Unknown key for plist importer (key: SHA256 type: data)
+2026-09-26 01:46:06.389 Df RightKitFinder[29124:3ae168] [app.rightkit.mac.finder:menu] menu kind=0 folder=/Users/liao/RKAcceptance-20260926/allowed/ items=1 -> 在应用中打开[终端|Ghostty|Visual Studio Code|Xcode]|剪切|复制到[下载|桌面|文稿|—|选择文件夹…]|移动到[下载|桌面|文稿|—|选择文件夹…]|工具箱[拷贝路径|拷贝名称|—|根据文件名新建文件夹|发送替身到桌面|隔空投送|授予写入权限|文件信息（哈希）…|—|隐藏所选|隐藏扩展名|—|彻底删除…]
+2026-09-26 01:46:13.378 Df RightKitFinder[29124:3ae168] [app.rightkit.mac.finder:menu] perform copyName
+2026-09-26 01:46:13.397 Df RightKit[29666:3ae04e] [app.rightkit.mac:router] handle copyName items=1
+2026-09-26 01:48:00.006 E  launchd[1:3aebf4] [app.rightkit.mac.agent:] Unknown key for plist importer (key: _Quarantined type: bool)
+2026-09-26 01:48:00.006 E  launchd[1:3aebf4] [app.rightkit.mac.agent:] Unknown key for plist importer (key: SHA256 type: data)
+2026-09-26 01:48:00.006 E  launchd[1:3aebf4] [app.rightkit.mac.store.agent:] Unknown key for plist importer (key: _Quarantined type: bool)
+2026-09-26 01:48:00.006 E  launchd[1:3aebf4] [app.rightkit.mac.store.agent:] Unknown key for plist importer (key: SHA256 type: data)
+2026-09-26 01:48:00.399 Df RightKitFinder[30159:3af78a] [app.rightkit.mac.finder:menu] Monitoring /Users/liao
+2026-09-26 01:53:15.739 Df RightKitFinder[30159:3b14de] [app.rightkit.mac.finder:menu] menu kind=0 folder=/Users/liao/RKAcceptance-20260926/allowed/ items=1 -> 在应用中打开[终端|Ghostty|Visual Studio Code|Xcode]|剪切|复制到[下载|桌面|文稿|—|选择文件夹…]|移动到[下载|桌面|文稿|—|选择文件夹…]|工具箱[拷贝路径|拷贝名称|—|根据文件名新建文件夹|发送替身到桌面|隔空投送|授予写入权限|文件信息（哈希）…|—|隐藏所选|隐藏扩展名|—|彻底删除…]
+2026-09-26 01:53:31.933 Df RightKitFinder[30159:3b3042] [app.rightkit.mac.finder:menu] menu kind=0 folder=/Users/liao/RKAcceptance-20260926/allowed/ items=1 -> 在应用中打开[终端|Ghostty|Visual Studio Code|Xcode]|剪切|复制到[下载|桌面|文稿|—|选择文件夹…]|移动到[下载|桌面|文稿|—|选择文件夹…]|工具箱[拷贝路径|拷贝名称|—|根据文件名新建文件夹|发送替身到桌面|隔空投送|授予写入权限|文件信息（哈希）…|—|隐藏所选|隐藏扩展名|—|彻底删除…]
+2026-09-26 01:53:41.144 Df RightKitFinder[30159:3b3042] [app.rightkit.mac.finder:menu] perform copyTo
+2026-09-26 01:53:41.378 Df RightKitFinder[30159:3af78a] [app.rightkit.mac.finder:menu] Monitoring /Users/liao
+2026-09-26 01:53:41.568 Df RightKit[31314:3b32ca] [app.rightkit.mac:router] handle copyTo items=1
+2026-09-26 01:54:02.073 Df RightKitFinder[30159:3b3042] [app.rightkit.mac.finder:menu] menu kind=0 folder=/Users/liao/RKAcceptance-20260926/allowed/ items=1 -> 在应用中打开[终端|Ghostty|Visual Studio Code|Xcode]|剪切|复制到[下载|桌面|文稿|—|选择文件夹…]|移动到[下载|桌面|文稿|—|选择文件夹…]|工具箱[拷贝路径|拷贝名称|—|根据文件名新建文件夹|发送替身到桌面|隔空投送|授予写入权限|文件信息（哈希）…|—|隐藏所选|隐藏扩展名|—|彻底删除…]
+2026-09-26 01:54:11.786 Df RightKitFinder[30159:3b3042] [app.rightkit.mac.finder:menu] perform moveTo
+2026-09-26 01:54:11.790 Df RightKit[31314:3b32ca] [app.rightkit.mac:router] handle moveTo items=1
+2026-09-26 01:54:29.945 Df RightKitFinder[30159:3b3042] [app.rightkit.mac.finder:menu] menu kind=1 folder=/Users/liao/RKAcceptance-20260926/allowed/ items=0 -> 新建文件[文本文档|Markdown|RTF 文稿|Word 文档|Excel 工作簿|PowerPoint 演示文稿]|常用目录[下载|桌面|文稿]|在应用中打开[终端|Ghostty|Visual Studio Code|Xcode]|拷贝当前路径
+2026-09-26 01:54:52.080 Df RightKitFinder[30159:3b3042] [app.rightkit.mac.finder:menu] menu kind=1 folder=/Users/liao/RKAcceptance-20260926/allowed/ items=0 -> 新建文件[文本文档|Markdown|RTF 文稿|Word 文档|Excel 工作簿|PowerPoint 演示文稿]|常用目录[下载|桌面|文稿]|在应用中打开[终端|Ghostty|Visual Studio Code|Xcode]|拷贝当前路径
+2026-09-26 01:54:59.520 Df RightKitFinder[30159:3b3042] [app.rightkit.mac.finder:menu] perform newFile
+2026-09-26 01:54:59.526 Df RightKit[31314:3b32ca] [app.rightkit.mac:router] handle newFile items=0
+2026-09-26 01:55:14.473 Df RightKitFinder[30159:3b37aa] [app.rightkit.mac.finder:menu] menu kind=0 folder=/Users/liao/RKAcceptance-20260926/allowed/ items=1 -> 在应用中打开[终端|Ghostty|Visual Studio Code|Xcode]|剪切|复制到[下载|桌面|文稿|—|选择文件夹…]|移动到[下载|桌面|文稿|—|选择文件夹…]|工具箱[拷贝路径|拷贝名称|—|根据文件名新建文件夹|发送替身到桌面|隔空投送|授予写入权限|文件信息（哈希）…|—|隐藏所选|隐藏扩展名|—|彻底删除…]
+2026-09-26 01:55:24.200 Df RightKitFinder[30159:3b37aa] [app.rightkit.mac.finder:menu] perform deletePermanently
+2026-09-26 01:55:24.206 Df RightKit[31314:3b32ca] [app.rightkit.mac:router] handle deletePermanently items=1
+2026-09-26 01:58:03.886 Df RightKitFinder[31425:3b4359] [app.rightkit.mac.finder:menu] Monitoring /Users/liao
+2026-09-26 01:58:23.144 Df RightKitFinder[31425:3b4461] [app.rightkit.mac.finder:menu] menu kind=0 folder=/Users/liao/RKAcceptance-20260926/allowed/ items=1 -> 在应用中打开[终端|Ghostty|Visual Studio Code|Xcode]|剪切|复制到[下载|桌面|文稿|—|选择文件夹…]|移动到[下载|桌面|文稿|—|选择文件夹…]|工具箱[拷贝路径|拷贝名称|—|根据文件名新建文件夹|发送替身到桌面|隔空投送|授予写入权限|文件信息（哈希）…|—|隐藏所选|隐藏扩展名|—|彻底删除…]
+2026-09-26 01:58:43.447 Df RightKitFinder[31425:3b4461] [app.rightkit.mac.finder:menu] menu kind=0 folder=/Users/liao/RKAcceptance-20260926/allowed/ items=1 -> 在应用中打开[终端|Ghostty|Visual Studio Code|Xcode]|剪切|复制到[下载|桌面|文稿|—|选择文件夹…]|移动到[下载|桌面|文稿|—|选择文件夹…]|工具箱[拷贝路径|拷贝名称|—|根据文件名新建文件夹|发送替身到桌面|隔空投送|授予写入权限|文件信息（哈希）…|—|隐藏所选|隐藏扩展名|—|彻底删除…]
+2026-09-26 01:58:53.803 Df RightKitFinder[31425:3b4461] [app.rightkit.mac.finder:menu] perform deletePermanently
+2026-09-26 01:58:53.833 Df RightKit[31424:3b434a] [app.rightkit.mac:router] handle deletePermanently items=1

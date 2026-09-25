@@ -201,9 +201,9 @@ struct IOSIconSetIntent: AppIntent {
 
 /// 逐张处理；部分失败时保留成功的结果，全部失败才报错。输出写在原图旁边，原图所在文件夹必须已授权（F-080）。
 private func forEachImage(_ images: [URL], _ body: (URL) throws -> URL) throws -> [URL] {
-    for image in images { try requireWritable(image.deletingLastPathComponent()) }
     let started = images.filter { $0.startAccessingSecurityScopedResource() }
     defer { started.forEach { $0.stopAccessingSecurityScopedResource() } }
+    for image in images { try requireWritable(image.deletingLastPathComponent()) }
     var outputs: [URL] = []
     var lastFailure: ImageTools.Failure?
     for image in images {

@@ -16,6 +16,11 @@ final class FinderSync: FIFinderSync, @unchecked Sendable {
     override init() {
         super.init()
         SharedStore.writeHeartbeat()
+        // 文件选择面板也会启动扩展实例并写心跳，面板的宿主退出后这个 pid 就失效了。
+        // 还活着的实例发现心跳失效就接上，访达里的实例因此不会被误报为未运行（F-001）。
+        Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
+            if !SharedStore.heartbeatIsAlive() { SharedStore.writeHeartbeat() }
+        }
         reloadSettings()
         let observer = Unmanaged.passUnretained(self).toOpaque()
         CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), observer, { _, observer, _, _, _ in

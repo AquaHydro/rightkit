@@ -1,0 +1,17 @@
+{
+  "commit": "db020c22e17e76561c0324a47eb954c951e6c259",
+  "channel": "direct",
+  "build": "make release-unsigned; Developer ID signature checks passed",
+  "installedBinaryMatchesExport": true,
+  "binarySHA256": "ca9066f87ca4940a708a8c8a085faa50486d6374936bf6cc005a52e91c53c8f1",
+  "shortcut": "RightKit  20260926",
+  "authorizedOutput": {
+    "name": "input 2.png",
+    "bytes": 48997,
+    "sha256": "9e5eee471d897d3353813ddcbeb2b4aa433ffcd87d26922b2da7bcb51d18a03c"
+  },
+  "unauthorized": "RightKit 无权访问“denied”。",
+  "deniedDirectoryUnchanged": true,
+  "inputImagesUnchanged": true,
+  "scope": "Real Shortcuts UI regression of the original workflow. Runtime /.nofollow URL not separately instrumented in this run. App Store channel not rerun."
+}
