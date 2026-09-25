@@ -12,7 +12,7 @@ cd "$root"
 out=.build/release-appstore
 archive=$out/RightKit.xcarchive
 export_dir=$out/export
-options=scripts/release/ExportOptions-AppStore.plist
+export_options=scripts/release/ExportOptions-AppStore.plist
 
 rm -rf "$out"
 mkdir -p "$out"
@@ -22,7 +22,7 @@ xcodebuild -project RightKit.xcodeproj -scheme "RightKit App Store" -configurati
   -derivedDataPath .build/DerivedData-AppStore -archivePath "$archive" \
   -allowProvisioningUpdates archive | tail -1
 xcodebuild -exportArchive -archivePath "$archive" -exportPath "$export_dir" \
-  -exportOptionsPlist "$options" -allowProvisioningUpdates | tail -1
+  -exportOptionsPlist "$export_options" -allowProvisioningUpdates | tail -1
 
 # 归档的中间产物里也有一份同 ID 的扩展，LaunchServices 会抢先注册它。用完就注销并删除。
 lsregister=/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister
@@ -50,7 +50,7 @@ rm -rf "$expanded"
 
 if [[ -n ${UPLOAD:-} ]]; then
   upload_options=$out/ExportOptions-Upload.plist
-  cp "$options" "$upload_options"
+  cp "$export_options" "$upload_options"
   /usr/libexec/PlistBuddy -c "Set :destination upload" "$upload_options"
   xcodebuild -exportArchive -archivePath "$archive" -exportPath "$out/upload" \
     -exportOptionsPlist "$upload_options" -allowProvisioningUpdates | tail -1
