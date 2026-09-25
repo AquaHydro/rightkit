@@ -184,12 +184,48 @@ No text, no letters, no logos, no UI elements, no watermark.
 - 「zz」和问号只画成图形，不出现字母；小白鼠只有观者右侧那只耳朵是珊瑚色。
 - 定稿后放到 `website/assets/character/`，导出 56、112、168 px 三档放进 App（`StatusReady`、`StatusSleepy`、`StatusPuzzled`）。
 
+### 7. 官网价格卡和循环视频
+
+官网价格区的三张 2:3 插画卡，hover 时播放循环视频（见[官网设计](website.md#价格卡)）。和其他官网素材不同，这几张**不要透明背景**：视频不支持透明，画面直接画在卡片底色上。
+
+参考图（按顺序上传）：`RightKit/Resources/AppIcon.icon/Assets/character.png`、`website/assets/character/main.png`。用 `gpt-image` 系列，尺寸 1024 × 1536，画质 high。
+
+共用段落（接在固定风格段落后面）：
+
+```text
+Vertical pricing-card key visual, 2:3 portrait. {画面}
+The lower 40% of the frame fades smoothly into plain flat {底色} with nothing in it, reserved for text. No text, no letters, no numbers, no dollar signs, no logos, no watermark.
+```
+
+| 文件 | 底色 | 画面 |
+| --- | --- | --- |
+| `pricing-free.png`（官网版） | charcoal `#2A2B31` | `Close-up bust portrait filling the upper 60% of the frame: Riko looks at the viewer with a relaxed, warm, slightly playful smile, chin resting lightly on one hand, the white mouse sitting on top of her head. Hair gently lifted by a breeze. Solid charcoal background #2A2B31 with a soft coral glow behind her head and a few tiny floating blank file cards.` |
+| `pricing-store.png`（商店版） | off-white `#FAF7F5` | `Theme: thanking a supporter. Waist-up in the upper 60% of the frame: Riko smiles warmly at the viewer, holding a warm coral ceramic coffee mug with both hands close to her chest, a thin curl of steam rising from it shaped softly like a heart. The white mouse sits on her shoulder hugging a tiny shiny gold coin with a small heart embossed on it. Soft warm off-white background #FAF7F5 with a faint coral radial glow behind her, a few tiny sparkles.` |
+| `pricing-oss.png`（开源） | off-white `#FAF7F5` | `Riko sits cross-legged, seen from slightly above, happily building something with small wooden blocks shaped like folder and document icons, a small wrench in one hand; the white mouse stands on a block handing her a tiny screw. A few blank sticky notes and puzzle pieces around. Soft warm off-white background #FAF7F5 with a very faint coral radial glow, light and airy.` |
+
+视频用 Grok 图生视频，把定稿图**同时当首帧和尾帧**上传，6 秒、720p。动作只写小幅度的：眨眼、头发飘动、小白鼠动一动、背景小物件浮动。提示词里要写明头、脸和发卡全程不动：
+
+```text
+Very subtle living-portrait loop, locked camera, no cuts, no zoom. {小动作}. Her head, face and the white cursor hair clip on her bangs stay exactly in place and unchanged the whole time. Ends in the same pose as the start. No text.
+```
+
+检查：
+
+- 视频模型最容易让发卡漂移、变形，或者凭空多出道具。每张图至少生成两条，每 12 帧抽一张放大发卡区域，挑全程不变的一条。
+- 首帧和末帧要接得上，否则循环时会跳。接不上时用 ffmpeg 把视频正放加倒放拼成一条（`split`、`reverse`、`concat`）。
+- 蒸汽、光效不能挡住脸。
+- 画面里有道具时，提示词加一句 `Only the objects already in the frame, no new tools or objects appear.`，否则容易多出扳手、蝴蝶结之类的东西。
+- 小白鼠只有观者右侧那只耳朵是珊瑚色；不对就先用局部编辑修图，再生成视频。
+- 定稿后图片放到 `website/assets/character/`，原片放到 `website/assets/video/`，文件名和图片一致，再运行 `website/tools/export_images.py`。
+
 ## 导出
 
 | 物料 | 格式 |
 | --- | --- |
 | 官网 Hero | WebP，约 2400 × 900 |
 | 立绘、小插图 | 透明 PNG 或 WebP |
+| 价格卡插画 | 不透明 PNG 原图，网页用 WebP 420 和 840 宽 |
+| 价格卡视频 | MP4（H.264，无音轨），网页版不超过 1MB |
 
 官网用到的素材清单、当前状态和官网设计见[官网设计](website.md)。
 

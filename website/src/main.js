@@ -31,6 +31,35 @@
   });
   $$(".hero-stage, .ticker, .cta-art").forEach((el) => looping.observe(el));
 
+  // Pricing cards: the still turns into a loop on hover or focus. Without a mouse the
+  // loop plays while the card is mostly on screen. The video fades in once it is
+  // actually playing, so a slow download never shows a blank frame.
+  const plans = $$("[data-plan]");
+  const noHover = matchMedia("(hover: none)").matches;
+  const setPlaying = (card, on) => {
+    const video = $("video", card);
+    if (!on) {
+      card.classList.remove("playing");
+      video.pause();
+    } else if (!reduceMotion.matches && !navigator.connection?.saveData) {
+      if (video.paused) video.currentTime = 0;
+      video.play().catch(() => {});
+    }
+  };
+  plans.forEach((card) => {
+    $("video", card).addEventListener("playing", () => card.classList.add("playing"));
+    card.addEventListener("pointerenter", (event) => event.pointerType !== "touch" && setPlaying(card, true));
+    card.addEventListener("pointerleave", (event) => event.pointerType !== "touch" && setPlaying(card, false));
+    card.addEventListener("focusin", () => setPlaying(card, true));
+    card.addEventListener("focusout", (event) => !card.contains(event.relatedTarget) && setPlaying(card, false));
+  });
+  if (noHover) {
+    const inView = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => setPlaying(entry.target, entry.isIntersecting));
+    }, { threshold: 0.6 });
+    plans.forEach((card) => inView.observe(card));
+  }
+
   const stage = $("[data-stage]");
   if (!stage) return;
 

@@ -21,11 +21,11 @@ make website-deploy # 构建并部署到 https://rightkit.yiliang.app
 | 页面结构 | `src/index.html` |
 | 样式和动画 | `src/styles.css` |
 | 首屏右键演示、滚动进场 | `src/main.js` |
-| 字体、导出的图片、图标 | `public/` |
+| 字体、导出的图片、图标、价格卡视频 | `public/` |
 
 ## 更新图片
 
-角色原图在 `assets/character/`。换图后重新导出网页用的 WebP 和应用图标，并提交 `public/img/` 的变化：
+角色原图在 `assets/character/`，价格卡视频原片在 `assets/video/`。换图后重新导出网页用的 WebP、应用图标和视频（需要 ffmpeg），并提交 `public/img/` 和 `public/video/` 的变化：
 
 ```sh
 pip install pillow
