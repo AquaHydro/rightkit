@@ -2,7 +2,9 @@
 
 RightKit 是 macOS 访达的右键菜单工具。用户用它新建文件、把项目复制或移动到常用位置、用指定应用打开，以及执行一组文件工具。
 
-最低系统是 macOS 26。主程序负责设置、确认和耗时操作；访达扩展只负责在用户配置的监视目录内按当前选择组装菜单。默认监视用户主目录。
+最低系统是 macOS 26。主程序负责设置、确认和耗时操作；访达扩展只负责在用户配置的监视目录内按当前选择组装菜单。监视目录由用户在首次启动时授权。
+
+同一份代码发布两个渠道：官网版从官网跳转 GitHub Release 免费下载，商店版在 Mac App Store 付费购买。两者都运行在 App Sandbox 里，功能相同，差异见[功能规格](docs/features.md)的 `F-082`。
 
 ## 实现时读这些
 
@@ -22,6 +24,7 @@ RightKit 是 macOS 访达的右键菜单工具。用户用它新建文件、把�
 make verify   # 生成工程、运行全部测试和文档、文案、模板、Intent 检查
 make run      # 构建 Debug 版并启动（跳过登录项注册）
 make release  # Developer ID 签名、公证并打 DMG，产物在 .build/release/
+# 计划中（docs/roadmap.md 第 7 段）：make release-appstore 构建商店版并上传 App Store Connect
 ```
 
 首次运行后，在「系统设置 → 通用 → 登录项与扩展」里打开 RightKit 的访达扩展。

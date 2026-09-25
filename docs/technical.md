@@ -8,12 +8,45 @@
 
 - `RightKit`：SwiftUI 主程序，`LSUIElement = true`。负责设置、欢迎窗口、确认、哈希和二维码窗口、文件操作、系统服务、App Intents。
 - `RightKitFinder`：Finder Sync Extension。只读取当前菜单目标、生成菜单、把动作发给主程序。
-- `RightKitAgent`：主程序包内 `Contents/MacOS` 下的命令行程序，签名标识 `app.rightkit.mac.agent`，由 `SMAppService.agent` 注册为 LaunchAgent。只负责持有 XPC 服务名、校验来者并把请求转交主程序，不处理文件。
+- `RightKitAgent`：主程序包内 `Contents/MacOS` 下的命令行程序，签名标识是主程序 bundle ID 加 `.agent`，由 `SMAppService.agent` 注册为 LaunchAgent。只负责持有 XPC 服务名、校验来者并把请求转交主程序，不处理文件。
 - `RightKitCore`：Swift package。放菜单规则、命名、保护路径、模板描述和设置模型。不链接 SwiftUI，也不读写磁盘。
 
-开发期 bundle ID 使用 `app.rightkit.mac`，扩展使用 `app.rightkit.mac.finder`，App Group 使用 `group.app.rightkit.mac`。不要改成 `com.rightkit.app`。主程序和扩展都启用 App Groups，所有 target 使用同一个开发团队签名；扩展启用 App Sandbox，主程序和 agent 不启用。
+## 发布渠道与标识
 
-主程序不启用 App Sandbox，因为操作目标是用户在访达里点中的任意项目。扩展按系统要求启用 Sandbox，但不在扩展里改文件。不要另外做一套商店沙盒分支。
+同一份代码构建两个渠道（`F-082`）：官网版和商店版。两者都启用 App Sandbox，功能差异只靠编译条件 `APP_STORE` 区分，不维护两套分支。只有 `F-081` 检查更新和关于弹出层的链接受这个条件影响；其他任何行为出现渠道差异，都要先写进 `F-082`。
+
+| 标识 | 官网版 | 商店版 |
+| --- | --- | --- |
+| 主程序 | `app.rightkit.mac` | `app.rightkit.mac.store` |
+| 访达扩展 | `app.rightkit.mac.finder` | `app.rightkit.mac.store.finder` |
+| agent | `app.rightkit.mac.agent` | `app.rightkit.mac.store.agent` |
+| App Group | `Q9C87Z9H4G.app.rightkit.mac` | `Q9C87Z9H4G.app.rightkit.mac.store` |
+| XPC 服务名 | App Group 加 `.command` | App Group 加 `.command` |
+| 设置变化通知 | App Group 加 `.settings` | App Group 加 `.settings` |
+
+不要改成 `com.rightkit.app`。所有 target 用同一个开发团队签名。App Group 用团队 ID 前缀而不是 `group.` 前缀：agent 是没有 bundle 的命令行程序，无法嵌入描述文件，而 macOS 15 起 `group.` 前缀的 App Group 需要描述文件授权或从商店安装。
+
+这些标识按渠道由构建设置写进各 target 的 Info.plist，代码从 Info.plist 读取，`RightKitCore` 和 Swift 源码里不写死 bundle ID、App Group 或服务名。
+
+0.1 版官网版的设置在旧的 `group.app.rightkit.mac` 容器里，沙盒版读不到，不做迁移，首次启动按新用户处理。
+
+## 沙盒与文件访问
+
+三个 target 都启用 App Sandbox，entitlements 如下：
+
+- 主程序：`app-sandbox`、`application-groups`、`files.user-selected.read-write`、`files.bookmarks.app-scope`，以及只针对 `com.apple.finder` 的 `temporary-exception.apple-events`（`F-001` 重启访达）。官网版另加 `network.client`（`F-081`）。商店版不加网络权限。
+- 扩展：`app-sandbox`、`application-groups`。扩展不改文件，也不需要文件权限。
+- agent：`app-sandbox`、`application-groups`。XPC 服务名必须是 App Group 的直接子名，扩展和主程序才能在沙盒里查找它。
+
+文件访问（`F-080`）：
+
+- 用户经 `NSOpenPanel` 选择的文件夹保存为 security-scoped bookmark（`.withSecurityScope`）。主程序启动时解析全部监视目录、常用目录和发送到的 bookmark，并在整个运行期间保持 `startAccessingSecurityScopedResource()`。解析失败或 bookmark 过期又无法刷新时，标为需要重新授权。
+- 扩展传来的 URL 只有落在某个已授权文件夹内时才执行，判断放在命令分派入口的同一处，不在每个命令里各写一遍。
+- 沙盒里 `homeDirectoryForCurrentUser`、`URL.homeDirectory`、`URL.desktopDirectory` 指向应用容器。真实主目录用 `getpwuid(getuid())` 取得，桌面等位置由它拼出。`F-009` 和 `F-073` 里的「主目录」都指真实主目录。
+- 快捷指令的 `IntentFile` 自带对文件本身的访问权；写到源文件旁边前，同样检查所在文件夹是否已授权。
+- 自定义模板、设置、待粘贴列表和心跳都放在 App Group 容器里。
+
+扩展按系统要求启用 Sandbox，但不在扩展里改文件。
 
 ## 谁做什么
 
@@ -43,15 +76,15 @@
 
 扩展在自己的初始化里，向 App Group 写心跳：时间和扩展进程号。主程序检查该进程仍在运行且确实是 `RightKitFinder`，以此判断本次登录中扩展是否在运行，区分「已启用」和「未运行」。
 
-主程序修改设置后发出 Darwin 通知 `group.app.rightkit.mac.settings`（不带数据）。扩展收到后重读设置并更新 `directoryURLs`。这只是“设置变了”的提醒，不传命令。
+主程序修改设置后发出 Darwin 通知「App Group 加 `.settings`」（不带数据）。扩展收到后重读设置并更新 `directoryURLs`。这只是“设置变了”的提醒，不传命令。
 
 ## 通信
 
-普通 App 进程不能自己发布带名字的 XPC 服务，只有 launchd 管理的任务可以。因此由主程序包内的 `RightKitAgent` 通过 LaunchAgent 的 `MachServices` 发布名为 `group.app.rightkit.mac.command` 的本应用专用 XPC 服务。服务名以 App Group 标识符为前缀，沙盒里的扩展可以直接查找。消息包含 schema 版本、请求 ID、发出时间、动作、目标 URL 列表和可选参数。
+普通 App 进程不能自己发布带名字的 XPC 服务，只有 launchd 管理的任务可以。因此由主程序包内的 `RightKitAgent` 通过 LaunchAgent 的 `MachServices` 发布名为「App Group 加 `.command`」的本应用专用 XPC 服务。服务名是 App Group 的直接子名，沙盒里的扩展和主程序可以直接查找。agent 按需启动，launchd 只在有人查找这个服务时才运行它，不在登录时自动运行。消息包含 schema 版本、请求 ID、发出时间、动作、目标 URL 列表和可选参数。
 
 - 主程序每次启动都注册 agent（已注册时不重复），然后连接 agent，交出一个匿名 `NSXPCListener` 的 endpoint。agent 把扩展的请求原样转交这个 endpoint。
 - 主程序没有交出 endpoint 时，agent 用 `NSWorkspace` 启动主程序，最多等 3 秒。
-- agent 的监听用 `setConnectionCodeSigningRequirement` 只接受签名标识为 `app.rightkit.mac.finder` 或 `app.rightkit.mac`、且开发团队与 agent 自身一致的进程；主程序的匿名监听只接受 `app.rightkit.mac.agent`。团队标识从自身签名读取，不写死。验证失败立即断开。
+- agent 的监听用 `setConnectionCodeSigningRequirement` 只接受签名标识为本渠道的扩展或主程序、且开发团队与 agent 自身一致的进程；主程序的匿名监听只接受本渠道的 agent。团队标识从自身签名读取，不写死。验证失败立即断开。
 - XPC 方法只接收一个编码后的请求信封和一个结果回复。先检查信封大小、版本和字段类型，再解码 URL；不要把不受信任的数据直接当作路径使用。
 - 请求 ID 重复时忽略后到的一条。
 - 超过 30 秒的请求拒绝执行。
@@ -77,7 +110,8 @@
 
 ## 系统集成
 
-- 登录项使用 `SMAppService.mainApp`。
+- 登录项使用 `SMAppService.mainApp`，只在用户打开「登录时启动」后注册（`F-005`，商店审核指南 2.4.5(iii)）。
+- 重启访达：`NSRunningApplication.terminate()` 让访达正常退出，它通过 Apple Event 完成，所以需要只针对 `com.apple.finder` 的 Apple Events 临时例外和 `NSAppleEventsUsageDescription`。等访达进程结束后，用 `NSWorkspace.openApplication` 按 bundle ID 重新打开访达。`terminate()` 返回失败或几秒内访达没有退出，按 `F-001` 提示。沙盒会拦截 `forceTerminate()` 发出的信号，所以不再使用它。
 - 扩展状态使用 `FIFinderSyncController.isExtensionEnabled`。
 - 打开扩展设置使用 `FIFinderSyncController.showExtensionManagementInterface()`。
 - 文本服务注册 Google 翻译、百度翻译和生成二维码，输入类型是字符串。
@@ -85,10 +119,24 @@
 
 ## 发布
 
-在官网直接分发，不上 Mac App Store。用 Developer ID Application 签名，开启强化运行时，经公证后钉票，打成 DMG。`make release` 执行整个流程（`scripts/release/release.sh`），`make release-unsigned` 跳过公证，只用来检查签名。
+两个渠道都从同一次提交构建，版本号相同。
 
-- 导出方式 `developer-id`，自动签名。App Group 用 `group.` 前缀，所以主程序和扩展必须带 Developer ID 描述文件，并由描述文件授权这个 App Group；`scripts/release/check_signature.sh` 会检查这一点。
+官网版：
+
+- 用 Developer ID Application 签名，开启强化运行时，经公证后钉票，打成 DMG，上传到 GitHub 仓库 `AquaHydro/rightkit` 的 Release，标签是 `v` 加版本号。官网的下载按钮指向最新 Release。`make release` 执行签名到打包的流程（`scripts/release/release.sh`），`make release-unsigned` 跳过公证，只用来检查签名。
+- 导出方式 `developer-id`，自动签名。`scripts/release/check_signature.sh` 检查三个 target 都开了沙盒、entitlements 与上文一致。
 - 公证凭据保存在钥匙串的 notarytool 配置 `RightKit` 里，也可以用 `NOTARY_PROFILE` 换成别的名字。App 专用密码、私钥和 API key 都不进仓库。
+- `F-081` 读取 `https://api.github.com/repos/AquaHydro/rightkit/releases/latest`。发 Release 时必须是正式版本、标签格式正确，否则检查更新会误判。
+
+商店版：
+
+- 使用编译条件 `APP_STORE` 和商店版标识构建，导出方式 `app-store-connect`，用 Apple Distribution 签名，上传到 App Store Connect。由 `make release-appstore` 执行。
+- 二进制里不能有检查更新的代码、GitHub 链接和网络权限。检查脚本要确认这一点。
+- 商店版收费，官网版免费。商店版的应用内文案和链接都不提官网版或免费下载。
+- 送审说明要写清：为什么需要用户授权文件夹；为什么需要控制访达的 Apple Events 例外（只用来在用户确认后重启访达，让扩展生效）；怎样在系统设置里打开访达扩展。
+
+签名变化：
+
 - 后台项目数据库会记下 agent 注册时的签名约束。换了签名以后，比如从开发签名换到 Developer ID，launchd 会以 `Launch Constraint Violation` 拒绝启动 agent。所以主程序在签到失败或 5 秒内没有签到成功时，先等注销完成，再重新注册一次，然后重新签到。
 
 ## 构建与验证入口

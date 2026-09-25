@@ -25,7 +25,7 @@
 
 - 不要修改、覆盖、重新签名或替换 `/Applications/RightKit.app`。
 - 不要读写已经安装的 RightKit 的配置、模板、常用目录和开关。
-- 本仓库的应用使用 `app.rightkit.mac`，扩展使用 `app.rightkit.mac.finder`。
+- 本仓库的官网版应用使用 `app.rightkit.mac`，扩展使用 `app.rightkit.mac.finder`；商店版应用使用 `app.rightkit.mac.store`，扩展使用 `app.rightkit.mac.store.finder`。
 - 测试只用临时目录和测试自己创建的文件。永久删除只能删除这些文件。
 
 ## 文档
