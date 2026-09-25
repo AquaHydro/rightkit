@@ -21,15 +21,18 @@ RightKit 是 macOS 访达的右键菜单工具。用户用它新建文件、把�
 需要 Xcode 27 和 XcodeGen。工程由 `project.yml` 生成，生成的 `RightKit.xcodeproj` 也提交在仓库里。
 
 ```sh
-make verify   # 生成工程、运行全部测试和文档、文案、模板、Intent 检查
+make verify   # 生成工程、运行全部测试、构建两个渠道，再做文档、文案、模板、Intent 检查
 make run      # 构建 Debug 版并启动（跳过登录项注册）
 make release  # Developer ID 签名、公证并打 DMG，产物在 .build/release/
-# 计划中（docs/roadmap.md 第 7 段）：make release-appstore 构建商店版并上传 App Store Connect
+make release-appstore  # 商店版：归档、导出 .pkg 并检查签名和二进制，产物在 .build/release-appstore/
+make upload-appstore   # 同上，检查通过后上传 App Store Connect
 ```
 
 首次运行后，在「系统设置 → 通用 → 登录项与扩展」里打开 RightKit 的访达扩展。
 
 ## 文档维护
+
+需要人工配合或真机完成的事项记在 [TASK.md](TASK.md)。
 
 功能编号 `F-xxx` 和验收编号 `V-xxx` 一经分配就不要复用。废弃的功能保留编号，并写明不实现。
 
