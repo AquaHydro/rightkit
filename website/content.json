@@ -432,7 +432,7 @@
         }
       ],
       "more": "没找到答案？",
-      "moreLink": "在 GitHub 上提问",
+      "moreLink": "发邮件给我们",
       "imgAlt": "Riko 坐在文件夹上思考，小白鼠举着问号牌"
     },
     "footer": {
@@ -605,7 +605,7 @@
         {
           "title": "变更和联系",
           "body": [
-            "本政策如有变更，会更新这个页面和上面的日期。有任何问题，请在 GitHub 上提交 Issue。"
+            "本政策如有变更，会更新这个页面和上面的日期。有任何问题，请发邮件到 contact@yiliang.me。"
           ]
         }
       ]
@@ -1044,7 +1044,7 @@
         }
       ],
       "more": "Didn't find your answer?",
-      "moreLink": "Ask on GitHub",
+      "moreLink": "Email us",
       "imgAlt": "Riko sits on a folder thinking while the mouse holds up a question mark"
     },
     "footer": {
@@ -1217,7 +1217,7 @@
         {
           "title": "Changes and contact",
           "body": [
-            "If this policy changes, this page and the date above will be updated. For any questions, open an issue on GitHub."
+            "If this policy changes, this page and the date above will be updated. For any questions, email contact@yiliang.me."
           ]
         }
       ]

@@ -32,8 +32,8 @@ struct AboutPane: View {
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
             #if APP_STORE
-            // 两个渠道共用已有的反馈入口，不提供外部更新入口。
-            Link(L("反馈问题"), destination: URL(string: "https://github.com/AquaHydro/rightkit/issues")!)
+            // 仓库私有期间，商店版反馈走邮件；不提供外部更新入口。
+            Link(L("反馈问题"), destination: URL(string: "mailto:contact@yiliang.me")!)
                 .font(.callout)
             #else
             HStack(spacing: 16) {

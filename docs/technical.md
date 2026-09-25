@@ -135,7 +135,7 @@
 商店版：
 
 - 使用编译条件 `APP_STORE` 和商店版标识构建，导出方式 `app-store-connect`，用 Apple Distribution 签名，导出 `.pkg`。`make release-appstore` 执行归档、导出和检查（`scripts/release/release_appstore.sh`），`make upload-appstore` 在检查通过后上传 App Store Connect，使用 Xcode 里登录的账号。
-- 二进制里不能有检查更新的代码、GitHub API 或 Release 下载入口和网络权限。反馈按钮可通过浏览器打开项目 GitHub Issues。`scripts/release/check_signature.sh <app> appstore` 检查这一点，并和官网版共用标识、沙盒、App Group 和 agent 配置的检查。
+- 二进制里不能有检查更新的代码、GitHub API 或 Release 下载入口和网络权限。反馈按钮打开邮件 `contact@yiliang.me`。`scripts/release/check_signature.sh <app> appstore` 检查这一点，并和官网版共用标识、沙盒、App Group 和 agent 配置的检查。
 - 主程序和扩展各带一份 `PrivacyInfo.xcprivacy`：不跟踪、不收集数据；UserDefaults 用于本应用自己的偏好（`CA92.1`），主程序读取用户选中文件的时间戳用于哈希一致性检查（`3B52.1`）。用到新的需声明原因的 API 时同步更新。
 - 商店版收费，官网版免费。商店版的应用内文案和链接都不提官网版或免费下载。
 - 送审说明要写清：为什么需要用户授权文件夹；为什么需要控制访达的 Apple Events 例外（只用来在用户确认后重启访达，让扩展生效）；怎样在系统设置里打开访达扩展。
