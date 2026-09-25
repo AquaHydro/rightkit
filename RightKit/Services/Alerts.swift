@@ -120,6 +120,6 @@ extension Alerts {
     /// F-080：要读写的项目不在任何已授权文件夹内。
     static func showUnauthorized(_ url: URL) {
         show(L("RightKit 无权访问“%@”。", FileManager.default.displayName(atPath: url.path(percentEncoded: false))),
-             informative: L("请在设置里把它所在的文件夹加入监视目录。"))
+             informative: L("请在设置里把它所在的文件夹加入监视目录；如果那个文件夹显示「需要重新授权。」，点「重新授权…」。"))
     }
 }

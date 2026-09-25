@@ -105,12 +105,26 @@ final class AppModel {
     }
 
     /// F-080「重新授权…」：保留原条目的标识和开关，换成新选中的文件夹和 bookmark。
+    /// 选中的文件夹已在列表里时，去掉旧的那一行，不留重复。
     func reauthorize(_ entry: FolderEntry, in list: WritableKeyPath<Settings, [FolderEntry]>, with url: URL) {
         guard let index = settings[keyPath: list].firstIndex(where: { $0.id == entry.id }) else { return }
         var fresh = authorizedEntry(for: url)
         fresh.id = entry.id
         fresh.enabled = entry.enabled
-        settings[keyPath: list][index] = fresh
+        var entries = settings[keyPath: list]
+        entries[index] = fresh
+        entries.removeAll { $0.id != entry.id && PathRules.standardized($0.path) == fresh.path }
+        settings[keyPath: list] = entries
+    }
+
+    /// F-080 欢迎窗口「更改…」：替换刚授权的监视目录，默认的常用目录和发送到跟着新目录重新补。
+    func changeWelcomeFolder(_ entry: FolderEntry, to url: URL) {
+        reauthorize(entry, in: \.monitoredFolders, with: url)
+        var copy = settings
+        copy.redoStandardFolders(home: FolderStore.home) { FileManager.default.fileExists(atPath: $0) }
+        copy.favorites = activateNew(copy.favorites)
+        copy.sendTo = activateNew(copy.sendTo)
+        settings = copy
     }
 
     private func authorizedEntry(for url: URL) -> FolderEntry {

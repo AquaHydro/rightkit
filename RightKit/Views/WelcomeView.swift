@@ -79,7 +79,7 @@ struct WelcomeView: View {
         guard let url = Alerts.chooseFolder(prompt: L("授权"), startingAt: start) else { return }
         guard PathRules.canMonitor(url.path(percentEncoded: false), home: FolderStore.home) else { return rejected = true }
         if let authorized {
-            model.reauthorize(authorized, in: \.monitoredFolders, with: url)
+            model.changeWelcomeFolder(authorized, to: url)
         } else {
             model.addMonitoredFolder(url)
             let path = PathRules.standardized(url.path(percentEncoded: false))

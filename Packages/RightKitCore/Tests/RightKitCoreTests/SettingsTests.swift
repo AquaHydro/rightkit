@@ -58,6 +58,20 @@ import Testing
         #expect(!s.standardFoldersAdded && s.favorites.isEmpty, "需要重新授权的目录不算")
     }
 
+    @Test func changingWelcomeFolderRedoesStandardFolders() {
+        var s = Settings.afterAuthorizing(home: home) { _ in true }
+        s.favorites.append(FolderEntry(path: "/Volumes/Work"))
+        s.monitoredFolders = [FolderEntry(path: "\(home)/Documents")]
+        s.redoStandardFolders(home: home) { _ in true }
+        #expect(s.favorites.map(\.path) == ["\(home)/Documents", "/Volumes/Work"], "用户自己加的保留，不在新目录内的默认文件夹去掉")
+        #expect(s.sendTo.map(\.path) == ["\(home)/Documents"])
+        #expect(s.standardFoldersAdded)
+
+        s.monitoredFolders = [FolderEntry(path: home)]
+        s.redoStandardFolders(home: home) { _ in true }
+        #expect(s.favorites.map(\.path) == ["\(home)/Documents", "/Volumes/Work", "\(home)/Downloads", "\(home)/Desktop"], "已有的不重复")
+    }
+
     @Test func roundTripsThroughJSON() throws {
         var s = Settings.afterAuthorizing(home: home) { _ in true }
         s.newItems.append(NewItemEntry(kind: .custom(CustomTemplate(name: "周报", storedFileName: "a.key", fileExtension: "key")), enabled: true))

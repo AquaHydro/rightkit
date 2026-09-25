@@ -2849,18 +2849,18 @@
         }
       }
     },
-    "请在设置里把它所在的文件夹加入监视目录。": {
+    "请在设置里把它所在的文件夹加入监视目录；如果那个文件夹显示「需要重新授权。」，点「重新授权…」。": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "In Settings, add the folder that contains it to Monitored Folders."
+            "value": "In Settings, add the folder that contains it to Monitored Folders. If that folder shows “Needs authorization again.”, click “Authorize Again…”."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "请在设置里把它所在的文件夹加入监视目录。"
+            "value": "请在设置里把它所在的文件夹加入监视目录；如果那个文件夹显示「需要重新授权。」，点「重新授权…」。"
           }
         }
       }

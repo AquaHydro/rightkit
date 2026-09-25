@@ -178,12 +178,26 @@ public struct Settings: Codable, Equatable, Sendable {
     public mutating func addStandardFoldersIfNeeded(home: String, exists: (String) -> Bool) {
         guard !standardFoldersAdded, !activeMonitoredPaths.isEmpty else { return }
         let roots = activeMonitoredPaths
-        let paths = ["Downloads", "Desktop", "Documents"]
-            .map { (home as NSString).appendingPathComponent($0) }
+        let paths = Self.standardFolderPaths(home: home)
             .filter { PathRules.isInsideAny($0, of: roots) && exists($0) }
         for path in paths where !favorites.contains(where: { $0.path == path }) { favorites.append(FolderEntry(path: path)) }
         for path in paths where !sendTo.contains(where: { $0.path == path }) { sendTo.append(FolderEntry(path: path)) }
         standardFoldersAdded = true
+    }
+
+    /// F-080：欢迎窗口里「更改…」换掉刚授权的文件夹后调用。去掉已不在可用监视目录内的默认文件夹，再按新的监视目录补一次。
+    public mutating func redoStandardFolders(home: String, exists: (String) -> Bool) {
+        let roots = activeMonitoredPaths
+        let standard = Set(Self.standardFolderPaths(home: home))
+        let outside: (FolderEntry) -> Bool = { standard.contains($0.path) && !PathRules.isInsideAny($0.path, of: roots) }
+        favorites.removeAll(where: outside)
+        sendTo.removeAll(where: outside)
+        standardFoldersAdded = false
+        addStandardFoldersIfNeeded(home: home, exists: exists)
+    }
+
+    private static func standardFolderPaths(home: String) -> [String] {
+        ["Downloads", "Desktop", "Documents"].map { (home as NSString).appendingPathComponent($0) }
     }
 
     /// 全新设置在用户授权主目录之后的样子。测试和性能脚本用它得到常见的起点。
