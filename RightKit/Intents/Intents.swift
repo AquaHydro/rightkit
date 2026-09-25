@@ -19,6 +19,15 @@ private func currentSettings() -> Settings {
 
 private func urls(_ files: [IntentFile]) -> [URL] { files.compactMap(\.fileURL) }
 
+// 快捷指令传来的文件可能是 security-scoped URL，下面各动作读写前先开始访问，用完结束（F-080）。
+
+/// F-080：要写到这个文件夹里，它必须已授权，或者正是快捷指令传进来的那个文件夹。
+private func requireWritable(_ folder: URL, passedIn: Bool = false) throws {
+    guard passedIn || FolderAccess.shared.isAuthorized(folder) else {
+        throw IntentFailure(message: L("RightKit 无权访问“%@”。", FileManager.default.displayName(atPath: folder.path(percentEncoded: false))))
+    }
+}
+
 // MARK: 拷贝路径、拷贝名称
 
 struct CopyPathIntent: AppIntent {
@@ -88,9 +97,13 @@ struct NewFileIntent: AppIntent {
     func perform() async throws -> some IntentResult & ReturnsValue<IntentFile> {
         let settings = currentSettings()
         guard let item = settings.newItems.first(where: { $0.id == type.id }) else { throw IntentFailure(message: L("无法创建文件。")) }
-        let target = folder?.fileURL ?? URL.desktopDirectory
+        let passedIn = folder?.fileURL
+        let target = passedIn ?? FolderStore.desktop
         let trimmed = name?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         let fileName = trimmed.isEmpty ? Naming.untitled(fileExtension: item.fileExtension) : Naming.ensuringExtension(trimmed, item.fileExtension)
+        let started = passedIn?.startAccessingSecurityScopedResource() == true
+        defer { if started { passedIn?.stopAccessingSecurityScopedResource() } }
+        try requireWritable(target, passedIn: started)
         do {
             let created: URL
             switch item.kind {
@@ -122,6 +135,8 @@ struct FileHashIntent: AppIntent {
 
     func perform() async throws -> some IntentResult & ReturnsValue<String> {
         guard let url = file.fileURL else { throw IntentFailure(message: L("无法读取文件。")) }
+        let started = url.startAccessingSecurityScopedResource()
+        defer { if started { url.stopAccessingSecurityScopedResource() } }
         do {
             let hashes = try Tools.hashFile(url)
             let text = FileHashes.Algorithm.allCases.map { "\($0.rawValue): \(hashes.value($0))" }.joined(separator: "\n")
@@ -184,8 +199,11 @@ struct IOSIconSetIntent: AppIntent {
     }
 }
 
-/// 逐张处理；部分失败时保留成功的结果，全部失败才报错。
+/// 逐张处理；部分失败时保留成功的结果，全部失败才报错。输出写在原图旁边，原图所在文件夹必须已授权（F-080）。
 private func forEachImage(_ images: [URL], _ body: (URL) throws -> URL) throws -> [URL] {
+    for image in images { try requireWritable(image.deletingLastPathComponent()) }
+    let started = images.filter { $0.startAccessingSecurityScopedResource() }
+    defer { started.forEach { $0.stopAccessingSecurityScopedResource() } }
     var outputs: [URL] = []
     var lastFailure: ImageTools.Failure?
     for image in images {
@@ -264,7 +282,10 @@ struct OpenInAppIntent: AppIntent {
         let isFolder: (URL) -> Bool = { url in
             (try? url.resourceValues(forKeys: [.isDirectoryKey, .isPackageKey])).map { $0.isDirectory == true && $0.isPackage != true } ?? false
         }
-        let targets = OpenTargets.resolve(role: tool.role, folder: nil, items: urls(items), isFolder: isFolder)
+        let files = urls(items)
+        let targets = OpenTargets.resolve(role: tool.role, folder: nil, items: files, isFolder: isFolder)
+        let started = files.filter { $0.startAccessingSecurityScopedResource() }
+        defer { started.forEach { $0.stopAccessingSecurityScopedResource() } }
         do {
             _ = try await NSWorkspace.shared.open(targets, withApplicationAt: appURL, configuration: NSWorkspace.OpenConfiguration())
         } catch {

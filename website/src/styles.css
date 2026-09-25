@@ -437,3 +437,12 @@ h3 { font-size: 17px; line-height: 1.35; font-weight: 700; }
   .btn { height: 46px; }
   .actions .btn { flex: 1 1 auto; }
 }
+
+/* Privacy policy */
+.legal { min-height: 100vh; padding-top: calc(64px + clamp(48px, 7vw, 96px)); }
+.legal-body { max-width: 680px; }
+.legal-body h1 { font: 900 clamp(32px, 5vw, 44px)/1.15 var(--font-display); letter-spacing: -0.01em; }
+.legal-body h2 { margin-top: 40px; font: 800 20px/1.3 var(--font-display); }
+.legal-body p { margin-top: 12px; color: var(--on-paper-2); }
+.legal-body .legal-updated { margin-top: 8px; font: 500 13px/1.4 var(--font-mono); }
+.legal-body a { color: var(--coral-ink); font-weight: 600; }

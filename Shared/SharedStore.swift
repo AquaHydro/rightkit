@@ -4,7 +4,7 @@ import RightKitCore
 
 /// App Group 里的共享文件：设置、待粘贴列表和扩展心跳。主程序写设置，扩展只读。
 enum SharedStore {
-    static let log = Logger(subsystem: "app.rightkit.mac", category: "store")
+    static let log = Logger(subsystem: ServiceNames.appBundleID, category: "store")
 
     /// 测试用 `RIGHTKIT_SETTINGS_DIR` 指向临时目录，避免碰到真实设置。
     static let directory: URL = {

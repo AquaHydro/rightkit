@@ -14,14 +14,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private lazy var router = CommandRouter(model: model, windows: windows, progress: progress)
     private var server: CommandServer?
     private var statusTimer: Timer?
-    /// 由登录项或 agent 在后台拉起时不主动开窗口。
+    /// 由登录项、agent 或扩展经网址拉起时不主动开设置窗口。
     private var launchedInBackground = false
+    /// 扩展连不上 agent 时经网址打开主程序，启动后打开「通用」页。
+    private var showsAgentUnavailable = false
+    private var finishedLaunching = false
 
     func applicationWillFinishLaunching(_ notification: Notification) {
-        let arguments = ProcessInfo.processInfo.arguments
         let event = NSAppleEventManager.shared().currentAppleEvent
         let asLoginItem = event?.paramDescriptor(forKeyword: keyAEPropData)?.enumCodeValue == keyAELaunchedAsLogInItem
-        launchedInBackground = asLoginItem || arguments.contains("--background")
+        launchedInBackground = asLoginItem
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
@@ -41,9 +43,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             MainActor.assumeIsolated { [weak self] in self?.refreshStatus() }
         }
 
-        if ProcessInfo.processInfo.arguments.contains("--agent-unavailable") {
-            UserDefaults.standard.set(SettingsTab.general.rawValue, forKey: "settingsTab")
-            windows.openSettings()
+        finishedLaunching = true
+        #if !APP_STORE
+        UpdateChecker.shared.checkAutomaticallyIfDue()
+        #endif
+        if showsAgentUnavailable {
+            openGeneralSettings()
         } else if !model.settings.welcomeShown {
             windows.open(id: WindowID.welcome)
         } else if !launchedInBackground {
@@ -57,9 +62,25 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         return false
     }
 
-    /// `rightkit://activate` 只用来让系统把主程序带到前台，不带任何命令。
+    /// 本渠道网址只表达启动或激活的原因，不带任何命令（`AppURLAction`）。
+    /// 由网址拉起时，系统在 `applicationDidFinishLaunching` 之前调用这里。
     func application(_ application: NSApplication, open urls: [URL]) {
-        NSApp.activate()
+        for action in urls.compactMap(ServiceNames.current.action(of:)) {
+            switch action {
+            case .activate:
+                NSApp.activate()
+                if !finishedLaunching { launchedInBackground = true }
+            case .background:
+                if !finishedLaunching { launchedInBackground = true }
+            case .agentUnavailable:
+                if finishedLaunching { openGeneralSettings() } else { showsAgentUnavailable = true }
+            }
+        }
+    }
+
+    private func openGeneralSettings() {
+        UserDefaults.standard.set(SettingsTab.general.rawValue, forKey: "settingsTab")
+        windows.openSettings()
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool { false }

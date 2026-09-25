@@ -30,11 +30,14 @@ public struct FeatureGroups: Codable, Equatable, Sendable {
 }
 
 /// 用户选择的文件夹。`path` 是上次解析 bookmark 得到的路径，扩展只读它。
+/// `bookmark` 是 security-scoped bookmark，主程序靠它在沙盒里访问这个文件夹（F-080）。
 public struct FolderEntry: Codable, Equatable, Identifiable, Sendable {
     public var id = UUID()
     public var path: String
     public var bookmark: Data?
     public var enabled = true
+    /// F-080：文件夹还在，但 bookmark 解析或开始访问失败。扩展不注册这样的监视目录。
+    public var needsAuthorization = false
 
     public init(path: String, bookmark: Data? = nil, enabled: Bool = true) {
         self.path = path
@@ -132,12 +135,13 @@ public struct ToolboxEntry: Codable, Equatable, Identifiable, Sendable {
 }
 
 public struct Settings: Codable, Equatable, Sendable {
-    public static let currentSchemaVersion = 1
+    /// 2：沙盒版（F-080），新增授权状态和 `standardFoldersAdded`，登录时启动默认关。
+    public static let currentSchemaVersion = 2
 
     public var schemaVersion = Settings.currentSchemaVersion
     public var theme = Theme.system
     public var language = AppLanguage.system
-    public var launchAtLogin = true
+    public var launchAtLogin = false
     public var showMenuBarIcon = true
     public var showMenuIcons = true
     public var confirmPermanentDelete = true
@@ -152,6 +156,8 @@ public struct Settings: Codable, Equatable, Sendable {
     public var sendTo: [FolderEntry] = []
     public var toolbox: [ToolboxEntry] = Settings.defaultToolbox
     public var welcomeShown = false
+    /// F-080：第一次授权后已经补过默认的常用目录和发送到。
+    public var standardFoldersAdded = false
     public var lastImageFormat = ImageFormat.png
 
     public init() {}
@@ -162,15 +168,43 @@ public struct Settings: Codable, Equatable, Sendable {
 
     public static let defaultToolbox: [ToolboxEntry] = ToolboxCommand.allCases.map { ToolboxEntry(command: $0) }
 
-    /// 首次启动的默认值。`exists` 用来跳过不存在的下载、桌面、文稿。
-    public static func makeDefault(home: String, exists: (String) -> Bool) -> Settings {
+    /// 访达扩展实际注册的监视目录：排除需要重新授权的条目（F-080）。
+    public var activeMonitoredPaths: [String] {
+        monitoredFolders.filter { !$0.needsAuthorization }.map(\.path)
+    }
+
+    /// F-080：第一次授权后调用。常用目录和发送到各补一份下载、桌面、文稿，
+    /// 只取位于可用监视目录内、且存在的那些，已有的不重复。之后不再补。
+    public mutating func addStandardFoldersIfNeeded(home: String, exists: (String) -> Bool) {
+        guard !standardFoldersAdded, !activeMonitoredPaths.isEmpty else { return }
+        let roots = activeMonitoredPaths
+        let paths = Self.standardFolderPaths(home: home)
+            .filter { PathRules.isInsideAny($0, of: roots) && exists($0) }
+        for path in paths where !favorites.contains(where: { $0.path == path }) { favorites.append(FolderEntry(path: path)) }
+        for path in paths where !sendTo.contains(where: { $0.path == path }) { sendTo.append(FolderEntry(path: path)) }
+        standardFoldersAdded = true
+    }
+
+    /// F-080：欢迎窗口里「更改…」换掉刚授权的文件夹后调用。去掉已不在可用监视目录内的默认文件夹，再按新的监视目录补一次。
+    public mutating func redoStandardFolders(home: String, exists: (String) -> Bool) {
+        let roots = activeMonitoredPaths
+        let standard = Set(Self.standardFolderPaths(home: home))
+        let outside: (FolderEntry) -> Bool = { standard.contains($0.path) && !PathRules.isInsideAny($0.path, of: roots) }
+        favorites.removeAll(where: outside)
+        sendTo.removeAll(where: outside)
+        standardFoldersAdded = false
+        addStandardFoldersIfNeeded(home: home, exists: exists)
+    }
+
+    private static func standardFolderPaths(home: String) -> [String] {
+        ["Downloads", "Desktop", "Documents"].map { (home as NSString).appendingPathComponent($0) }
+    }
+
+    /// 全新设置在用户授权主目录之后的样子。测试和性能脚本用它得到常见的起点。
+    public static func afterAuthorizing(home: String, exists: (String) -> Bool) -> Settings {
         var settings = Settings()
         settings.monitoredFolders = [FolderEntry(path: home)]
-        let standard = ["Downloads", "Desktop", "Documents"]
-            .map { (home as NSString).appendingPathComponent($0) }
-            .filter(exists)
-        settings.favorites = standard.map { FolderEntry(path: $0) }
-        settings.sendTo = standard.map { FolderEntry(path: $0) }
+        settings.addStandardFoldersIfNeeded(home: home, exists: exists)
         return settings
     }
 

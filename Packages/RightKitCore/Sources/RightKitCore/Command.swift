@@ -96,14 +96,77 @@ public struct RequestDeduplicator: Sendable {
     }
 }
 
+/// 一个发布渠道的全部标识（technical.md 发布渠道与标识）。只由主程序 bundle ID、App Group 和网址 scheme 推出，不写死。
+public struct ChannelIdentifiers: Equatable, Sendable {
+    public static let appBundleIDKey = "RKAppBundleID"
+    public static let appGroupKey = "RKAppGroup"
+    public static let urlSchemeKey = "RKURLScheme"
+
+    public let appBundleID: String
+    public let appGroup: String
+    public let urlScheme: String
+
+    public init(appBundleID: String, appGroup: String, urlScheme: String) {
+        self.appBundleID = appBundleID
+        self.appGroup = appGroup
+        self.urlScheme = urlScheme
+    }
+
+    /// 从 Info.plist 读取。缺少任何一项都返回 nil。
+    public init?(infoDictionary info: [String: Any]) {
+        guard let app = info[Self.appBundleIDKey] as? String, !app.isEmpty,
+              let group = info[Self.appGroupKey] as? String, !group.isEmpty,
+              let scheme = info[Self.urlSchemeKey] as? String, !scheme.isEmpty
+        else { return nil }
+        self.init(appBundleID: app, appGroup: group, urlScheme: scheme)
+    }
+
+    public var extensionBundleID: String { appBundleID + ".finder" }
+    public var agentBundleID: String { appBundleID + ".agent" }
+    /// agent 的 launchd 配置在主程序包 `Contents/Library/LaunchAgents` 里的文件名。
+    public var agentPlist: String { agentBundleID + ".plist" }
+    /// XPC 服务名必须是 App Group 的直接子名，沙盒里的扩展才能查找。
+    public var command: String { appGroup + ".command" }
+    public var settingsChanged: String { appGroup + ".settings" }
+    /// 主程序专用网址。只表达启动或激活的原因，不带命令或路径。
+    public func url(for action: AppURLAction) -> URL? { URL(string: urlScheme + "://" + action.rawValue) }
+
+    /// 本渠道 scheme 的网址对应的动作；其他网址返回 nil。
+    public func action(of url: URL) -> AppURLAction? {
+        guard url.scheme?.lowercased() == urlScheme.lowercased(), let host = url.host() else { return nil }
+        return AppURLAction(rawValue: host.lowercased())
+    }
+
+    public var activationURL: URL? { url(for: .activate) }
+}
+
+/// 扩展和 agent 打开主程序时用的网址动作（technical.md 通信）。沙盒进程启动其他应用时，系统会丢掉启动参数，所以改用网址。
+public enum AppURLAction: String, CaseIterable, Sendable {
+    /// 让系统把主程序带到前台。
+    case activate
+    /// agent 在后台拉起主程序，不开窗口。
+    case background
+    /// 扩展连不上 agent，主程序打开设置的「通用」页。
+    case agentUnavailable = "agent-unavailable"
+}
+
+/// 当前进程所属渠道的标识。主程序、扩展和 agent 的 Info.plist 都带这三项。
 public enum ServiceNames {
-    public static let appGroup = "group.app.rightkit.mac"
-    public static let command = "group.app.rightkit.mac.command"
-    public static let settingsChanged = "group.app.rightkit.mac.settings"
-    public static let appBundleID = "app.rightkit.mac"
-    public static let extensionBundleID = "app.rightkit.mac.finder"
-    public static let agentBundleID = "app.rightkit.mac.agent"
-    public static let agentPlist = "app.rightkit.mac.agent.plist"
+    public static let current: ChannelIdentifiers = {
+        guard let identifiers = ChannelIdentifiers(infoDictionary: Bundle.main.infoDictionary ?? [:]) else {
+            fatalError("Info.plist lacks \(ChannelIdentifiers.appBundleIDKey), \(ChannelIdentifiers.appGroupKey) or \(ChannelIdentifiers.urlSchemeKey)")
+        }
+        return identifiers
+    }()
+
+    public static var appGroup: String { current.appGroup }
+    public static var command: String { current.command }
+    public static var settingsChanged: String { current.settingsChanged }
+    public static var appBundleID: String { current.appBundleID }
+    public static var extensionBundleID: String { current.extensionBundleID }
+    public static var agentBundleID: String { current.agentBundleID }
+    public static var agentPlist: String { current.agentPlist }
+    public static var activationURL: URL? { current.activationURL }
 }
 
 /// agent 对外的 XPC 接口。扩展调用 `submit`，主程序调用 `checkIn`。

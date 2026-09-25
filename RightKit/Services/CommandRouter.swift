@@ -33,6 +33,10 @@ final class CommandRouter {
     private func perform(_ request: ValidatedRequest) async {
         let items = request.items
         let action = request.command.action
+        if let denied = FolderAccess.shared.firstUnauthorized(locations(touchedBy: request)) {
+            log.error("Unauthorized \(action.rawValue, privacy: .public)")
+            return Alerts.showUnauthorized(denied)
+        }
         switch action {
         case .openSettings:
             windows.openSettings()
@@ -274,6 +278,29 @@ final class CommandRouter {
     }
 
     // MARK: 判断
+
+    /// F-080：命令要读写的位置。只拷贝路径、名称或在访达中打开文件夹的命令不碰文件内容，不检查。
+    /// 从文件夹选择面板临时选中的目标在选中时已登记授权。
+    private func locations(touchedBy request: ValidatedRequest) -> [URL] {
+        switch request.command.action {
+        case .openSettings, .copyCurrentPath, .copyPath, .copyName, .openFolder, .cut:
+            return []
+        case .newFile:
+            return destinationFolder(request).map { [$0] } ?? []
+        case .paste:
+            return model.pendingPaste.map { URL(filePath: $0) } + (destinationFolder(request).map { [$0] } ?? [])
+        case .openIn:
+            return request.items.isEmpty ? (request.folder.map { [$0] } ?? []) : request.items
+        case .copyTo, .moveTo:
+            let target = folderEntry(request.command.argument, in: settings.sendTo)
+                .map { URL(filePath: $0.path, directoryHint: .isDirectory) }
+            return request.items + (target.map { [$0] } ?? [])
+        case .aliasToDesktop:
+            return request.items + [FolderStore.desktop]
+        default:
+            return request.items
+        }
+    }
 
     private func folderEntry(_ id: String?, in entries: [FolderEntry]) -> FolderEntry? {
         guard let entry = entries.first(where: { $0.id.uuidString == id }) else { return nil }

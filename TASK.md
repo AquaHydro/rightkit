@@ -1,0 +1,44 @@
+# 待办
+
+需要人工配合、或者只能在真机上完成的事项。完成后勾选；整组做完就删掉那一节。编号含义见[功能规格](docs/features.md)和[验收](docs/verification.md)。
+
+## 上架前必须完成
+
+- [ ] 官网暂用 `https://rightkit.yiliang.app`（Cloudflare Pages 项目 `rightkit`，`make website-deploy` 部署）。App Store Connect 的隐私政策网址填 `https://rightkit.yiliang.app/privacy/`，技术支持网址填官网或 GitHub Issues。以后换正式域名时改 `website/site.json` 的 `url` 并重新部署。
+- [ ] 在 App Store Connect 新建 App（要填的文案、隐私问卷、分级和截图方案见 [App Store 上架资料](docs/app-store.md)，价格和联系人信息待你定）：bundle ID `app.rightkit.mac.store`，类别「工具」，定价，中英文简介、关键词和截图，隐私问卷（不收集数据；翻译只是打开浏览器），年龄分级。
+- [ ] 送审备注（英文草稿已写在 [App Store 上架资料](docs/app-store.md)）：为什么需要授权文件夹；只针对访达的 Apple Events 例外只用于用户确认后重启访达，让扩展生效；怎样在「系统设置 → 通用 → 登录项与扩展」里打开访达扩展；审核人员的演示步骤。
+- [ ] 商店截图：按 [App Store 上架资料](docs/app-store.md) 的「截图」一节，中英文各 5 张，16:10。
+- [ ] 上传商店版：本机 `make upload-appstore`，或推标签后由 Release 工作流上传；确认通过 App Store Connect 的自动校验。
+
+## 自动化发布（GitHub Actions）
+
+- [ ] 在 App Store Connect → 用户和访问 → 集成 → App Store Connect API 新建 key，角色选 Admin（要能创建 Developer ID 描述文件）。下载 `.p8`，记下 Key ID 和 Issuer ID。
+- [ ] 在钥匙串访问里同时选中 Developer ID Application、Apple Distribution、3rd Party Mac Developer Installer 三个证书（连同私钥），导出成一个 `.p12`，设一个密码。
+- [ ] 仓库 Settings → Secrets and variables → Actions 添加：`SIGNING_CERTS_P12_BASE64`（`base64 -i certs.p12 | pbcopy`）、`SIGNING_CERTS_P12_PASSWORD`、`ASC_KEY_P8_BASE64`（`base64 -i AuthKey_XXXX.p8 | pbcopy`）、`ASC_KEY_ID`、`ASC_ISSUER_ID`。
+- [ ] 仓库 Settings → Environments 新建 `app-store`，按需勾选 Required reviewers，这样上传商店前要你点批准。
+- [ ] 确认 PR 上的 CI 通过。`xcode-27` runner 还是公开预览，排队可能较慢。
+- [ ] 第一次发布：改 `project.yml` 的 `MARKETING_VERSION` 和 `CURRENT_PROJECT_VERSION`，合并后推标签（如 `git tag v0.2.0 && git push origin v0.2.0`），看 Release 工作流跑通。
+
+## 真机验收
+
+- [ ] `V-002`：默认值改过（登录时启动、监视目录、常用目录），需要重跑。
+- [ ] `V-004`：欢迎窗口新增了授权行和登录时启动。
+- [ ] `V-006`：重启访达，官网版和商店版各一次，包括拒绝自动化授权的情况。
+- [ ] `V-080`：文件夹授权，包括重启主程序、重新登录后仍能访问，以及授权失效后的「重新授权…」。
+- [ ] `V-081`：发布第一个正式 Release 后，在官网版里确认「有新版本」和「已是最新」两种提示。
+- [ ] `V-082`：两个版本同时安装时设置互不影响。（`make release-unsigned` 和 `make release-appstore` 的签名检查已于 2026-09-25 通过。）
+- [ ] `V-083`：沙盒回归，包括替身、壁纸、文件夹图标、快捷指令、agent 签名校验、后台拉起不开窗口、扩展状态和 `iconutil`。
+- [ ] 在 macOS 26 上跑一遍。验收记录里还没有 26 的环境；做不到的话，考虑把最低系统提到 27。
+
+## 官网版发布
+
+- [ ] 第一个 GitHub Release：由 Release 工作流在推标签时自动创建（见上一节）。标签是 `v` 加三段数字，并且等于 `MARKETING_VERSION`。
+- [ ] 商店版上架后，在官网下载按钮旁放商店链接。
+
+## 已知问题
+
+- [ ] 仓库还是私有：官网的下载、GitHub、更新日志链接和官网版的检查更新都是 404。公开仓库后，把商店版「关于」和官网的反馈入口改回 GitHub Issues（或保留邮件）。
+
+- [ ] 两个版本同时安装时，系统服务（翻译、二维码）的 `NSPortName` 都是 `RightKit`，可能互相冲突。需要真机确认，必要时按渠道区分。
+- [ ] 系统服务的菜单名只写了中文（Info.plist 的 `NSServices`），英文系统下也显示中文。
+- [ ] 扩展读取全局 `AppleInterfaceStyle` 判断深浅色，隐私清单按 `CA92.1` 声明。如果审核对此有疑问，改用其他方式取外观。

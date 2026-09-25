@@ -71,3 +71,15 @@
 ## 2026-09-24 补充验收（用户手动）
 
 用户在本机手动完成了上次标为 `Blocked` 和未覆盖的项目，结果全部通过：`V-001` 的「未启用」和「后台服务已关闭」两种状态、`V-010` 用 Office 打开三个模板、`V-046` 设为壁纸，以及在快捷指令里运行 9 个动作。系统版本与构建和上一次相同。
+
+## 2026-09-25 PR #8 授权恢复与分发入口收敛
+
+基于 PR #8 的 `71a7898` 修复；本记录随修复提交保存。
+
+- `make verify XCODE_FLAGS=CODE_SIGNING_ALLOWED=NO` 通过：核心 58 项、应用逻辑 45 项，共 103 项测试通过；两个渠道 Debug 构建、文档、213 条文案、Office 模板、9 个 Intent 和 diff 检查通过。
+- `FolderStoreTests` 使用自己创建的临时目录，覆盖正常目录、父目录权限为 `000` 时拒绝访问、恢复 `755` 后重新可用、删除目录、普通文件，以及 bookmark 授权失败状态。拒绝访问不会被归为丢失。
+- 视觉检查使用当前源码的 `FolderRow`、`FolderStore` 和设置页共用组件，在独立 SwiftUI 分组表单窗口呈现三种状态。已检查[浅色](evidence/pr8-folder-authorization/light.png)和[深色](evidence/pr8-folder-authorization/dark.png)：授权失败显示恢复按钮，丢失显示丢失提示。此为组件窗口检查，未执行完整 App 的系统授权面板或 Finder 交互。
+- `python3 website/build.py` 通过；解析生成的中英文 HTML，各确认 5 个下载入口指向 GitHub 最新 Release，无旧下载占位地址。
+- 检查商店版 Debug 主程序及 debug dylib：包含 Issues 反馈地址，不包含 GitHub API 或 Release 更新地址。发布签名检查脚本通过 `zsh -n`。
+- 临时面板选择不再加入长期授权集合；只有添加到设置列表时才登记并保存 bookmark。F-080 和 V-080 已明确范围。
+- 未重新执行发布签名、公证、商店上传、系统权限撤销、重新登录及 Finder 端到端回归。`V-080`、`V-082`、`V-083` 保持 `Planned`。首个 GitHub Release、官网真实域名、商店元数据及定价仍按 `TASK.md` 跟进。

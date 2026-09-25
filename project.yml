@@ -6,8 +6,17 @@ options:
   developmentLanguage: zh-Hans
   createIntermediateGroups: true
   groupSortPosition: top
+# 两个发布渠道（technical.md 发布渠道与标识）：官网版用 Debug、Release，商店版用 Debug-AppStore、Release-AppStore。
+configs:
+  Debug: debug
+  Release: release
+  Debug-AppStore: debug
+  Release-AppStore: release
 settings:
   base:
+    RK_APP_ID: app.rightkit.mac
+    RK_URL_SCHEME: rightkit
+    RK_APP_GROUP: $(DEVELOPMENT_TEAM).$(RK_APP_ID)
     DEVELOPMENT_TEAM: Q9C87Z9H4G
     CODE_SIGN_STYLE: Automatic
     SWIFT_VERSION: "6.0"
@@ -19,6 +28,10 @@ settings:
     ENABLE_USER_SCRIPT_SANDBOXING: YES
     LOCALIZATION_PREFERS_STRING_CATALOGS: YES
     REGISTER_APP_GROUPS: YES
+  configs:
+    AppStore:
+      RK_APP_ID: app.rightkit.mac.store
+      RK_URL_SCHEME: rightkit-store
 packages:
   RightKitCore:
     path: Packages/RightKitCore
@@ -30,11 +43,6 @@ targets:
       - path: RightKit
         excludes: ["Info.plist", "*.entitlements"]
       - path: Shared
-      - path: RightKitAgent/app.rightkit.mac.agent.plist
-        buildPhase:
-          copyFiles:
-            destination: wrapper
-            subpath: Contents/Library/LaunchAgents
     dependencies:
       - package: RightKitCore
       - target: RightKitFinder
@@ -46,11 +54,31 @@ targets:
     settings:
       base:
         PRODUCT_NAME: RightKit
-        PRODUCT_BUNDLE_IDENTIFIER: app.rightkit.mac
+        PRODUCT_BUNDLE_IDENTIFIER: $(RK_APP_ID)
         INFOPLIST_FILE: RightKit/Info.plist
         CODE_SIGN_ENTITLEMENTS: RightKit/RightKit.entitlements
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
-        ENABLE_APP_SANDBOX: NO
+        ENABLE_APP_SANDBOX: YES
+        ENABLE_USER_SELECTED_FILES: readwrite
+      configs:
+        AppStore:
+          SWIFT_ACTIVE_COMPILATION_CONDITIONS: $(inherited) APP_STORE
+          # 商店版没有检查更新，不要网络权限（F-082）。
+          CODE_SIGN_ENTITLEMENTS: RightKit/RightKit-AppStore.entitlements
+    # agent 的 launchd 配置按渠道生成，文件名和服务名都随 RK_APP_ID、RK_APP_GROUP 变化。
+    postBuildScripts:
+      - name: Generate LaunchAgent plist
+        script: |
+          set -euo pipefail
+          dir="${TARGET_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/Library/LaunchAgents"
+          mkdir -p "$dir"
+          sed -e "s/__APP_ID__/${RK_APP_ID}/g" -e "s/__APP_GROUP__/${RK_APP_GROUP}/g" \
+            "${SRCROOT}/RightKitAgent/LaunchAgent.plist" > "$dir/${RK_APP_ID}.agent.plist"
+          plutil -lint "$dir/${RK_APP_ID}.agent.plist" >/dev/null
+        inputFiles:
+          - $(SRCROOT)/RightKitAgent/LaunchAgent.plist
+        outputFiles:
+          - $(TARGET_BUILD_DIR)/$(CONTENTS_FOLDER_PATH)/Library/LaunchAgents/$(RK_APP_ID).agent.plist
   RightKitFinder:
     type: app-extension
     platform: macOS
@@ -63,7 +91,7 @@ targets:
     settings:
       base:
         PRODUCT_NAME: RightKitFinder
-        PRODUCT_BUNDLE_IDENTIFIER: app.rightkit.mac.finder
+        PRODUCT_BUNDLE_IDENTIFIER: $(RK_APP_ID).finder
         INFOPLIST_FILE: RightKitFinder/Info.plist
         CODE_SIGN_ENTITLEMENTS: RightKitFinder/RightKitFinder.entitlements
         ENABLE_APP_SANDBOX: YES
@@ -78,10 +106,11 @@ targets:
     settings:
       base:
         PRODUCT_NAME: RightKitAgent
-        PRODUCT_BUNDLE_IDENTIFIER: app.rightkit.mac.agent
+        PRODUCT_BUNDLE_IDENTIFIER: $(RK_APP_ID).agent
         INFOPLIST_FILE: RightKitAgent/Info.plist
         CREATE_INFOPLIST_SECTION_IN_BINARY: YES
         CODE_SIGN_ENTITLEMENTS: RightKitAgent/RightKitAgent.entitlements
+        ENABLE_APP_SANDBOX: YES
         SKIP_INSTALL: YES
   RightKitTests:
     type: bundle.unit-test
@@ -106,3 +135,15 @@ schemes:
         - RightKitTests
     run:
       config: Debug
+  RightKit App Store:
+    build:
+      targets:
+        RightKit: all
+    run:
+      config: Debug-AppStore
+    profile:
+      config: Release-AppStore
+    analyze:
+      config: Debug-AppStore
+    archive:
+      config: Release-AppStore

@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- 模板：构建时替换 __APP_ID__ 和 __APP_GROUP__，写成 Contents/Library/LaunchAgents/__APP_ID__.agent.plist（project.yml）。 -->
 <plist version="1.0">
 <dict>
 	<key>Label</key>
-	<string>app.rightkit.mac.agent</string>
+	<string>__APP_ID__.agent</string>
 	<key>BundleProgram</key>
 	<string>Contents/MacOS/RightKitAgent</string>
 	<key>MachServices</key>
 	<dict>
-		<key>group.app.rightkit.mac.command</key>
+		<key>__APP_GROUP__.command</key>
 		<true/>
 	</dict>
 	<key>AssociatedBundleIdentifiers</key>
 	<array>
-		<string>app.rightkit.mac</string>
+		<string>__APP_ID__</string>
 	</array>
 	<key>LimitLoadToSessionType</key>
 	<string>Aqua</string>

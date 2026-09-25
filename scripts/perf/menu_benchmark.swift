@@ -10,7 +10,7 @@ struct MenuBenchmark {
         try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
         defer { try? FileManager.default.removeItem(at: root) }
 
-        var settings = Settings.makeDefault(home: root.path) { _ in true }
+        var settings = Settings.afterAuthorizing(home: root.path) { _ in true }
         settings.openTools = []
         for index in 0..<30 {
             let folder = root.appending(path: "folder-\(index)")

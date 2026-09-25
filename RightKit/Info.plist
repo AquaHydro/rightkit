@@ -22,15 +22,17 @@
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>app.rightkit.mac</string>
+			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>rightkit</string>
+				<string>$(RK_URL_SCHEME)</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.utilities</string>
 	<key>LSMinimumSystemVersion</key>
@@ -91,6 +93,14 @@
 			</array>
 		</dict>
 	</array>
+	<key>RKAppBundleID</key>
+	<string>$(RK_APP_ID)</string>
+	<key>RKAppGroup</key>
+	<string>$(RK_APP_GROUP)</string>
+	<key>RKURLScheme</key>
+	<string>$(RK_URL_SCHEME)</string>
+	<key>NSAppleEventsUsageDescription</key>
+	<string>RightKit 只在你确认后请访达重新启动，让右键菜单生效。</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>© 2026 氢氧根</string>
 </dict>

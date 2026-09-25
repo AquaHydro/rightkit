@@ -30,7 +30,7 @@ enum Tools {
 
     // MARK: F-044
 
-    static func makeAliasOnDesktop(_ item: URL, desktop: URL = URL.desktopDirectory) throws(FileEngineError) -> URL {
+    static func makeAliasOnDesktop(_ item: URL, desktop: URL = FolderStore.desktop) throws(FileEngineError) -> URL {
         let temp = FileEngine.tempURL(in: desktop)
         do {
             let data = try item.bookmarkData(options: .suitableForBookmarkFile)

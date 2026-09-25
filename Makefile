@@ -1,8 +1,10 @@
 DERIVED := .build/DerivedData
 APP := $(DERIVED)/Build/Products/Debug/RightKit.app
-XCODEBUILD := xcodebuild -project RightKit.xcodeproj -scheme RightKit -derivedDataPath $(DERIVED) -allowProvisioningUpdates
+# CI 没有签名证书，传 XCODE_FLAGS="CODE_SIGNING_ALLOWED=NO" 只做编译和测试（.github/workflows/ci.yml）。
+XCODE_FLAGS ?=
+XCODEBUILD := xcodebuild -project RightKit.xcodeproj -scheme RightKit -derivedDataPath $(DERIVED) -allowProvisioningUpdates $(XCODE_FLAGS)
 
-.PHONY: generate build test verify run release release-unsigned website website-serve
+.PHONY: generate build build-appstore test verify run release release-unsigned release-appstore upload-appstore website website-serve website-deploy
 
 generate:
 	xcodegen generate
@@ -10,11 +12,15 @@ generate:
 build: generate
 	$(XCODEBUILD) -configuration Debug build
 
+# 商店版 Debug 构建（technical.md 发布渠道与标识）。
+build-appstore: generate
+	xcodebuild -project RightKit.xcodeproj -scheme "RightKit App Store" -derivedDataPath $(DERIVED) -allowProvisioningUpdates -configuration Debug-AppStore $(XCODE_FLAGS) build
+
 test: generate
 	$(XCODEBUILD) test
 
 # 统一验证入口（technical.md 构建与验证入口）。
-verify: test build
+verify: test build build-appstore
 	python3 scripts/check_docs.py
 	python3 scripts/strings.py check
 	python3 scripts/check_office_templates.py
@@ -29,6 +35,14 @@ release:
 release-unsigned:
 	SKIP_NOTARIZE=1 scripts/release/release.sh
 
+# 商店版：归档、导出 .pkg 并检查签名和二进制（V-082）。
+release-appstore:
+	scripts/release/release_appstore.sh
+
+# 检查通过后上传 App Store Connect，使用 Xcode 里登录的账号。
+upload-appstore:
+	UPLOAD=1 scripts/release/release_appstore.sh
+
 # 自动化环境跳过登录项注册。
 run: build
 	open --env RIGHTKIT_SKIP_LOGIN_ITEM=1 $(APP)
@@ -40,3 +54,7 @@ website:
 # 本地预览官网：http://localhost:8000
 website-serve: website
 	python3 -m http.server 8000 --directory website/dist
+
+# 部署官网到 Cloudflare Pages 项目 rightkit（https://rightkit.yiliang.app）。第一次会打开浏览器登录。
+website-deploy: website
+	npx -y wrangler@latest pages deploy website/dist --project-name rightkit --branch main

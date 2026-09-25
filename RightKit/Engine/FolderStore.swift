@@ -2,31 +2,66 @@ import AppKit
 import Foundation
 import RightKitCore
 
-/// 用户选择的文件夹：保存 bookmark，按 bookmark 找回被移动过的文件夹（technical.md 设置）。
+/// 用户选择的文件夹：保存 security-scoped bookmark，按 bookmark 找回被移动过的文件夹（technical.md 沙盒与文件访问）。
 enum FolderStore {
-    static let home = PathRules.standardized(FileManager.default.homeDirectoryForCurrentUser.path(percentEncoded: false))
+    enum State: Equatable { case available, missing, needsAuthorization }
 
-    static func entry(for url: URL) -> FolderEntry {
-        makeEntry(FolderEntry(path: PathRules.standardized(url.path(percentEncoded: false))))
+    /// 只有明确的不存在错误才显示丢失；沙盒或文件权限拒绝时保留重新授权入口。
+    static func state(_ entry: FolderEntry) -> State {
+        guard !isInTrash(entry.path) else { return .missing }
+        do {
+            let values = try URL(filePath: entry.path).resourceValues(forKeys: [.isDirectoryKey])
+            guard values.isDirectory == true else { return .missing }
+            return entry.needsAuthorization ? .needsAuthorization : .available
+        } catch {
+            let error = error as NSError
+            if error.domain == NSCocoaErrorDomain,
+               [NSFileNoSuchFileError, NSFileReadNoSuchFileError].contains(error.code) { return .missing }
+            if error.domain == NSPOSIXErrorDomain,
+               [Int(ENOENT), Int(ENOTDIR)].contains(error.code) { return .missing }
+            return .needsAuthorization
+        }
     }
 
+    /// 真实主目录。沙盒里 `homeDirectoryForCurrentUser` 和 `NSHomeDirectory()` 都指向应用容器。
+    static let home: String = {
+        guard let pw = getpwuid(getuid()), let dir = pw.pointee.pw_dir else { return NSHomeDirectory() }
+        return PathRules.standardized(String(cString: dir))
+    }()
+
+    /// 真实桌面，F-044 替身和 F-074 新建文件的默认位置。
+    static var desktop: URL {
+        URL(filePath: home, directoryHint: .isDirectory).appending(path: "Desktop", directoryHint: .isDirectory)
+    }
+
+    /// 文件夹选择面板给出的 URL 此时可以访问，趁这时存下 bookmark。
+    static func entry(for url: URL) -> FolderEntry {
+        FolderEntry(path: PathRules.standardized(url.path(percentEncoded: false)), bookmark: bookmark(for: url))
+    }
+
+    /// 给还没有 bookmark 的条目补上。只有在已授权文件夹内才能成功。
     static func makeEntry(_ entry: FolderEntry) -> FolderEntry {
+        guard entry.bookmark == nil else { return entry }
         var copy = entry
-        copy.bookmark = try? URL(filePath: entry.path, directoryHint: .isDirectory).bookmarkData()
+        copy.bookmark = bookmark(for: URL(filePath: entry.path, directoryHint: .isDirectory))
         return copy
+    }
+
+    static func bookmark(for url: URL) -> Data? {
+        try? url.bookmarkData(options: .withSecurityScope)
     }
 
     /// 按 bookmark 更新路径。进了废纸篓的文件夹算不存在，保留原路径。
     static func refreshed(_ entry: FolderEntry) -> FolderEntry {
-        guard let bookmark = entry.bookmark else { return entry }
+        guard let data = entry.bookmark else { return entry }
         var stale = false
-        guard let url = try? URL(resolvingBookmarkData: bookmark, options: [.withoutUI, .withoutMounting], bookmarkDataIsStale: &stale)
+        guard let url = try? URL(resolvingBookmarkData: data, options: [.withoutUI, .withoutMounting], bookmarkDataIsStale: &stale)
         else { return entry }
         let path = PathRules.standardized(url.path(percentEncoded: false))
         guard !isInTrash(path) else { return entry }
         var copy = entry
         copy.path = path
-        if stale { copy.bookmark = try? url.bookmarkData() }
+        if stale, let fresh = bookmark(for: url) { copy.bookmark = fresh }
         return copy
     }
 

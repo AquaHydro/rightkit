@@ -27,26 +27,20 @@ final class FinderSync: FIFinderSync, @unchecked Sendable {
     }
 
     private func reloadSettings() {
+        // 读不到设置时按全新安装处理：还没有授权任何文件夹，不注册监视目录（F-080）。
         if case .loaded(let loaded) = SharedStore.loadSettings(backupOnFailure: false) {
             settings = loaded
         } else {
-            settings = Settings.makeDefault(home: Self.home) { FileManager.default.fileExists(atPath: $0) }
+            settings = Settings()
         }
         L10n.setLanguage(settings.language)
-        // 不注册 `/`；不存在的目录不注册。
-        let urls = settings.monitoredFolders
-            .map(\.path)
+        // 不注册 `/`；不存在或需要重新授权的目录不注册。
+        let urls = settings.activeMonitoredPaths
             .filter { $0 != "/" && FileManager.default.fileExists(atPath: $0) }
             .map { URL(filePath: $0, directoryHint: .isDirectory) }
         FIFinderSyncController.default().directoryURLs = Set(urls)
         log.notice("Monitoring \(urls.map(\.path).joined(separator: ", "), privacy: .public)")
     }
-
-    /// 沙盒里 `NSHomeDirectory()` 是容器目录，要取真实主目录。
-    static let home: String = {
-        guard let pw = getpwuid(getuid()), let dir = pw.pointee.pw_dir else { return NSHomeDirectory() }
-        return String(cString: dir)
-    }()
 
     // MARK: 工具栏（F-008）
 
@@ -204,15 +198,18 @@ enum CommandSender {
     /// 协作式激活下，主程序自己调用 `activate()` 会被拒绝；由扩展经 LaunchServices 打开专用网址来激活它。
     static func bringMainAppForward() {
         NSApp.yieldActivation(toApplicationWithBundleIdentifier: ServiceNames.appBundleID)
-        guard let url = URL(string: "rightkit://activate") else { return }
-        NSWorkspace.shared.open(url, configuration: NSWorkspace.OpenConfiguration())
+        openMainApp(.activate)
     }
 
-    /// 扩展在 `RightKit.app/Contents/PlugIns/RightKitFinder.appex`。
+    /// 沙盒会丢掉启动参数，所以用网址告诉主程序要打开「通用」页。
     static func openMainApp() {
+        openMainApp(.agentUnavailable)
+    }
+
+    /// 指定打开扩展所在的主程序包（`RightKit.app/Contents/PlugIns/RightKitFinder.appex`），不交给 LaunchServices 挑选同 scheme 的其他副本。
+    private static func openMainApp(_ action: AppURLAction) {
+        guard let url = ServiceNames.current.url(for: action) else { return }
         let appURL = Bundle.main.bundleURL.deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
-        let configuration = NSWorkspace.OpenConfiguration()
-        configuration.arguments = ["--agent-unavailable"]
-        NSWorkspace.shared.openApplication(at: appURL, configuration: configuration)
+        NSWorkspace.shared.open([url], withApplicationAt: appURL, configuration: NSWorkspace.OpenConfiguration())
     }
 }

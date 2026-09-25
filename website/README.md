@@ -7,6 +7,7 @@
 ```sh
 make website        # 生成 website/dist
 make website-serve  # 构建后在 http://localhost:8000 预览
+make website-deploy # 构建并部署到 https://rightkit.yiliang.app
 ```
 
 只需要 Python 3，不需要安装依赖。

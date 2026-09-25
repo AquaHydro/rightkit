@@ -109,7 +109,7 @@ public enum MenuBuilder {
         var nodes: [MenuNode] = []
 
         // F-060：只在监视目录及其子目录出现。
-        let monitored = settings.monitoredFolders.map(\.path)
+        let monitored = settings.activeMonitoredPaths
         let scopePaths = input.location == .items && !input.items.isEmpty ? input.items.map(\.path) : [input.folder]
         guard scopePaths.allSatisfy({ PathRules.isInsideAny($0, of: monitored) }) else { return [] }
 
