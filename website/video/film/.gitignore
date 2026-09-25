@@ -1,5 +1,7 @@
 node_modules/
-renders/
+renders/*
+!renders/rightkit-intro-zh.mp4
+!renders/rightkit-intro-vertical.mp4
 dist/
 .build/
 assets/*.wav
