@@ -13,13 +13,13 @@
 | 主要类别 | 工具（Utilities） |
 | 次要类别 | 效率（Productivity） |
 | 主要语言 | 简体中文，另加英文（美国）本地化 |
-| 版权 | `2026 氢氧根`（按实际署名改） |
+| 版权 | `2026 廖奕良` |
 | 隐私政策网址 | `https://rightkit.yiliang.app/privacy/`，英文本地化填 `https://rightkit.yiliang.app/en/privacy/` |
 | 技术支持网址 | `https://rightkit.yiliang.app/`，英文填 `https://rightkit.yiliang.app/en/` |
 | 营销网址 | 同技术支持网址 |
-| 价格 | 待定 |
+| 价格 | 1 美元（美国区选 1.00 美元的价格点，没有就选 0.99），其他地区按 Apple 自动换算 |
 
-名称「RightKit」如果已被占用，按「RightKit 右键菜单」「RightKit: Right-Click Menu」的顺序备选。
+名称待定。2026-09-25 查询时，Mac App Store 已有两款同类右键工具用了这个名字：「RightKit右键菜单工具」（瑞瑞 宋，2026-07-31 上架）和「RightKit: Right-Click Tools」（泽韦 陈，2026-08-24 上架）。App Store Connect 只拦截完全相同的名称，但同类产品同名容易被判为误导（审核指南 2.3.7、4.1），用户也分不清。
 
 ## 简体中文
 
@@ -200,4 +200,4 @@ PRIVACY
 No data is collected. The App Store version makes no network requests. The Translate services only open the translation website in the user's default browser.
 ```
 
-联系信息填本人姓名、电话和邮箱，只填在 App Store Connect 里，不写进仓库。
+联系人：廖奕良，邮箱 `contact@yiliang.me`。电话只填在 App Store Connect 里，不写进仓库。
