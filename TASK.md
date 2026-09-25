@@ -4,7 +4,6 @@
 
 ## 上架前必须完成
 
-- [ ] 提交重新生成的 `RightKit.xcodeproj`：`make generate` 后提交。仓库里的工程还是双渠道改造之前的版本，直接打开会找不到文件。
 - [ ] 官网域名：定下后替换 `website/site.json` 的 `url` 和 `download`，以及 `RightKit/Views/Settings/AboutPane.swift` 里商店版「反馈问题」的占位地址 `https://rightkit.example`。
 - [ ] 证书：钥匙串里要有 Apple Distribution 和 Mac Installer Distribution 证书（Xcode → Settings → Accounts → Manage Certificates）。
 - [ ] 在 App Store Connect 新建 App：bundle ID `app.rightkit.mac.store`，类别「工具」，定价，中英文简介、关键词和截图，隐私问卷（不收集数据；翻译只是打开浏览器），年龄分级。
