@@ -4,7 +4,7 @@
 
 ## 上架前必须完成
 
-资料都在 [App Store 上架资料](docs/app-store.md)：商店名「RightKit: Finder Toolkit」（中文区「RightKit 访达工具箱」），价格 1 美元，版权 `2026 廖奕良`，联系邮箱 `contact@yiliang.me`（电话直接填在 App Store Connect）。
+资料都在 [App Store 上架资料](docs/app-store.md)：商店名「RightKit: Finder Toolkit」（中文区「RightKit 访达工具箱」），价格 1 美元，版权 `2026 Liao Yiliang`，联系邮箱 `contact@yiliang.me`（电话直接填在 App Store Connect）。
 
 - [x] 官网和隐私政策上线：`https://rightkit.yiliang.app`（Cloudflare Pages 项目 `rightkit`，`make website-deploy` 部署）。隐私政策 `/privacy/`、`/en/privacy/`。以后换正式域名时改 `website/site.json` 的 `url` 并重新部署。
 - [ ] 在 App Store Connect 新建 App：bundle ID `app.rightkit.mac.store`，按上架资料填名称、副标题、描述、关键词、隐私政策和技术支持网址、价格、隐私问卷（不收集数据）、年龄分级（4+）。
