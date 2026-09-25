@@ -1,7 +1,8 @@
 import RightKitCore
 import SwiftUI
 
-/// 关于弹出层（设置窗口右上角）：应用图标（Q 版 Riko）、版本、标语和项目链接。
+/// 关于弹出层（设置窗口右上角）：应用图标（Q 版 Riko）、版本、标语和链接。
+/// 官网版有 GitHub、反馈问题和检查更新；商店版只有指向官网的反馈问题（F-082）。
 struct AboutPane: View {
     private var version: String {
         let info = Bundle.main.infoDictionary
@@ -30,11 +31,18 @@ struct AboutPane: View {
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
+            #if APP_STORE
+            // 与 website/site.json 的 url 保持一致。
+            Link(L("反馈问题"), destination: URL(string: "https://rightkit.example")!)
+                .font(.callout)
+            #else
             HStack(spacing: 16) {
                 Link("GitHub", destination: URL(string: "https://github.com/AquaHydro/rightkit")!)
                 Link(L("反馈问题"), destination: URL(string: "https://github.com/AquaHydro/rightkit/issues")!)
             }
             .font(.callout)
+            Button(L("检查更新…")) { UpdateChecker.shared.checkNow() }
+            #endif
         }
         .padding(24)
         .frame(width: 320)

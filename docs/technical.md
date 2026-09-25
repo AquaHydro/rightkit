@@ -36,7 +36,7 @@
 
 三个 target 都启用 App Sandbox，entitlements 如下：
 
-- 主程序：`app-sandbox`、`application-groups`、`files.user-selected.read-write`、`files.bookmarks.app-scope`，以及只针对 `com.apple.finder` 的 `temporary-exception.apple-events` 和强化运行时要求的 `automation.apple-events`（`F-001` 重启访达）。Info.plist 带 `NSAppleEventsUsageDescription`，英文在 `RightKit/Resources/InfoPlist.xcstrings`。官网版另加 `network.client`（`F-081`）。商店版不加网络权限。
+- 主程序：`app-sandbox`、`application-groups`、`files.user-selected.read-write`、`files.bookmarks.app-scope`，以及只针对 `com.apple.finder` 的 `temporary-exception.apple-events` 和强化运行时要求的 `automation.apple-events`（`F-001` 重启访达）。Info.plist 带 `NSAppleEventsUsageDescription`，英文在 `RightKit/Resources/InfoPlist.xcstrings`。官网版另加 `network.client`（`F-081`）。商店版不加网络权限，用单独的 `RightKit/RightKit-AppStore.entitlements`，两份文件除这一项外保持一致。
 - 扩展：`app-sandbox`、`application-groups`。扩展不改文件，也不需要文件权限。
 - agent：`app-sandbox`、`application-groups`。XPC 服务名必须是 App Group 的直接子名，扩展和主程序才能在沙盒里查找它。
 
@@ -129,7 +129,7 @@
 - 用 Developer ID Application 签名，开启强化运行时，经公证后钉票，打成 DMG，上传到 GitHub 仓库 `AquaHydro/rightkit` 的 Release，标签是 `v` 加版本号。官网的下载按钮指向最新 Release。`make release` 执行签名到打包的流程（`scripts/release/release.sh`），`make release-unsigned` 跳过公证，只用来检查签名。
 - 导出方式 `developer-id`，自动签名。`scripts/release/check_signature.sh` 检查三个 target 都开了沙盒、entitlements 与上文一致。
 - 公证凭据保存在钥匙串的 notarytool 配置 `RightKit` 里，也可以用 `NOTARY_PROFILE` 换成别的名字。App 专用密码、私钥和 API key 都不进仓库。
-- `F-081` 读取 `https://api.github.com/repos/AquaHydro/rightkit/releases/latest`。发 Release 时必须是正式版本、标签格式正确，否则检查更新会误判。
+- `F-081` 读取 `https://api.github.com/repos/AquaHydro/rightkit/releases/latest`。发 Release 时必须是正式版本、标签是 `v` 加三段数字，否则检查更新会当作失败。解析和比较在 `RightKit/Engine/UpdateCheck.swift`，请求和提示在 `RightKit/Services/UpdateChecker.swift`，两者都包在 `#if !APP_STORE` 里。「自动检查更新」开关、上次检查时间和被跳过的版本只有主程序用，存在主程序的 UserDefaults 里，不进共享设置。
 
 商店版：
 

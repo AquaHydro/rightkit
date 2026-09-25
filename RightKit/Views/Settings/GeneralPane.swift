@@ -7,6 +7,10 @@ import SwiftUI
 struct GeneralPane: View {
     @Environment(AppModel.self) private var model
     @State private var confirmingRestart = false
+    #if !APP_STORE
+    /// F-081：只有官网版有，存在主程序自己的 UserDefaults 里。
+    @AppStorage(UpdateChecker.autoCheckKey) private var autoCheckUpdates = true
+    #endif
 
     var body: some View {
         @Bindable var model = model
@@ -53,6 +57,12 @@ struct GeneralPane: View {
                 Toggle(isOn: $model.settings.showMenuBarIcon) {
                     RowLabel(title: L("显示菜单栏图标"), symbol: "menubar.rectangle", tint: .intentInspect)
                 }
+                #if !APP_STORE
+                Toggle(isOn: $autoCheckUpdates) {
+                    RowLabel(title: L("自动检查更新"), caption: L("有新版本时提醒你，并打开下载页面。"),
+                             symbol: "arrow.down.circle", tint: .intentGo)
+                }
+                #endif
             }
         }
         .alert(L("重新启动访达？"), isPresented: $confirmingRestart) {

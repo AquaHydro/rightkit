@@ -44,6 +44,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         finishedLaunching = true
+        #if !APP_STORE
+        UpdateChecker.shared.checkAutomaticallyIfDue()
+        #endif
         if showsAgentUnavailable {
             openGeneralSettings()
         } else if !model.settings.welcomeShown {

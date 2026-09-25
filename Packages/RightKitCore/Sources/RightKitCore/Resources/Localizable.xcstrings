@@ -65,6 +65,22 @@
         }
       }
     },
+    "RightKit %@ 可用": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKit %@ Is Available"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKit %@ 可用"
+          }
+        }
+      }
+    },
     "RightKit 仅在这些文件夹及其子文件夹的访达菜单中显示。": {
       "localizations": {
         "en": {
@@ -93,6 +109,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "RightKit 只能在你授权的文件夹里新建、复制和整理文件。建议授权个人主文件夹。"
+          }
+        }
+      }
+    },
+    "RightKit 已是最新版本。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKit is up to date."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKit 已是最新版本。"
           }
         }
       }
@@ -289,6 +321,22 @@
         }
       }
     },
+    "你正在使用 %@。前往下载页面获取新版本。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You’re using %@. Go to the download page to get the new version."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你正在使用 %@。前往下载页面获取新版本。"
+          }
+        }
+      }
+    },
     "使用该文件类型的默认应用打开。": {
       "localizations": {
         "en": {
@@ -381,6 +429,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "创建后自动打开文件"
+          }
+        }
+      }
+    },
+    "前往下载": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Go to Download"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "前往下载"
           }
         }
       }
@@ -1585,6 +1649,22 @@
         }
       }
     },
+    "无法检查更新。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn’t check for updates."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法检查更新。"
+          }
+        }
+      }
+    },
     "无法生成图标集。": {
       "localizations": {
         "en": {
@@ -1841,6 +1921,22 @@
         }
       }
     },
+    "有新版本时提醒你，并打开下载页面。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Let you know when a new version is out and open its download page."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "有新版本时提醒你，并打开下载页面。"
+          }
+        }
+      }
+    },
     "未命名": {
       "localizations": {
         "en": {
@@ -1869,6 +1965,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "根据文件名新建文件夹"
+          }
+        }
+      }
+    },
+    "检查更新…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check for Updates…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "检查更新…"
           }
         }
       }
@@ -2337,6 +2449,22 @@
         }
       }
     },
+    "稍后": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Later"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "稍后"
+          }
+        }
+      }
+    },
     "稍后设置": {
       "localizations": {
         "en": {
@@ -2429,6 +2557,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "编辑器"
+          }
+        }
+      }
+    },
+    "自动检查更新": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check for Updates Automatically"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自动检查更新"
           }
         }
       }

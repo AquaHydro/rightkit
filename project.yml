@@ -63,6 +63,8 @@ targets:
       configs:
         AppStore:
           SWIFT_ACTIVE_COMPILATION_CONDITIONS: $(inherited) APP_STORE
+          # 商店版没有检查更新，不要网络权限（F-082）。
+          CODE_SIGN_ENTITLEMENTS: RightKit/RightKit-AppStore.entitlements
     # agent 的 launchd 配置按渠道生成，文件名和服务名都随 RK_APP_ID、RK_APP_GROUP 变化。
     postBuildScripts:
       - name: Generate LaunchAgent plist
