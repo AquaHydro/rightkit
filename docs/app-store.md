@@ -13,7 +13,7 @@
 | 主要类别 | 工具（Utilities） |
 | 次要类别 | 效率（Productivity） |
 | 主要语言 | 简体中文，另加英文（美国）本地化 |
-| 版权 | `2026 廖奕良` |
+| 版权 | `2026 Liao Yiliang` |
 | 隐私政策网址 | `https://rightkit.yiliang.app/privacy/`，英文本地化填 `https://rightkit.yiliang.app/en/privacy/` |
 | 技术支持网址 | `https://rightkit.yiliang.app/`，英文填 `https://rightkit.yiliang.app/en/` |
 | 营销网址 | 同技术支持网址 |
@@ -202,4 +202,4 @@ PRIVACY
 No data is collected. The App Store version makes no network requests. The Translate services only open the translation website in the user's default browser.
 ```
 
-联系人：廖奕良，邮箱 `contact@yiliang.me`。电话只填在 App Store Connect 里，不写进仓库。
+联系人：Liao Yiliang，邮箱 `contact@yiliang.me`。电话只填在 App Store Connect 里，不写进仓库。
