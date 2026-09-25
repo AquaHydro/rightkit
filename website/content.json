@@ -155,7 +155,7 @@
           {
             "icon": "folder",
             "title": "只在你指定的地方出现",
-            "body": "菜单只在监视目录里出现，默认是你的主目录，可以自己改。"
+            "body": "菜单只在你授权的文件夹里出现，建议授权主目录，之后可以自己改。"
           },
           {
             "icon": "laptop",
@@ -412,7 +412,7 @@
         },
         {
           "q": "为什么有些文件夹里没有菜单？",
-          "a": "菜单只在监视目录里出现，默认是你的主目录。可以在设置的「通用」里修改。"
+          "a": "菜单只在你授权的文件夹里出现。首次启动时建议授权主目录，之后可以在设置的「通用」里修改。"
         },
         {
           "q": "会上传我的文件吗？",
@@ -767,7 +767,7 @@
           {
             "icon": "folder",
             "title": "Only where you want it",
-            "body": "The menu appears in your watched folders only. Your home folder by default."
+            "body": "The menu appears only in folders you authorize. Your home folder is a good start."
           },
           {
             "icon": "laptop",
@@ -1024,7 +1024,7 @@
         },
         {
           "q": "Why is there no menu in some folders?",
-          "a": "The menu only appears in your watched folders, which default to your home folder. Change them in Settings > General."
+          "a": "The menu only appears in folders you authorize. Authorizing your home folder on first launch is recommended, and you can change it in Settings > General."
         },
         {
           "q": "Are my files uploaded?",
