@@ -42,7 +42,7 @@
 | `V-075` | `F-075` | 超过 1 秒的传输显示进度窗口；取消后已完成项保留、源不变、没有半截文件 | `Passed` |
 | `V-080` | `F-005`、`F-009`、`F-080` | 全新安装时没有监视目录，登录时启动为关且没有注册登录项；欢迎窗口授权主目录后，重启主程序和重新登录仍能在主目录、桌面、文稿里执行新建、复制、移动和删除，不再出现系统权限询问；跳过授权时访达菜单不出现；授权失效或目录元数据读取被拒绝时，设置行显示「需要重新授权。」并可重新选择；明确不存在时显示丢失；临时选择目录可以完成当前复制或移动，不加入设置列表，重启后不会成为长期授权目录；对未授权位置的命令按规格提示且不改动文件；欢迎窗口「更改…」后默认常用目录和发送到跟着新文件夹更新；重新授权时选中列表里已有的文件夹，不留重复行 | `Passed` |
 | `V-081` | `F-081` | 用本地假服务或注入的响应测试：新版本、同版本、旧版本、预发布、标签格式错误、网络失败六种情况的提示与规格一致；「稍后」后自动检查不再提示同一版本；「前往下载」打开 Release 网页，没有下载任何文件 | `Planned` |
-| `V-082` | `F-082` | `make release` 和 `make release-appstore` 的签名检查都通过（`scripts/release/check_signature.sh`）；两个渠道的 bundle ID、App Group、XPC 服务名和 entitlements 与工程边界一致；三个 target 都开了沙盒；商店版二进制里没有 `api.github.com`、`github.com/AquaHydro/rightkit/releases` 字符串和 `network.client` 权限，关于里只有「反馈问题」，打开项目 GitHub Issues；官网中英文下载按钮都指向最新 GitHub Release；两个版本同时安装时设置互不影响 | `Passed` |
+| `V-082` | `F-082` | `make release` 和 `make release-appstore` 的签名检查都通过（`scripts/release/check_signature.sh`）；两个渠道的 bundle ID、App Group、XPC 服务名和 entitlements 与工程边界一致；三个 target 都开了沙盒；商店版二进制里没有 `api.github.com`、`github.com/AquaHydro/rightkit/releases` 字符串和 `network.client` 权限，关于里只有「反馈问题」，仓库私有期间打开邮件 `contact@yiliang.me`；官网中英文下载按钮都指向最新 GitHub Release；两个版本同时安装时设置互不影响 | `Passed` |
 | `V-083` | `F-044`、`F-056`、`F-057`、`F-074` | 沙盒构建下回归：替身在真实桌面而不是容器里；设为壁纸生效；设置文件夹图标生效；快捷指令对已授权和未授权文件夹的输出结果与 `F-080` 一致；agent 在沙盒里仍能校验扩展和主程序的签名，拒绝其他进程；主程序没运行时点访达菜单，主程序被拉起但不开设置窗口；停用后台项目后点菜单，主程序打开「通用」页；扩展状态在沙盒里仍能区分「已启用」和「未运行」；生成 macOS 图标集时 `iconutil` 在沙盒里正常运行 | `Passed` |
 
 ## 哈希向量
