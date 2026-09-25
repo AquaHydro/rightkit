@@ -5,7 +5,6 @@
 ## 上架前必须完成
 
 - [ ] 官网域名：定下后替换 `website/site.json` 的 `url` 和 `download`，以及 `RightKit/Views/Settings/AboutPane.swift` 里商店版「反馈问题」的占位地址 `https://rightkit.example`。
-- [ ] 证书：钥匙串里要有 Apple Distribution 和 Mac Installer Distribution 证书（Xcode → Settings → Accounts → Manage Certificates）。
 - [ ] 在 App Store Connect 新建 App：bundle ID `app.rightkit.mac.store`，类别「工具」，定价，中英文简介、关键词和截图，隐私问卷（不收集数据；翻译只是打开浏览器），年龄分级。
 - [ ] 送审备注：为什么需要授权文件夹；只针对访达的 Apple Events 例外只用于用户确认后重启访达，让扩展生效；怎样在「系统设置 → 通用 → 登录项与扩展」里打开访达扩展；审核人员的演示步骤。
 - [ ] `make upload-appstore` 上传，确认通过 App Store Connect 的自动校验。
