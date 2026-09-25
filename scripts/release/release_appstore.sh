@@ -17,12 +17,18 @@ export_options=scripts/release/ExportOptions-AppStore.plist
 rm -rf "$out"
 mkdir -p "$out"
 
+# CI 用 App Store Connect API key 做自动签名和公证（.github/workflows/release.yml）；本机用 Xcode 里登录的账号。
+auth=()
+if [[ -n ${ASC_KEY_PATH:-} ]]; then
+  auth=(-authenticationKeyPath "$ASC_KEY_PATH" -authenticationKeyID "$ASC_KEY_ID" -authenticationKeyIssuerID "$ASC_ISSUER_ID")
+fi
+
 xcodegen generate >/dev/null
 xcodebuild -project RightKit.xcodeproj -scheme "RightKit App Store" -configuration Release-AppStore \
   -derivedDataPath .build/DerivedData-AppStore -archivePath "$archive" \
-  -allowProvisioningUpdates archive | tail -1
+  -allowProvisioningUpdates "${auth[@]}" archive | tail -1
 xcodebuild -exportArchive -archivePath "$archive" -exportPath "$export_dir" \
-  -exportOptionsPlist "$export_options" -allowProvisioningUpdates | tail -1
+  -exportOptionsPlist "$export_options" -allowProvisioningUpdates "${auth[@]}" | tail -1
 
 # 归档的中间产物里也有一份同 ID 的扩展，LaunchServices 会抢先注册它。用完就注销并删除。
 lsregister=/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister
@@ -53,7 +59,7 @@ if [[ -n ${UPLOAD:-} ]]; then
   cp "$export_options" "$upload_options"
   /usr/libexec/PlistBuddy -c "Set :destination upload" "$upload_options"
   xcodebuild -exportArchive -archivePath "$archive" -exportPath "$out/upload" \
-    -exportOptionsPlist "$upload_options" -allowProvisioningUpdates | tail -1
+    -exportOptionsPlist "$upload_options" -allowProvisioningUpdates "${auth[@]}" | tail -1
   echo "Uploaded to App Store Connect."
 fi
 

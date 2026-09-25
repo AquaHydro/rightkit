@@ -34,6 +34,8 @@ make upload-appstore   # 同上，检查通过后上传 App Store Connect
 
 需要人工配合或真机完成的事项记在 [TASK.md](TASK.md)。
 
+PR 由 GitHub Actions 跑 `make verify`；推 `v` 开头的标签会自动签名、公证、发布 GitHub Release 并上传商店版，见[工程边界](docs/technical.md)的「发布」。
+
 功能编号 `F-xxx` 和验收编号 `V-xxx` 一经分配就不要复用。废弃的功能保留编号，并写明不实现。
 
 ```sh

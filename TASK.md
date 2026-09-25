@@ -7,7 +7,16 @@
 - [ ] 官网域名：定下后替换 `website/site.json` 的 `url` 和 `download`，以及 `RightKit/Views/Settings/AboutPane.swift` 里商店版「反馈问题」的占位地址 `https://rightkit.example`。
 - [ ] 在 App Store Connect 新建 App：bundle ID `app.rightkit.mac.store`，类别「工具」，定价，中英文简介、关键词和截图，隐私问卷（不收集数据；翻译只是打开浏览器），年龄分级。
 - [ ] 送审备注：为什么需要授权文件夹；只针对访达的 Apple Events 例外只用于用户确认后重启访达，让扩展生效；怎样在「系统设置 → 通用 → 登录项与扩展」里打开访达扩展；审核人员的演示步骤。
-- [ ] `make upload-appstore` 上传，确认通过 App Store Connect 的自动校验。
+- [ ] 上传商店版：本机 `make upload-appstore`，或推标签后由 Release 工作流上传；确认通过 App Store Connect 的自动校验。
+
+## 自动化发布（GitHub Actions）
+
+- [ ] 在 App Store Connect → 用户和访问 → 集成 → App Store Connect API 新建 key，角色选 Admin（要能创建 Developer ID 描述文件）。下载 `.p8`，记下 Key ID 和 Issuer ID。
+- [ ] 在钥匙串访问里同时选中 Developer ID Application、Apple Distribution、3rd Party Mac Developer Installer 三个证书（连同私钥），导出成一个 `.p12`，设一个密码。
+- [ ] 仓库 Settings → Secrets and variables → Actions 添加：`SIGNING_CERTS_P12_BASE64`（`base64 -i certs.p12 | pbcopy`）、`SIGNING_CERTS_P12_PASSWORD`、`ASC_KEY_P8_BASE64`（`base64 -i AuthKey_XXXX.p8 | pbcopy`）、`ASC_KEY_ID`、`ASC_ISSUER_ID`。
+- [ ] 仓库 Settings → Environments 新建 `app-store`，按需勾选 Required reviewers，这样上传商店前要你点批准。
+- [ ] 确认 PR 上的 CI 通过。`xcode-27` runner 还是公开预览，排队可能较慢。
+- [ ] 第一次发布：改 `project.yml` 的 `MARKETING_VERSION` 和 `CURRENT_PROJECT_VERSION`，合并后推标签（如 `git tag v0.2.0 && git push origin v0.2.0`），看 Release 工作流跑通。
 
 ## 真机验收
 
@@ -22,7 +31,7 @@
 
 ## 官网版发布
 
-- [ ] 第一个 GitHub Release：标签是 `v` 加三段数字（如 `v0.2.0`），不要勾选预发布，上传 `make release` 生成的 DMG。
+- [ ] 第一个 GitHub Release：由 Release 工作流在推标签时自动创建（见上一节）。标签是 `v` 加三段数字，并且等于 `MARKETING_VERSION`。
 - [ ] 官网下载按钮指向 `https://github.com/AquaHydro/rightkit/releases/latest`；商店版上架后，旁边放商店链接。
 
 ## 已知问题

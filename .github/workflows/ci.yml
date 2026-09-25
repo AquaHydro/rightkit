@@ -1,0 +1,41 @@
+# 每个 PR 和推到 main 时，在 Xcode 27 runner 上跑统一验证入口（technical.md 构建与验证入口）。
+# 没有签名证书，只做编译、测试和各项检查；签名和公证在 release.yml。
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: xcode-27
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: 安装 XcodeGen
+        run: brew install xcodegen
+
+      - name: 工具链
+        run: |
+          sw_vers
+          xcodebuild -version
+          xcodegen --version
+
+      - name: make verify
+        run: make verify XCODE_FLAGS="CODE_SIGNING_ALLOWED=NO"
+
+      - name: 提交的 Xcode 工程是否最新
+        run: |
+          if ! git diff --quiet -- RightKit.xcodeproj; then
+            echo "::warning::RightKit.xcodeproj 与 project.yml 生成的结果不同。本机 make generate 后提交；如果只是 XcodeGen 版本差异可以忽略。"
+            git diff --stat -- RightKit.xcodeproj
+          fi

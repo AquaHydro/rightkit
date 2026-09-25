@@ -1,6 +1,8 @@
 DERIVED := .build/DerivedData
 APP := $(DERIVED)/Build/Products/Debug/RightKit.app
-XCODEBUILD := xcodebuild -project RightKit.xcodeproj -scheme RightKit -derivedDataPath $(DERIVED) -allowProvisioningUpdates
+# CI 没有签名证书，传 XCODE_FLAGS="CODE_SIGNING_ALLOWED=NO" 只做编译和测试（.github/workflows/ci.yml）。
+XCODE_FLAGS ?=
+XCODEBUILD := xcodebuild -project RightKit.xcodeproj -scheme RightKit -derivedDataPath $(DERIVED) -allowProvisioningUpdates $(XCODE_FLAGS)
 
 .PHONY: generate build build-appstore test verify run release release-unsigned release-appstore upload-appstore website website-serve
 
@@ -12,7 +14,7 @@ build: generate
 
 # 商店版 Debug 构建（technical.md 发布渠道与标识）。
 build-appstore: generate
-	xcodebuild -project RightKit.xcodeproj -scheme "RightKit App Store" -derivedDataPath $(DERIVED) -allowProvisioningUpdates -configuration Debug-AppStore build
+	xcodebuild -project RightKit.xcodeproj -scheme "RightKit App Store" -derivedDataPath $(DERIVED) -allowProvisioningUpdates -configuration Debug-AppStore $(XCODE_FLAGS) build
 
 test: generate
 	$(XCODEBUILD) test
