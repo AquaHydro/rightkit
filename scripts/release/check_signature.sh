@@ -53,6 +53,8 @@ check() {
 check "$app" $app_id
 check "$app/Contents/PlugIns/RightKitFinder.appex" $app_id.finder
 check "$app/Contents/MacOS/RightKitAgent" $app_id.agent
+[[ $(/usr/libexec/PlistBuddy -c 'Print :LSUIElement' "$app/Contents/PlugIns/RightKitFinder.appex/Contents/Info.plist" 2>/dev/null) == true ]] \
+  || fail "Finder extension must declare LSUIElement for App Store upload"
 
 # 主程序的网络权限只给官网版的检查更新（F-081、F-082）。
 main_ents=$tmp/$app_id.plist

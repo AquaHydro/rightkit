@@ -2,6 +2,13 @@
 
 [验收](verification.md) 里需要真正打开访达的用例记录在这里。每次记录系统版本、构建、监视目录、步骤、结果和菜单回调日志。
 
+## App Store Connect 首次上传（V-082）
+
+- Xcode 27.0，本地 `make upload-appstore`，商店版 `app.rightkit.mac.store`。首次尝试 `0.1.1 (3)` 被 Apple 自动校验拒绝：Finder 扩展的 Info.plist 缺少 `LSUIElement`。该构建未完成上传。
+- 扩展补充 `LSUIElement = YES`，发布检查增加断言，构建号升至 `4`。重新执行 `make upload-appstore`，归档、导出 `.pkg` 和三个部件的签名检查通过。
+- App Store Connect 的 TestFlight 构建列表显示 `0.1.1 (4)` 上传状态「完成」，构建元数据的二进制文件状态「已验证」；bundle ID、版本和 build 号一致，最低 macOS 26.0，arm64 与 x86_64，非豁免加密为「否」。尚未提交 App 审核。
+- `make verify XCODE_FLAGS=CODE_SIGNING_ALLOWED=NO`、`python3 scripts/check_docs.py`、`git diff --check` 通过。Finder 实际菜单验收仍引用上文此前构建的真机记录，本次只验证了上传与自动校验，不把上传结果当作新的 Finder UI 验收。
+
 ## 2026-09-23 第一次真机验收
 
 - 系统：macOS 27.0（26A428），Xcode 27.0。最低支持 macOS 26 未验证，手上没有 26 环境。

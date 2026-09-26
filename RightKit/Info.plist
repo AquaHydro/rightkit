@@ -102,6 +102,6 @@
 	<key>NSAppleEventsUsageDescription</key>
 	<string>RightKit 只在你确认后请访达重新启动，让右键菜单生效。</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>© 2026 氢氧根</string>
+	<string>© 2026 Liao Yiliang</string>
 </dict>
 </plist>

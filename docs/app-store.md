@@ -203,3 +203,15 @@ No data is collected. The App Store version makes no network requests. The Trans
 ```
 
 联系人：Liao Yiliang，邮箱 `contact@yiliang.me`。电话只填在 App Store Connect 里，不写进仓库。
+
+## App 沙盒信息（App Sandbox Information）
+
+只为商店版使用的 Finder Apple Events 临时例外填写一行；普通文件访问和 App Group 权限不在这里逐项填写。
+
+**Entitlement Key**：`com.apple.security.temporary-exception.apple-events`
+
+**Usage Information**：
+
+```text
+RightKit only uses this exception to ask Finder to quit after the user clicks “Restart Finder” in Settings and confirms. It then reopens Finder so the Finder extension can take effect. The exception’s sole array value, `com.apple.finder`, limits this action to Finder. To test it, enable the Finder extension, then use Settings → Restart Finder and allow the macOS automation prompt.
+```

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RightKit App Store image</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; width: 2560px; height: 1600px; overflow: hidden; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif; }
+  main { position: relative; width: 2560px; height: 1600px; overflow: hidden; background: var(--bg); color: #20262a; }
+  main::after { content: ""; position: absolute; inset: auto 0 0; height: 22px; background: var(--accent); }
+  .brand { position: absolute; top: 91px; left: 122px; font-size: 43px; line-height: 1; font-weight: 780; }
+  .rule { position: absolute; top: 155px; left: 124px; width: 120px; height: 8px; background: var(--accent); }
+  .count { position: absolute; top: 94px; right: 122px; font-size: 32px; font-weight: 650; color: #677177; }
+  h1 { position: absolute; top: 193px; left: 120px; width: 2310px; margin: 0; font-size: 100px; line-height: 1.07; letter-spacing: 0; font-weight: 760; white-space: nowrap; }
+  .subline { position: absolute; top: 327px; left: 124px; margin: 0; font-size: 37px; line-height: 1.35; color: #526168; }
+  .screen { position: absolute; left: 120px; top: 458px; width: 1780px; height: 1060px; overflow: hidden; background: #fff; border: 2px solid #d7e0e0; border-radius: 6px; box-shadow: 0 26px 70px rgba(22, 45, 51, .13); }
+  .screen img { display: block; width: 1616px; height: auto; }
+  .mascot { position: absolute; z-index: 2; width: 800px; height: 1200px; right: 12px; bottom: -130px; object-fit: contain; object-position: bottom center; filter: drop-shadow(0 27px 30px rgba(35, 40, 46, .13)); }
+  .slide-2 .screen, .slide-3 .screen { top: 428px; height: 1145px; }
+  .slide-2 .screen img, .slide-3 .screen img { width: 1540px; }
+  .slide-4 .screen { top: 428px; height: 1145px; }
+  .slide-4 .screen img { width: 1440px; margin-top: -15px; }
+  .slide-5 { color: #fff; }
+  .slide-5 .brand, .slide-5 h1 { color: #fff; }
+  .slide-5 .count, .slide-5 .subline { color: #c5c9cb; }
+  .slide-5 .screen { top: 535px; width: 2220px; height: 447px; background: #25262d; border-color: #56565e; box-shadow: 0 26px 70px rgba(0, 0, 0, .24); }
+  .slide-5 .screen img { width: 2220px; }
+  .slide-5 .mascot { width: 650px; height: 650px; right: 85px; bottom: -40px; border-radius: 50%; object-fit: cover; border: 11px solid #ec796e; filter: drop-shadow(0 18px 35px rgba(0, 0, 0, .25)); }
+</style>
+<main>
+  <div class="brand">RightKit</div>
+  <div class="rule"></div>
+  <div class="count"></div>
+  <h1></h1>
+  <p class="subline"></p>
+  <div class="screen"><img alt="Actual RightKit interface"></div>
+  <img class="mascot" alt="Riko mascot">
+</main>
+<script>
+  const slides = [
+    { key: '01-new-file', art: 'feature-new-file.png', bg: '#f2f7f3', accent: '#54a66e',
+      zh: ['右键一下，就办好了。', '新建文本、Markdown 和 Office 文件。'],
+      en: ['Right-click. Done.', 'Create text, Markdown and Office files in Finder.'] },
+    { key: '02-move-to', art: 'feature-copy-move.png', bg: '#edf7f8', accent: '#38a6ae',
+      zh: ['常用的文件夹，一步就到。', '复制或移动，不用在文件夹之间来回找。'],
+      en: ['Favorite folders, one step away.', 'Copy or move files without hunting for folders.'] },
+    { key: '03-open-in-app', art: 'feature-open-app.png', bg: '#faf5f1', accent: '#ef946d',
+      zh: ['直接在终端或编辑器里打开。', '目录交给终端，项目交给编辑器。'],
+      en: ['Open in Terminal or your editor.', 'Folders in Terminal. Projects in your editor.'] },
+    { key: '04-toolbox', art: 'feature-toolbox.png', bg: '#f4f1f7', accent: '#9276ac',
+      zh: ['16 个小工具，收在一个子菜单里。', '路径、哈希、图片和图标，一次右键。'],
+      en: ['16 file tools. One submenu.', 'Paths, hashes, images and icons in one place.'] },
+    { key: '05-settings', art: 'status-ready.png', bg: '#26272e', accent: '#ed7d72',
+      zh: ['状态一目了然。', '访达扩展是否就绪，打开设置就知道。'],
+      en: ['Status at a glance.', 'See when your Finder extension is ready.'] },
+  ];
+  const params = new URLSearchParams(location.search);
+  const index = Number(params.get('slide')) - 1;
+  const locale = params.get('locale');
+  if (!slides[index] || !['zh', 'en'].includes(locale)) throw Error('Invalid slide or locale');
+  const slide = slides[index];
+  const main = document.querySelector('main');
+  main.classList.add(`slide-${index + 1}`);
+  main.style.setProperty('--bg', slide.bg);
+  main.style.setProperty('--accent', slide.accent);
+  document.querySelector('.count').textContent = `${String(index + 1).padStart(2, '0')} / 05`;
+  document.querySelector('h1').textContent = slide[locale][0];
+  document.querySelector('.subline').textContent = slide[locale][1];
+  document.querySelector('.screen img').src = `../../docs/evidence/app-store/source/zh/${slide.key}${index === 4 ? '-status.png' : '.jpg'}`;
+  document.querySelector('.mascot').src = `../../website/assets/character/${slide.art}`;
+</script>
