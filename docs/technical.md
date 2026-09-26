@@ -79,6 +79,12 @@
 
 扩展在自己的初始化里，向 App Group 写心跳：时间和扩展进程号。文件选择面板也会启动扩展实例并写心跳，面板的宿主退出后这个进程号就失效了，所以每个扩展实例每 5 秒检查一次，发现心跳里的进程已不在就用自己的进程号重写。主程序检查该进程仍在运行且确实是 `RightKitFinder`，以此判断本次登录中扩展是否在运行，区分「已启用」和「未运行」。沙盒不允许向其他进程发信号或调用 `proc_name`，所以用 `sysctl` 的 `KERN_PROC_PID` 读进程名。
 
+菜单性能：监视目录在一次规则构建中只标准化一次；复制到和移动到共用当次目标目录的存在性和显示名查询。扩展用 `MenuRenderer` 构建完整菜单，不复用 `NSMenuItem` 或命令数组。SF Symbol 的位图按当前系统浅深色缓存，外观变化时清空；真实文件、文件类型和应用图标只在同次菜单内复用，下次重新向系统查询。工具栏不读取目标、选择或待粘贴列表。
+
+待粘贴状态只在空白处或单个文件夹、且剪切粘贴开启时查询。`PendingPasteState` 每次检查 App Group 中 `pending.json` 的设备、inode、大小和纳秒修改/变更时间；版本未变时复用“是否非空”，不读取整个列表。文件被原子替换、删除或重新创建后重新读取；失败不缓存，后续可以重试。不缓存用户文件的隐藏状态等选择元数据。
+
+扩展的 `menu-performance` 日志记录初始化，以及每次菜单的选择元数据、待粘贴状态、规则和 AppKit 菜单构建耗时，首个回调标记 `first=true`。耗时不含日志输出、Finder 绘制和系统启动扩展前的等待；日志只有计数、类型和耗时，不增加文件路径。可重复的 Release 基准见 `scripts/perf/run_menu.py`。
+
 主程序修改设置后发出 Darwin 通知「App Group 加 `.settings`」（不带数据）。扩展收到后重读设置并更新 `directoryURLs`。这只是“设置变了”的提醒，不传命令。
 
 ## 通信
@@ -136,7 +142,7 @@
 
 - 使用编译条件 `APP_STORE` 和商店版标识构建，导出方式 `app-store-connect`，用 Apple Distribution 签名，导出 `.pkg`。Finder 扩展的 Info.plist 声明 `LSUIElement = YES`，满足 App Store Connect 上传校验。`make release-appstore` 执行归档、导出和检查（`scripts/release/release_appstore.sh`），`make upload-appstore` 在检查通过后上传 App Store Connect，使用 Xcode 里登录的账号。
 - 二进制里不能有检查更新的代码、GitHub API 或 Release 下载入口和网络权限。反馈按钮打开邮件 `contact@yiliang.me`。`scripts/release/check_signature.sh <app> appstore` 检查这一点，并和官网版共用标识、沙盒、App Group 和 agent 配置的检查。
-- 主程序和扩展各带一份 `PrivacyInfo.xcprivacy`：不跟踪、不收集数据；UserDefaults 用于本应用自己的偏好（`CA92.1`），主程序读取用户选中文件的时间戳用于哈希一致性检查（`3B52.1`）。用到新的需声明原因的 API 时同步更新。
+- 主程序和扩展各带一份 `PrivacyInfo.xcprivacy`：不跟踪、不收集数据；UserDefaults 用于本应用自己的偏好（`CA92.1`），主程序读取用户选中文件的时间戳用于哈希一致性检查（`3B52.1`）。扩展检查共享待粘贴文件的版本，声明 FileTimestamp 的 `C617.1`；使用 `systemUptime` 测量内部阶段耗时，声明 SystemBootTime 的 `35F9.1`。用到新的需声明原因的 API 时同步更新。
 - 商店版收费，官网版免费。商店版的应用内文案和链接都不提官网版或免费下载。
 - 送审说明要写清：为什么需要用户授权文件夹；为什么需要控制访达的 Apple Events 例外（只用来在用户确认后重启访达，让扩展生效）；怎样在系统设置里打开访达扩展。
 

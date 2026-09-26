@@ -109,9 +109,12 @@ public enum MenuBuilder {
         var nodes: [MenuNode] = []
 
         // F-060：只在监视目录及其子目录出现。
-        let monitored = settings.activeMonitoredPaths
-        let scopePaths = input.location == .items && !input.items.isEmpty ? input.items.map(\.path) : [input.folder]
-        guard scopePaths.allSatisfy({ PathRules.isInsideAny($0, of: monitored) }) else { return [] }
+        let monitored = PathRules.MonitoringScope(settings.activeMonitoredPaths)
+        if input.location == .items && !input.items.isEmpty {
+            guard input.items.allSatisfy({ monitored.contains($0.path) }) else { return [] }
+        } else {
+            guard monitored.contains(input.folder) else { return [] }
+        }
 
         let items = input.location == .items ? input.items : []
         let isNone = items.isEmpty
@@ -128,7 +131,7 @@ public enum MenuBuilder {
             if !children.isEmpty { nodes.append(submenu(L("新建文件"), "doc.badge.plus", children)) }
         }
         if groups.favorites, isNone {
-            let children = folders(settings.favorites, env).map { folderLeaf($0, Command(.openFolder, $0.id.uuidString), env) }
+            let children = folderTargets(settings.favorites, env).map { folderLeaf($0, Command(.openFolder, $0.entry.id.uuidString)) }
             if !children.isEmpty { nodes.append(submenu(L("常用目录"), "star", children)) }
         }
         if groups.openIn {
@@ -146,9 +149,9 @@ public enum MenuBuilder {
             nodes.append(leaf(L("剪切"), "scissors", Command(.cut)))
         }
         if groups.copyMove {
-            let targets = folders(settings.sendTo, env)
+            let targets = folderTargets(settings.sendTo, env)
             func transfer(_ title: String, _ symbol: String, _ action: CommandAction) -> MenuNode {
-                var children = targets.map { folderLeaf($0, Command(action, $0.id.uuidString), env) }
+                var children = targets.map { folderLeaf($0, Command(action, $0.entry.id.uuidString)) }
                 if !children.isEmpty { children.append(.separator) }
                 children.append(leaf(L("选择文件夹…"), "folder.badge.questionmark", Command(action)))
                 return submenu(title, symbol, children)
@@ -261,16 +264,32 @@ public enum MenuBuilder {
         return nil
     }
 
-    static func folders(_ entries: [FolderEntry], _ env: MenuEnvironment) -> [FolderEntry] {
-        entries.filter { $0.enabled && env.folderExists($0.path) }
+    private struct FolderTarget {
+        let entry: FolderEntry
+        let title: String
+    }
+
+    private static func folderTargets(_ entries: [FolderEntry], _ env: MenuEnvironment) -> [FolderTarget] {
+        var existence: [String: Bool] = [:]
+        var names: [String: String] = [:]
+        var targets: [FolderTarget] = []
+        for entry in entries where entry.enabled {
+            let exists = existence[entry.path] ?? env.folderExists(entry.path)
+            existence[entry.path] = exists
+            guard exists else { continue }
+            let title = names[entry.path] ?? env.displayName(entry.path)
+            names[entry.path] = title
+            targets.append(FolderTarget(entry: entry, title: title))
+        }
+        return targets
     }
 
     static func leaf(_ title: String, _ symbol: String, _ command: Command) -> MenuNode {
         MenuNode(title: title, icon: .symbol(symbol), content: .command(command))
     }
 
-    static func folderLeaf(_ entry: FolderEntry, _ command: Command, _ env: MenuEnvironment) -> MenuNode {
-        MenuNode(title: env.displayName(entry.path), icon: .file(path: entry.path), content: .command(command))
+    private static func folderLeaf(_ target: FolderTarget, _ command: Command) -> MenuNode {
+        MenuNode(title: target.title, icon: .file(path: target.entry.path), content: .command(command))
     }
 
     static func submenu(_ title: String, _ symbol: String, _ children: [MenuNode]) -> MenuNode {

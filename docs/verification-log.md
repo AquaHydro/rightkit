@@ -182,3 +182,9 @@ macOS 27.0（26A428），构建提交 `8e2be71` 加本次 `FolderStore.refreshed
 - 在真实快捷指令 App 中运行保留的 `RightKit  20260926`：未授权的 `/private/tmp/RKAcceptance-20260926/denied/input.png` 被拒绝，提示「RightKit 无权访问“denied”。」，目录仍只有原始图片；改选授权范围内的 `~/RKAcceptance-20260926/allowed/input.png`，成功得到 `input 2.png`，两个输入图的 SHA-256 均未改变，新建 TXT 动作也成功。
 - [授权成功截图](evidence/device-2026-09-26/db020c2-shortcut-allowed.png)、[未授权拒绝截图](evidence/device-2026-09-26/db020c2-shortcut-denied.png)、[结构化结果](evidence/device-2026-09-26/db020c2-shortcuts.json)。本次复跑的是此前触发 `/.nofollow` 问题的原始流程，未加入临时日志再次采集运行时 URL；不把终端模拟当作快捷指令验收。商店渠道未重跑。
 - 测试文件已清理，快捷指令保留；安装的官网版已更新到 db020c2。
+
+## 2026-09-26：菜单性能自动验证
+
+`F-008`、`F-033`、`F-060`、`F-061` 的菜单路径优化通过 112 项自动测试、双渠道未签名构建和统一检查。Release 同负载对照：30 个监视目录、10000 项规则计算 p50 从 457.100 ms 降到 27.061 ms；含真实元数据、10000 条待粘贴记录、30 个目标目录的 1000 项完整 AppKit 构建从 21.582 ms 降到 11.529 ms。
+
+完整方法、原始数据、符号位图与限制见 [菜单性能验证](performance/2026-09-26-menu.md)。没有替换已安装应用，UI 工具未能连接隔离测试窗口；没有把本次测试当成 Finder 首次可见延迟或交互通过。新增专项 `V-051` 保持 Planned，原有验收状态不变。
