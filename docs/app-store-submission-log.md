@@ -2,9 +2,15 @@
 
 记录日期：2026-09-26。对象：macOS 商店版 `app.rightkit.mac.store`，App Store Connect Apple ID `6816212746`，版本 `0.1.1 (4)`。
 
-本记录区分上传校验、提审和发布。当前状态是 **准备提交**；尚未点击「添加以供审核」或最终的「提交以供审核」，也没有获得 Apple 人工审核批准。版本设置为审核通过后**手动发布**，因此提审和上架仍是两个独立动作。上架资料原文见 [app-store.md](app-store.md)，构建与真机验收见 [verification-log.md](verification-log.md)，截图来源见 [evidence/app-store/README.md](evidence/app-store/README.md)。
+本记录区分上传校验、提审和发布。当前状态是 **等待审核**；尚未获得 Apple 人工审核批准，更未上架。版本设置为审核通过后**手动发布**，因此提审和上架仍是两个独立动作。上架资料原文见 [app-store.md](app-store.md)，构建与真机验收见 [verification-log.md](verification-log.md)，截图来源见 [evidence/app-store/README.md](evidence/app-store/README.md)。
 
-## 助手执行与核验
+## 正式提交记录
+
+- 用户于 2026-09-26 12:32（App Store Connect 页面显示的本地时间）正式提交审核，提交者显示为「廖奕良」。助手本轮只读取页面核验，没有代用户提交。
+- 提交 ID：`01dc116b-b85e-4cf4-950b-1fe5dd8056ff`；已提交项目共 1 项：`macOS App 0.1.1`，构建 `0.1.1 (4)`。
+- App Store Connect 的提交页与项目行均显示「等待审核」。这只证明提审成功，不代表已进入人工审核、通过审核或已发布。
+
+## 助手执行与核验（提审前）
 
 | 事项 | 结果与证据边界 |
 | --- | --- |
@@ -24,10 +30,9 @@
 - 核查并选择 App 不包含、显示或访问第三方内容；提供 Finder Apple Events 临时例外的准确英文用途和测试方法，要求填入专门的 App Sandbox Information。
 - 要求最后审查和留档，并明确**由用户稍后正式提交审核**。没有授权助手在本次记录和提交代码时点击 Connect 的提审按钮。
 
-## 提审与发布待办
+## 审核与发布待办
 
-1. 用户在 App Store Connect 的 `0.1.1` 版本页点击「添加以供审核」，在审核提交页检查系统列出的项目和任何新出现的必填项，再正式点击「提交以供审核」。如系统返回错误，先处理错误再提交。
-2. 等待 Apple 人工审核。`com.apple.security.temporary-exception.apple-events` 的用途虽已解释，是否被接受仍由 Apple 判断；收到反馈时以实际审核信息处理。
-3. 审核通过后在 Connect **手动发布**，再检查商店页面、可购买状态和下载后的首次启动。没有把「已验证」或「审核通过」当成「已发布」。
+1. 等待 Apple 人工审核。`com.apple.security.temporary-exception.apple-events` 的用途虽已解释，是否被接受仍由 Apple 判断；收到反馈时以实际审核信息处理。
+2. 审核通过后在 Connect **手动发布**，再检查商店页面、可购买状态和下载后的首次启动。没有把「已验证」或「审核通过」当成「已发布」。
 
-仓库侧：与上传包对应的 `project.yml` build 号、Finder 扩展 plist、签名检查、上架资料和截图应随本记录一起提交。后续任何二进制改动再上传时递增 build 号。自动化 Release 工作流的密钥与环境配置、官网版首个 Release 仍见 [TASK.md](../TASK.md)，不构成本次手动提审的前置条件。
+仓库侧：与上传包对应的 `project.yml` build 号、Finder 扩展 plist、签名检查、上架资料和截图已在 `14a868c` 一起提交。后续任何二进制改动再上传时递增 build 号。自动化 Release 工作流的密钥与环境配置、官网版首个 Release 仍见 [TASK.md](../TASK.md)，不构成本次手动提审的前置条件。
