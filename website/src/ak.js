@@ -63,17 +63,16 @@ const navLinks = [...document.querySelectorAll(".ak-nav-links a[href^='#']")];
 let scrollFrame = 0;
 function updateSection() {
   scrollFrame = 0;
-  let active = 0;
+  let active = -1;
   const marker = window.innerHeight * .35;
   sections.forEach((section, i) => { if (section.getBoundingClientRect().top <= marker) active = i; });
   const current = sections[active];
-  if (!current) return;
   const number = String(active + 1).padStart(2, "0");
   if (indexNumber) indexNumber.textContent = number;
   if (giant) giant.textContent = number;
-  if (indexTitle) indexTitle.textContent = current.id === "profile" ? "RIKO PROFILE" : current.querySelector(".section-label")?.textContent?.replace(/^\/\/\s*\d+\s*/, "")?.trim() || current.id.toUpperCase();
+  if (indexTitle) indexTitle.textContent = !current ? "RIGHTKIT" : current.id === "profile" ? "RIKO PROFILE" : current.querySelector(".section-label")?.textContent?.replace(/^\/\/\s*\d+\s*/, "")?.trim() || current.id.toUpperCase();
   navLinks.forEach((link) => {
-    if (link.hash === `#${current.id}`) link.setAttribute("aria-current", "location");
+    if (current && link.hash === `#${current.id}`) link.setAttribute("aria-current", "location");
     else link.removeAttribute("aria-current");
   });
 }
@@ -88,6 +87,7 @@ if (galleryRoot) {
   const items = [...galleryRoot.querySelectorAll("[data-ak-gallery-item]")];
   const echo = galleryRoot.querySelector(".ak-profile-echo");
   const progress = galleryRoot.querySelector(".ak-profile-progress span");
+  if (progress) progress.style.width = `${100 / items.length}%`;
   let previous = 0;
   let initialized = false;
   let echoTimer = 0;
