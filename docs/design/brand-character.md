@@ -235,9 +235,9 @@ No text, no letters, no numbers, no logos, no watermark.
 
 ### 9. ak-ui 档案全身立绘和首屏 PV
 
-档案区新增两张透明全身立绘：`profile-riko-stand-ak.png` 和 `profile-riko-ok-ak.png`。生成时上传 `hero-character-ak.png` 与应用图标的 `character.png`，使用 OpenAI 图片编辑通道，透明 PNG。站姿版本要求自然正面站立，另一张微侧身并做清晰 OK 手势。两张都要完整保留头顶呆毛到鞋底和四周透明边距。
+档案区使用四张透明全身立绘：`profile-riko-stand-ak.png`、`profile-riko-ok-ak.png`、`profile-riko-wave-ak.png` 和 `profile-riko-file-ak.png`。生成时上传 `hero-character-ak.png` 与应用图标的 `character.png`，使用 OpenAI 图片编辑通道，透明 PNG。站姿版本要求自然正面站立，OK 版本微侧身并做清晰手势，挥手版本伸出完整五指问好，文件版本抱着一张无字深灰文件卡。四张都要完整保留头顶呆毛到鞋底和四周透明边距。
 
-提示词必须明确这些检查项：珊瑚粉渐变短发；观者右侧刘海上的白色光标发卡；黑色箭头朝左上；发卡右下三条珊瑚线；机能夹克结构与 `hero-character-ak.png` 一致；小白鼠只有观者右侧耳朵是珊瑚色；不要文字、Logo、UI、游戏素材、地面阴影或水印。
+提示词必须明确这些检查项：珊瑚粉渐变短发；观者右侧刘海上的白色光标发卡；黑色箭头朝左上；发卡右下三条珊瑚线；机能夹克结构与 `hero-character-ak.png` 一致；小白鼠只有观者右侧耳朵是珊瑚色；不要文字、Logo、UI、游戏素材、地面阴影或水印。文件卡只能使用纯色与折角，不出现字母、数字或符号。
 
 首屏背景 `hero-pv-poster-ak.png` 是 16:9 的纯环境画面，不再重复画 Riko，避免和网页前景立绘争抢焦点。左侧保留低细节暗部给网页文案，上下自然压暗。场景只使用原创的深石墨数据工作间、磨砂玻璃板、细结构线、空白文件卡片轮廓、地面微反射和珊瑚雾光，不出现人物、动物、文字和游戏素材。
 

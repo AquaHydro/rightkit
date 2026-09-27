@@ -46,6 +46,8 @@ CHARACTER = {
     # Full-body profile art generated for the ak-ui archive gallery.
     "profile-riko-stand-ak": ("profile-riko-stand-ak.png", (512, 1024)),
     "profile-riko-ok-ak": ("profile-riko-ok-ak.png", (512, 1024)),
+    "profile-riko-wave-ak": ("profile-riko-wave-ak.png", (512, 1024)),
+    "profile-riko-file-ak": ("profile-riko-file-ak.png", (512, 1024)),
 }
 
 # Pricing card loops in website/assets/video, played on hover. The poster is the

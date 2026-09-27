@@ -191,7 +191,7 @@ Hero 里的访达窗口用 HTML 和 CSS 绘制。窗口里有 4 个项目：一�
 | `sheet.png` | 生图基准，不上网页 | 已入库 |
 | 以上角色图的 `-ak` 版（`hero-character-ak.png`、`cta-character-ak.png`、`feature-*-ak.png` × 5、`pricing-*-ak.png` × 3） | ak-ui 风格（`/ak/`），构图同经典版，服装换成机能夹克，生成方法见[品牌角色设定](brand-character.md#8-ak-ui-风格版本) | 已用，导出宽度同经典版 |
 | `website/assets/video/pricing-*-ak.mp4` | ak 版价格卡视频原片，768 × 1168，6 秒 | 已用。原片尾帧回不到首帧，导出时正放加倒放拼成 12 秒无缝循环，CRF 31，约 0.4 到 0.9MB |
-| `profile-riko-stand-ak.png`、`profile-riko-ok-ak.png` | ak 版 Riko 档案全身立绘，透明背景 | 已用，导出 512 和 1024 宽。发卡、小白鼠耳朵和全身边距已经人工检查 |
+| `profile-riko-stand-ak.png`、`profile-riko-ok-ak.png`、`profile-riko-wave-ak.png`、`profile-riko-file-ak.png` | ak 版 Riko 档案全身立绘，透明背景 | 已用，导出 512 和 1024 宽。四种姿势依次为站立、OK、挥手、抱文件卡，发卡、小白鼠耳朵和全身边距已经人工检查 |
 | `hero-pv-poster-ak.png` | ak 版首屏电影背景海报，不含人物 | 已用，导出为 `hero-pv-poster-ak.webp`，视频不能播放时仍完整显示 |
 | `website/assets/video/hero-pv-ak.mp4` | ak 版首屏低动态环境 PV 原片，1264 × 720，约 6 秒 | 已用。原片每 12 帧检查结构与禁用内容，导出时正放加倒放为约 12 秒无缝循环 |
 | `website/assets/apps/*.png` | 「在应用中打开」里终端、Ghostty、Visual Studio Code、Xcode 的真实图标 | 已用，按 macOS 图标网格导出 64 和 128。来源和权利人见 `website/assets/apps/SOURCES.md`，页脚写明商标归属。Apple 的两个图标正式上线前要确认符合 Apple 商标使用指南 |

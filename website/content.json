@@ -55,7 +55,8 @@
       "images": [
         { "id": "portrait", "label": "Riko", "alt": "Riko 的全身立绘，珊瑚色短发、光标发卡和肩上的小白鼠", "src": "profile-riko-stand-ak-1024.webp" },
         { "id": "ok", "label": "准备好了", "alt": "Riko 微笑眨眼，比出 OK 手势，小白鼠在肩上", "src": "profile-riko-ok-ak-1024.webp" },
-        { "id": "open", "label": "在应用中打开", "alt": "Riko 拿着钥匙形光标打开应用窗口", "src": "feature-open-app-ak-640.webp" }
+        { "id": "wave", "label": "打个招呼", "alt": "Riko 侧身站立，伸手挥手问好，小白鼠在肩上", "src": "profile-riko-wave-ak-1024.webp" },
+        { "id": "file", "label": "整理就绪", "alt": "Riko 抱着一张无字文件卡，小白鼠在肩上", "src": "profile-riko-file-ak-1024.webp" }
       ]
     },
     "ticker": [
@@ -701,7 +702,8 @@
       "images": [
         { "id": "portrait", "label": "Riko", "alt": "Full body Riko with coral hair, cursor clip, and a white mouse on her shoulder", "src": "profile-riko-stand-ak-1024.webp" },
         { "id": "ok", "label": "All set", "alt": "Riko smiles and winks with an OK gesture, the mouse on her shoulder", "src": "profile-riko-ok-ak-1024.webp" },
-        { "id": "open", "label": "Open in App", "alt": "Riko opens an app window with a key shaped cursor", "src": "feature-open-app-ak-640.webp" }
+        { "id": "wave", "label": "Hello", "alt": "Riko stands at an angle and waves hello, the mouse on her shoulder", "src": "profile-riko-wave-ak-1024.webp" },
+        { "id": "file", "label": "Files ready", "alt": "Riko holds a blank file card, the mouse on her shoulder", "src": "profile-riko-file-ak-1024.webp" }
       ]
     },
     "ticker": [
