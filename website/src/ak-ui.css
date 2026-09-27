@@ -206,11 +206,17 @@
 .ak-nav-links a small { display: block; font: 500 10px/1.2 var(--font); letter-spacing: .08em; }
 .ak-nav-links a[aria-current="location"] { color: var(--coral); background: none; }
 .ak-nav-links a[aria-current="location"]::after { bottom: 0; transform: none; }
-.ak-section-index { position: fixed; right: 0; top: 31%; z-index: 48; width: 170px; height: 320px; padding: 18px 16px 14px 20px; background: rgba(24,25,29,.9); color: var(--on-ink); border-left: 1px solid rgba(255,255,255,.3); pointer-events: none; overflow: hidden; }
+/* Section index lives in the right gutter beside the 1200px content column, low on the screen, so it never covers
+   the copy, the demo or Riko's face. It needs a real gutter; narrower windows drop it (see the media query below). */
+.ak-section-index {
+  --rail: min(160px, calc((100vw - var(--wrap)) / 2 - 12px));
+  position: fixed; right: 0; bottom: 40px; z-index: 48; width: var(--rail); height: 196px; padding: 14px 10px 0 14px;
+  background: rgba(24, 25, 29, 0.9); color: var(--on-ink); border-left: 1px solid rgba(255, 255, 255, 0.3); pointer-events: none; overflow: hidden;
+}
 .ak-section-index::before { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 3px; background: var(--coral); }
-.ak-section-index-giant { position: absolute; top: 185px; left: 5px; font: 700 140px/1 "Oswald", var(--font); color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,.6); }
-.ak-section-index-count { position: relative; display: block; font: 500 14px/1.3 var(--font-mono); color: var(--coral); white-space: nowrap; }
-.ak-section-index-title { position: relative; display: block; margin-top: 10px; font: 500 12px/1.3 var(--font-mono); text-transform: uppercase; overflow-wrap: anywhere; }
+.ak-section-index-giant { position: absolute; left: 8px; bottom: calc(var(--rail) * -0.12); font: 700 calc(var(--rail) * 0.8)/1 "Oswald", var(--font); color: transparent; -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.6); }
+.ak-section-index-count { position: relative; display: block; font: 500 12px/1.3 var(--font-mono); color: var(--coral); white-space: nowrap; }
+.ak-section-index-title { position: relative; display: block; margin-top: 8px; font: 500 12px/1.3 var(--font-mono); text-transform: uppercase; overflow-wrap: anywhere; }
 
 /* Sparse construction lines cross behind the focal media. */
 .hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(#16171c99, #16171c99), url("img/hero-pv-poster-ak.webp") center / cover no-repeat; opacity: .26; pointer-events: none; }
@@ -280,12 +286,8 @@
 @keyframes ak-profile-out { to { opacity: 0; translate: -20px 0; } }
 @keyframes ak-profile-in { from { opacity: 0; translate: 20px 0; } to { opacity: 1; translate: 0 0; } }
 
-@media (max-width: 1300px) { .ak-section-index { width: 132px; height: 260px; padding: 14px 10px 10px 14px; } .ak-section-index-giant { top: 154px; font-size: 110px; } }
+@media (max-width: 1419px) { .ak-section-index { display: none; } }
 @media (max-width: 860px) {
-  .ak-section-index { top: 72px; width: 64px; height: 144px; padding: 8px 5px 5px 7px; background: rgba(24,25,29,.72); }
-  .ak-section-index-giant { top: 94px; left: 3px; font-size: 54px; -webkit-text-stroke-width: 1px; }
-  .ak-section-index-count { font-size: 8px; }
-  .ak-section-index-title { margin-top: 4px; font-size: 8px; }
   .ak-profile-inner { grid-template-columns: 1fr; gap: 0; }
   .ak-profile-info { padding: 0; }
   .ak-profile-stage { height: min(125vw,580px); margin-bottom: -80px; }
