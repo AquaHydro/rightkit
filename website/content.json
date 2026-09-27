@@ -23,6 +23,7 @@
       "download": "下载",
       "language": "切换到英文"
     },
+    "akNav": { "features": "FEATURES", "toolbox": "TOOLBOX", "profile": "PROFILE", "pricing": "PRICING", "faq": "FAQ", "profileLocal": "角色", "featuresLocal": "功能", "toolboxLocal": "工具箱", "pricingLocal": "价格", "faqLocal": "常见问题", "index": "章节索引" },
     "hero": {
       "kicker": "RIGHT-CLICK, DONE",
       "motion": "背景动效",
@@ -39,6 +40,23 @@
         "开源"
       ],
       "charAlt": "RightKit 的角色 Riko 伸手点向右键菜单，肩上趴着一只小白鼠"
+    },
+    "profile": {
+      "eyebrow": "RIGHTKIT :// PROFILE",
+      "name": "Riko",
+      "localName": "莉可",
+      "partner": "伙伴：小白鼠",
+      "body": "开朗、手快、靠得住的右键小帮手。珊瑚色头发、卷起的呆毛，还有那枚光标菜单发卡，是她最显眼的标记。肩上的小白鼠只有右边一只耳朵是珊瑚色。",
+      "galleryLabel": "Riko 形象档案",
+      "open": "查看大图",
+      "close": "关闭大图",
+      "prev": "上一张",
+      "next": "下一张",
+      "images": [
+        { "id": "portrait", "label": "Riko", "alt": "Riko 的全身立绘，珊瑚色短发、光标发卡和肩上的小白鼠", "src": "profile-riko-stand-ak-1024.webp" },
+        { "id": "ok", "label": "准备好了", "alt": "Riko 微笑眨眼，比出 OK 手势，小白鼠在肩上", "src": "profile-riko-ok-ak-1024.webp" },
+        { "id": "open", "label": "在应用中打开", "alt": "Riko 拿着钥匙形光标打开应用窗口", "src": "feature-open-app-ak-640.webp" }
+      ]
     },
     "ticker": [
       "新建文件",
@@ -651,6 +669,7 @@
       "download": "Download",
       "language": "Switch to Chinese"
     },
+    "akNav": { "features": "FEATURES", "toolbox": "TOOLBOX", "profile": "PROFILE", "pricing": "PRICING", "faq": "FAQ", "profileLocal": "", "featuresLocal": "", "toolboxLocal": "", "pricingLocal": "", "faqLocal": "", "index": "Section index" },
     "hero": {
       "kicker": "RIGHT-CLICK, DONE",
       "motion": "Background motion",
@@ -667,6 +686,23 @@
         "Open source"
       ],
       "charAlt": "Riko, the RightKit character, reaching toward a context menu with a white mouse on her shoulder"
+    },
+    "profile": {
+      "eyebrow": "RIGHTKIT :// PROFILE",
+      "name": "Riko",
+      "localName": "",
+      "partner": "Companion: the white mouse",
+      "body": "Cheerful, quick handed, and dependable, Riko is your right click helper. Coral hair, a curled ahoge, and her cursor menu hair clip make her easy to spot. The mouse on her shoulder has one coral ear on the viewer's right.",
+      "galleryLabel": "Riko character profile",
+      "open": "View full image",
+      "close": "Close image",
+      "prev": "Previous image",
+      "next": "Next image",
+      "images": [
+        { "id": "portrait", "label": "Riko", "alt": "Full body Riko with coral hair, cursor clip, and a white mouse on her shoulder", "src": "profile-riko-stand-ak-1024.webp" },
+        { "id": "ok", "label": "All set", "alt": "Riko smiles and winks with an OK gesture, the mouse on her shoulder", "src": "profile-riko-ok-ak-1024.webp" },
+        { "id": "open", "label": "Open in App", "alt": "Riko opens an app window with a key shaped cursor", "src": "feature-open-app-ak-640.webp" }
+      ]
     },
     "ticker": [
       "New File",
