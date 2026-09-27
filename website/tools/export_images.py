@@ -22,6 +22,7 @@ OUT = ROOT / "website/public/img"
 # name -> (source, widths). Each width is exported as name-<width>.webp.
 CHARACTER = {
     "hero-character": ("hero-character.png", (560, 1120)),
+    "hero-character-ak": ("hero-character-ak.png", (560, 1120)),  # ak-ui theme (/ak/)
     "cta-character": ("cta-character.png", (480, 960)),
     "main": ("main.png", (400, 800)),
     "feature-new-file": ("feature-new-file.png", (320, 640)),
@@ -32,19 +33,33 @@ CHARACTER = {
     "pricing-free": ("pricing-free.png", (420, 840)),
     "pricing-store": ("pricing-store.png", (420, 840)),
     "pricing-oss": ("pricing-oss.png", (420, 840)),
+    # ak-ui theme (/ak/): same compositions in the operator outfit.
+    "cta-character-ak": ("cta-character-ak.png", (480, 960)),
+    "feature-new-file-ak": ("feature-new-file-ak.png", (320, 640)),
+    "feature-copy-move-ak": ("feature-copy-move-ak.png", (320, 640)),
+    "feature-open-app-ak": ("feature-open-app-ak.png", (320, 640)),
+    "feature-toolbox-ak": ("feature-toolbox-ak.png", (320, 640)),
+    "feature-empty-error-ak": ("feature-empty-error-ak.png", (240, 480)),
+    "pricing-free-ak": ("pricing-free-ak.png", (420, 840)),
+    "pricing-store-ak": ("pricing-store-ak.png", (420, 840)),
+    "pricing-oss-ak": ("pricing-oss-ak.png", (420, 840)),
 }
 
 # Pricing card loops in website/assets/video, played on hover. The poster is the
 # matching still above, which is also the first frame of the loop.
 VIDEOS = ("pricing-free", "pricing-store", "pricing-oss")
+# The ak loops end away from their first frame, so they play forward then backward to loop without a jump.
+PINGPONG = ("pricing-free-ak", "pricing-store-ak", "pricing-oss-ak")
 
 
 def export_videos() -> None:
     target = ROOT / "website/public/video"
     target.mkdir(exist_ok=True)
-    for name in VIDEOS:
-        subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", ROOT / f"website/assets/video/{name}.mp4",
-                        "-an", "-c:v", "libx264", "-crf", "28", "-preset", "slow", "-pix_fmt", "yuv420p",
+    for name in VIDEOS + PINGPONG:
+        # Ping-pong doubles the length, so it needs a higher CRF to stay under the 1 MB budget.
+        loop = ["-filter_complex", "[0:v]split[a][b];[b]reverse[r];[a][r]concat=n=2:v=1[v]", "-map", "[v]"] if name in PINGPONG else []
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", ROOT / f"website/assets/video/{name}.mp4", *loop,
+                        "-an", "-c:v", "libx264", "-crf", "31" if name in PINGPONG else "28", "-preset", "slow", "-pix_fmt", "yuv420p",
                         "-movflags", "+faststart", target / f"{name}.mp4"], check=True)
 
 

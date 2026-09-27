@@ -16,10 +16,21 @@ RightKit 产品介绍页的结构、视觉、动画和素材。角色设定见[�
 - 每节开头一个等宽小标签（`// 01  MULTI-HARNESS`），编号用品牌色，后面拉一条细线。
 - 角色出场两次：首屏 Hero 和结尾下载区，中间各节只用排版和卡片。
 - 首屏字标用「灯管通电」式闪烁出场，文字上升、立绘侧滑进场。常驻动画幅度小、周期长。滚动进场统一用一条 expo-out 曲线。支持减弱动态效果。
-- 纯 CSS 动画加少量 JS，没有 WebGL 和视频。
+- 纯 CSS 动画加少量 JS，没有 WebGL 和视频（ak-ui 风格的首屏粒子例外）。
 - 价格页（`/pricing`）的每张价格卡是一整张角色插画，文字压在底部渐变上。平时是静图，鼠标移上去才播放一段循环短视频，移开就停。
 
 RightKit 照搬结构和节奏，价格卡也学了 hover 播放视频的做法，但不照搬气质：Cindy 的故障、扫描线、赛博朋克风格和我们的圆润可爱图标不搭。我们的动效都围绕「右键」这一个动作来设计。
+
+### 两种风格
+
+同一套模板和文案构建出两种风格，两者都保留：
+
+| 风格 | 网址 | 样式 |
+| --- | --- | --- |
+| 经典（默认） | `/`、`/en/` | `styles.css`，本文「视觉」和「动画」里没有特别标注的部分 |
+| ak-ui | `/ak/`、`/ak/en/` | `styles.css` 之后再加载 `ak-ui.css`，按 [ak-ui](https://github.com/YunYouJun/ak-ui) 的 terminal 强度改几何和交互反馈 |
+
+ak-ui 风格只改切角、信号线、编号标签和终端式线格，品牌不变：珊瑚色、深浅区块交替、Nunito 字标、Riko 和模拟访达窗口都保留。全站角色素材都换成 ak 版（文件名加 `-ak`，见[素材清单](#素材清单)）：构图和姿势与经典版一致，外套换成带炭灰结构块、珊瑚信号条和胸前绑带的机能夹克，发色、呆毛和光标发卡不变，所以版式和手指位置不变。模拟窗口和菜单仍然照 macOS 26 的样子画，不套 ak-ui 几何。两种风格的交互脚本、文案和无障碍行为完全相同。ak-ui 页面的 canonical 指向经典版对应页面。
 
 ## 视觉
 
@@ -53,6 +64,21 @@ RightKit 照搬结构和节奏，价格卡也学了 hover 播放视频的做法�
 - 每节开头的小标签：`// 01  新建`，等宽字体、字间距 0.2em、编号用珊瑚色，右侧拉一条 1px 细线。
 - 区块之间用一条带珊瑚色小圆点端点的细线过渡。
 - 卡片圆角 16px，和 macOS 26 的窗口圆角气质一致。
+
+ak-ui 风格在此基础上改为：
+
+- 小标签的编号放在右下切角的珊瑚色标签块里（浅色区块用 `--coral-ink` 底白字），右侧细线末端有一个短竖线。
+- 卡片、工具分组和价格卡不用圆角，右上切角（ak-ui `--ak-cut-md` / `--ak-cut-lg`）。卡片左上有一段 32px 珊瑚信号线，价格卡顶部是 4px 粗线（官网版珊瑚，其余深色）。
+- 按钮是对角切角的矩形，填充画在 `::before` 上，所以切角不会裁掉焦点框和点击区域。hover 上移 1px，底部信号线展开；按下下移 1px。「即将上架」用斜线纹理加自己的文字表示不可用，不只靠颜色。
+- 首屏只有一个强几何动作：Riko 身后一块倾斜 12° 的石墨色斜面，左边一条 4px 珊瑚线。斜面用石墨色而不是珊瑚色，因为 Riko 的头发会融进珊瑚底。背景是 48px 线格，斜面上叠一层珊瑚色粒子波（ak-ui `createParticleField`，WebGL，不可用时退到 2D 或静态点阵），用遮罩避开左侧文案。模拟窗口左上和右上有瞄准框角标。
+- 下载区重复首屏的手势：48px 线格、窄一些的石墨斜面和一层旋涡粒子（`orbit`），页面首尾呼应。
+- 鼠标视差（ak-ui `createDashboardDepth`）：首屏的线格、粒子、斜面、光晕和 Riko，下载区的线格、斜面、粒子和 Riko，四个功能区和工具箱的插画，都按不同深度反向移动。首屏模拟窗口不动，保证点击位置稳定。只对精确指针生效，触屏不动；减弱动态效果时回到中心。
+- 首屏和下载区各有一个「背景动效」开关（桌面在右上，手机在底部），两个开关同步控制全部粒子，`aria-pressed` 表示状态，亮起的方块表示正在播放。粒子离开视口、页面隐藏或减弱动态效果时自动暂停，减弱动态效果时开关隐藏。
+- 功能区和工具箱的 Q 版站在一块右上切角的线格底板上，左上和右下有瞄准框角标，取代经典版的地面阴影。
+- 首屏四个标签是一条「数据轨」：上方一条细线，每格开头一段珊瑚短线。手机上两列。
+- 工具箱第五组（解散文件夹、彻底删除）是危险操作：红色左边线、红色编号块和菱形标记，不只靠颜色。
+- 常见问题每题前有等宽编号；展开时左侧出现珊瑚竖线、编号变色右移、加号转成叉号。
+- 焦点框统一用 ak-ui 的 `--ak-focus-width`（3px）和 `--ak-focus-offset`，深色区块用 `--coral`，浅色区块用 `--coral-ink`。
 
 ## 页面结构
 
@@ -128,6 +154,9 @@ Hero 里的访达窗口用 HTML 和 CSS 绘制。窗口里有 4 个项目：一�
 | 跑马灯 | 匀速滚动 | 36s 一圈 |
 | 滚动进场 | 元素进入视口时上升 24px 淡入，同一组错开 60ms | 0.7s |
 | 按钮 hover | 上移 1px，阴影加深 | 0.18s |
+| 首屏斜面（ak-ui） | 从右侧 12% 处滑入并淡入 | 1.1s，延迟 0.15s |
+| 按钮 hover（ak-ui） | 上移 1px，投影加深，底部信号线展开 | 0.12s（线 0.2s） |
+| 导航链接 hover（ak-ui） | 底部珊瑚线从左展开 | 0.2s |
 | 菜单展开 | 从光标位置缩放 0.96 到 1 并淡入 | 0.18s |
 | 价格卡 hover | 视频淡入并循环播放，插画放大到 1.025 | 淡入 0.4s，放大 0.9s |
 
@@ -153,6 +182,8 @@ Hero 里的访达窗口用 HTML 和 CSS 绘制。窗口里有 4 个项目：一�
 | `main.png` | 备用头像 | 已导出，页面暂未使用 |
 | `hero-dark.webp`、`hero-light.webp` | 备用 | 页面未使用 |
 | `sheet.png` | 生图基准，不上网页 | 已入库 |
+| 以上角色图的 `-ak` 版（`hero-character-ak.png`、`cta-character-ak.png`、`feature-*-ak.png` × 5、`pricing-*-ak.png` × 3） | ak-ui 风格（`/ak/`），构图同经典版，服装换成机能夹克，生成方法见[品牌角色设定](brand-character.md#8-ak-ui-风格版本) | 已用，导出宽度同经典版 |
+| `website/assets/video/pricing-*-ak.mp4` | ak 版价格卡视频原片，768 × 1168，6 秒 | 已用。原片尾帧回不到首帧，导出时正放加倒放拼成 12 秒无缝循环，CRF 31，约 0.4 到 0.9MB |
 | `website/assets/apps/*.png` | 「在应用中打开」里终端、Ghostty、Visual Studio Code、Xcode 的真实图标 | 已用，按 macOS 图标网格导出 64 和 128。来源和权利人见 `website/assets/apps/SOURCES.md`，页脚写明商标归属。Apple 的两个图标正式上线前要确认符合 Apple 商标使用指南 |
 | 应用图标 | favicon、导航、分享图 | 从 `RightKit/Resources/AppIcon.icon` 合成，导出 64、180、512 |
 | `public/img/og.jpg` | 1200 × 630 分享图 | 由 `website/tools/og.html` 渲染（`node website/tools/render_og.mjs`，需要 Playwright） |
@@ -162,10 +193,10 @@ Hero 里的访达窗口用 HTML 和 CSS 绘制。窗口里有 4 个项目：一�
 
 ## 技术
 
-- 静态站，只用 Python 标准库构建：`python3 website/build.py`（或 `make website`）把 `src/index.html` 按 `content.json` 渲染成 `dist/index.html`（中文）和 `dist/en/index.html`（英文），再复制 `public/`、`styles.css` 和 `main.js`。`make website-serve` 在本地 8000 端口预览。
+- 静态站，只用 Python 标准库构建：`python3 website/build.py`（或 `make website`）把 `src/index.html` 按 `content.json` 渲染成 `dist/index.html`（中文）和 `dist/en/index.html`（英文），ak-ui 风格渲染到 `dist/ak/` 下，再复制 `public/`、`styles.css`、`ak-ui.css`、`main.js` 和 `ak.js`。两种风格共用 `public/` 里的图片、字体和视频。`make website-serve` 在本地 8000 端口预览。
 - 模板语法只有变量、循环和条件，见 `build.py` 开头的说明。
 - 资源路径都是相对路径，放在域名根目录或 GitHub Pages 这类子路径下都能用。`dist/` 不入库，部署时构建。
-- 不引入前端框架和第三方脚本。字体自托管：Nunito（拉丁字母子集，可变字重）和 Geist Mono，许可证在 `public/fonts/`。中文走系统字体。
+- 不引入前端框架和第三方脚本。ak-ui 风格用它的 `tokens.css`（CSS 变量，不含重置和组件样式），以及原样复制的三个 ES 模块 `js/site/particles.mjs`、`js/site/shared.mjs`、`js/dashboard-depth.mjs`，都放在 `public/ak-ui/`，附 MIT 许可证；`src/ak.js` 只在 ak-ui 页面以 `type=module` 加载。品牌到 `--ak-*` 语义变量的映射和全部 ak-ui 样式写在 `src/ak-ui.css`，经典版的 `styles.css` 不改。模板用 `{% if theme.ak %}` 给 ak-ui 版加少量标记（首屏斜面、常见问题编号）；页面之间的链接用 `home`，资源用 `base`，所以 `/ak/` 下切换语言不会跳回经典版。升级时 `npm pack @yunyoujun/ak-ui`，替换 `dist/tokens.css` 和上面三个 `src/js/` 模块。字体自托管：Nunito（拉丁字母子集，可变字重）和 Geist Mono，许可证在 `public/fonts/`。中文走系统字体。
 - 语言：导航和页脚都有切换链接，页面声明 `hreflang`。不根据浏览器语言自动跳转，也不弹切换提示。
 - 首屏立绘用 `fetchpriority="high"` 并预加载，其余图片懒加载。
 - 官网域名 `https://rightkit.example` 仍待确定；下载已固定跳转 GitHub 最新 Release。域名、下载地址、GitHub 链接和版本号统一放在 `site.json`。

@@ -25,6 +25,7 @@
     },
     "hero": {
       "kicker": "RIGHT-CLICK, DONE",
+      "motion": "背景动效",
       "title1": "右键一下，",
       "title2": "就办好了。",
       "lead": "RightKit 给访达的右键菜单加上新建文件、拷贝到、移动到、用应用打开和一整套文件工具。",
@@ -652,6 +653,7 @@
     },
     "hero": {
       "kicker": "RIGHT-CLICK, DONE",
+      "motion": "Background motion",
       "title1": "Right-click.",
       "title2": "Done.",
       "lead": "RightKit adds New File, Copy To, Move To, Open in App and a full toolbox to the Finder context menu.",

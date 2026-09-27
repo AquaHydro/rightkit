@@ -47,7 +47,7 @@ upload-appstore:
 run: build
 	open --env RIGHTKIT_SKIP_LOGIN_ITEM=1 $(APP)
 
-# 官网：生成 website/dist，中文在 /，英文在 /en/。只用 Python 标准库。
+# 官网：生成 website/dist，中文在 /，英文在 /en/；ak-ui 风格在 /ak/。只用 Python 标准库。
 website:
 	python3 website/build.py
 

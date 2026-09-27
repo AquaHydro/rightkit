@@ -2,7 +2,8 @@
 """Build the RightKit website into website/dist.
 
 Standard library only. Renders src/index.html and src/privacy.html once per language in content.json
-and copies the static files next to it.
+and theme, and copies the static files next to it. The classic theme lives at the root; the ak-ui theme
+(styles.css plus src/ak-ui.css) lives under /ak/ and shares the same assets.
 
 Template syntax:
   {{ path.to.value }}          HTML-escaped text; {name} placeholders use site.json
@@ -24,6 +25,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 SRC = ROOT / "src"
 DIST = ROOT / "dist"
+
+# Theme name -> URL prefix. Templates see theme.ak to add the ak-ui markup.
+THEMES = {"classic": "", "ak": "ak/"}
 
 TOKEN = re.compile(r"\{\{\s*(.+?)\s*\}\}|\{%\s*(.+?)\s*%\}", re.S)
 
@@ -123,19 +127,22 @@ def main() -> int:
     if DIST.exists():
         shutil.rmtree(DIST)
     shutil.copytree(ROOT / "public", DIST)
-    for name in ("styles.css", "main.js"):
+    for name in ("styles.css", "ak-ui.css", "main.js", "ak.js"):
         shutil.copy2(SRC / name, DIST / name)
 
-    for strings in content.values():
-        for sub, tree in pages.items():
-            path = strings["path"] + sub
-            depth = len([part for part in path.split("/") if part])
-            # Relative asset paths keep the site working under a sub-path such as GitHub Pages.
-            scope = {"site": site, "t": strings, "base": "../" * depth}
-            target = DIST / path.strip("/") / "index.html"
-            target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_text(render(tree, scope), encoding="utf-8")
-            print(f"built {target.relative_to(ROOT)}")
+    for theme, prefix in THEMES.items():
+        for strings in content.values():
+            for sub, tree in pages.items():
+                path = "/" + prefix + strings["path"].lstrip("/") + sub
+                depth = len([part for part in path.split("/") if part])
+                # Relative asset paths keep the site working under a sub-path such as GitHub Pages.
+                # base points at the shared assets; home keeps page links inside the same theme.
+                base = "../" * depth
+                scope = {"site": site, "t": strings, "base": base, "home": base + prefix, "theme": {theme: True}}
+                target = DIST / path.strip("/") / "index.html"
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_text(render(tree, scope), encoding="utf-8")
+                print(f"built {target.relative_to(ROOT)}")
     return 0
 
 

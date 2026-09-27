@@ -21,11 +21,13 @@
 <link rel="icon" type="image/png" sizes="64x64" href="{{ base }}img/app-icon-64.png">
 <link rel="apple-touch-icon" href="{{ base }}img/app-icon-180.png">
 <link rel="preload" href="{{ base }}fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" as="image" href="{{ base }}img/hero-character-1120.webp" imagesrcset="{{ base }}img/hero-character-560.webp 560w, {{ base }}img/hero-character-1120.webp 1120w" imagesizes="(max-width: 760px) 70vw, 34vw" fetchpriority="high">
-<link rel="stylesheet" href="{{ base }}styles.css">
+<link rel="preload" as="image" href="{{ base }}img/hero-character{% if theme.ak %}-ak{% endif %}-1120.webp" imagesrcset="{{ base }}img/hero-character{% if theme.ak %}-ak{% endif %}-560.webp 560w, {{ base }}img/hero-character{% if theme.ak %}-ak{% endif %}-1120.webp 1120w" imagesizes="(max-width: 760px) 70vw, 34vw" fetchpriority="high">
+<link rel="stylesheet" href="{{ base }}styles.css">{% if theme.ak %}
+<link rel="stylesheet" href="{{ base }}ak-ui/tokens.css">
+<link rel="stylesheet" href="{{ base }}ak-ui.css">{% endif %}
 <script>document.documentElement.classList.add("js")</script>
 </head>
-<body>
+<body{% if theme.ak %} data-ak-ui{% endif %}>
 <svg class="sprite" aria-hidden="true" focusable="false">
   <symbol id="i-doc-plus" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M12 11v6M9 14h6"/></symbol>
   <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></symbol>
@@ -68,7 +70,7 @@
       <a href="#faq">{{ t.nav.faq }}</a>
     </nav>
     <div class="nav-actions">
-      <a class="lang" href="{{ base }}{{ t.alt.href|raw }}" hreflang="{{ t.alt.lang }}" lang="{{ t.alt.lang }}" aria-label="{{ t.nav.language }}">{{ t.alt.short }}</a>
+      <a class="lang" href="{{ home }}{{ t.alt.href|raw }}" hreflang="{{ t.alt.lang }}" lang="{{ t.alt.lang }}" aria-label="{{ t.nav.language }}">{{ t.alt.short }}</a>
       <a class="btn btn-primary btn-sm" href="{{ site.download }}"><svg class="ic"><use href="#i-download"/></svg>{{ t.nav.download }}</a>
     </div>
   </div>
@@ -76,7 +78,10 @@
 
 <main id="main">
   <section class="hero band ink" aria-labelledby="hero-title">
-    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="grid-bg" aria-hidden="true"{% if theme.ak %} data-depth="0.04"{% endif %}></div>{% if theme.ak %}
+    <div class="hero-plane" data-depth="0.12" aria-hidden="true"></div>
+    <canvas class="ak-particle-field hero-particles" data-pattern="wave" data-depth="0.08" aria-hidden="true"></canvas>
+    <button type="button" class="motion-toggle" data-motion-toggle aria-pressed="true" hidden>{{ t.hero.motion }}</button>{% endif %}
     <div class="wrap hero-inner">
       <div class="hero-copy">
         <p class="kicker intro" style="--d:0"><span class="kicker-line"></span>{{ t.hero.kicker }}</p>
@@ -96,9 +101,9 @@
       </div>
 
       <div class="hero-stage" data-stage>
-        <div class="glow" aria-hidden="true"></div>
-        <div class="character">
-          <img class="character-img" src="{{ base }}img/hero-character-1120.webp" srcset="{{ base }}img/hero-character-560.webp 560w, {{ base }}img/hero-character-1120.webp 1120w" sizes="(max-width: 760px) 70vw, 34vw" width="1120" height="1400" alt="{{ t.hero.charAlt }}" fetchpriority="high">
+        <div class="glow" aria-hidden="true"{% if theme.ak %} data-depth="0.22"{% endif %}></div>
+        <div class="character"{% if theme.ak %} data-depth="0.16"{% endif %}>
+          <img class="character-img" src="{{ base }}img/hero-character{% if theme.ak %}-ak{% endif %}-1120.webp" srcset="{{ base }}img/hero-character{% if theme.ak %}-ak{% endif %}-560.webp 560w, {{ base }}img/hero-character{% if theme.ak %}-ak{% endif %}-1120.webp 1120w" sizes="(max-width: 760px) 70vw, 34vw" width="1120" height="1400" alt="{{ t.hero.charAlt }}" fetchpriority="high">
           <span class="clip-ping" aria-hidden="true"></span>
         </div>
 
@@ -149,7 +154,7 @@
         <p class="note reveal">{{ t.sections.new.note }}</p>
       </div>
       <figure class="feature-art reveal">
-        <img src="{{ base }}img/feature-new-file-640.webp" srcset="{{ base }}img/feature-new-file-320.webp 320w, {{ base }}img/feature-new-file-640.webp 640w" sizes="(max-width: 760px) 60vw, 320px" width="640" height="960" alt="{{ t.sections.new.imgAlt }}" loading="lazy" decoding="async">
+        <img{% if theme.ak %} data-depth="0.1"{% endif %} src="{{ base }}img/feature-new-file{% if theme.ak %}-ak{% endif %}-640.webp" srcset="{{ base }}img/feature-new-file{% if theme.ak %}-ak{% endif %}-320.webp 320w, {{ base }}img/feature-new-file{% if theme.ak %}-ak{% endif %}-640.webp 640w" sizes="(max-width: 760px) 60vw, 320px" width="640" height="960" alt="{{ t.sections.new.imgAlt }}" loading="lazy" decoding="async">
       </figure>
     </div>
   </section>
@@ -174,7 +179,7 @@
         <p class="note reveal">{{ t.sections.send.note }}</p>
       </div>
       <figure class="feature-art reveal">
-        <img src="{{ base }}img/feature-copy-move-640.webp" srcset="{{ base }}img/feature-copy-move-320.webp 320w, {{ base }}img/feature-copy-move-640.webp 640w" sizes="(max-width: 760px) 60vw, 320px" width="640" height="960" alt="{{ t.sections.send.imgAlt }}" loading="lazy" decoding="async">
+        <img{% if theme.ak %} data-depth="0.1"{% endif %} src="{{ base }}img/feature-copy-move{% if theme.ak %}-ak{% endif %}-640.webp" srcset="{{ base }}img/feature-copy-move{% if theme.ak %}-ak{% endif %}-320.webp 320w, {{ base }}img/feature-copy-move{% if theme.ak %}-ak{% endif %}-640.webp 640w" sizes="(max-width: 760px) 60vw, 320px" width="640" height="960" alt="{{ t.sections.send.imgAlt }}" loading="lazy" decoding="async">
       </figure>
     </div>
   </section>
@@ -191,7 +196,7 @@
         <p class="note reveal">{{ t.sections.open.note }}</p>
       </div>
       <figure class="feature-art reveal">
-        <img src="{{ base }}img/feature-open-app-640.webp" srcset="{{ base }}img/feature-open-app-320.webp 320w, {{ base }}img/feature-open-app-640.webp 640w" sizes="(max-width: 760px) 60vw, 320px" width="640" height="960" alt="{{ t.sections.open.imgAlt }}" loading="lazy" decoding="async">
+        <img{% if theme.ak %} data-depth="0.1"{% endif %} src="{{ base }}img/feature-open-app{% if theme.ak %}-ak{% endif %}-640.webp" srcset="{{ base }}img/feature-open-app{% if theme.ak %}-ak{% endif %}-320.webp 320w, {{ base }}img/feature-open-app{% if theme.ak %}-ak{% endif %}-640.webp 640w" sizes="(max-width: 760px) 60vw, 320px" width="640" height="960" alt="{{ t.sections.open.imgAlt }}" loading="lazy" decoding="async">
       </figure>
     </div>
   </section>
@@ -205,7 +210,7 @@
           <p class="body reveal">{{ t.sections.toolbox.body }}</p>
         </div>
         <figure class="toolbox-art reveal">
-          <img src="{{ base }}img/feature-toolbox-640.webp" srcset="{{ base }}img/feature-toolbox-320.webp 320w, {{ base }}img/feature-toolbox-640.webp 640w" sizes="(max-width: 760px) 50vw, 260px" width="640" height="960" alt="{{ t.sections.toolbox.imgAlt }}" loading="lazy" decoding="async">
+          <img{% if theme.ak %} data-depth="0.1"{% endif %} src="{{ base }}img/feature-toolbox{% if theme.ak %}-ak{% endif %}-640.webp" srcset="{{ base }}img/feature-toolbox{% if theme.ak %}-ak{% endif %}-320.webp 320w, {{ base }}img/feature-toolbox{% if theme.ak %}-ak{% endif %}-640.webp 640w" sizes="(max-width: 760px) 50vw, 260px" width="640" height="960" alt="{{ t.sections.toolbox.imgAlt }}" loading="lazy" decoding="async">
         </figure>
       </div>
       <ol class="tool-groups">
@@ -256,8 +261,8 @@
       <ul class="plans">
         {% for plan in t.sections.pricing.plans %}<li class="plan reveal{% if plan.primary %} plan-primary{% endif %}" data-plan>
           <div class="plan-art" aria-hidden="true">
-            <img src="{{ base }}img/{{ plan.art }}-840.webp" srcset="{{ base }}img/{{ plan.art }}-420.webp 420w, {{ base }}img/{{ plan.art }}-840.webp 840w" sizes="(max-width: 1080px) min(82vw, 360px), 400px" width="840" height="1260" alt="" loading="lazy" decoding="async">
-            <video src="{{ base }}video/{{ plan.art }}.mp4" muted loop playsinline preload="none" disablepictureinpicture tabindex="-1"></video>
+            <img src="{{ base }}img/{{ plan.art }}{% if theme.ak %}-ak{% endif %}-840.webp" srcset="{{ base }}img/{{ plan.art }}{% if theme.ak %}-ak{% endif %}-420.webp 420w, {{ base }}img/{{ plan.art }}{% if theme.ak %}-ak{% endif %}-840.webp 840w" sizes="(max-width: 1080px) min(82vw, 360px), 400px" width="840" height="1260" alt="" loading="lazy" decoding="async">
+            <video src="{{ base }}video/{{ plan.art }}{% if theme.ak %}-ak{% endif %}.mp4" muted loop playsinline preload="none" disablepictureinpicture tabindex="-1"></video>
           </div>
           <div class="plan-body">
             <h3><span>0{{ loop.index }}</span>{{ plan.name }}</h3>
@@ -271,7 +276,11 @@
   </section>
 
   <section id="download" class="band cta" aria-labelledby="cta-title">
-    <div class="cta-glow" aria-hidden="true"></div>
+    <div class="cta-glow" aria-hidden="true"></div>{% if theme.ak %}
+    <div class="grid-bg" data-depth="0.04" aria-hidden="true"></div>
+    <div class="hero-plane cta-plane" data-depth="0.12" aria-hidden="true"></div>
+    <canvas class="ak-particle-field cta-particles" data-pattern="orbit" data-depth="0.08" aria-hidden="true"></canvas>
+    <button type="button" class="motion-toggle" data-motion-toggle aria-pressed="true" hidden>{{ t.hero.motion }}</button>{% endif %}
     <div class="wrap cta-inner">
       <div class="cta-copy">
         <p class="kicker reveal"><span class="kicker-line"></span>{{ t.cta.kicker }}</p>
@@ -284,7 +293,7 @@
         <p class="fineprint reveal">{{ t.cta.requirement }}</p>
       </div>
       <figure class="cta-art reveal">
-        <img src="{{ base }}img/cta-character-960.webp" srcset="{{ base }}img/cta-character-480.webp 480w, {{ base }}img/cta-character-960.webp 960w" sizes="(max-width: 760px) 80vw, 460px" width="960" height="960" alt="{{ t.cta.imgAlt }}" loading="lazy" decoding="async">
+        <img{% if theme.ak %} data-depth="0.1"{% endif %} src="{{ base }}img/cta-character{% if theme.ak %}-ak{% endif %}-960.webp" srcset="{{ base }}img/cta-character{% if theme.ak %}-ak{% endif %}-480.webp 480w, {{ base }}img/cta-character{% if theme.ak %}-ak{% endif %}-960.webp 960w" sizes="(max-width: 760px) 80vw, 460px" width="960" height="960" alt="{{ t.cta.imgAlt }}" loading="lazy" decoding="async">
       </figure>
     </div>
   </section>
@@ -295,13 +304,13 @@
         <p class="section-label reveal"><span>// {{ t.faq.num }}</span>{{ t.faq.label }}</p>
         <h2 id="faq-title" class="reveal">{{ t.faq.title }}</h2>
         <figure class="faq-art reveal">
-          <img src="{{ base }}img/feature-empty-error-480.webp" srcset="{{ base }}img/feature-empty-error-240.webp 240w, {{ base }}img/feature-empty-error-480.webp 480w" sizes="200px" width="480" height="720" alt="{{ t.faq.imgAlt }}" loading="lazy" decoding="async">
+          <img src="{{ base }}img/feature-empty-error{% if theme.ak %}-ak{% endif %}-480.webp" srcset="{{ base }}img/feature-empty-error{% if theme.ak %}-ak{% endif %}-240.webp 240w, {{ base }}img/feature-empty-error{% if theme.ak %}-ak{% endif %}-480.webp 480w" sizes="200px" width="480" height="720" alt="{{ t.faq.imgAlt }}" loading="lazy" decoding="async">
           <figcaption>{{ t.faq.more }} <a href="{{ site.contact }}">{{ t.faq.moreLink }}<svg class="ic"><use href="#i-arrow"/></svg></a></figcaption>
         </figure>
       </div>
       <div class="faq-list">
         {% for item in t.faq.items %}<details class="reveal">
-          <summary>{{ item.q }}<svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+          <summary>{% if theme.ak %}<span class="faq-num" aria-hidden="true">0{{ loop.index }}</span><span>{{ item.q }}</span>{% else %}{{ item.q }}{% endif %}<svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></summary>
           <p>{{ item.a }}</p>
         </details>{% endfor %}
       </div>
@@ -321,7 +330,7 @@
       <a href="{{ site.releases }}">{{ t.footer.releases }}</a>
       <a href="{{ site.contact }}">{{ t.footer.issues }}</a>
       <a href="privacy/">{{ t.footer.privacy }}</a>
-      <a href="{{ base }}{{ t.alt.href|raw }}" hreflang="{{ t.alt.lang }}" lang="{{ t.alt.lang }}">{{ t.alt.label }}</a>
+      <a href="{{ home }}{{ t.alt.href|raw }}" hreflang="{{ t.alt.lang }}" lang="{{ t.alt.lang }}">{{ t.alt.label }}</a>
     </nav>
     <p class="copyright">{{ t.footer.copyright }}<br><span class="trademarks">{{ t.footer.trademarks }}</span></p>
   </div>
@@ -330,6 +339,7 @@
 
 <script type="application/json" id="demo-data">{{ t.demo|json }}</script>
 <script type="application/json" id="tool-data">{{ t.toolbox.groups|json }}</script>
-<script src="{{ base }}main.js" defer></script>
+<script src="{{ base }}main.js" defer></script>{% if theme.ak %}
+<script type="module" src="{{ base }}ak.js"></script>{% endif %}
 </body>
 </html>

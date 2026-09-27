@@ -218,6 +218,21 @@ Very subtle living-portrait loop, locked camera, no cuts, no zoom. {小动作}. 
 - 小白鼠只有观者右侧那只耳朵是珊瑚色；不对就先用局部编辑修图，再生成视频。
 - 定稿后图片放到 `website/assets/character/`，原片放到 `website/assets/video/`，文件名和图片一致，再运行 `website/tools/export_images.py`。
 
+### 8. ak-ui 风格版本
+
+官网 ak-ui 风格（`/ak/`）用的全套角色图。每张都以对应的经典版为底重画，只换服装，构图、姿势、道具和画布位置不变，所以网页版式不用改。
+
+参考图（按顺序上传）：对应的经典版原图、`website/assets/character/hero-character-ak.png`（服装基准；它本身用 `hero-character.png` 和图标 `character.png` 生成）。用 `gpt-image` 系列，画质 high，尺寸和透明设置与经典版相同。
+
+```text
+Redraw the character from the first image with the exact same composition, pose, framing, canvas position and props. Keep her face, the coral gradient hair, the curled ahoge and the white hair clip with a black cursor arrow and three coral lines exactly. Only change her outfit to the tactical 'operator' field jacket from the second image: ivory-white technical jacket with high collar, charcoal #2A2B31 structural panels on shoulders and cuffs, thin coral signal stripes, slim black chest harness strap with a small buckle, charcoal armband with a coral chevron, black headset around the neck. {补充}
+No text, no letters, no numbers, no logos, no watermark.
+```
+
+- Q 版补充：`chibi proportions (2.5 heads tall, simple vertical-line eyes, round blush), black shorts, chunky white-and-charcoal sneakers, clean vector-like cel shading, transparent background, no ground shadow`。道具可以加切角，但颜色和含义不变（工具箱变成珊瑚色硬壳装备箱）。
+- 价格卡补充：底色不变，加 `a very faint thin line grid and a few small coral corner brackets`，下方 40% 仍然渐变成纯底色。
+- 价格卡视频照[第 7 条](#7-官网价格卡和循环视频)生成。Grok 常常回不到首帧，导出脚本对 `-ak` 视频统一做正放加倒放。
+
 ## 导出
 
 | 物料 | 格式 |
