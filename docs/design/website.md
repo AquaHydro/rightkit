@@ -30,7 +30,7 @@ RightKit 照搬结构和节奏，价格卡也学了 hover 播放视频的做法�
 | 经典（默认） | `/`、`/en/` | `styles.css`，本文「视觉」和「动画」里没有特别标注的部分 |
 | ak-ui | `/ak/`、`/ak/en/` | `styles.css` 之后再加载 `ak-ui.css`，按 [ak-ui](https://github.com/YunYouJun/ak-ui) 的 terminal 强度改几何和交互反馈 |
 
-ak-ui 风格只改切角、信号线、编号标签和终端式线格，品牌不变：珊瑚色、深浅区块交替、Nunito 字标、Riko 和模拟访达窗口都保留。全站角色素材都换成 ak 版（文件名加 `-ak`，见[素材清单](#素材清单)）：构图和姿势与经典版一致，外套换成带炭灰结构块、珊瑚信号条和胸前绑带的机能夹克，发色、呆毛和光标发卡不变，所以版式和手指位置不变。模拟窗口和菜单仍然照 macOS 26 的样子画，不套 ak-ui 几何。两种风格的交互脚本、文案和无障碍行为完全相同。ak-ui 页面的 canonical 指向经典版对应页面。
+ak-ui 风格使用 terminal 强度重新编排首屏和角色内容，品牌不变：珊瑚色、Nunito 字标、Riko 和模拟访达窗口都保留。首屏用电影画幅视频、稀疏结构线、平直珊瑚色块、超大描边字和固定章节索引建立沉浸构图。中段增加只在 ak 版出现的「Riko 档案」，以全身立绘、灰度回声和可键盘操作的缩略图介绍现有角色设定。全站角色素材都换成 ak 版（文件名加 `-ak`，见[素材清单](#素材清单)）。模拟窗口和菜单仍然照 macOS 26 的样子画，不套 ak-ui 几何。背景视频和粒子共用「背景动效」开关，减弱动态效果时都保持静止。ak-ui 页面的 canonical 指向经典版对应页面。
 
 ## 视觉
 
@@ -58,6 +58,8 @@ ak-ui 风格只改切角、信号线、编号标签和终端式线格，品牌�
 
 网页字体只加载拉丁字母子集，中文走系统字体，不下载中文字库。
 
+ak-ui 版额外自托管 Oswald，用于导航、章节编号和数据标签。字体按 OFL 使用，许可证放在 `website/public/fonts/OFL-Oswald.txt`。Nunito 继续用于 RightKit 字标和展示标题，Geist Mono 继续用于等宽数据。
+
 ### 版式
 
 - 内容最大宽度 1200px，两侧留白至少 24px（手机 16px）。
@@ -70,10 +72,14 @@ ak-ui 风格在此基础上改为：
 - 小标签的编号放在右下切角的珊瑚色标签块里（浅色区块用 `--coral-ink` 底白字），右侧细线末端有一个短竖线。
 - 卡片、工具分组和价格卡不用圆角，右上切角（ak-ui `--ak-cut-md` / `--ak-cut-lg`）。卡片左上有一段 32px 珊瑚信号线，价格卡顶部是 4px 粗线（官网版珊瑚，其余深色）。
 - 按钮是对角切角的矩形，填充画在 `::before` 上，所以切角不会裁掉焦点框和点击区域。hover 上移 1px，底部信号线展开；按下下移 1px。「即将上架」用斜线纹理加自己的文字表示不可用，不只靠颜色。
-- 首屏只有一个强几何动作：Riko 身后一块倾斜 12° 的石墨色斜面，左边一条 4px 珊瑚线。斜面用石墨色而不是珊瑚色，因为 Riko 的头发会融进珊瑚底。背景是 48px 线格，斜面上叠一层珊瑚色粒子波（ak-ui `createParticleField`，WebGL，不可用时退到 2D 或静态点阵），用遮罩避开左侧文案。模拟窗口左上和右上有瞄准框角标。
-- 下载区重复首屏的手势：48px 线格、窄一些的石墨斜面和一层旋涡粒子（`orbit`），页面首尾呼应。
+- 首屏用两三条贯穿视口的水平结构线和一条竖线切分画面，交点有小十字。Riko 和模拟窗口越过结构线，避免密集网格把内容切碎。
+- 左侧文案后面是一块平直珊瑚矩形，与 Riko 分开。`RIGHT` 空心字在边缘裁切，只作为背景图形，不进入无障碍树。
+- 首屏最底层是原创低动态 PV 视频，静态海报始终可用。视频使用上下暗边形成电影画幅，离开首屏、关闭背景动效或开启减弱动态效果时暂停。
+- 页面右侧固定章节索引显示半裁的大号编号和当前区块标题。中文页导航以窄体英文大写为主标签、中文为小标签，英文页只显示英文；当前项同时有珊瑚信号线和 `aria-current`。
+- 下载区用同样的结构线和被裁切的 `RIKO` 空心字呼应首屏，并保留一层旋涡粒子（`orbit`）。
 - 鼠标视差（ak-ui `createDashboardDepth`）：首屏的线格、粒子、斜面、光晕和 Riko，下载区的线格、斜面、粒子和 Riko，四个功能区和工具箱的插画，都按不同深度反向移动。首屏模拟窗口不动，保证点击位置稳定。只对精确指针生效，触屏不动；减弱动态效果时回到中心。
 - 首屏和下载区各有一个「背景动效」开关（桌面在右上，手机在底部），两个开关同步控制全部粒子，`aria-pressed` 表示状态，亮起的方块表示正在播放。粒子离开视口、页面隐藏或减弱动态效果时自动暂停，减弱动态效果时开关隐藏。
+- Riko 档案的主立绘前景越过结构线，背后复用当前立绘做灰度低透明度回声，最底层是深灰空心字。缩略图选择使用 ak-ui `createMediaGallery`，支持方向键、Home、End 和触摸横滑；切换顺序是旧立绘淡出、空场短暂停留、新立绘进入，回声随后出现。
 - 功能区和工具箱的 Q 版站在一块右上切角的线格底板上，左上和右下有瞄准框角标，取代经典版的地面阴影。
 - 首屏四个标签是一条「数据轨」：上方一条细线，每格开头一段珊瑚短线。手机上两列。
 - 工具箱第五组（解散文件夹、彻底删除）是危险操作：红色左边线、红色编号块和菱形标记，不只靠颜色。
@@ -95,10 +101,11 @@ ak-ui 风格在此基础上改为：
 | 5 | `// 04 工具箱` | `--ink` | 16 个命令按菜单里的五个分组排成卡片，每个命令一句说明（F-040 到 F-057） | `feature-toolbox` |
 | 6 | `// 05 放心用` | `--paper` | 3 × 2 小卡片：删除前确认（F-051）、系统目录受保护（F-073）、从不覆盖、进度可取消（F-075）、只在监视目录出现（F-009、F-060）、在本机完成（F-070） | 无 |
 | 7 | `// 06 更多入口` | `--ink` | 快捷指令与聚焦（F-074），二维码（F-070），翻译（F-071） | 无 |
-| 8 | `// 07 价格` | `--paper` | 三张插画卡片：「官网版 免费」（深色）指向下载，「商店版 $1」（浅色）指向 Mac App Store，「一起参与 开源」（浅色）指向 GitHub 仓库。卡片铺满角色插画，hover 时播放循环视频，见[价格卡](#价格卡) | `pricing-free`、`pricing-store`、`pricing-oss` |
-| 9 | 下载 | 深色加珊瑚光晕 | 大字「右键，就办好了。」，下载和 GitHub 按钮，版本与系统要求。Riko 第二次出场 | `cta-character` |
-| 10 | `// 08 常见问题` | `--paper` | 8 个问题的折叠列表，左侧放「没找到答案？」和 GitHub 提问链接 | `feature-empty-error` |
-| 11 | 页脚 | `--ink` | 链接（含隐私政策）、版权、底部一个大号描边字标 | 无 |
+| 8 | `Riko 档案`，只在 ak 版显示 | `--ink` | 角色全身立绘、灰度回声、真实设定、缩略图切换与进度 | `profile-riko-*-ak` 和现有 Riko 素材 |
+| 9 | `// 07 价格` | `--paper` | 三张插画卡片：「官网版 免费」（深色）指向下载，「商店版 $1」（浅色）指向 Mac App Store，「一起参与 开源」（浅色）指向 GitHub 仓库。卡片铺满角色插画，hover 时播放循环视频，见[价格卡](#价格卡) | `pricing-free`、`pricing-store`、`pricing-oss` |
+| 10 | 下载 | 深色加珊瑚光晕 | 大字「右键，就办好了。」，下载和 GitHub 按钮，版本与系统要求。Riko 第二次出场 | `cta-character` |
+| 11 | `// 08 常见问题` | `--paper` | 8 个问题的折叠列表，左侧放「没找到答案？」和 GitHub 提问链接 | `feature-empty-error` |
+| 12 | 页脚 | `--ink` | 链接（含隐私政策）、版权、底部一个大号描边字标 | 无 |
 
 隐私政策是单独的页面，中文在 `/privacy/`，英文在 `/en/privacy/`，模板 `website/src/privacy.html`，文案在 `content.json` 的 `privacy`。它是 App Store Connect 要填的隐私政策网址，内容必须和应用的实际网络行为一致：翻译只打开浏览器，只有官网版检查更新。
 
@@ -184,6 +191,9 @@ Hero 里的访达窗口用 HTML 和 CSS 绘制。窗口里有 4 个项目：一�
 | `sheet.png` | 生图基准，不上网页 | 已入库 |
 | 以上角色图的 `-ak` 版（`hero-character-ak.png`、`cta-character-ak.png`、`feature-*-ak.png` × 5、`pricing-*-ak.png` × 3） | ak-ui 风格（`/ak/`），构图同经典版，服装换成机能夹克，生成方法见[品牌角色设定](brand-character.md#8-ak-ui-风格版本) | 已用，导出宽度同经典版 |
 | `website/assets/video/pricing-*-ak.mp4` | ak 版价格卡视频原片，768 × 1168，6 秒 | 已用。原片尾帧回不到首帧，导出时正放加倒放拼成 12 秒无缝循环，CRF 31，约 0.4 到 0.9MB |
+| `profile-riko-stand-ak.png`、`profile-riko-ok-ak.png` | ak 版 Riko 档案全身立绘，透明背景 | 已用，导出 512 和 1024 宽。发卡、小白鼠耳朵和全身边距已经人工检查 |
+| `hero-pv-poster-ak.png` | ak 版首屏电影背景海报，不含人物 | 已用，导出为 `hero-pv-poster-ak.webp`，视频不能播放时仍完整显示 |
+| `website/assets/video/hero-pv-ak.mp4` | ak 版首屏低动态环境 PV 原片，1264 × 720，约 6 秒 | 已用。原片每 12 帧检查结构与禁用内容，导出时正放加倒放为约 12 秒无缝循环 |
 | `website/assets/apps/*.png` | 「在应用中打开」里终端、Ghostty、Visual Studio Code、Xcode 的真实图标 | 已用，按 macOS 图标网格导出 64 和 128。来源和权利人见 `website/assets/apps/SOURCES.md`，页脚写明商标归属。Apple 的两个图标正式上线前要确认符合 Apple 商标使用指南 |
 | 应用图标 | favicon、导航、分享图 | 从 `RightKit/Resources/AppIcon.icon` 合成，导出 64、180、512 |
 | `public/img/og.jpg` | 1200 × 630 分享图 | 由 `website/tools/og.html` 渲染（`node website/tools/render_og.mjs`，需要 Playwright） |
@@ -196,11 +206,11 @@ Hero 里的访达窗口用 HTML 和 CSS 绘制。窗口里有 4 个项目：一�
 - 静态站，只用 Python 标准库构建：`python3 website/build.py`（或 `make website`）把 `src/index.html` 按 `content.json` 渲染成 `dist/index.html`（中文）和 `dist/en/index.html`（英文），ak-ui 风格渲染到 `dist/ak/` 下，再复制 `public/`、`styles.css`、`ak-ui.css`、`main.js` 和 `ak.js`。两种风格共用 `public/` 里的图片、字体和视频。`make website-serve` 在本地 8000 端口预览。
 - 模板语法只有变量、循环和条件，见 `build.py` 开头的说明。
 - 资源路径都是相对路径，放在域名根目录或 GitHub Pages 这类子路径下都能用。`dist/` 不入库，部署时构建。
-- 不引入前端框架和第三方脚本。ak-ui 风格用它的 `tokens.css`（CSS 变量，不含重置和组件样式），以及原样复制的三个 ES 模块 `js/site/particles.mjs`、`js/site/shared.mjs`、`js/dashboard-depth.mjs`，都放在 `public/ak-ui/`，附 MIT 许可证；`src/ak.js` 只在 ak-ui 页面以 `type=module` 加载。品牌到 `--ak-*` 语义变量的映射和全部 ak-ui 样式写在 `src/ak-ui.css`，经典版的 `styles.css` 不改。模板用 `{% if theme.ak %}` 给 ak-ui 版加少量标记（首屏斜面、常见问题编号）；页面之间的链接用 `home`，资源用 `base`，所以 `/ak/` 下切换语言不会跳回经典版。升级时 `npm pack @yunyoujun/ak-ui`，替换 `dist/tokens.css` 和上面三个 `src/js/` 模块。字体自托管：Nunito（拉丁字母子集，可变字重）和 Geist Mono，许可证在 `public/fonts/`。中文走系统字体。
+- 不引入前端框架和第三方运行时。ak-ui 风格用它的 `tokens.css`，以及原样复制的 `js/site/particles.mjs`、`js/site/shared.mjs`、`js/site/sections.mjs`、`js/site/gallery.mjs`、`js/effects.mjs` 和 `js/dashboard-depth.mjs`，都放在 `public/ak-ui/` 并附 MIT 许可证；`src/ak.js` 只在 ak-ui 页面以 `type=module` 加载。品牌到 `--ak-*` 语义变量的映射和全部 ak-ui 样式写在 `src/ak-ui.css`，经典版的 `styles.css` 不改。模板只在 `{% if theme.ak %}` 分支增加 ak 专属结构。页面之间的链接用 `home`，资源用 `base`，所以 `/ak/` 下切换语言不会跳回经典版。字体自托管 Nunito、Geist Mono 和 Oswald，许可证在 `public/fonts/`。中文走系统字体。
 - 语言：导航和页脚都有切换链接，页面声明 `hreflang`。不根据浏览器语言自动跳转，也不弹切换提示。
 - 首屏立绘用 `fetchpriority="high"` 并预加载，其余图片懒加载。
 - 官网域名 `https://rightkit.example` 仍待确定；下载已固定跳转 GitHub 最新 Release。域名、下载地址、GitHub 链接和版本号统一放在 `site.json`。
-- 性能预算：首屏传输量不超过 500KB，移动端 LCP 在 2.5 秒以内。2026-09 本地实测首屏约 280KB（未压缩）。
+- 经典版继续遵守首屏传输量不超过 500KB、移动端 LCP 在 2.5 秒以内的预算。ak 版以电影背景和高质量角色展示为优先，视频使用 `preload="metadata"` 和静态海报兜底，不设同一体积预算。
 
 ## 验收
 

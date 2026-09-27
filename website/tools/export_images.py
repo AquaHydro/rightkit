@@ -43,13 +43,16 @@ CHARACTER = {
     "pricing-free-ak": ("pricing-free-ak.png", (420, 840)),
     "pricing-store-ak": ("pricing-store-ak.png", (420, 840)),
     "pricing-oss-ak": ("pricing-oss-ak.png", (420, 840)),
+    # Full-body profile art generated for the ak-ui archive gallery.
+    "profile-riko-stand-ak": ("profile-riko-stand-ak.png", (512, 1024)),
+    "profile-riko-ok-ak": ("profile-riko-ok-ak.png", (512, 1024)),
 }
 
 # Pricing card loops in website/assets/video, played on hover. The poster is the
 # matching still above, which is also the first frame of the loop.
 VIDEOS = ("pricing-free", "pricing-store", "pricing-oss")
 # The ak loops end away from their first frame, so they play forward then backward to loop without a jump.
-PINGPONG = ("pricing-free-ak", "pricing-store-ak", "pricing-oss-ak")
+PINGPONG = ("pricing-free-ak", "pricing-store-ak", "pricing-oss-ak", "hero-pv-ak")
 
 
 def export_videos() -> None:
@@ -70,6 +73,10 @@ def export_character() -> None:
             height = round(image.height * width / image.width)
             resized = image.resize((width, height), Image.LANCZOS)
             resized.save(OUT / f"{name}-{width}.webp", "WEBP", quality=82, method=6)
+
+    # The cinematic ak hero background keeps one stable URL for the video poster.
+    poster = Image.open(ART / "hero-pv-poster-ak.png").convert("RGB")
+    poster.save(OUT / "hero-pv-poster-ak.webp", "WEBP", quality=88, method=6)
 
 
 # App icons for the Open in App section, scaled onto the macOS icon grid
