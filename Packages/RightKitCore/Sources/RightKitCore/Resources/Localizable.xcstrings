@@ -1153,6 +1153,22 @@
         }
       }
     },
+    "按住 Option 键右键点按程序坞中的访达，选择“重新开启”。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hold Option, right-click Finder in the Dock, and choose “Relaunch”."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按住 Option 键右键点按程序坞中的访达，选择“重新开启”。"
+          }
+        }
+      }
+    },
     "授予写入权限": {
       "localizations": {
         "en": {
@@ -3245,6 +3261,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "重新启动"
+          }
+        }
+      }
+    },
+    "重新启动访达": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restart Finder"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重新启动访达"
           }
         }
       }
