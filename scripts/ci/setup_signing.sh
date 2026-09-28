@@ -2,8 +2,10 @@
 # CI 发布前准备签名：临时钥匙串导入证书，写出 App Store Connect API key（.github/workflows/release.yml）。
 #
 # 需要的 secrets（仓库 Settings → Secrets and variables → Actions）：
-#   SIGNING_CERTS_P12_BASE64    一个 .p12，含 Developer ID Application、Apple Distribution、
-#                               3rd Party Mac Developer Installer 三个证书和私钥，base64 编码
+#   SIGNING_CERTS_P12_BASE64    一个 .p12，含 Developer ID Application 和 Apple Development
+#                               （归档时用）两个证书和私钥，base64 编码。
+#                               商店版的 Apple Distribution 和 Mac Installer 证书由 Apple 云端代管，
+#                               xcodebuild 用下面的 API key 取用，不用放进 .p12
 #   SIGNING_CERTS_P12_PASSWORD  导出 .p12 时设的密码
 #   ASC_KEY_P8_BASE64           App Store Connect API key（.p8，Admin 角色），base64 编码
 #   ASC_KEY_ID、ASC_ISSUER_ID    这个 key 的 ID 和 Issuer ID

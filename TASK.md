@@ -21,12 +21,12 @@
 
 ## 自动化发布（GitHub Actions）
 
-- [ ] 在 App Store Connect → 用户和访问 → 集成 → App Store Connect API 新建 key，角色选 Admin（要能创建 Developer ID 描述文件）。下载 `.p8`，记下 Key ID 和 Issuer ID。
-- [ ] 在钥匙串访问里同时选中 Developer ID Application、Apple Distribution、3rd Party Mac Developer Installer 三个证书（连同私钥），导出成一个 `.p12`，设一个密码。
-- [ ] 仓库 Settings → Secrets and variables → Actions 添加：`SIGNING_CERTS_P12_BASE64`（`base64 -i certs.p12 | pbcopy`）、`SIGNING_CERTS_P12_PASSWORD`、`ASC_KEY_P8_BASE64`（`base64 -i AuthKey_XXXX.p8 | pbcopy`）、`ASC_KEY_ID`、`ASC_ISSUER_ID`。
-- [ ] 仓库 Settings → Environments 新建 `app-store`，按需勾选 Required reviewers，这样上传商店前要你点批准。
-- [ ] 确认 PR 上的 CI 通过。`xcode-27` runner 还是公开预览，排队可能较慢。
-- [ ] 第一次发布：改 `project.yml` 的 `MARKETING_VERSION` 和 `CURRENT_PROJECT_VERSION`，合并后推标签（如 `git tag v0.2.0 && git push origin v0.2.0`），看 Release 工作流跑通。
+- [x] App Store Connect API key（Admin，`4UBZD7P35G`）已存进仓库 secrets：`ASC_KEY_P8_BASE64`、`ASC_KEY_ID`。
+- [x] 仓库已建 `app-store` 环境，只允许 `v*` 标签使用。私有仓库的免费方案不能要求手动批准。
+- [ ] 存 `ASC_ISSUER_ID`：`gh secret set ASC_ISSUER_ID`。
+- [ ] 在钥匙串访问里同时选中「Developer ID Application: YiLiang Liao」和「Apple Development: YiLiang Liao」两个证书（连同私钥），导出成一个 `.p12` 并设密码；再存 `SIGNING_CERTS_P12_BASE64`（`base64 -i certs.p12 | gh secret set SIGNING_CERTS_P12_BASE64`）和 `SIGNING_CERTS_P12_PASSWORD`。商店版证书由 Apple 云端代管，不用导出。
+- [ ] 试运行：Actions → Release → Run workflow，两个渠道都应通过签名、公证和检查。
+- [ ] 第一次正式发布：改 `project.yml` 的 `MARKETING_VERSION` 和 `CURRENT_PROJECT_VERSION`，合并后推标签（如 `git tag v0.2.0 && git push origin v0.2.0`），看 Release 工作流跑通。
 
 ## 真机验收
 
