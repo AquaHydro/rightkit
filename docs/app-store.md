@@ -21,13 +21,13 @@
 
 2026-09-25 查询时，Mac App Store 已有两款同类右键工具用了这个名字：「RightKit右键菜单工具」（瑞瑞 宋，2026-07-31 上架）和「RightKit: Right-Click Tools」（泽韦 陈，2026-08-24 上架）。App Store Connect 只拦截完全相同的名称，但同类产品同名容易被判为误导（审核指南 2.3.7、4.1），用户也分不清。
 
-所以商店名用「RightKit: Finder Toolkit」，中文区用「RightKit 访达工具箱」。应用内、图标和官网仍叫 RightKit：审核指南 2.3.8 要求商店名和设备上显示的名称相似，保留 RightKit 前缀就满足。
+所以商店名用「RightKit: Context Menu Toolkit」，中文区用「RightKit 右键工具箱」。0.1.1 (4) 曾用「RightKit: Finder Toolkit」「RightKit 访达工具箱」，被审核指南 5.2.5 拒绝：名称、副标题和关键词不能用 Finder、访达等苹果商标；描述里说明在访达中使用可以保留。应用内、图标和官网仍叫 RightKit：审核指南 2.3.8 要求商店名和设备上显示的名称相似，保留 RightKit 前缀就满足。
 
 ## 简体中文
 
-**名称**（30 字以内）：RightKit 访达工具箱
+**名称**（30 字以内）：RightKit 右键工具箱
 
-**副标题**（30 字以内）：给访达加一个更好用的右键菜单
+**副标题**（30 字以内）：右键一下，就办好了
 
 **推广文本**（170 字以内，随时可改，不用送审）：
 
@@ -36,7 +36,7 @@
 **关键词**（100 字符以内，逗号分隔，不重复名称）：
 
 ```text
-右键,右键菜单,访达,新建文件,复制到,移动到,剪切,粘贴,终端,文件工具,图标,哈希,隐藏文件,二维码,效率
+右键菜单,文件管理,新建文件,复制到,移动到,剪切,粘贴,终端,文件工具,图标,哈希,隐藏文件,二维码,效率
 ```
 
 **描述**：
@@ -91,9 +91,9 @@ RightKit 的第一个 App Store 版本。
 
 ## English (U.S.)
 
-**Name**: RightKit: Finder Toolkit
+**Name**: RightKit: Context Menu Toolkit
 
-**Subtitle**: Better Finder Right-Click Menu
+**Subtitle**: Do More with a Right-Click
 
 **Promotional Text**:
 
@@ -102,7 +102,7 @@ Right-click. Done. Create files, copy or move items to your favorite folders, op
 **Keywords**:
 
 ```text
-right click,context menu,new file,copy to,move to,cut,paste,terminal,hidden files,icon,hash,qr,alias
+right click,file manager,new file,copy to,move to,cut,paste,terminal,hidden files,icon,hash,qr,alias
 ```
 
 **Description**:
