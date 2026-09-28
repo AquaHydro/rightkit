@@ -25,6 +25,7 @@
 
 - 日常开发不要修改、覆盖、重新签名或替换 `/Applications/RightKit.app`，也不要读写已经安装的 RightKit 的配置、模板、常用目录和开关。
 - 例外：执行 `TASK.md` 里的真机验收时，可以把本仓库构建的 RightKit 装进 `/Applications/RightKit.app`、启动它，并把 `~/Library/Containers` 和 `~/Library/Group Containers` 里的 `app.rightkit.*` 移到废纸篓，以得到全新安装状态。
+- 例外：用户要求录制审核演示或执行真机验收时，可以临时切换两个渠道的 Finder 扩展，避免重复菜单；先记录原状态，任务结束后恢复。可以启动对应构建的独立副本、授权仅含测试文件的演示目录，并在说明影响后重启 Finder。这些必要准备无需再次确认；不因此授权覆盖已安装应用、清空用户配置或向 Apple 上传、回复、提交审核。
 - 本仓库的官网版应用使用 `app.rightkit.mac`，扩展使用 `app.rightkit.mac.finder`；商店版应用使用 `app.rightkit.mac.store`，扩展使用 `app.rightkit.mac.store.finder`。
 - 测试只用临时目录和测试自己创建的文件。永久删除只能删除这些文件。
 

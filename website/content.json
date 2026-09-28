@@ -23,8 +23,35 @@
       "download": "下载",
       "language": "切换到英文"
     },
+    "akNav": { "features": "FEATURES", "toolbox": "TOOLBOX", "profile": "PROFILE", "workbench": "WORKBENCH", "pricing": "PRICING", "faq": "FAQ", "profileLocal": "角色", "featuresLocal": "功能", "toolboxLocal": "工具箱", "workbenchLocal": "工作台", "pricingLocal": "价格", "faqLocal": "常见问题", "index": "章节索引" },
+    "akWorkbench": {
+      "label": "工作台",
+      "title": "Riko 的工作台",
+      "body": "从 Riko 的工作台出发，看看 RightKit 怎样把常用操作带到访达右键菜单。",
+      "sceneAlt": "等距视角的深色工作台，摆着文件夹架、笔记本电脑、小显示器、剪贴板、一叠文件卡、带珊瑚色条纹的装备箱和一只小白鼠",
+      "links": [
+        { "key": "new", "label": "NEW", "name": "新建文件", "href": "#new", "x": "28%", "y": "54%" },
+        { "key": "send", "label": "SEND", "name": "复制到与移动到", "href": "#send", "x": "19.5%", "y": "36%" },
+        { "key": "open", "label": "OPEN", "name": "在应用中打开", "href": "#open", "x": "43.5%", "y": "37%" },
+        { "key": "toolbox", "label": "TOOLS", "name": "工具箱", "href": "#toolbox", "x": "79%", "y": "41%" },
+        { "key": "download", "label": "GET", "name": "下载 RightKit", "href": "#download", "x": "36.5%", "y": "64.5%" },
+        { "key": "github", "label": "CODE", "name": "GitHub 源代码", "github": true, "x": "61%", "y": "31%" }
+      ]
+    },
+    "akWorld": { "label": "词条浏览", "intro": "选择词条，了解右键菜单之外的功能。", "prev": "上一个词条", "next": "下一个词条" },
+    "akLinks": {
+      "label": "探索入口",
+      "title": "继续探索 RightKit",
+      "viewMore": "VIEW MORE",
+      "items": [
+        { "key": "download", "title": "官网版下载", "english": "DOWNLOAD", "body": "免费下载，全部功能都能用。", "icon": "download", "art": "profile-riko-wave-ak-1024.webp", "tint": "#30d158", "download": true },
+        { "key": "github", "title": "GitHub 源代码", "english": "SOURCE CODE", "body": "查看源代码和最新版本。", "icon": "github", "art": "profile-riko-file-ak-1024.webp", "tint": "#bf5af2", "github": true, "fill": true },
+        { "key": "privacy", "title": "隐私说明", "english": "PRIVACY", "body": "了解文件和设置怎样留在你的 Mac 上。", "icon": "shield", "art": "profile-riko-ok-ak-1024.webp", "tint": "#0a84ff", "href": "privacy/" }
+      ]
+    },
     "hero": {
       "kicker": "RIGHT-CLICK, DONE",
+      "motion": "背景动效",
       "title1": "右键一下，",
       "title2": "就办好了。",
       "lead": "RightKit 给访达的右键菜单加上新建文件、拷贝到、移动到、用应用打开和一整套文件工具。",
@@ -38,6 +65,24 @@
         "开源"
       ],
       "charAlt": "RightKit 的角色 Riko 伸手点向右键菜单，肩上趴着一只小白鼠"
+    },
+    "profile": {
+      "eyebrow": "RIGHTKIT :// PROFILE",
+      "name": "Riko",
+      "localName": "莉可",
+      "partner": "伙伴：小白鼠",
+      "body": "开朗、手快、靠得住的右键小帮手。珊瑚色头发、卷起的呆毛，还有那枚光标菜单发卡，是她最显眼的标记。肩上的小白鼠只有右边一只耳朵是珊瑚色。",
+      "galleryLabel": "Riko 形象档案",
+      "open": "查看大图",
+      "close": "关闭大图",
+      "prev": "上一张",
+      "next": "下一张",
+      "images": [
+        { "id": "portrait", "label": "Riko", "alt": "Riko 的全身立绘，珊瑚色短发、光标发卡和肩上的小白鼠", "src": "profile-riko-stand-ak-1024.webp" },
+        { "id": "ok", "label": "准备好了", "alt": "Riko 微笑眨眼，比出 OK 手势，小白鼠在肩上", "src": "profile-riko-ok-ak-1024.webp" },
+        { "id": "wave", "label": "打个招呼", "alt": "Riko 侧身站立，伸手挥手问好，小白鼠在肩上", "src": "profile-riko-wave-ak-1024.webp" },
+        { "id": "file", "label": "整理就绪", "alt": "Riko 抱着一张无字文件卡，小白鼠在肩上", "src": "profile-riko-file-ak-1024.webp" }
+      ]
     },
     "ticker": [
       "新建文件",
@@ -172,16 +217,19 @@
         "items": [
           {
             "icon": "shortcuts",
+            "akEnglish": "SHORTCUTS",
             "title": "快捷指令与聚焦",
             "body": "拷贝路径、新建文件、文件哈希、转换图片、生成图标集等动作可以放进快捷指令。"
           },
           {
             "icon": "qr",
+            "akEnglish": "QR CODE",
             "title": "二维码",
             "body": "选中文字，从系统服务生成二维码，可以拷贝图片或存成 PNG。"
           },
           {
             "icon": "translate",
+            "akEnglish": "TRANSLATE",
             "title": "翻译",
             "body": "选中文字，用 Google 翻译或百度翻译打开，目标语言跟随界面语言。"
           }
@@ -650,8 +698,35 @@
       "download": "Download",
       "language": "Switch to Chinese"
     },
+    "akNav": { "features": "FEATURES", "toolbox": "TOOLBOX", "profile": "PROFILE", "workbench": "WORKBENCH", "pricing": "PRICING", "faq": "FAQ", "profileLocal": "", "featuresLocal": "", "toolboxLocal": "", "workbenchLocal": "", "pricingLocal": "", "faqLocal": "", "index": "Section index" },
+    "akWorkbench": {
+      "label": "WORKBENCH",
+      "title": "Riko's Workbench",
+      "body": "Start at Riko's desk and see how RightKit brings everyday actions into Finder's context menu.",
+      "sceneAlt": "An isometric dark workbench with a folder rack, a laptop, a small monitor, a clipboard, a stack of file cards, an equipment case with coral stripes and a small white mouse",
+      "links": [
+        { "key": "new", "label": "NEW", "name": "New File", "href": "#new", "x": "28%", "y": "54%" },
+        { "key": "send", "label": "SEND", "name": "Copy To and Move To", "href": "#send", "x": "19.5%", "y": "36%" },
+        { "key": "open", "label": "OPEN", "name": "Open in App", "href": "#open", "x": "43.5%", "y": "37%" },
+        { "key": "toolbox", "label": "TOOLS", "name": "Toolbox", "href": "#toolbox", "x": "79%", "y": "41%" },
+        { "key": "download", "label": "GET", "name": "Download RightKit", "href": "#download", "x": "36.5%", "y": "64.5%" },
+        { "key": "github", "label": "CODE", "name": "GitHub source code", "github": true, "x": "61%", "y": "31%" }
+      ]
+    },
+    "akWorld": { "label": "TERM BROWSER", "intro": "Select a term to explore what RightKit does beyond the context menu.", "prev": "Previous term", "next": "Next term" },
+    "akLinks": {
+      "label": "EXPLORE",
+      "title": "Explore RightKit",
+      "viewMore": "VIEW MORE",
+      "items": [
+        { "key": "download", "title": "Direct download", "english": "DOWNLOAD", "body": "Free, with every feature.", "icon": "download", "art": "profile-riko-wave-ak-1024.webp", "tint": "#30d158", "download": true },
+        { "key": "github", "title": "GitHub source code", "english": "SOURCE CODE", "body": "Browse the code and the latest release.", "icon": "github", "art": "profile-riko-file-ak-1024.webp", "tint": "#bf5af2", "github": true, "fill": true },
+        { "key": "privacy", "title": "Privacy", "english": "PRIVACY", "body": "See how your files and settings stay on your Mac.", "icon": "shield", "art": "profile-riko-ok-ak-1024.webp", "tint": "#0a84ff", "href": "privacy/" }
+      ]
+    },
     "hero": {
       "kicker": "RIGHT-CLICK, DONE",
+      "motion": "Background motion",
       "title1": "Right-click.",
       "title2": "Done.",
       "lead": "RightKit adds New File, Copy To, Move To, Open in App and a full toolbox to the Finder context menu.",
@@ -665,6 +740,24 @@
         "Open source"
       ],
       "charAlt": "Riko, the RightKit character, reaching toward a context menu with a white mouse on her shoulder"
+    },
+    "profile": {
+      "eyebrow": "RIGHTKIT :// PROFILE",
+      "name": "Riko",
+      "localName": "",
+      "partner": "Companion: the white mouse",
+      "body": "Cheerful, quick handed, and dependable, Riko is your right click helper. Coral hair, a curled ahoge, and her cursor menu hair clip make her easy to spot. The mouse on her shoulder has one coral ear on the viewer's right.",
+      "galleryLabel": "Riko character profile",
+      "open": "View full image",
+      "close": "Close image",
+      "prev": "Previous image",
+      "next": "Next image",
+      "images": [
+        { "id": "portrait", "label": "Riko", "alt": "Full body Riko with coral hair, cursor clip, and a white mouse on her shoulder", "src": "profile-riko-stand-ak-1024.webp" },
+        { "id": "ok", "label": "All set", "alt": "Riko smiles and winks with an OK gesture, the mouse on her shoulder", "src": "profile-riko-ok-ak-1024.webp" },
+        { "id": "wave", "label": "Hello", "alt": "Riko stands at an angle and waves hello, the mouse on her shoulder", "src": "profile-riko-wave-ak-1024.webp" },
+        { "id": "file", "label": "Files ready", "alt": "Riko holds a blank file card, the mouse on her shoulder", "src": "profile-riko-file-ak-1024.webp" }
+      ]
     },
     "ticker": [
       "New File",
@@ -799,16 +892,19 @@
         "items": [
           {
             "icon": "shortcuts",
+            "akEnglish": "SHORTCUTS",
             "title": "Shortcuts and Spotlight",
             "body": "Copy Path, New File, File Hashes, Convert Image, icon sets and more are available as actions."
           },
           {
             "icon": "qr",
+            "akEnglish": "QR CODE",
             "title": "QR codes",
             "body": "Turn selected text into a QR code from the Services menu. Copy it or save it as PNG."
           },
           {
             "icon": "translate",
+            "akEnglish": "TRANSLATE",
             "title": "Translate",
             "body": "Open selected text in Google Translate or Baidu Translate, in your interface language."
           }

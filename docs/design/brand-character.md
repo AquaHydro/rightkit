@@ -218,6 +218,41 @@ Very subtle living-portrait loop, locked camera, no cuts, no zoom. {小动作}. 
 - 小白鼠只有观者右侧那只耳朵是珊瑚色；不对就先用局部编辑修图，再生成视频。
 - 定稿后图片放到 `website/assets/character/`，原片放到 `website/assets/video/`，文件名和图片一致，再运行 `website/tools/export_images.py`。
 
+### 8. ak-ui 风格版本
+
+官网 ak-ui 风格（`/ak/`）用的全套角色图。每张都以对应的经典版为底重画，只换服装，构图、姿势、道具和画布位置不变，所以网页版式不用改。
+
+参考图（按顺序上传）：对应的经典版原图、`website/assets/character/hero-character-ak.png`（服装基准；它本身用 `hero-character.png` 和图标 `character.png` 生成）。用 `gpt-image` 系列，画质 high，尺寸和透明设置与经典版相同。
+
+```text
+Redraw the character from the first image with the exact same composition, pose, framing, canvas position and props. Keep her face, the coral gradient hair, the curled ahoge and the white hair clip with a black cursor arrow and three coral lines exactly. Only change her outfit to the tactical 'operator' field jacket from the second image: ivory-white technical jacket with high collar, charcoal #2A2B31 structural panels on shoulders and cuffs, thin coral signal stripes, slim black chest harness strap with a small buckle, charcoal armband with a coral chevron, black headset around the neck. {补充}
+No text, no letters, no numbers, no logos, no watermark.
+```
+
+- Q 版补充：`chibi proportions (2.5 heads tall, simple vertical-line eyes, round blush), black shorts, chunky white-and-charcoal sneakers, clean vector-like cel shading, transparent background, no ground shadow`。道具可以加切角，但颜色和含义不变（工具箱变成珊瑚色硬壳装备箱）。
+- 价格卡补充：底色不变，加 `a very faint thin line grid and a few small coral corner brackets`，下方 40% 仍然渐变成纯底色。
+- 价格卡视频照[第 7 条](#7-官网价格卡和循环视频)生成。Grok 常常回不到首帧，导出脚本对 `-ak` 视频统一做正放加倒放。
+
+### 9. ak-ui 档案全身立绘和首屏 PV
+
+档案区使用四张透明全身立绘：`profile-riko-stand-ak.png`、`profile-riko-ok-ak.png`、`profile-riko-wave-ak.png` 和 `profile-riko-file-ak.png`。站姿版先用 `hero-character-ak.png` 与应用图标的 `character.png` 生成；其余三张以定稿的 `profile-riko-stand-ak.png` 为第一张参考图，只改姿势，这样造型才一致。使用 OpenAI 图片编辑通道，透明 PNG。站姿版本要求自然正面站立，OK 版本微侧身并做清晰手势，挥手版本伸出完整五指问好，文件版本双手把一叠三张无字奶白色折角纸质文件卡抱在胸前。四张都要完整保留头顶呆毛到鞋底和四周透明边距。
+
+提示词必须明确这些检查项：珊瑚粉渐变、长度到肩的短发（第一版挥手和文件图变成了及腰长发加过膝袜和腿环，必须写明 `SHOULDER-LENGTH`、`short white socks`、`no thigh-high socks, no leg straps`）；观者右侧刘海上的白色光标发卡；黑色箭头朝左上；发卡右下三条珊瑚线；机能夹克结构与 `hero-character-ak.png` 一致；小白鼠只有观者右侧耳朵是珊瑚色；不要文字、Logo、UI、游戏素材、地面阴影或水印。文件卡只能使用纯色与折角，不出现字母、数字或符号。
+
+首屏背景 `hero-pv-poster-ak.png` 是 16:9 的纯环境画面，不再重复画 Riko，避免和网页前景立绘争抢焦点。左侧保留低细节暗部给网页文案，上下自然压暗。场景只使用原创的深石墨数据工作间、磨砂玻璃板、细结构线、空白文件卡片轮廓、地面微反射和珊瑚雾光，不出现人物、动物、文字和游戏素材。
+
+把同一张海报同时作为 Grok 图生视频的首帧和尾帧，6 秒、720p。动作限于珊瑚雾光呼吸、玻璃边缘高光缓慢流动、空白卡片漂移几个像素和地面反射轻微变化。镜头锁定，不切镜、不缩放，不生成新人物、新动物或新道具。每 12 帧抽查结构没有跳动，也没有凭空出现人物、文字或 Logo；如果首尾仍不一致，网页导出统一正放接倒放。
+
+### 10. ak-ui 工作台场景
+
+`workbench-scene-ak.png` 是「Riko 的工作台」区块的 3:2 等距场景，参考明日方舟官网「泰拉万象」那种接近单色的桌面场景。用 GPT-image 文生图，不上传参考图，也不画 Riko。第一版用了饱和的珊瑚色装备箱和亮蓝文件夹，像通用 3D 素材，已废弃：材质要压成石墨、炭灰、奶白和拉丝金属，珊瑚色只留在装备箱条纹、搭扣和一根线缆上。
+
+```text
+Isometric 3D diorama render of a field operator's workbench floating in a dark void, in the style of a premium game website key scene: near-monochrome matte materials, graphite, charcoal, off-white plastic and brushed steel, soft studio top light, subtle fog at the floor, gentle ambient occlusion, very restrained. On a large dark matte desk: a slim silver laptop open with a blank grey screen (no logo on the lid), a small standalone monitor showing only a few blank grey bars, a vertical metal rack holding five plain folders in muted desaturated slate blue, a clipboard with blank white paper, a stack of blank white file cards, a graphite hard-shell equipment case with a thin coral #FF7973 stripe and coral latches, a black wireless mouse, a coiled cable, a mug. Sitting on the desk next to the laptop, a tiny round white mouse (the animal) with only its right ear coral, white tail. A few blank paper cards hover in the air above the desk. Coral appears only as small accents. Dark charcoal background #1B1C20 with a faint diagonal line grid. Wide composition with empty dark margin around the desk. No text, no letters, no numbers, no logos, no apple logo, no people.
+```
+
+检查：六个热点对应的物件（文件卡叠、文件夹架、笔记本、装备箱、小显示器、剪贴板）要各自有清楚轮廓；屏幕和纸面不能出现文字；底色要接近网页区块底色 `#1c1d21`，否则边缘会露出矩形。换图后重新量热点坐标。
+
 ## 导出
 
 | 物料 | 格式 |
