@@ -2,18 +2,22 @@ import AppKit
 import FinderSync
 import os
 import RightKitCore
-import UniformTypeIdentifiers
 
 /// 只读当次的菜单快照、组装菜单、把点击交给主程序（technical.md 扩展）。
 /// 访达在主线程调用这些方法；设置通知也回到主线程处理。
 final class FinderSync: FIFinderSync, @unchecked Sendable {
     private let log = Logger(subsystem: ServiceNames.extensionBundleID, category: "menu")
+    private let performance = Logger(subsystem: ServiceNames.extensionBundleID, category: "menu-performance")
+    private let renderer = MenuRenderer()
+    private lazy var pending = PendingPasteState(url: SharedStore.pendingURL)
+    private var menuCount = 0
     private var settings = Settings()
     /// 最近一次菜单的命令和目标快照。访达会复制菜单项，只有 tag 能可靠带回来。
     private var commands: [Command] = []
     private var snapshot: (folder: URL?, items: [URL]) = (nil, [])
 
     override init() {
+        let start = ProcessInfo.processInfo.systemUptime
         super.init()
         SharedStore.writeHeartbeat()
         // 文件选择面板也会启动扩展实例并写心跳，面板的宿主退出后这个 pid 就失效了。
@@ -29,6 +33,7 @@ final class FinderSync: FIFinderSync, @unchecked Sendable {
             DispatchQueue.main.async { finderSync.reloadSettings() }
         }, ServiceNames.settingsChanged as CFString, nil, .deliverImmediately)
         log.info("Extension started, pid \(ProcessInfo.processInfo.processIdentifier)")
+        performance.notice("init_ms=\((ProcessInfo.processInfo.systemUptime - start) * 1000) roots=\(self.settings.activeMonitoredPaths.count)")
     }
 
     private func reloadSettings() {
@@ -66,22 +71,40 @@ final class FinderSync: FIFinderSync, @unchecked Sendable {
         case .contextualMenuForItems, .contextualMenuForSidebar: location = .items
         @unknown default: return nil
         }
-        let folder = controller.targetedURL()
+        let start = ProcessInfo.processInfo.systemUptime
+        menuCount += 1
+        // F-008：工具栏完全跳过 Finder 选择、文件元数据和待粘贴列表。
+        let folder = location == .toolbar ? nil : controller.targetedURL()
         let items = location == .items ? (controller.selectedItemURLs() ?? []) : []
-        snapshot = (location == .toolbar ? nil : folder, items)
-
+        snapshot = (folder, items)
+        var keys: Set<URLResourceKey> = [.isDirectoryKey]
+        if settings.toolbox.contains(where: { $0.enabled && $0.command == .toggleHidden }) { keys.insert(.isHiddenKey) }
+        if settings.toolbox.contains(where: { $0.enabled && $0.command == .toggleExtension }) { keys.insert(.hasHiddenExtensionKey) }
+        let selected = items.map { Self.selectedItem($0, keys: keys) }
+        let metadataEnd = ProcessInfo.processInfo.systemUptime
+        // 只有可能显示粘贴的上下文才查询。版本未变时仅做一次 stat，不读 JSON。
+        let canPaste = location != .toolbar && settings.groups.cutPaste
+            && (selected.isEmpty || (selected.count == 1 && selected[0].isFolder))
         let input = MenuInput(
             location: location,
             folder: folder?.path(percentEncoded: false) ?? "/",
-            items: items.map(Self.selectedItem),
-            hasPendingPaste: !SharedStore.loadPending().isEmpty
+            items: selected,
+            hasPendingPaste: canPaste && pending.hasItems()
         )
+        let pendingEnd = ProcessInfo.processInfo.systemUptime
         let nodes = MenuBuilder.build(input, settings: settings, environment: Self.environment)
+        let rulesEnd = ProcessInfo.processInfo.systemUptime
         commands = []
+        var menu: NSMenu?
+        if !nodes.isEmpty {
+            let result = renderer.render(nodes, target: self, action: #selector(runCommand(_:)),
+                                         isDark: UserDefaults.standard.string(forKey: "AppleInterfaceStyle") == "Dark")
+            commands = result.commands
+            menu = result.menu
+        }
+        let end = ProcessInfo.processInfo.systemUptime
         log.notice("menu kind=\(menuKind.rawValue) folder=\(input.folder, privacy: .public) items=\(items.count) -> \(Self.describe(nodes), privacy: .public)")
-        guard !nodes.isEmpty else { return nil }
-        let menu = NSMenu(title: "")
-        nodes.forEach { menu.addItem(makeItem($0)) }
+        performance.notice("menu first=\(self.menuCount == 1) kind=\(menuKind.rawValue) items=\(items.count) metadata_ms=\((metadataEnd - start) * 1000) pending_ms=\((pendingEnd - metadataEnd) * 1000) rules_ms=\((rulesEnd - pendingEnd) * 1000) presentation_ms=\((end - rulesEnd) * 1000) total_ms=\((end - start) * 1000)")
         return menu
     }
 
@@ -91,67 +114,6 @@ final class FinderSync: FIFinderSync, @unchecked Sendable {
             if node.content == .separator { return "—" }
             return node.children.isEmpty ? node.title : "\(node.title)[\(describe(node.children))]"
         }.joined(separator: "|")
-    }
-
-    private func makeItem(_ node: MenuNode) -> NSMenuItem {
-        if node.content == .separator { return .separator() }
-        let item = NSMenuItem(title: node.title, action: nil, keyEquivalent: "")
-        switch node.icon {
-        case .symbol(let name): item.image = NSImage(systemSymbolName: name, accessibilityDescription: nil).map(Self.menuSymbol)
-        case .app(let bundleID):
-            if let url = NSWorkspace.shared.urlForApplication(withBundleIdentifier: bundleID) {
-                item.image = Self.menuSized(NSWorkspace.shared.icon(forFile: url.path))
-            }
-        case .fileType(let ext):
-            item.image = Self.menuSized(NSWorkspace.shared.icon(for: UTType(filenameExtension: ext) ?? .data))
-        case .file(let path):
-            item.image = Self.menuSized(NSWorkspace.shared.icon(forFile: path))
-        case nil: break
-        }
-        switch node.content {
-        case .command(let command):
-            item.action = #selector(runCommand(_:))
-            item.target = self
-            item.tag = commands.count
-            commands.append(command)
-        case .submenu(let children):
-            let submenu = NSMenu(title: node.title)
-            children.forEach { submenu.addItem(makeItem($0)) }
-            item.submenu = submenu
-        case .separator: break
-        }
-        return item
-    }
-
-    /// 访达收到的 SF Symbol 会被压成不带模板标记的黑色位图，深色模式下看不清。
-    /// 这里先按当前系统外观涂成菜单文字色，再标记为模板：访达认模板时由它着色（含高亮行），不认时颜色也已经对了。
-    /// 外观读全局 `AppleInterfaceStyle`，扩展进程自己的 `effectiveAppearance` 可能停在启动时的外观。
-    private static func menuSymbol(_ symbol: NSImage) -> NSImage {
-        let isDark = UserDefaults.standard.string(forKey: "AppleInterfaceStyle") == "Dark"
-        let size = symbol.size
-        guard let rep = NSBitmapImageRep(
-            bitmapDataPlanes: nil, pixelsWide: Int(size.width * 2), pixelsHigh: Int(size.height * 2),
-            bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false,
-            colorSpaceName: .deviceRGB, bytesPerRow: 0, bitsPerPixel: 0
-        ) else { return symbol }
-        rep.size = size
-        NSGraphicsContext.saveGraphicsState()
-        NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: rep)
-        let rect = NSRect(origin: .zero, size: size)
-        symbol.draw(in: rect)
-        NSColor(white: isDark ? 1 : 0, alpha: 0.85).set()
-        rect.fill(using: .sourceAtop)
-        NSGraphicsContext.restoreGraphicsState()
-        let image = NSImage(size: size)
-        image.addRepresentation(rep)
-        image.isTemplate = true
-        return image
-    }
-
-    /// 彩色图标统一缩到菜单的 16 pt，和 SF Symbol 对齐。
-    private static func menuSized(_ icon: NSImage) -> NSImage {
-        icon.size = NSSize(width: 16, height: 16)
-        return icon
     }
 
     @objc private func runCommand(_ sender: NSMenuItem) {
@@ -169,8 +131,8 @@ final class FinderSync: FIFinderSync, @unchecked Sendable {
     )
 
     /// 只读元数据，不打开文件。读不到时按 URL 的目录标记处理。
-    private static func selectedItem(_ url: URL) -> SelectedItem {
-        let values = try? url.resourceValues(forKeys: [.isDirectoryKey, .isHiddenKey, .hasHiddenExtensionKey])
+    private static func selectedItem(_ url: URL, keys: Set<URLResourceKey>) -> SelectedItem {
+        let values = try? url.resourceValues(forKeys: keys)
         return SelectedItem(
             path: url.path(percentEncoded: false),
             isDirectory: values?.isDirectory ?? url.hasDirectoryPath,

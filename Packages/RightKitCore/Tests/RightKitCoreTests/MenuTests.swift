@@ -208,6 +208,82 @@ import Testing
             #expect(menu(.container, settings: s)[0].children.last?.title == "周报", "用户写的名字不翻译")
         }
     }
+
+    @Test func monitoredPathMatchingKeepsExistingNormalizationAndBoundaryRules() {
+        let roots = ["/", "/Users/tester/./work//", "/Volumes/Other", "/Users/tester/work/../kept"]
+        let paths = ["/", "/Users/tester/work", "/Users/tester/work//./a", "/Users/tester/worker/a", "/Volumes/Other/a",
+                     "/Volumes/Otherland", "/Users/tester/work/../kept/a", "/Users/tester/kept/a", "/tmp/file"]
+        func previousMatch(_ path: String, _ roots: [String]) -> Bool {
+            roots.contains { root in
+                guard root != "/" else { return false }
+                let p = PathRules.standardized(path), r = PathRules.standardized(root)
+                return p == r || r == "/" || p.hasPrefix(r + "/")
+            }
+        }
+        for candidateRoots in [roots, ["/"], ["//"], ["/Users/tester/work"], [String]()] {
+            let scope = PathRules.MonitoringScope(candidateRoots)
+            for path in paths {
+                #expect(scope.contains(path) == previousMatch(path, candidateRoots), "\(path), \(candidateRoots)")
+                #expect(PathRules.isInsideAny(path, of: candidateRoots) == previousMatch(path, candidateRoots))
+            }
+        }
+    }
+
+    @Test func transferTargetsKeepCompleteMenusAndQuerySynchronousFactsOnce() {
+        final class Counts: @unchecked Sendable {
+            private let lock = NSLock()
+            private var existence: [String: Int] = [:]
+            private var names: [String: Int] = [:]
+            private var missing: Set<String> = []
+            func exists(_ path: String) -> Bool {
+                lock.lock(); defer { lock.unlock() }
+                existence[path, default: 0] += 1
+                return !path.hasSuffix("Gone") && !missing.contains(path)
+            }
+            func name(_ path: String) -> String {
+                lock.lock(); defer { lock.unlock() }
+                names[path, default: 0] += 1
+                return "name: " + (path as NSString).lastPathComponent
+            }
+            func snapshot() -> ([String: Int], [String: Int]) {
+                lock.lock(); defer { lock.unlock() }
+                return (existence, names)
+            }
+            func remove(_ path: String) {
+                lock.lock(); defer { lock.unlock() }
+                missing.insert(path)
+            }
+        }
+        var s = settings
+        s.sendTo.append(s.sendTo[0]) // 两个条目指向同一路径，保持菜单两项。
+        let counts = Counts()
+        let measured = MenuEnvironment(folderExists: { counts.exists($0) }, displayName: { counts.name($0) }, isAppInstalled: { _ in false })
+        let input = MenuInput(location: .items, folder: home, items: [file("a.txt")])
+        let nodes = L10n.$override.withValue(.simplifiedChinese) {
+            MenuBuilder.build(input, settings: s, environment: measured)
+        }
+        let targets = s.sendTo.filter { $0.enabled && !$0.path.hasSuffix("Gone") }
+        let expectedCopy = targets.map {
+            MenuNode(title: "name: " + ($0.path as NSString).lastPathComponent, icon: .file(path: $0.path), content: .command(Command(.copyTo, $0.id.uuidString)))
+        } + [.separator, MenuBuilder.leaf("选择文件夹…", "folder.badge.questionmark", Command(.copyTo))]
+        let expectedMove = targets.map {
+            MenuNode(title: "name: " + ($0.path as NSString).lastPathComponent, icon: .file(path: $0.path), content: .command(Command(.moveTo, $0.id.uuidString)))
+        } + [.separator, MenuBuilder.leaf("选择文件夹…", "folder.badge.questionmark", Command(.moveTo))]
+        #expect(nodes.first { $0.title == "复制到" }?.children == expectedCopy)
+        #expect(nodes.first { $0.title == "移动到" }?.children == expectedMove)
+        let (existence, names) = counts.snapshot()
+        #expect(existence == Dictionary(uniqueKeysWithValues: Set(s.sendTo.filter(\.enabled).map(\.path)).map { ($0, 1) }))
+        #expect(names == Dictionary(uniqueKeysWithValues: Set(targets.map(\.path)).map { ($0, 1) }))
+
+        let removedPath = s.sendTo[0].path
+        counts.remove(removedPath)
+        let nextMenu = L10n.$override.withValue(.simplifiedChinese) {
+            MenuBuilder.build(input, settings: s, environment: measured)
+        }
+        #expect(nextMenu.first { $0.title == "复制到" }?.children.filter { $0.icon == .file(path: removedPath) }.isEmpty == true)
+        let (nextExistence, _) = counts.snapshot()
+        #expect(nextExistence[removedPath] == 2, "下一次构建必须重新检查已删除的文件夹")
+    }
 }
 
 import AppKit

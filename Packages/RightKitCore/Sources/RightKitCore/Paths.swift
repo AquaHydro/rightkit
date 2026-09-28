@@ -84,6 +84,34 @@ public enum PathRules {
         roots.contains { $0 != "/" && isSameOrInside(path, $0) }
     }
 
+    /// Finder 菜单一次构建期间复用标准化后的监视目录。
+    struct MonitoringScope {
+        private struct Root {
+            let path: String
+            let childPrefix: String
+
+            init(_ path: String) {
+                self.path = path
+                childPrefix = path + "/"
+            }
+        }
+
+        private let roots: [Root]
+
+        init(_ roots: [String]) {
+            // 与 isInsideAny 的旧行为一致，仅原始的 "/" 被排除。
+            self.roots = roots.filter { $0 != "/" }.map { Root(PathRules.standardized($0)) }
+        }
+
+        func contains(_ path: String) -> Bool {
+            guard !roots.isEmpty else { return false }
+            let path = PathRules.standardized(path)
+            return roots.contains { root in
+                path == root.path || root.path == "/" || path.hasPrefix(root.childPrefix)
+            }
+        }
+    }
+
     /// 把文件夹移动到它自己里面（F-032）。
     public static func isMovingIntoItself(source: String, destinationFolder: String) -> Bool {
         isSameOrInside(destinationFolder, source)
