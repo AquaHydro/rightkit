@@ -243,6 +243,16 @@ No text, no letters, no numbers, no logos, no watermark.
 
 把同一张海报同时作为 Grok 图生视频的首帧和尾帧，6 秒、720p。动作限于珊瑚雾光呼吸、玻璃边缘高光缓慢流动、空白卡片漂移几个像素和地面反射轻微变化。镜头锁定，不切镜、不缩放，不生成新人物、新动物或新道具。每 12 帧抽查结构没有跳动，也没有凭空出现人物、文字或 Logo；如果首尾仍不一致，网页导出统一正放接倒放。
 
+### 10. ak-ui 工作台场景
+
+`workbench-scene-ak.png` 是「Riko 的工作台」区块的 3:2 等距场景，参考明日方舟官网「泰拉万象」那种接近单色的桌面场景。用 GPT-image 文生图，不上传参考图，也不画 Riko。第一版用了饱和的珊瑚色装备箱和亮蓝文件夹，像通用 3D 素材，已废弃：材质要压成石墨、炭灰、奶白和拉丝金属，珊瑚色只留在装备箱条纹、搭扣和一根线缆上。
+
+```text
+Isometric 3D diorama render of a field operator's workbench floating in a dark void, in the style of a premium game website key scene: near-monochrome matte materials, graphite, charcoal, off-white plastic and brushed steel, soft studio top light, subtle fog at the floor, gentle ambient occlusion, very restrained. On a large dark matte desk: a slim silver laptop open with a blank grey screen (no logo on the lid), a small standalone monitor showing only a few blank grey bars, a vertical metal rack holding five plain folders in muted desaturated slate blue, a clipboard with blank white paper, a stack of blank white file cards, a graphite hard-shell equipment case with a thin coral #FF7973 stripe and coral latches, a black wireless mouse, a coiled cable, a mug. Sitting on the desk next to the laptop, a tiny round white mouse (the animal) with only its right ear coral, white tail. A few blank paper cards hover in the air above the desk. Coral appears only as small accents. Dark charcoal background #1B1C20 with a faint diagonal line grid. Wide composition with empty dark margin around the desk. No text, no letters, no numbers, no logos, no apple logo, no people.
+```
+
+检查：六个热点对应的物件（文件卡叠、文件夹架、笔记本、装备箱、小显示器、剪贴板）要各自有清楚轮廓；屏幕和纸面不能出现文字；底色要接近网页区块底色 `#1c1d21`，否则边缘会露出矩形。换图后重新量热点坐标。
+
 ## 导出
 
 | 物料 | 格式 |

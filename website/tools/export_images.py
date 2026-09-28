@@ -48,6 +48,7 @@ CHARACTER = {
     "profile-riko-ok-ak": ("profile-riko-ok-ak.png", (512, 1024)),
     "profile-riko-wave-ak": ("profile-riko-wave-ak.png", (512, 1024)),
     "profile-riko-file-ak": ("profile-riko-file-ak.png", (512, 1024)),
+    "workbench-scene-ak": ("workbench-scene-ak.png", (768, 1536)),
 }
 
 # Pricing card loops in website/assets/video, played on hover. The poster is the

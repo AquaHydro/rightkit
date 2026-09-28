@@ -315,3 +315,150 @@
   .ak-profile-progress span { transition: none; }
   .ak-profile-echo { transition: none; }
 }
+
+/* Section chrome borrowed from the reference site: one hairline near the bottom of each
+   band with a huge quiet word sitting on it. Decorative only, behind the content. */
+.band[data-ak-word] { overflow: clip; padding-bottom: clamp(120px, 14vw, 200px); }
+.band[data-ak-word]::after {
+  content: attr(data-ak-word) / "";
+  position: absolute; z-index: 0; left: 0; right: 0; bottom: 0;
+  padding-left: max(24px, calc((100vw - var(--wrap)) / 2));
+  border-top: 1px solid var(--line-ink);
+  font: 700 clamp(88px, 12vw, 176px)/.78 "Oswald", var(--font); letter-spacing: -.01em;
+  color: rgba(255, 255, 255, .045); white-space: nowrap; pointer-events: none; user-select: none;
+}
+.band.paper[data-ak-word]::after { border-top-color: var(--line-paper); color: rgba(42, 43, 49, .05); }
+.band[data-ak-word] > .wrap { position: relative; z-index: 1; }
+
+/* Diagonal construction grid plus one small halftone patch. */
+.ak-structure {
+  background-image:
+    repeating-linear-gradient(45deg, transparent 0 119px, rgba(255, 255, 255, .03) 119px 120px),
+    repeating-linear-gradient(-45deg, transparent 0 119px, rgba(255, 255, 255, .03) 119px 120px);
+}
+.paper.ak-structure {
+  background-image:
+    repeating-linear-gradient(45deg, transparent 0 119px, rgba(42, 43, 49, .04) 119px 120px),
+    repeating-linear-gradient(-45deg, transparent 0 119px, rgba(42, 43, 49, .04) 119px 120px);
+}
+.ak-structure::before {
+  content: ""; position: absolute; z-index: 0; top: 0; right: 0; width: 420px; height: 320px; pointer-events: none;
+  background: radial-gradient(circle, currentColor 1px, transparent 1.4px) 0 0 / 8px 8px; opacity: .1;
+  -webkit-mask-image: radial-gradient(closest-side, #000, transparent); mask-image: radial-gradient(closest-side, #000, transparent);
+}
+
+/* Workbench: an isometric scene with light markers, mirrored by a text directory. */
+.ak-workbench { background-color: #1c1d21; }
+.ak-workbench-inner { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: clamp(32px, 4vw, 64px); align-items: center; }
+.ak-workbench-directory { display: grid; margin-top: 36px; border-top: 1px solid var(--line-ink); }
+.ak-workbench-directory a {
+  display: flex; align-items: center; gap: 14px; min-height: 52px; padding: 0 8px;
+  border-bottom: 1px solid var(--line-ink); color: var(--on-ink-2); text-decoration: none; font-size: 15px;
+  transition: color var(--ak-motion-fast) var(--ak-ease-standard), background-color var(--ak-motion-fast) var(--ak-ease-standard);
+}
+.ak-workbench-label { width: 52px; color: var(--on-ink); font: 500 14px/1 "Oswald", var(--font); letter-spacing: .08em; }
+.ak-workbench-directory .ic { width: 16px; height: 16px; margin-left: auto; color: var(--coral); opacity: 0; translate: -6px 0; transition: opacity var(--ak-motion-fast), translate var(--ak-motion-base) var(--ak-ease-emphasized); }
+.ak-workbench-directory a:is(:hover, :focus-visible, .is-lit) { color: var(--on-ink); background: rgba(255, 255, 255, .05); }
+.ak-workbench-directory a:is(:hover, :focus-visible, .is-lit) .ic { opacity: 1; translate: 0 0; }
+.ak-workbench-scene { position: relative; margin: 0; }
+.ak-workbench-scene img {
+  display: block; width: 100%; height: auto;
+  -webkit-mask-image: radial-gradient(ellipse 72% 70% at 50% 52%, #000 62%, transparent);
+  mask-image: radial-gradient(ellipse 72% 70% at 50% 52%, #000 62%, transparent);
+}
+.ak-workbench-hotspot {
+  position: absolute; left: var(--x); top: var(--y); display: flex; align-items: center; gap: 8px;
+  translate: -9px -9px; color: var(--on-ink); text-decoration: none; white-space: nowrap;
+  font: 500 14px/1 "Oswald", var(--font); letter-spacing: .1em; text-shadow: 0 1px 6px rgba(0, 0, 0, .8);
+}
+.ak-workbench-hotspot::before {
+  content: ""; flex: none; width: 16px; height: 16px; border: 1px solid currentColor;
+  background: linear-gradient(to top right, transparent calc(50% - .6px), currentColor calc(50% - .6px) calc(50% + .6px), transparent calc(50% + .6px));
+  box-shadow: 0 0 0 4px rgba(27, 28, 32, .55);
+  transition: background-color var(--ak-motion-fast), border-color var(--ak-motion-fast), scale var(--ak-motion-base) var(--ak-ease-emphasized);
+}
+.ak-workbench-hotspot small { max-width: 0; overflow: hidden; padding-block: 5px; background: rgba(20, 21, 25, .88); color: var(--on-ink); font: 500 13px/1 var(--font); letter-spacing: 0; opacity: 0; transition: max-width var(--ak-motion-base) var(--ak-ease-emphasized), opacity var(--ak-motion-fast); }
+.ak-workbench-hotspot:is(:hover, .is-lit) { color: var(--coral); }
+.ak-workbench-hotspot:is(:hover, .is-lit)::before { background-color: var(--coral); border-color: var(--coral); scale: 1.15; }
+.ak-workbench-hotspot:is(:hover, .is-lit) small { max-width: 12em; padding-inline: 8px; opacity: 1; }
+
+/* Term browser: a ruled index beside one symbol drawn in particles. */
+.ak-world-layout { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 5vw, 80px); margin-top: 40px; align-items: stretch; }
+.ak-world-terms { border-top: 1px solid rgba(255, 255, 255, .28); }
+[data-ak-world-select] {
+  display: flex; align-items: baseline; gap: 16px; width: 100%; padding: 22px 8px 14px; border: 0; border-bottom: 1px solid rgba(255, 255, 255, .28);
+  background: none; color: var(--on-ink-2); text-align: left; cursor: pointer; font: inherit;
+  transition: color var(--ak-motion-fast) var(--ak-ease-standard), padding-left var(--ak-motion-base) var(--ak-ease-emphasized);
+}
+.ak-world-term-local { font: 700 clamp(26px, 2.8vw, 38px)/1.1 var(--font); }
+.ak-world-term-en { font: 500 14px/1 "Oswald", var(--font); letter-spacing: .1em; }
+[data-ak-world-select]:hover { color: var(--on-ink); }
+[data-ak-world-select][aria-pressed="true"] { padding-left: 20px; color: var(--on-ink); border-bottom-color: var(--coral); box-shadow: inset 3px 0 var(--coral); }
+[data-ak-world-select]:focus-visible { outline: var(--ak-focus-width) solid var(--ak-focus-color); outline-offset: -3px; }
+.ak-world-stage { position: relative; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); grid-template-rows: 1fr auto; column-gap: 20px; min-height: 460px; }
+[data-ak-world-canvas], .ak-world-static { grid-area: 1 / 1; width: 100%; height: 100%; min-height: 300px; }
+[data-ak-world-canvas] { display: block; opacity: 0; transition: opacity var(--ak-motion-slow); }
+.ak-world-static { display: grid; place-items: center; }
+.ak-world-static svg.card-ic { width: 62%; height: auto; aspect-ratio: 1; fill: none; stroke: var(--on-ink); stroke-width: 1.2; color: var(--on-ink); }
+.ak-world-canvas-ready [data-ak-world-canvas] { opacity: 1; }
+.ak-world-canvas-ready .ak-world-static { visibility: hidden; }
+.ak-world-detail { grid-area: 1 / 2; align-self: center; }
+.ak-world-detail::before { content: ""; display: block; width: 100%; margin-bottom: 18px; border-top: 1px dashed rgba(255, 255, 255, .35); }
+[data-ak-world-title] { font: 700 clamp(24px, 2.2vw, 32px)/1.2 var(--font); }
+[data-ak-world-body] { margin-top: 12px; color: var(--on-ink-2); line-height: 1.7; }
+.ak-world-controls { grid-column: 1 / -1; display: flex; align-items: center; gap: 16px; margin-top: 18px; }
+.ak-world-controls button { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid rgba(255, 255, 255, .35); background: none; color: var(--on-ink); cursor: pointer; font-size: 18px; transition: border-color var(--ak-motion-fast), background-color var(--ak-motion-fast); }
+.ak-world-controls button:hover { border-color: var(--coral); background: rgba(255, 121, 115, .12); }
+.ak-world-controls button:focus-visible { outline: var(--ak-focus-width) solid var(--ak-focus-color); outline-offset: 3px; }
+[data-ak-world-current] { font: 500 13px/1 var(--font-mono); letter-spacing: .1em; }
+.ak-world-progress { flex: 1; height: 2px; background: rgba(255, 255, 255, .2); }
+.ak-world-progress > span { display: block; height: 100%; background: var(--coral); transition: width var(--ak-motion-base) var(--ak-ease-emphasized); }
+
+/* Explore: full-bleed tall posters, each washed in one menu intent colour. */
+.ak-link-panels { display: flex; height: min(620px, 74vh); min-height: 480px; margin-top: 40px; border: 1px solid var(--line-ink); }
+.ak-link-panel {
+  position: relative; flex: 1 1 0; min-width: 0; display: flex; align-items: flex-end; overflow: hidden; isolation: isolate;
+  padding: clamp(24px, 3vw, 44px); color: var(--on-ink); text-decoration: none;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--tint) 34%, #1b1c20), #1b1c20 78%);
+  border-right: 1px solid var(--line-ink); transition: flex-grow var(--ak-motion-slow) var(--ak-ease-emphasized);
+}
+.ak-link-panel:last-child { border-right: 0; }
+.ak-link-panel img {
+  position: absolute; z-index: -1; left: 50%; top: 4%; width: auto; height: 124%; translate: -50% 0;
+  filter: grayscale(1) contrast(1.05) brightness(.8); mix-blend-mode: luminosity; opacity: .75;
+  transition: opacity var(--ak-motion-slow), scale var(--ak-motion-slow) var(--ak-ease-emphasized), filter var(--ak-motion-slow);
+}
+.ak-link-panel::before { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(180deg, transparent 30%, rgba(20, 21, 25, .9) 62%, rgba(20, 21, 25, .97)); }
+.ak-link-panel::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--tint); scale: 0 1; transform-origin: left; transition: scale var(--ak-motion-base) var(--ak-ease-emphasized); }
+.ak-link-panel-content { display: grid; justify-items: start; gap: 8px; }
+.ak-link-panel-content > .ic { width: 38px; height: 38px; margin-bottom: 10px; color: var(--on-ink); }
+.ak-link-panel-content strong { font: 700 clamp(28px, 2.6vw, 40px)/1.15 var(--font); }
+.ak-link-panel-en { font: 500 15px/1 "Oswald", var(--font); letter-spacing: .12em; color: color-mix(in srgb, var(--tint) 70%, #fff); }
+.ak-link-panel-body { max-width: 26ch; color: var(--on-ink-2); font-size: 14px; }
+.ak-link-panel-more { display: inline-flex; align-items: center; gap: 10px; margin-top: 16px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, .5); font: 500 12px/1 var(--font-mono); letter-spacing: .14em; }
+.ak-link-panel-more .ic { width: 16px; height: 16px; transition: translate var(--ak-motion-base) var(--ak-ease-emphasized); }
+.ak-link-panel:is(:hover, :focus-visible) { flex-grow: 1.35; }
+.ak-link-panel:is(:hover, :focus-visible) img { opacity: 1; scale: 1.03; filter: grayscale(.4) brightness(.95); mix-blend-mode: normal; }
+.ak-link-panel:is(:hover, :focus-visible)::after { scale: 1; }
+.ak-link-panel:is(:hover, :focus-visible) .ak-link-panel-more .ic { translate: 4px 0; }
+.ak-link-panel:focus-visible { outline: var(--ak-focus-width) solid var(--ak-focus-color); outline-offset: -4px; }
+
+@media (max-width: 900px) {
+  .ak-workbench-inner, .ak-world-layout { grid-template-columns: minmax(0, 1fr); }
+  .ak-workbench-scene { order: -1; }
+  .ak-workbench-hotspot { display: none; }
+  .ak-link-panels { flex-direction: column; height: auto; }
+  .ak-link-panel { min-height: 300px; border-right: 0; border-bottom: 1px solid var(--line-ink); }
+  .ak-link-panel img { left: auto; right: -8%; top: 0; height: 140%; translate: none; }
+}
+@media (max-width: 600px) {
+  .ak-world-stage { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+  [data-ak-world-canvas], .ak-world-static { min-height: 260px; }
+  .ak-world-detail { grid-area: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-ak-world-canvas] { display: none; }
+  .ak-world-canvas-ready .ak-world-static { visibility: visible; }
+  .ak-workbench-directory a, .ak-workbench-directory .ic, .ak-workbench-hotspot::before, .ak-workbench-hotspot small,
+  [data-ak-world-select], .ak-world-progress > span, .ak-link-panel, .ak-link-panel img, .ak-link-panel::after { transition: none; }
+}

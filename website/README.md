@@ -22,12 +22,12 @@ make website-deploy # 构建并部署到 https://rightkit.yiliang.app
 | 样式和动画 | `src/styles.css`（经典，默认） |
 | ak-ui 风格（`/ak/`） | `src/ak-ui.css`，叠加在 `styles.css` 之上；变量来自 `public/ak-ui/tokens.css` |
 | 首屏右键演示、滚动进场 | `src/main.js` |
-| ak-ui 版章节索引、Riko 档案和背景动效 | `src/ak.js`，调用 `public/ak-ui/js/` 里的 ak-ui 模块 |
+| ak-ui 版章节索引、工作台热点、词条粒子、Riko 档案和背景动效 | `src/ak.js`，调用 `public/ak-ui/js/` 里的 ak-ui 模块 |
 | 字体、导出的图片、图标和视频 | `public/` |
 
 ## 更新图片
 
-角色原图在 `assets/character/`，价格卡与 ak 首屏视频原片在 `assets/video/`。换图后重新导出网页用的 WebP、应用图标和视频（需要 ffmpeg），并提交 `public/img/` 和 `public/video/` 的变化。ak 首屏原片会自动导出成正放接倒放的无缝循环：
+角色和 ak 工作台原图在 `assets/character/`，价格卡与 ak 首屏视频原片在 `assets/video/`。换图后重新导出网页用的 WebP、应用图标和视频（需要 ffmpeg），并提交 `public/img/` 和 `public/video/` 的变化。ak 首屏原片会自动导出成正放接倒放的无缝循环：
 
 ```sh
 pip install pillow
