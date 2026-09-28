@@ -6,6 +6,7 @@ DerivedData/
 xcuserdata/
 .env
 .env.*
+!.env.example
 *.p12
 *.p8
 
