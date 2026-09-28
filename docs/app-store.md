@@ -186,14 +186,11 @@ HOW TO TEST
 1. Launch RightKit. The Welcome window appears.
 2. Click "Authorize…" and choose your home folder (the panel opens there). The context menu only appears inside authorized folders.
 3. In the same window, click "Open System Settings". This opens System Settings > General > Login Items & Extensions. Turn on the RightKit Finder extension. The Welcome window's status card updates to show the extension is on.
-4. Click "Get Started" to open Settings. If the status says "Finder extension isn’t running", click "Restart Finder" and confirm with "Restart". macOS asks once for permission to control Finder; click Allow.
+4. Click "Get Started" to open Settings. If the status says "Finder extension isn’t running", relaunch Finder: hold Option, right-click Finder in the Dock, and choose "Relaunch". The "Restart Finder" button in Settings shows the same instructions.
 5. In Finder, open any folder inside your home folder and right-click an empty area. Choose New File > Plain Text. Right-click the new file to try Copy To, Move To, Open in App and Toolbox.
 
 WHY WE NEED FOLDER ACCESS
 RightKit runs in the App Sandbox. It creates, copies and moves files only inside folders the user selects in the standard open panel (com.apple.security.files.user-selected.read-write). Access is kept with app-scoped security-scoped bookmarks (com.apple.security.files.bookmarks.app-scope) so the context menu keeps working after a restart. Nothing outside the chosen folders is accessed.
-
-WHY WE NEED THE FINDER APPLE EVENTS EXCEPTION
-com.apple.security.temporary-exception.apple-events is limited to com.apple.finder. It is used for one action only: after the user clicks "Restart Finder" in Settings and confirms the dialog, RightKit asks Finder to quit so that macOS reloads the newly enabled Finder extension. RightKit then relaunches Finder. It sends no other Apple Events and never runs without the user's confirmation. If the user denies automation permission, RightKit shows how to relaunch Finder manually.
 
 BACKGROUND HELPER
 The app bundle contains a small launch agent (registered with SMAppService). It only relays menu commands from the Finder extension to the main app over XPC and does not handle files. It starts on demand when the extension uses it. Launch at login is off by default and only turns on if the user enables it.
@@ -206,12 +203,4 @@ No data is collected. The App Store version makes no network requests. The Trans
 
 ## App 沙盒信息（App Sandbox Information）
 
-只为商店版使用的 Finder Apple Events 临时例外填写一行；普通文件访问和 App Group 权限不在这里逐项填写。
-
-**Entitlement Key**：`com.apple.security.temporary-exception.apple-events`
-
-**Usage Information**：
-
-```text
-RightKit only uses this exception to ask Finder to quit after the user clicks “Restart Finder” in Settings and confirms. It then reopens Finder so the Finder extension can take effect. The exception’s sole array value, `com.apple.finder`, limits this action to Finder. To test it, enable the Finder extension, then use Settings → Restart Finder and allow the macOS automation prompt.
-```
+商店版没有临时例外，这里不填。0.1.1 (4) 填过的 `com.apple.security.temporary-exception.apple-events` 一行要删掉（审核指南 2.4.5(i) 不批准）。

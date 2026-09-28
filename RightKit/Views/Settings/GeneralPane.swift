@@ -65,6 +65,14 @@ struct GeneralPane: View {
                 #endif
             }
         }
+        #if APP_STORE
+        // 商店版不能用 Apple Events 让访达退出（审核 2.4.5(i) 不给临时例外），只说明手动重启的方法。
+        .alert(L("重新启动访达"), isPresented: $confirmingRestart) {
+            Button(L("好")) {}
+        } message: {
+            Text(L("按住 Option 键右键点按程序坞中的访达，选择“重新开启”。"))
+        }
+        #else
         .alert(L("重新启动访达？"), isPresented: $confirmingRestart) {
             Button(L("重新启动")) {
                 Task {
@@ -78,6 +86,7 @@ struct GeneralPane: View {
         } message: {
             Text(L("访达会短暂关闭并重新打开。"))
         }
+        #endif
     }
 }
 
@@ -173,6 +182,7 @@ enum FinderControl {
         }
     }
 
+    #if !APP_STORE
     private static let finderID = "com.apple.finder"
 
     /// F-001：请访达正常退出，等它退出后重新打开。退出靠 Apple Event，需要只针对访达的临时例外；
@@ -204,6 +214,7 @@ enum FinderControl {
         configuration.activates = false
         return (try? await NSWorkspace.shared.openApplication(at: url, configuration: configuration)) != nil
     }
+    #endif
 }
 
 /// F-009：监视目录。

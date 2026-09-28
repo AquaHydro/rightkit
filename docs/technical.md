@@ -36,7 +36,7 @@
 
 三个 target 都启用 App Sandbox，entitlements 如下：
 
-- 主程序：`app-sandbox`、`application-groups`、`files.user-selected.read-write`、`files.bookmarks.app-scope`，以及只针对 `com.apple.finder` 的 `temporary-exception.apple-events` 和强化运行时要求的 `automation.apple-events`（`F-001` 重启访达）。Info.plist 带 `NSAppleEventsUsageDescription`，英文在 `RightKit/Resources/InfoPlist.xcstrings`。官网版另加 `network.client`（`F-081`）。商店版不加网络权限，用单独的 `RightKit/RightKit-AppStore.entitlements`，两份文件除这一项外保持一致。
+- 主程序：`app-sandbox`、`application-groups`、`files.user-selected.read-write`、`files.bookmarks.app-scope`，官网版另有只针对 `com.apple.finder` 的 `temporary-exception.apple-events` 和强化运行时要求的 `automation.apple-events`（`F-001` 重启访达）；App Review 不批准这个临时例外，商店版不带这两项。Info.plist 带 `NSAppleEventsUsageDescription`，英文在 `RightKit/Resources/InfoPlist.xcstrings`。官网版另加 `network.client`（`F-081`）。商店版不加网络权限，用单独的 `RightKit/RightKit-AppStore.entitlements`，两份文件除这些项外保持一致。
 - 扩展：`app-sandbox`、`application-groups`。扩展不改文件，也不需要文件权限。
 - agent：`app-sandbox`、`application-groups`。XPC 服务名必须是 App Group 的直接子名，扩展和主程序才能在沙盒里查找它。
 
@@ -115,7 +115,7 @@
 ## 系统集成
 
 - 登录项使用 `SMAppService.mainApp`，只在用户打开「登录时启动」后注册（`F-005`，商店审核指南 2.4.5(iii)）。
-- 重启访达：先在后台调用 `AEDeterminePermissionToAutomateTarget`（退出事件，允许询问用户）确认自动化授权，再用 `NSRunningApplication.terminate()` 让访达正常退出。它通过 Apple Event 完成，所以需要只针对 `com.apple.finder` 的 Apple Events 临时例外和 `NSAppleEventsUsageDescription`。等访达进程结束后，用 `NSWorkspace.openApplication` 按 bundle ID 重新打开访达。`terminate()` 返回失败或几秒内访达没有退出，按 `F-001` 提示。沙盒会拦截 `forceTerminate()` 发出的信号，所以不再使用它。
+- 重启访达：先在后台调用 `AEDeterminePermissionToAutomateTarget`（退出事件，允许询问用户）确认自动化授权，再用 `NSRunningApplication.terminate()` 让访达正常退出。它通过 Apple Event 完成，所以需要只针对 `com.apple.finder` 的 Apple Events 临时例外和 `NSAppleEventsUsageDescription`。等访达进程结束后，用 `NSWorkspace.openApplication` 按 bundle ID 重新打开访达。`terminate()` 返回失败或几秒内访达没有退出，按 `F-001` 提示。沙盒会拦截 `forceTerminate()` 发出的信号，所以不再使用它。商店版（`APP_STORE`）不编译这段，只显示手动重启说明。
 - 扩展状态使用 `FIFinderSyncController.isExtensionEnabled`。
 - 打开扩展设置使用 `FIFinderSyncController.showExtensionManagementInterface()`。
 - 文本服务注册 Google 翻译、百度翻译和生成二维码，输入类型是字符串。
@@ -138,7 +138,7 @@
 - 二进制里不能有检查更新的代码、GitHub API 或 Release 下载入口和网络权限。反馈按钮打开邮件 `contact@yiliang.me`。`scripts/release/check_signature.sh <app> appstore` 检查这一点，并和官网版共用标识、沙盒、App Group 和 agent 配置的检查。
 - 主程序和扩展各带一份 `PrivacyInfo.xcprivacy`：不跟踪、不收集数据；UserDefaults 用于本应用自己的偏好（`CA92.1`），主程序读取用户选中文件的时间戳用于哈希一致性检查（`3B52.1`）。用到新的需声明原因的 API 时同步更新。
 - 商店版收费，官网版免费。商店版的应用内文案和链接都不提官网版或免费下载。
-- 送审说明要写清：为什么需要用户授权文件夹；为什么需要控制访达的 Apple Events 例外（只用来在用户确认后重启访达，让扩展生效）；怎样在系统设置里打开访达扩展。
+- 送审说明要写清：为什么需要用户授权文件夹；怎样在系统设置里打开访达扩展。
 
 持续集成（`.github/workflows/`，runner 是 GitHub 托管的 `xcode-27`）：
 
