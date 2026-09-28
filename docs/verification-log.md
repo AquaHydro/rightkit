@@ -192,3 +192,12 @@ macOS 27.0（26A428），构建提交 `8e2be71` 加本次 `FolderStore.refreshed
 ## 2026-09-27：菜单隔离交互补测
 
 UI 工具现已能连接 MenuPreview。实际展开浅/深色工具箱并点击「拷贝路径」「拷贝名称」，窗口分别显示 `copyPath/tag=3`、`copyName/tag=4`，确认命令映射；切回浅色可以重新打开菜单。仅测试回调，不进行文件操作。原生弹出层未取得完整截图，真实 Finder 的 `V-051` 保持 Planned。已终止 MenuPreview 进程、注销系统注册、删除测试应用和临时驱动，并验证没有残留。详情见 [菜单性能验证](performance/2026-09-26-menu.md)。
+
+## 2026-09-28：商店版真机验收（V-051、V-006）
+
+- 系统：macOS 27.0（26A428），Xcode 27.0。构建：`8dda875`（合并 #13 菜单性能、#17 商店版去掉 Apple Events 临时例外、#18 商店名称），`make build-appstore` 的 Debug-AppStore 开发签名构建 `0.1.1 (5)`，从 `.build/DerivedData` 直接运行，未替换 `/Applications/RightKit.app`。
+- 准备：记录原状态（官网版扩展开、商店版扩展关、浅色）。暂时关闭官网版扩展，暂时注销 `~/Applications/RightKit Review.app`（旧 `0.1.1 (4)` 审核演示副本）的扩展注册，确认访达加载的是新构建的扩展进程。监视目录沿用商店版已授权的 `~/RightKit-Review-Demo`，测试只在其中新建的 `V051-test` 里进行。
+- `V-051`：重启访达后第一次在空白处右键，RightKit 菜单项出现，「新建文件」子菜单展开正常，[截图](evidence/device-2026-09-28/v051-first-light.png)；选中文件后「工具箱 > 拷贝路径」写入正确路径；「新建文件 > Markdown」新建 `未命名.md`；剪切 `a.txt` 后在 `Sub` 空白处出现「粘贴」，[截图](evidence/device-2026-09-28/v051-paste-shown.png)，点击后文件移入 `Sub`，再次右键「粘贴」消失；再剪切、粘贴一次同样通过。切到深色后工具箱和新建文件子菜单的图标与文字清晰，[工具箱](evidence/device-2026-09-28/v051-dark-toolbox.png)、[新建文件](evidence/device-2026-09-28/v051-dark-newfile.png)；切回浅色后菜单正常。
+- 阶段日志见 [menu-performance.log](evidence/device-2026-09-28/menu-performance.log)：扩展初始化约 2 ms；每个扩展进程第一次构建 9.6 至 12.5 ms，后续空白处 3 至 6 ms，选中文件 3 至 14 ms。未覆盖外接盘、云盘和文件夹自定义图标更新。
+- `V-006`（商店版）：扩展已启用时点「重启访达」，弹出「重新启动访达」和手动说明，文案与规格一致，[截图](evidence/device-2026-09-28/v006-store-manual.png)；访达进程号前后不变，没有自动化授权请求。
+- 清理：删除 `V051-test`，恢复旧演示副本的扩展注册，官网版扩展重新启用、商店版扩展关闭，结束残留的测试扩展进程并重启访达，确认访达只显示一份 RightKit 菜单；系统外观恢复浅色。测试中「拷贝路径」覆盖了系统剪贴板。
