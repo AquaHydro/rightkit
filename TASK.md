@@ -5,18 +5,18 @@
 ## 上架前必须完成
 
 资料都在 [App Store 上架资料](docs/app-store.md)：商店名「RightKit: Context Menu Toolkit」（中文区「RightKit 右键工具箱」），价格 1 美元，版权 `2026 Liao Yiliang`，联系邮箱 `contact@yiliang.me`（电话直接填在 App Store Connect）。
-首次提审过程、分工和剩余步骤见 [提审交接记录](docs/app-store-submission-log.md)。2026-09-26 已由用户提交审核；2026-09-28 被拒（5.2.5 名称和副标题用了 Finder；2.4.5(i) 不批准 Apple Events 临时例外），代码和资料已在 #17、#18 修好，等待重新提交 `0.1.1 (5)`。通过后仍需用户手动发布。
+首次提审过程、分工和剩余步骤见 [提审交接记录](docs/app-store-submission-log.md)。2026-09-26 已由用户提交审核；2026-09-28 被拒（5.2.5 名称和副标题用了 Finder；2.4.5(i) 不批准 Apple Events 临时例外），代码和资料已在 #17、#18 修好，2026-09-28 重新提交 `0.1.1 (5)`，等待审核。通过后仍需用户手动发布。
 
 - [x] 官网和隐私政策上线：`https://rightkit.yiliang.app`（Cloudflare Pages 项目 `rightkit`，`make website-deploy` 部署）。隐私政策 `/privacy/`、`/en/privacy/`。以后换正式域名时改 `website/site.json` 的 `url` 并重新部署。
 - [x] 在 App Store Connect 新建 App：bundle ID `app.rightkit.mac.store`，按上架资料填名称、副标题、描述、关键词、隐私政策和技术支持网址、价格、隐私问卷（不收集数据）、年龄分级（4+）。隐私答复已发布。
 - [x] 送审备注：把上架资料里的英文备注贴进 App Review Information，不需要演示账号。
-- [ ] App 沙盒信息：删掉 App Sandbox Information 里 `com.apple.security.temporary-exception.apple-events` 那一行，商店版已不再申请。
+- [x] App 沙盒信息：用户已删掉 App Sandbox Information 里 `com.apple.security.temporary-exception.apple-events` 那一行，商店版已不再申请。
 - [x] 商店截图：`docs/evidence/app-store/zh` 与 `en` 各 5 张 2560 × 1600 产品图，已上传 App Store Connect 并按 01 至 05 排序。英文产品图用英文介绍配中文实机界面，用户已接受。
 - [x] 上传商店版：本机 `make upload-appstore` 上传 `0.1.1 (4)`；App Store Connect 显示上传完成、二进制已验证。出口合规从 `Info.plist` 读为「否」。
 - [x] 设置 App 供应国家或地区：App Store Connect 显示全部 175 个国家或地区为「App 发布时供应」，包含中国大陆。
 - [x] 付费 App 协议与商务资料：Connect 显示付费协议有效、银行账户可用、报税表使用中；该 App 的欧盟数字服务法交易商声明已提交。
 - [x] 用户正式提审：2026-09-26 12:32 提交 `0.1.1 (4)`，提交 ID `01dc116b-b85e-4cf4-950b-1fe5dd8056ff`；Connect 显示「等待审核」。
-- [ ] 处理 Apple 的实际审核反馈，直到审核通过。2026-09-28 第一次被拒，重新提交前：在 Connect 按上架资料改中英文名称、副标题、关键词和送审备注；上传 `0.1.1 (5)`（`make upload-appstore`）；在 Resolution Center 回复已删除临时例外并改名；重新提交。
+- [ ] 处理 Apple 的实际审核反馈，直到审核通过。2026-09-28 第一次被拒，已改名、上传 `0.1.1 (5)`、更新审核备注并重新提交，见提审记录。
 - [ ] 审核通过后由用户手动发布，并检查商店页面、购买和首次启动；发布方式当前不是自动发布。
 
 ## 自动化发布（GitHub Actions）

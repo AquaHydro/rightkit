@@ -36,3 +36,11 @@
 2. 审核通过后在 Connect **手动发布**，再检查商店页面、可购买状态和下载后的首次启动。没有把「已验证」或「审核通过」当成「已发布」。
 
 仓库侧：与上传包对应的 `project.yml` build 号、Finder 扩展 plist、签名检查、上架资料和截图已在 `14a868c` 一起提交。后续任何二进制改动再上传时递增 build 号。自动化 Release 工作流的密钥与环境配置、官网版首个 Release 仍见 [TASK.md](../TASK.md)，不构成本次手动提审的前置条件。
+
+## 2026-09-28 被拒与重新提交
+
+- Apple 于 2026-09-28 拒绝 `0.1.1 (4)`（提交 `01dc116b-b85e-4cf4-950b-1fe5dd8056ff`）：5.2.5，名称和副标题使用 Finder；2.4.5(i)，不批准 `com.apple.security.temporary-exception.apple-events`。
+- 代码与资料：#17 商店版删除 Apple Events 临时例外，「重启访达」改为手动说明；#18 改名；#20 签名检查改为商店版不得带临时例外。真机验收见 [验收记录](verification-log.md) 的 2026-09-28 一节。
+- 助手执行：`make upload-appstore` 上传 `0.1.1 (5)`，处理后为 VALID；用 App Store Connect API 修改中英文名称（「RightKit 右键工具箱」「RightKit: Context Menu Toolkit」）、副标题、关键词，把构建换成 `(5)`，并更新审核备注（开头说明 build 5 的改动，删去访达自动化说明，保留此前对补充问题的回答，3836 字符）。`asc validate` 无阻塞项。
+- 用户执行：在网页删除 App Sandbox Information 中的临时例外说明（API 无法读取，助手未核实），并于 2026-09-28 13:49 UTC 重新提交。
+- 提交后通过 API 核对：版本与提交均为「等待审核」，构建 `0.1.1 (5)`，名称、副标题、关键词、审核备注与上述一致。
