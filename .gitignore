@@ -13,3 +13,6 @@ xcuserdata/
 # 官网构建产物（python3 website/build.py）
 website/dist/
 .wrangler/
+
+# asc 本地凭据（asc auth login --local）
+.asc/config.json
