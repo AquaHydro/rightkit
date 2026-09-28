@@ -4,7 +4,7 @@
 # 用法：scripts/release/check_signature.sh <RightKit.app> [direct|appstore]
 #
 # 两个渠道都检查：三个部件的签名标识、团队、沙盒、App Group、没有调试权限、agent 的 launchd 配置。
-# 官网版另查 Developer ID、强化运行时、时间戳和网络权限；商店版另查 Apple Distribution、没有网络权限，
+# 官网版另查 Developer ID、强化运行时、时间戳、网络权限和访达 Apple Events 例外；商店版另查 Apple Distribution、没有网络权限和临时例外，
 # 以及二进制里没有检查更新和外部下载入口。
 set -euo pipefail
 app=$1
@@ -69,8 +69,13 @@ else
     fi
   done
 fi
-[[ $(entitlement "$main_ents" com.apple.security.temporary-exception.apple-events:0) == com.apple.finder ]] \
-  || fail "main app lacks the Finder Apple Events exception (F-001)"
+# F-001：只有官网版能让访达退出；App Review 不批准这个临时例外（2.4.5(i)），商店版不能带。
+apple_events=$(entitlement "$main_ents" com.apple.security.temporary-exception.apple-events:0)
+if [[ $channel == direct ]]; then
+  [[ $apple_events == com.apple.finder ]] || fail "main app lacks the Finder Apple Events exception (F-001)"
+else
+  [[ -z $apple_events ]] || fail "App Store build must not have the Apple Events temporary exception"
+fi
 
 plist="$app/Contents/Library/LaunchAgents/$app_id.agent.plist"
 [[ -f $plist ]] || fail "agent plist missing: $plist"
