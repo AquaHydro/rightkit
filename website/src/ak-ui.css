@@ -446,7 +446,9 @@
 @media (max-width: 900px) {
   .ak-workbench-inner, .ak-world-layout { grid-template-columns: minmax(0, 1fr); }
   .ak-workbench-scene { order: -1; }
-  .ak-workbench-hotspot { display: none; }
+  /* Touch: keep markers tappable, pad the hit area to ~36px without moving the square. */
+  .ak-workbench-hotspot { padding: 10px; translate: -19px -19px; font-size: 12px; }
+  .ak-workbench-hotspot small { display: none; }
   .ak-link-panels { flex-direction: column; height: auto; }
   .ak-link-panel { min-height: 300px; border-right: 0; border-bottom: 1px solid var(--line-ink); }
   .ak-link-panel img { left: auto; right: -8%; top: 0; height: 140%; translate: none; }
