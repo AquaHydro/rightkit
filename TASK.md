@@ -23,9 +23,8 @@
 
 - [x] App Store Connect API key（Admin，`4UBZD7P35G`）已存进仓库 secrets：`ASC_KEY_P8_BASE64`、`ASC_KEY_ID`。
 - [x] 仓库已建 `app-store` 环境，只允许 `v*` 标签使用。私有仓库的免费方案不能要求手动批准。
-- [ ] 存 `ASC_ISSUER_ID`：`gh secret set ASC_ISSUER_ID`。
-- [ ] 在钥匙串访问里同时选中「Developer ID Application: YiLiang Liao」和「Apple Development: YiLiang Liao」两个证书（连同私钥），导出成一个 `.p12` 并设密码；再存 `SIGNING_CERTS_P12_BASE64`（`base64 -i certs.p12 | gh secret set SIGNING_CERTS_P12_BASE64`）和 `SIGNING_CERTS_P12_PASSWORD`。商店版证书由 Apple 云端代管，不用导出。
-- [ ] 试运行：Actions → Release → Run workflow，两个渠道都应通过签名、公证和检查。
+- [x] 其余 secrets 已存：`ASC_ISSUER_ID`、`SIGNING_CERTS_P12_BASE64`、`SIGNING_CERTS_P12_PASSWORD`。`.p12` 含 Developer ID Application 和 Apple Development；商店版证书由 Apple 云端代管。
+- [x] 试运行：2026-09-29 手动运行 Release（run `36555100086`）通过。官网版 app 和 DMG 公证通过并钉票；商店版 `.pkg` 由 3rd Party Mac Developer Installer 签名，签名检查通过。Xcode 导出商店版时会自动把构建号加一。
 - [ ] 第一次正式发布：改 `project.yml` 的 `MARKETING_VERSION` 和 `CURRENT_PROJECT_VERSION`，合并后推标签（如 `git tag v0.2.0 && git push origin v0.2.0`），看 Release 工作流跑通。
 
 ## 真机验收
@@ -47,8 +46,6 @@
 
 - [ ] 仓库还是私有：官网的下载、GitHub、更新日志链接和官网版的检查更新都是 404。公开仓库后，把商店版「关于」和官网的反馈入口改回 GitHub Issues（或保留邮件）。
 
-- [ ] 两个版本同时安装时，系统服务（翻译、二维码）的 `NSPortName` 都是 `RightKit`。2026-09-26 真机确认：两版都注册了同名服务，请求交给了其中一版，功能正常，但用户不能指定由哪一版处理。是否按渠道区分待定。
-- [ ] 系统服务的菜单名只写了中文（Info.plist 的 `NSServices`），英文系统下也显示中文。
 - [ ] 扩展读取全局 `AppleInterfaceStyle` 判断深浅色，隐私清单按 `CA92.1` 声明。如果审核对此有疑问，改用其他方式取外观。
 
 ## 菜单性能专项
