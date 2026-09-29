@@ -149,8 +149,8 @@
 持续集成（`.github/workflows/`，runner 是 GitHub 托管的 `xcode-27`）：
 
 - `ci.yml`：每个 PR 和推到 `main` 时跑 `make verify XCODE_FLAGS="CODE_SIGNING_ALLOWED=NO"`，不签名，只编译、测试两个渠道并做各项检查。生成的工程和提交的不一致时给出警告。
-- `release.yml`：推 `v` 开头的标签时发布。先用 `scripts/ci/check_version_tag.sh` 确认标签等于 `v` 加 `MARKETING_VERSION`；官网版跑 `make release`，把 DMG 和 SHA-256 发布到这个标签的 GitHub Release；成功后商店版在 `app-store` 环境里跑 `make upload-appstore`，可以在仓库设置里给这个环境加手动批准。
-- CI 签名用临时钥匙串（`scripts/ci/setup_signing.sh`、`cleanup_signing.sh`）和 App Store Connect API key。设置了 `ASC_KEY_PATH`、`ASC_KEY_ID`、`ASC_ISSUER_ID` 时，两个发布脚本改用 API key 做自动签名和公证；本机不设置，照旧用 Xcode 账号和钥匙串里的 notarytool 配置。证书和 key 只放在 GitHub secrets 里。
+- `release.yml`：推 `v` 开头的标签时发布。先用 `scripts/ci/check_version_tag.sh` 确认标签等于 `v` 加 `MARKETING_VERSION`；官网版跑 `make release`，把 DMG 和 SHA-256 发布到这个标签的 GitHub Release；成功后商店版在 `app-store` 环境里跑 `make upload-appstore`。这个环境只允许 `v*` 标签使用；私有仓库的免费方案不能要求手动批准，上传只会在 App Store Connect 多出一个构建版本，提审和发布仍由用户手动完成。在 Actions 里手动运行 Release 是试运行：两个渠道都完整签名、公证和检查，但不发 Release、不传商店，用来验证签名配置。
+- CI 签名用临时钥匙串（`scripts/ci/setup_signing.sh`、`cleanup_signing.sh`）和 App Store Connect API key。钥匙串里只导入 Developer ID Application 和 Apple Development 证书；商店版的 Apple Distribution 和 Mac Installer 证书由 Apple 云端代管，xcodebuild 用 API key 取用。设置了 `ASC_KEY_PATH`、`ASC_KEY_ID`、`ASC_ISSUER_ID` 时，两个发布脚本改用 API key 做自动签名和公证；本机不设置，照旧用 Xcode 账号和钥匙串里的 notarytool 配置。证书和 key 只放在 GitHub secrets 里。
 - 发布前在 `project.yml` 里改 `MARKETING_VERSION`，并调高 `CURRENT_PROJECT_VERSION`（App Store Connect 不接受重复的构建号），提交后再打标签。
 
 签名变化：
