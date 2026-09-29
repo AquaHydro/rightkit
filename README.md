@@ -41,7 +41,11 @@ make upload-appstore   # 同上，检查通过后上传 App Store Connect
 | `vscode.png` | Visual Studio Code 品牌资源包 | Microsoft Corporation |
 | `ghostty.png` | Ghostty 仓库的 `images/icons/icon_512.png` | Ghostty 项目 |
 
-详细来源见[图标来源记录](website/assets/apps/SOURCES.md)。图标归各自权利人所有；注明来源不等于取得再分发授权。Apple 的 Terminal 和 Xcode 图标在公开仓库前仍需确认使用许可，无法确认时应换成自绘图标。
+详细来源见[图标来源记录](website/assets/apps/SOURCES.md)。图标归各自权利人所有；注明来源不等于取得再分发授权。Apple 的 Terminal、Xcode 和 Microsoft 的 Visual Studio Code 图标在公开仓库前仍需确认适用授权，无法确认时应换成自绘图标。
+
+## 许可
+
+RightKit 自有源代码和文字文档采用 [MIT 许可证](LICENSE)。Riko、应用图标等原创品牌素材保留所有权利，范围见[素材授权说明](ASSETS.md)。第三方资源各自适用原许可，详见[第三方资源与许可](THIRD_PARTY_NOTICES.md)。
 
 ## 文档维护
 

@@ -201,7 +201,7 @@ Hero 里的访达窗口用 HTML 和 CSS 绘制。窗口里有 4 个项目：一�
 | `workbench-scene-ak.png` | ak 版「Riko 的工作台」等距场景，深色不透明背景 | 已用，导出 768 和 1536 宽。画面不含人物、文字、Logo 或游戏素材，屏幕都是空白，文件夹是低饱和蓝灰色 |
 | `hero-pv-poster-ak.png` | ak 版首屏电影背景海报，不含人物 | 已用，导出为 `hero-pv-poster-ak.webp`，视频不能播放时仍完整显示 |
 | `website/assets/video/hero-pv-ak.mp4` | ak 版首屏低动态环境 PV 原片，1264 × 720，约 6 秒 | 已用。原片每 12 帧检查结构与禁用内容，导出时正放加倒放为约 12 秒无缝循环 |
-| `website/assets/apps/*.png` | 「在应用中打开」里终端、Ghostty、Visual Studio Code、Xcode 的真实图标 | 已用，按 macOS 图标网格导出 64 和 128。来源和权利人见 `website/assets/apps/SOURCES.md`，页脚写明商标归属。Apple 的两个图标正式上线前要确认符合 Apple 商标使用指南 |
+| `website/assets/apps/*.png` | 「在应用中打开」里终端、Ghostty、Visual Studio Code、Xcode 的真实图标 | 已用，按 macOS 图标网格导出 64 和 128。来源和权利人见 `website/assets/apps/SOURCES.md`，页脚写明商标归属。Apple 的两个图标和 Visual Studio Code 图标在公开仓库前仍需确认适用授权或替换 |
 | 应用图标 | favicon、导航、分享图 | 从 `RightKit/Resources/AppIcon.icon` 合成，导出 64、180、512 |
 | `public/img/og.jpg` | 1200 × 630 分享图 | 由 `website/tools/og.html` 渲染（`node website/tools/render_og.mjs`，需要 Playwright） |
 | 应用截图或录屏 | 真实访达菜单和设置窗口 | 待做，需要在 Mac 上截取。首屏已经用 HTML 模拟菜单，截图以后可以放进功能分区 |
