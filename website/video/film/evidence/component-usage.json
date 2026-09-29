@@ -90,7 +90,7 @@
       "components": [
         "website/src/index.html .finder",
         "website/src/main.js buildMenu()",
-        "website/src/index.html .apps（app 图标，来源见 website/assets/apps/SOURCES.md）",
+        "website/src/index.html .apps（通用终端、编辑器图标由 website/src/styles.css 绘制）",
         "feature-open-app-640.webp"
       ],
       "styleEntries": [

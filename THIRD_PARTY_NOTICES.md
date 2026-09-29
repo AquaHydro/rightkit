@@ -9,7 +9,6 @@
 | Nunito | `website/public/fonts/` | SIL Open Font License 1.1；见 [OFL-Nunito.txt](website/public/fonts/OFL-Nunito.txt) |
 | Oswald | `website/public/fonts/` | SIL Open Font License 1.1；见 [OFL-Oswald.txt](website/public/fonts/OFL-Oswald.txt) |
 | 归藏 product video skill 起步工程代码 | `website/video/film/` | GNU AGPL-3.0，Copyright © 2026 op7418；见该目录的 [LICENSE](website/video/film/LICENSE) 与 [NOTICE](website/video/film/NOTICE.md) |
-| Ghostty 应用图标 | `website/assets/apps/ghostty.png` 及导出版本 | 上游仓库采用 MIT，Copyright © 2024 Mitchell Hashimoto, Ghostty contributors；保留的完整文本见 [LICENSE.Ghostty](website/assets/apps/LICENSE.Ghostty)。图标的商标使用须另行遵守权利人要求 |
 | Soft UI Click 音效 | 宣传片渲染结果 | Universfield 的 [Pixabay 原始页面](https://pixabay.com/sound-effects/film-special-effects-soft-ui-click-147352/)；受 [Pixabay Content License](https://pixabay.com/service/license-summary/) 约束，制作记录见 [audio-selection.json](website/video/film/evidence/audio-selection.json)。原始音频未随仓库单独提交 |
 
-官网还使用 Apple Terminal、Apple Xcode 和 Microsoft Visual Studio Code 的应用图标。它们的来源见[应用图标来源](website/assets/apps/SOURCES.md)，不受 RightKit 的 MIT 许可证或品牌素材声明覆盖。当前尚未确认这些图标可随公开仓库再分发；公开仓库前须取得适用授权或替换它们。
+官网「在应用中打开」的终端和编辑器小图标是本项目绘制的通用图形，不使用第三方应用图标。文中提及的应用名称及商标归各自权利人所有。

@@ -30,18 +30,9 @@ make upload-appstore   # 同上，检查通过后上传 App Store Connect
 
 首次运行后，在「系统设置 → 通用 → 登录项与扩展」里打开 RightKit 的访达扩展。
 
-## 第三方应用图标
+## 官网上的应用示例图标
 
-官网「在应用中打开」的示例使用以下应用图标，原始文件在 `website/assets/apps/`：
-
-| 文件 | 来源 | 权利人 |
-| --- | --- | --- |
-| `terminal.png` | Apple 终端使用手册 | Apple Inc. |
-| `xcode.png` | Apple Developer 网站 | Apple Inc. |
-| `vscode.png` | Visual Studio Code 品牌资源包 | Microsoft Corporation |
-| `ghostty.png` | Ghostty 仓库的 `images/icons/icon_512.png` | Ghostty 项目 |
-
-详细来源见[图标来源记录](website/assets/apps/SOURCES.md)。图标归各自权利人所有；注明来源不等于取得再分发授权。Apple 的 Terminal、Xcode 和 Microsoft 的 Visual Studio Code 图标在公开仓库前仍需确认适用授权，无法确认时应换成自绘图标。
+官网「新建文件」里的文件类型和「在应用中打开」里的终端、编辑器图标都由 `website/src/styles.css` 绘制。应用名称只说明兼容的应用；官网不随附 Terminal、Ghostty、Visual Studio Code 或 Xcode 的应用图标。应用内的访达菜单则在运行时向 macOS 取得文件类型和已安装应用的图标。
 
 ## 许可
 

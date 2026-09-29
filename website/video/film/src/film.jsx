@@ -173,7 +173,7 @@ const scenes = {
   open: (s) => <Shot s={s} cls="ink">
     <div className="grid-bg"/>
     <Copy s={s}>
-      <ul className="apps">{t.sections.open.apps.map((a, i) => <li key={a.icon} data-in={`${0.9 + i * 0.07} 0 16`}><img className="app-ic" src={img(`apps/${a.icon}-128.webp`)} alt=""/>{a.name}</li>)}</ul>
+      <ul className="apps">{t.sections.open.apps.map((a, i) => <li key={a.name} data-in={`${0.9 + i * 0.07} 0 16`}><span className="app-ic" data-kind={a.kind} aria-hidden="true"/>{a.name}</li>)}</ul>
     </Copy>
     <figure className="art" data-in="0.6"><img data-float="6.5 6" src={img('feature-open-app-640.webp')} alt=""/></figure>
     <Stage left={800} top={300} parts={openShot()}/>

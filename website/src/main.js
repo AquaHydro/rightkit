@@ -244,7 +244,7 @@
     const items = [];
     const kind = target?.kind;
     const typeRow = (type) => ({ title: type.title, real: `<span class="ric doc" style="--c:${docColors[type.ext] || "#8e8e93"}"></span>`, run: () => act.newFile(type, target) });
-    const appRow = (app) => ({ title: app.title, real: app.id === "terminal" ? `<span class="ric terminal">&gt;_</span>` : `<span class="ric vscode">&lt;/&gt;</span>`, run: () => act.openApp(app, target) });
+    const appRow = (app) => ({ title: app.title, real: app.id === "terminal" ? `<span class="ric terminal">&gt;_</span>` : `<span class="ric editor">&lt;/&gt;</span>`, run: () => act.openApp(app, target) });
     const placeRow = (place, run) => ({ title: place.name, real: `<span class="ric folder"></span>`, run });
 
     if (!target || kind === "folder") items.push({ title: m.newFile, icon: "doc-plus", children: data.types.map(typeRow) });

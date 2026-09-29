@@ -244,7 +244,7 @@ h3 { font-size: 17px; line-height: 1.35; font-weight: 700; }
 .ric.doc { width: 13px; margin: 0 1.5px; border-radius: 2px 4px 2px 2px; background: #fdfdfd; box-shadow: inset 0 -4px 0 var(--c, #8e8e93); }
 .ric.folder { border-radius: 2px 3px 3px 3px; background: linear-gradient(#6cc4fb, #3fa6ee); height: 12px; }
 .ric.terminal { background: #1c1c1e; box-shadow: inset 0 0 0 1px #555; color: #5f5; font-family: var(--font-mono); font-size: 7px; }
-.ric.vscode { background: #0a78d7; font-size: 9px; }
+.ric.editor { background: #353c46; font-size: 9px; }
 
 .fake-cursor {
   position: fixed; left: 0; top: 0; z-index: 90; width: 22px; height: 28px; pointer-events: none; opacity: 0;
@@ -293,7 +293,12 @@ h3 { font-size: 17px; line-height: 1.35; font-weight: 700; }
 
 .apps { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
 .apps li { display: inline-flex; align-items: center; gap: 10px; height: 48px; padding: 0 16px 0 8px; border-radius: 12px; background: #fff; box-shadow: 0 0 0 1px var(--line-paper); font-size: 14px; font-weight: 600; }
-.app-ic { width: 32px; height: 32px; flex: none; filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.18)); }
+.app-ic { position: relative; display: block; width: 32px; height: 32px; flex: none; border-radius: 7px; background: #30343b; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.18); }
+.app-ic::before { content: ""; position: absolute; inset: 5px 5px auto; height: 5px; border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
+.app-ic::after { content: ">_"; position: absolute; left: 7px; top: 13px; font: 700 11px/1 var(--font-mono); letter-spacing: -0.08em; color: #abdfc0; }
+.app-ic[data-kind="editor"] { background: #e6eaed; }
+.app-ic[data-kind="editor"]::before { border-bottom-color: rgba(42, 43, 49, 0.3); }
+.app-ic[data-kind="editor"]::after { content: "</>"; left: 6px; color: #475869; font-size: 9px; letter-spacing: -0.12em; }
 
 /* Toolbox */
 .toolbox-head { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 32px; align-items: end; }

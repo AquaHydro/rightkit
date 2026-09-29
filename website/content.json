@@ -146,19 +146,19 @@
         "apps": [
           {
             "name": "终端",
-            "icon": "terminal"
+            "kind": "terminal"
           },
           {
             "name": "Ghostty",
-            "icon": "ghostty"
+            "kind": "terminal"
           },
           {
             "name": "Visual Studio Code",
-            "icon": "vscode"
+            "kind": "editor"
           },
           {
             "name": "Xcode",
-            "icon": "xcode"
+            "kind": "editor"
           }
         ]
       },
@@ -506,7 +506,7 @@
       "privacy": "隐私政策",
       "character": "角色 Riko",
       "copyright": "© {year} RightKit",
-      "trademarks": "终端和 Xcode 是 Apple Inc. 的商标，Visual Studio Code 是 Microsoft Corporation 的商标，Ghostty 图标归 Ghostty 项目所有。"
+      "trademarks": "文中提及的应用名称及商标归各自权利人所有。"
     },
     "demo": {
       "windowTitle": "桌面",
@@ -821,19 +821,19 @@
         "apps": [
           {
             "name": "Terminal",
-            "icon": "terminal"
+            "kind": "terminal"
           },
           {
             "name": "Ghostty",
-            "icon": "ghostty"
+            "kind": "terminal"
           },
           {
             "name": "Visual Studio Code",
-            "icon": "vscode"
+            "kind": "editor"
           },
           {
             "name": "Xcode",
-            "icon": "xcode"
+            "kind": "editor"
           }
         ]
       },
@@ -1181,7 +1181,7 @@
       "privacy": "Privacy",
       "character": "Meet Riko",
       "copyright": "© {year} RightKit",
-      "trademarks": "Terminal and Xcode are trademarks of Apple Inc. Visual Studio Code is a trademark of Microsoft Corporation. The Ghostty icon belongs to the Ghostty project."
+      "trademarks": "App names and trademarks mentioned here belong to their respective owners."
     },
     "demo": {
       "windowTitle": "Desktop",
