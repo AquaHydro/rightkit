@@ -9,6 +9,6 @@
 | `vscode.png` | Visual Studio Code 品牌资源包（code.visualstudio.com/brand） | Microsoft Corporation |
 | `ghostty.png` | Ghostty 仓库 `images/icons/icon_512.png`（github.com/ghostty-org/ghostty） | Ghostty 项目 |
 
-Microsoft 的品牌指南允许用蓝色图标指代 Visual Studio Code。Apple 对自家应用图标的对外使用有限制，正式上线前需要确认是否符合 Apple 的商标使用指南，不符合时换回自绘图标。
+Microsoft 的[品牌指南](https://code.visualstudio.com/brand)允许在文档中介绍 Visual Studio Code 时使用图标，但不允许用图标宣传自己的产品。Apple 对自家应用图标的对外使用也有限制。公开仓库前应确认这三个图标的使用许可；无法确认时换成自绘图标。
 
 导出：`python3 website/tools/export_images.py`，输出到 `public/img/apps/`。
