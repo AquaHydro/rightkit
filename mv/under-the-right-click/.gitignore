@@ -1,0 +1,8 @@
+node_modules/
+out/
+video/
+studio/frames/
+studio/song.mp3
+slices/
+qa/still_*
+__pycache__/

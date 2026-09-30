@@ -1,0 +1,4 @@
+Background art (no characters) for a 1990s TV anime opening. Night rooftop in the 'Archive City': an endless vertical city made of stacked filing cabinets, drawers and folder-shaped towers, some towers crumbling and floating apart. Thousands of loose paper documents and small white file cards drift through the air like snow. Faint glowing rectangular floating context-menu panels hang in the dark sky. In the foreground a flat concrete rooftop with a low railing, space in the center for a character. Deep navy night sky, cold moonlight, one warm coral light source from below.
+Style: 1990s cel anime background painting simplified for cel layers, crisp black ink outlines on buildings, flat color fills with one hard-edged shadow tone, no gradients, no photorealism, limited palette: navy #12203F, riso blue #1D5FD1, paper white #FAF7F5, charcoal #2A2B31, coral #FF8F6C. 16:9 wide shot. No text, no letters, no logos, no watermark.
+
+refs: 
