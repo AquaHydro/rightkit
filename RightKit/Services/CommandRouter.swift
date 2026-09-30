@@ -104,7 +104,7 @@ final class CommandRouter {
             guard let service = NSSharingService(named: .sendViaAirDrop), service.canPerform(withItems: items) else {
                 return Alerts.showFailure(for: action)
             }
-            NSApp.activate()
+            Alerts.bringToFront()
             service.perform(withItems: items)
 
         case .hash:

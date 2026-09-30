@@ -86,9 +86,10 @@ extension Alerts {
         return formats[control.selectedSegment]
     }
 
-    /// 从访达触发时访达仍是前台应用，协作式的 `activate()` 会被拒绝。
+    /// 访达是前台应用时，协作式的 `activate()` 会被拒绝（本应用是 LSUIElement，启动时也不会自动到前台），
+    /// 所以窗口和提示都要强制激活。只在用户操作后调用。
     static func bringToFront() {
-        NSApp.activate()
+        NSApp.activate(ignoringOtherApps: true)
     }
 
     /// 临时选择只供当前操作使用；加入设置列表时由 AppModel 保存长期授权（F-080）。

@@ -94,7 +94,7 @@
 - 主程序每次启动都注册 agent（已注册时不重复），然后连接 agent，交出一个匿名 `NSXPCListener` 的 endpoint。agent 把扩展的请求原样转交这个 endpoint。
 - 主程序没有交出 endpoint 时，agent 启动主程序，最多等 3 秒。
 - 沙盒进程启动其他应用时，系统会丢掉启动参数，所以启动原因用本渠道 scheme 的固定网址表达（`AppURLAction`）：`activate` 把主程序带到前台，`background` 表示 agent 在后台拉起、不开设置窗口，`agent-unavailable` 让主程序打开「通用」页。扩展和 agent 都用 `NSWorkspace.open(_:withApplicationAt:configuration:)` 指定打开自己所在的主程序包，不交给 LaunchServices 挑选同 scheme 的其他副本。网址只有这三个动作，不带命令或路径；主程序忽略其他网址。
-- agent 的监听用 `setConnectionCodeSigningRequirement` 只接受签名标识为本渠道的扩展或主程序、且开发团队与 agent 自身一致的进程；主程序的匿名监听只接受本渠道的 agent。团队标识从自身签名读取，不写死。验证失败立即断开。
+- agent 的监听用 `setConnectionCodeSigningRequirement` 只接受签名标识为本渠道的扩展或主程序、且开发团队与 agent 自身一致的进程；主程序的匿名监听只接受本渠道的 agent。团队标识从自身签名读取，不写死。商店版由 Apple 重签，叶证书主题里没有团队标识，此时改认 Mac App Store 签名标记（与 Apple 生成的指定要求一致）。验证失败立即断开。主程序签到被拒或中断后至少等 1 秒再重发，不能空转。
 - XPC 方法只接收一个编码后的请求信封和一个结果回复。先检查信封大小、版本和字段类型，再解码 URL；不要把不受信任的数据直接当作路径使用。
 - 请求 ID 重复时忽略后到的一条。
 - 超过 30 秒的请求拒绝执行。

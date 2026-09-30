@@ -15,10 +15,11 @@ public enum CodeSigning {
     }
 
     /// 同一团队、给定签名标识之一。拿不到团队标识时返回 nil，调用方应拒绝连接。
+    /// 商店版由 Apple 重签，叶证书主题里没有团队标识，改认 Mac App Store 签名标记（与 Apple 生成的指定要求一致）。
     public static func requirement(identifiers: [String], team: String? = ownTeamIdentifier()) -> String? {
         guard let team, !identifiers.isEmpty else { return nil }
         let ids = identifiers.map { "identifier \"\($0)\"" }.joined(separator: " or ")
-        return "anchor apple generic and (\(ids)) and certificate leaf[subject.OU] = \"\(team)\""
+        return "anchor apple generic and (\(ids)) and (certificate leaf[field.1.2.840.113635.100.6.1.9] or certificate leaf[subject.OU] = \"\(team)\")"
     }
 
     /// 读取某个进程的签名标识。只用于区分已通过签名要求的来者是谁。

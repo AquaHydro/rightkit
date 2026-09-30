@@ -83,10 +83,11 @@ RightKit 给访达的右键菜单加上新建文件、剪切粘贴、复制到�
 支持简体中文和英文，需要 macOS 26 或更高版本。
 ```
 
-**此版本的新功能**（首发可以不填；需要时）：
+**此版本的新功能**（0.1.2）：
 
 ```text
-RightKit 的第一个 App Store 版本。
+- 修复访达菜单命令无法送达 RightKit 的问题，同时解决它在后台反复重试导致的卡顿。
+- 打开 RightKit 或从访达触发命令时，窗口和提示现在会显示在最前面。
 ```
 
 ## English (U.S.)
@@ -147,6 +148,13 @@ Built to be safe
 Before you start, turn on the RightKit Finder extension in System Settings > General > Login Items & Extensions. RightKit's Settings window shows the extension's status and takes you there.
 
 English and Simplified Chinese. Requires macOS 26 or later.
+```
+
+**What's New in This Version** (0.1.2):
+
+```text
+- Fixed Finder menu commands not reaching RightKit, and the slowdown caused by it retrying in the background.
+- Windows and alerts now come to the front when you open RightKit or run a command from Finder.
 ```
 
 ## App 隐私
