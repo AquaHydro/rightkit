@@ -68,7 +68,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         for action in urls.compactMap(ServiceNames.current.action(of:)) {
             switch action {
             case .activate:
-                NSApp.activate()
+                Alerts.bringToFront()
                 if !finishedLaunching { launchedInBackground = true }
             case .background:
                 if !finishedLaunching { launchedInBackground = true }

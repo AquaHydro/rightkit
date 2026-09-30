@@ -14,14 +14,14 @@ final class WindowOpener {
 
     func open(id: String) {
         perform { [weak self] in
-            NSApp.activate()
+            Alerts.bringToFront()
             self?.openWindowAction?(id: id)
         }
     }
 
     func open<Value: Codable & Hashable>(id: String, value: Value) {
         perform { [weak self] in
-            NSApp.activate()
+            Alerts.bringToFront()
             self?.openWindowAction?(id: id, value: value)
         }
     }

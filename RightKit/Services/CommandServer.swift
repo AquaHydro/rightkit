@@ -40,7 +40,7 @@ final class CommandServer: NSObject, NSXPCListenerDelegate, AppXPC, @unchecked S
 
     /// 连接 agent 并签到。agent 被 launchd 按需拉起；断开后稍后重试。
     func checkIn() {
-        let connection = NSXPCConnection(machServiceName: ServiceNames.command)
+        nonisolated(unsafe) let connection = NSXPCConnection(machServiceName: ServiceNames.command)
         connection.remoteObjectInterface = NSXPCInterface(with: AgentXPC.self)
         if let requirement = CodeSigning.requirement(identifiers: [ServiceNames.agentBundleID]) {
             connection.setCodeSigningRequirement(requirement)
@@ -51,9 +51,9 @@ final class CommandServer: NSObject, NSXPCListenerDelegate, AppXPC, @unchecked S
             DispatchQueue.main.asyncAfter(deadline: .now() + 5) { self?.checkIn() }
         }
         connection.interruptionHandler = { [weak self] in
-            // agent 重启过，需要重新交出 endpoint。
+            // agent 重启过，需要重新交出 endpoint。稍等再发，对方一直拒绝时不会空转。
             self?.setCheckedIn(false)
-            self?.sendEndpoint(over: connection)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { self?.sendEndpoint(over: connection) }
         }
         connection.resume()
         lock.withLock {
