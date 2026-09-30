@@ -16,3 +16,6 @@ website/dist/
 
 # asc 本地凭据（asc auth login --local）
 .asc/config.json
+
+# Cindy 的本地 worktree
+.cindy-worktrees/
