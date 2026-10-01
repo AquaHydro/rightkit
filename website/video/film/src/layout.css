@@ -125,3 +125,49 @@ body { margin: 0; background: var(--ink); }
 .vertical .end-copy { left: 90px; top: 200px; width: 900px; }
 .vertical .end-copy .headline-en { font-size: 108px; white-space: normal; }
 .vertical .end-art { left: 170px; right: auto; top: 1060px; width: 760px; }
+
+/* ---- v2: footage (AI shots and screen recordings) */
+.clip { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+/* AI shots with a dark flat background: lighten drops the background into the stage and keeps the grid.
+   Set on the outer box: masks and transforms isolate their children from the stage behind. */
+.riko-clip, .riko-wave { mix-blend-mode: lighten; }
+.clip.blurred { filter: blur(14px) brightness(0.45); transform: scale(1.06); }
+.vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, transparent 45%, rgba(20, 20, 24, 0.7)); }
+.cold-title { position: absolute; left: 0; right: 0; top: 120px; margin: 0; text-align: center; font-weight: inherit; text-shadow: 0 2px 24px rgba(0, 0, 0, 0.7); }
+.cold-title .headline-en { font-size: 46px; font-weight: 800; letter-spacing: -0.01em; }
+.cold-title .headline-zh { margin-top: 12px; font-size: 30px; color: var(--on-ink); }
+.riko-clip { position: absolute; left: 778px; top: 62px; width: 1152px; height: 648px; -webkit-mask-image: linear-gradient(#000 78%, transparent 99%); mask-image: linear-gradient(#000 78%, transparent 99%); }
+.rec { position: absolute; overflow: hidden; background: #fff; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.08); }
+.rec.panel { background: #ececee; }
+.rec.row { position: relative; width: 800px; height: 136px; margin-top: 36px; border-radius: 18px; -webkit-mask-image: linear-gradient(#000 80%, transparent 100%); mask-image: linear-gradient(#000 80%, transparent 100%); box-shadow: none; }
+.shade-left { position: absolute; inset: 0; background: linear-gradient(90deg, var(--ink) 0%, rgba(42, 43, 49, 0.92) 38%, transparent 62%); }
+#shot-safe .copy { width: 820px; }
+.chips { display: flex; gap: 12px; margin: 30px 0 0; padding: 0; list-style: none; }
+.chips li { display: inline-flex; align-items: center; gap: 10px; height: 54px; padding: 0 22px 0 16px; border-radius: 14px; background: rgba(255, 255, 255, 0.06); box-shadow: 0 0 0 1px var(--line-ink); font: 600 23px/1 var(--film-font-zh); }
+.chips .ic { width: 24px; height: 24px; color: var(--coral); fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.riko-wave { position: absolute; inset: 0; transform: translateX(120px); }
+.end-copy .actions { display: flex; gap: 16px; }
+.end-copy .url { margin-top: 18px; font: 500 26px/1 var(--font-mono); color: var(--coral); }
+
+/* ---- v2.1: chibi Riko (AI, flat style) instead of photoreal shots */
+.chibi-clip { position: absolute; inset: 0; mix-blend-mode: lighten; }
+.chibi-clip.right { transform: translate(600px, 40px) scale(0.88); }
+/* Opening: the press art is 1536x1024 drawn at 0.8 (1229x820); the coral button sits near (930, 800). */
+.cold-stage { position: absolute; inset: 0; transform-origin: 1180px 600px; }
+/* The press clip is full frame; the big mouse's base sits near (735, 1010). lighten drops its darker background. */
+.press-body { position: absolute; inset: 0; transform-origin: 735px 1010px; mix-blend-mode: lighten; }
+.click-ring { position: absolute; left: 930px; top: 770px; width: 120px; height: 120px; margin: -60px; border-radius: 50%; border: 5px solid var(--coral); opacity: 0; }
+.click-ring.small { border-width: 3px; border-color: #fff; }
+/* Opens upward from the button, as macOS flips a menu near the bottom of the screen. */
+.cold-menu { position: absolute; left: 990px; bottom: 330px; transform: scale(2.2); transform-origin: 0 100%; }
+.cold-menu-pop { transform-origin: 0 100%; }
+.cold-menu .menu { position: relative; visibility: hidden; transform-origin: 0 100%; }
+#shot-cold .cold-title { top: 190px; left: 990px; right: auto; bottom: auto; text-align: left; text-shadow: none; }
+#shot-cold .cold-title .headline-en { font-size: 64px; font-weight: 900; }
+#shot-cold .cold-title .headline-zh { font-size: 38px; }
+.chibi-still { position: absolute; left: 190px; top: 600px; height: 440px; margin: 0; }
+.chibi-still img { height: 100%; filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.35)); }
+/* Ending wave (AI, flat style): full-frame clip, Riko already sits on the right half. */
+.riko-end { position: absolute; inset: 0; mix-blend-mode: lighten; transform: translate(30px, 20px) scale(0.94); transform-origin: 100% 50%; }
+.end-copy .actions { align-items: center; }
+.store-badge { height: 76px; width: auto; display: block; }

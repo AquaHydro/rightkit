@@ -11,6 +11,10 @@
 //   data-ticker="px/s"          scrolling ticker
 //   data-float="period amp"     idle float (website float keyframes)
 //   data-path / data-clicks     cursor path segments and click times
+//   data-clip="t [src] [rate]"  <video> footage: plays from source time `src` at shot time t, holds its last frame
+//   data-spring="t [from]"      pops from scale `from` to 1 with one overshoot (0.45s); hidden before t
+//   data-squash="t"             character press: squash down for 0.5s before t, then a springy rebound
+//   data-push="t [scale]"       camera push-in toward transform-origin over 0.6s, fading out
 const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 function bezier(x1, y1, x2, y2) {
   const f = (a, b, s) => 3 * a * s * (1 - s) ** 2 + 3 * b * s * s * (1 - s) + s ** 3;
@@ -24,6 +28,9 @@ function bezier(x1, y1, x2, y2) {
 const easeOut = bezier(0.16, 1, 0.3, 1);        // website --ease-out, the only main curve
 const easeMove = bezier(0.45, 0, 0.2, 1);       // main.js moveCursor
 const easeFly = bezier(0.5, 0, 0.2, 1);         // main.js flyTo
+const easeIn = bezier(0.5, 0, 0.75, 0);
+// Damped spring 0 -> 1 with a single visible overshoot (~6%).
+const spring = (u) => (u >= 1 ? 1 : 1 - Math.exp(-6 * u) * Math.cos(1.5 * Math.PI * u));
 const windows = (spec) => spec.split(',').map((w) => w.split('-').map(Number));
 const inside = (spec, t) => windows(spec).some(([a, b]) => t >= a && t < b);
 
@@ -138,6 +145,40 @@ function seekScene(scene, t) {
     const [period, amp] = el.dataset.float.split(' ').map(Number);
     el.style.transform = `translateY(${-amp * (0.5 - 0.5 * Math.cos((2 * Math.PI * t) / period))}px)`;
   });
+  scene.querySelectorAll('[data-spring]').forEach((el) => {
+    const [at, from = 0.3] = el.dataset.spring.split(' ').map(Number);
+    const u = (t - at) / 0.45;
+    el.style.visibility = u >= 0 ? 'visible' : 'hidden';
+    el.style.opacity = String(clamp((t - at) / 0.12));
+    el.style.transform = `scale(${from + (1 - from) * spring(clamp(u))})`;
+  });
+  scene.querySelectorAll('[data-squash]').forEach((el) => {
+    const at = Number(el.dataset.squash);
+    // Anticipation: sink 5% while widening; release: spring back from a deeper squash.
+    const pre = easeOut(clamp((t - (at - 0.5)) / 0.5));
+    const post = t < at ? 0 : 1 - spring(clamp((t - at) / 0.5));
+    const k = t < at ? 0.05 * pre : 0.08 * post;
+    el.style.transform = `scale(${1 + k * 0.6}, ${1 - k})`;
+  });
+  scene.querySelectorAll('[data-push]').forEach((el) => {
+    const [at, to = 1.3] = el.dataset.push.split(' ').map(Number);
+    const u = easeIn(clamp((t - at) / 0.6));
+    el.style.transform = `scale(${1 + (to - 1) * u})`;
+    el.style.opacity = String(1 - 0.6 * u);
+  });
+  scene.querySelectorAll('video[data-clip]').forEach((el) => {
+    const [at, src = 0, rate = 1] = el.dataset.clip.split(' ').map(Number);
+    // Hold a little before the end: Chrome shows frame 0 when asked for the very last frame.
+    const end = Math.max(0, (el.duration || 0) - 0.1);
+    const target = Math.max(0, Math.min(end, src + Math.max(0, t - at) * rate));
+    if (Math.abs(el.currentTime - target) < 1e-3) return;
+    // 'seeked' fires before the frame is composited; also wait for the frame to be presented (or two paints).
+    pending.push(new Promise((resolve) => el.addEventListener('seeked', () => {
+      const paint = () => requestAnimationFrame(() => requestAnimationFrame(resolve));
+      if (el.requestVideoFrameCallback) { const id = el.requestVideoFrameCallback(() => paint()); setTimeout(() => { el.cancelVideoFrameCallback(id); paint(); }, 250); } else paint();
+    }, {once: true})));
+    el.currentTime = target;
+  });
   scene.querySelectorAll('.fake-cursor[data-path]').forEach((el) => {
     const segs = JSON.parse(el.dataset.path);
     let p = scene._resolve(segs[0][2]);
@@ -155,6 +196,9 @@ function seekScene(scene, t) {
   });
 }
 
+// Seeks started by the last window.seek(); the renderer awaits window.ready() before each screenshot.
+let pending = [];
+window.ready = () => { const p = Promise.all(pending); pending = []; return p; };
 window.seek = function (seconds) {
   const t = clamp(Number(seconds) || 0, 0, window.FILM.duration - 1 / window.FILM.fps);
   document.querySelectorAll('.shot').forEach((scene) => {

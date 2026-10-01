@@ -105,6 +105,25 @@ function openShot() {
   ];
 }
 
+// v2: copy to Documents, then the real progress window (screen recording) floats in.
+function sendShot2() {
+  const doc = '季度报告.docx', docs = demo.places[2];
+  const items = menuFor(doc);
+  const at = `${file(doc)}|52|40`;
+  return [
+    `<div class="finder-wrap" data-in="0.3 0 24 0.97">${finderHTML({
+      files: baseFiles({[doc]: {win: 'selected@1.5-9'}}),
+      sideAttrs: {[docs.path]: {win: 'flash@4-4.6'}},
+      toasts: [toast(demo.toast.copiedTo, {name: doc, dest: docs.name}, '4-5.1')],
+    })}</div>`,
+    `<span class="fly-ghost file-icon" data-fly="3.5" data-from='${file(doc)} .file-icon' data-to='[data-place="${docs.path}"]'><span class="doc" data-ext="docx" data-label="docx"></span></span>`,
+    menu('s1', items, {at, open: '2-3.5', active: {[m.copyTo]: '2.7-3.5'}}),
+    menu('s1s', submenu(items, m.copyTo), {parent: `s1/${m.copyTo}`, open: '2.85-3.5', active: {[docs.name]: '3.3-3.5'}}),
+    cursor([[0, 0, [640, 420]], [0.8, 1.5, at], [2.3, 2.7, `${row(`s1/${m.copyTo}`)}|60|13`], [2.95, 3.3, `${row(`s1s/${docs.name}`)}|50|13`], [4.2, 5, [150, 250]]],
+    [1.5, 2, 3.45], 0.6),
+  ];
+}
+
 const highlight = ['转换图片…', '生成 macOS 图标集', '生成 iOS 图标集', '解散文件夹'];
 function toolboxShot() {
   const img = '封面.png', folder = '项目资料';
@@ -129,6 +148,13 @@ function toolboxShot() {
       [3.8, 4.3, atF], [4.75, 5.2, `${row(`t2/${m.toolbox}`)}|60|13`]], [1.2, 1.5, 4.3, 4.5], 0.4)}</div>`,
   ];
 }
+
+// Footage: a <video> seeked by timeline.js (data-clip="shotTime [sourceTime] [rate]"); `fade` fades it in from that time.
+const clip = (name, at, {src = 0, rate = 1, cls = '', fade} = {}) =>
+  <video className={`clip ${cls}`} src={`clips/${name}.mp4`} data-clip={`${at} ${src} ${rate}`} data-in={fade === undefined ? undefined : `${fade} 0 0`} muted playsInline preload="auto"/>;
+// A recorded macOS window as a floating card; `r` is the source window's corner radius in source pixels.
+const Rec = ({name, at, x, y, w, h, scale = 1, r = 36, enter, cls = ''}) =>
+  <div className={`rec ${cls}`} data-in={`${enter ?? at - 0.3} 0 40 0.96`} style={{left: x, top: y, width: w * scale, height: h * scale, borderRadius: r * scale}}>{clip(name, at)}</div>;
 
 // ---- Shots
 function Shot({s, children, cls = ''}) {
@@ -202,16 +228,87 @@ const scenes = {
       <div className="actions" data-in="0.45"><span className="btn btn-primary btn-lg" {...html(`<svg class="ic"><use href="#i-download"/></svg>${escapeHTML(t.cta.download)}`)}/></div>
       <p className="fineprint" data-in="0.55">{s.description}</p>
     </div>
-    <figure className="end-art" data-in="0.3 0 80"><img data-float="1.6 26" src={img('cta-character-960.webp')} alt=""/></figure>
+    <div className="riko-end">{clip('riko-wave-flat', 0.3, {fade: 0.3})}</div>
   </Shot>,
 };
+
+// v2 scenes (v2/plan.json picks them with `scene`).
+Object.assign(scenes, {
+  // Chibi Riko presses the big mouse's coral right button (AI, press lands 1.375s into the clip = shot 1.5s),
+  // then holds; code adds the rebound, the website's real menu springing out of the button, and the push-in.
+  cold: (s) => <Shot s={s} cls="ink">
+    <div className="cold-stage" data-push="3.4 1.35">
+      <div className="grid-bg"/><div className="glow" style={{left: 150, top: 160}}/>
+      <div className="press-body" data-squash="1.5">{clip('chibi-press', 0.125)}</div>
+      <i className="click-ring" data-ring="1.5"/><i className="click-ring small" data-ring="1.6"/>
+      <div className="cold-menu"><div className="cold-menu-pop" data-spring="1.5 0.2"
+        {...html(menu('c1', menuFor(null), {open: '1.5-99', active: {[m.newFile]: '2.3-99'}}))}/></div>
+      <h1 className="cold-title" data-in="1.9"><span className="headline-en" lang="en">{s.headlineEn}</span><span className="headline-zh" lang="zh-CN">{s.headline}</span></h1>
+    </div>
+  </Shot>,
+  brand2: (s) => <Shot s={s} cls="ink">
+    <div className="grid-bg"/><div className="center-glow"/>
+    <div className="brand-stack">
+      <div className="brand-icon"><img data-pop="0.15" src={img('app-icon-512.png')} alt=""/></div>
+      <p className="brand-word" data-in="0.55">RightKit<span className="dot">.</span></p>
+      <h1 data-in="0.8"><span className="headline-en" lang="en">{s.headlineEn}</span><span className="headline-zh" lang="zh-CN">右键一下，<em>就办好了。</em></span></h1>
+    </div>
+  </Shot>,
+  new2: (s) => <Shot s={s} cls="ink">
+    <div className="grid-bg"/><div className="glow" style={{left: 1280, top: 150}}/>
+    <div className="riko-clip" data-in="0.2 0 0">{clip('riko-point', 0.2)}</div>
+    <Copy s={s}>
+      <ul className="types">{t.sections.new.types.map((ext, i) => <li key={ext} data-in={`${5 + i * 0.06} 0 16`}><span className="doc-ic" data-ext={ext}/>.{ext}</li>)}</ul>
+      <p className="note" data-in="8.6">{s.note}</p>
+    </Copy>
+    <Stage left={790} top={430} parts={newShot()}/>
+  </Shot>,
+  send2: (s) => <Shot s={s} cls="ink">
+    <div className="grid-bg"/>
+    <Copy s={s}><p className="note" data-in="5.3">{s.note}</p></Copy>
+    <figure className="art" data-in="0.6"><img data-float="6.5 6" src={img('feature-copy-move-640.webp')} alt=""/></figure>
+    <Stage left={800} top={300} parts={sendShot2()}/>
+    <Rec name="progress" at={5.3} x={1080} y={640} w={800} h={296} scale={0.95}/>
+  </Shot>,
+  more2: (s) => <Shot s={s} cls="ink">
+    <div className="grid-bg"/><div className="glow" style={{left: 1100, top: 200}}/>
+    <Copy s={s}/>
+    <figure className="chibi-still" data-in="0.8"><img data-float="2.4 14" src="clips/chibi-juggle.png" alt=""/></figure>
+    <Rec name="shortcuts" at={0.3} x={790} y={200} w={592} h={720} scale={0.95} r={22} cls="panel"/>
+    <Rec name="qrcode" at={0.9} x={1380} y={215} w={640} h={832} scale={0.78}/>
+  </Shot>,
+  safe2: (s) => <Shot s={s} cls="ink">
+    <div className="grid-bg"/><div className="glow" style={{left: 1150, top: 160}}/>
+    <div className="chibi-clip right">{clip('chibi-shield', 0.2, {fade: 0.2})}</div>
+    <Copy s={s}>
+      <div className="rec row" data-in="0.6 0 40 0.96">{clip('welcome-row', 0.9)}</div>
+      <ul className="chips">{s.chips.map((c, i) => <li key={c} data-in={`${3.2 + i * 0.07} 0 16`}><svg className="ic" {...html('<use href="#i-check"/>')}/>{c}</li>)}</ul>
+    </Copy>
+  </Shot>,
+  // ink, not cta: the AI clip's background (#20212A) must be darker than the stage for lighten to hide it.
+  end2: (s) => <Shot s={s} cls="ink">
+    <div className="cta-glow"/>
+    <div className="riko-end">{clip('riko-wave-flat', 0.3, {fade: 0.3})}</div>
+    <div className="end-copy">
+      <div className="end-brand" data-in="0.1"><img src={img('app-icon-512.png')} alt=""/><span>RightKit<span className="dot">.</span></span></div>
+      <h1 data-in="0.25"><span className="headline-en" lang="en">{s.headlineEn}</span><span className="headline-zh" lang="zh-CN">{t.cta.title1}<em>{t.cta.title2}</em></span></h1>
+      <div className="actions" data-in="0.45">
+        <span className="btn btn-primary btn-lg" {...html(`<svg class="ic"><use href="#i-download"/></svg>${escapeHTML(t.cta.download)}`)}/>
+        {/* Apple's official badge, unmodified (toolbox.marketingtools.apple.com), same height as the button. */}
+        <img className="store-badge" src="assets/badges/mac-app-store-zh-cn-black.svg" alt={s.storeLabel}/>
+      </div>
+      <p className="fineprint" data-in="0.55">{s.description}</p>
+      <p className="url" data-in="0.7">{s.url}</p>
+    </div>
+  </Shot>,
+});
 
 // Section labels, safe cards and ticker words come from website/content.json.
 const sectionOf = {new: 'new', send: 'send', open: 'open', toolbox: 'toolbox', safe: 'trust', more: 'more'};
 const tool = (id) => t.toolbox.groups.flat().find((x) => x.id === id).title.replace(/…$/, '');
 function enrich(s) {
   const sec = t.sections[sectionOf[s.id]];
-  return {...s, ...(sec && {num: sec.num, label: sec.label}),
+  return {...(sec && {num: sec.num, label: sec.label}), ...s,
     cards: s.id === 'safe' ? sec.items.slice(0, 3) : undefined,
     ticker: s.id === 'title' ? [m.newFile, m.copyTo, m.moveTo, m.favorites, m.openInApp, ...['copyPath', 'convertImage', 'macIconset', 'hash', 'airdrop'].map(tool)] : undefined};
 }
@@ -220,6 +317,6 @@ export function renderFilm(plan) {
   V = plan.height > plan.width;
   return renderToStaticMarkup(<main id="film" className={V ? 'vertical' : ''} style={{width: plan.width, height: plan.height}}>
     <div {...html(sprite)}/>
-    {plan.shots.map((s) => <React.Fragment key={s.id}>{scenes[s.id](enrich(s))}</React.Fragment>)}
+    {plan.shots.map((s) => <React.Fragment key={s.id}>{scenes[s.scene || s.id](enrich(s))}</React.Fragment>)}
   </main>);
 }

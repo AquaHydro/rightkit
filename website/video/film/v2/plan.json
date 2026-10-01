@@ -1,0 +1,873 @@
+{
+  "demo": false,
+  "product": "RightKit",
+  "style": "repo",
+  "width": 1920,
+  "height": 1080,
+  "fps": 60,
+  "repo": "/Users/liao/Documents/rightkit",
+  "audioRequired": true,
+  "sfxRequired": true,
+  "typography": {
+    "mode": "bilingual",
+    "zhFont": "PingFang SC（系统字体，Mac 上渲染）",
+    "enFont": "Nunito 900（website/public/fonts，OFL）",
+    "zhStyle": "sans-serif",
+    "monoFont": "Geist Mono"
+  },
+  "scope": {
+    "versions": "0.1.2",
+    "channels": [
+      "website",
+      "mac-app-store"
+    ],
+    "platforms": [
+      "macos-desktop"
+    ]
+  },
+  "duration": 60,
+  "audio": {
+    "ducking": {
+      "enabled": true
+    },
+    "music": {
+      "file": "assets/music.wav",
+      "gain": 0.6
+    },
+    "beatGrid": {
+      "bpm": 120,
+      "offset": 0
+    },
+    "cues": [
+      {
+        "at": 0.15,
+        "actionId": "brand-icon",
+        "file": "../assets/sfx/pop.wav",
+        "gain": 1.9,
+        "role": "sfx",
+        "kind": "pop"
+      },
+      {
+        "at": 4.485,
+        "actionId": "cold-press",
+        "file": "../assets/sfx/soft-ui-click.wav",
+        "gain": 0.9,
+        "role": "sfx",
+        "kind": "click",
+        "syncOffset": 0.015
+      },
+      {
+        "at": 4.5,
+        "actionId": "cold-press",
+        "file": "../assets/sfx/pop.wav",
+        "gain": 1.5,
+        "role": "sfx",
+        "kind": "pop"
+      },
+      {
+        "at": 6.2,
+        "actionId": "cold-push",
+        "file": "../assets/sfx/whoosh.wav",
+        "gain": 1.2,
+        "role": "sfx",
+        "kind": "whoosh",
+        "syncOffset": 0.2
+      },
+      {
+        "at": 8.985,
+        "actionId": "new-rclick",
+        "file": "../assets/sfx/soft-ui-click.wav",
+        "gain": 0.57,
+        "role": "sfx",
+        "kind": "click",
+        "syncOffset": 0.015,
+        "onBeat": true,
+        "beatDivision": 2
+      },
+      {
+        "at": 9.85,
+        "actionId": "new-sub",
+        "file": "../assets/sfx/toggle.wav",
+        "gain": 1.6,
+        "role": "sfx",
+        "kind": "toggle"
+      },
+      {
+        "at": 10.785,
+        "actionId": "new-pick",
+        "file": "../assets/sfx/soft-ui-click.wav",
+        "gain": 0.57,
+        "role": "sfx",
+        "kind": "click",
+        "syncOffset": 0.015
+      },
+      {
+        "at": 11.0,
+        "actionId": "new-pop",
+        "file": "../assets/sfx/pop.wav",
+        "gain": 1.9,
+        "role": "sfx",
+        "kind": "pop",
+        "onBeat": true,
+        "beatDivision": 2
+      },
+      {
+        "at": 13.485,
+        "actionId": "new-rclick2",
+        "file": "../assets/sfx/soft-ui-click.wav",
+        "gain": 0.57,
+        "role": "sfx",
+        "kind": "click",
+        "syncOffset": 0.015,
+        "onBeat": true,
+        "beatDivision": 2
+      },
+      {
+        "at": 15.285,
+        "actionId": "new-pick2",
+        "file": "../assets/sfx/soft-ui-click.wav",
+        "gain": 0.57,
+        "role": "sfx",
+        "kind": "click",
+        "syncOffset": 0.015
+      },
+      {
+        "at": 15.5,
+        "actionId": "new-pop2",
+        "file": "../assets/sfx/pop.wav",
+        "gain": 1.9,
+        "role": "sfx",
+        "kind": "pop",
+        "onBeat": true,
+        "beatDivision": 2
+      },
+      {
+        "at": 18.5,
+        "actionId": "send-select",
+        "file": "../assets/sfx/click-alt.wav",
+        "gain": 3.3,
+        "role": "sfx",
+        "kind": "click-alt"
+      },
+      {
+        "at": 18.985,
+        "actionId": "send-rclick",
+        "file": "../assets/sfx/soft-ui-click.wav",
+        "gain": 0.57,
+        "role": "sfx",
+        "kind": "click",
+        "syncOffset": 0.015,
+        "onBeat": true,
+        "beatDivision": 2
+      },
+      {
+        "at": 19.85,
+        "actionId": "send-sub",
+        "file": "../assets/sfx/toggle.wav",
+        "gain": 1.6,
+        "role": "sfx",
+        "kind": "toggle"
+      },
+      {
+        "at": 20.3,
+        "actionId": "send-fly",
+        "file": "../assets/sfx/whoosh.wav",
+        "gain": 0.8,
+        "role": "sfx",
+        "kind": "whoosh",
+        "syncOffset": 0.2,
+        "onBeat": true,
+        "beatDivision": 2
+      },
+      {
+        "at": 20.435,
+        "actionId": "send-pick",
+        "file": "../assets/sfx/soft-ui-click.wav",
+        "gain": 0.57,
+        "role": "sfx",
+        "kind": "click",
+        "syncOffset": 0.015
+      },
+      {
+        "at": 21.0,
+        "actionId": "send-done",
+        "file": "../assets/sfx/success.wav",
+        "gain": 3.0,
+        "role": "sfx",
+        "kind": "success",
+        "onBeat": true,
+        "beatDivision": 2
+      },
+      {
+        "at": 21.865,
+        "actionId": "send-progress",
+        "file": "../assets/sfx/sweep.wav",
+        "gain": 2.0,
+        "role": "sfx",
+        "kind": "sweep",
+        "syncOffset": 0.135
+      },
+      {
+        "at": 27.3,
+        "actionId": "open-select",
+        "file": "../assets/sfx/click-alt.wav",
+        "gain": 3.3,
+        "role": "sfx",
+        "kind": "click-alt"
+      },
+      {
+        "at": 27.985,
+        "actionId": "open-rclick",
+        "file": "../assets/sfx/soft-ui-click.wav",
+        "gain": 0.57,
+        "role": "sfx",
+        "kind": "click",
+        "syncOffset": 0.015,
+        "onBeat": true,
+        "beatDivision": 2
+      },
+      {
+        "at": 28.85,
+        "actionId": "open-sub",
+        "file": "../assets/sfx/toggle.wav",
+        "gain": 1.6,
+        "role": "sfx",
+        "kind": "toggle"
+      },
+      {
+        "at": 29.985,
+        "actionId": "open-vscode",
+        "file": "../assets/sfx/soft-ui-click.wav",
+        "gain": 0.57,
+        "role": "sfx",
+        "kind": "click",
+        "syncOffset": 0.015,
+        "onBeat": true,
+        "beatDivision": 2
+      },
+      {
+        "at": 30.8,
+        "actionId": "open-select2",
+        "file": "../assets/sfx/click-alt.wav",
+        "gain": 3.3,
+        "role": "sfx",
+        "kind": "click-alt"
+      },
+      {
+        "at": 31.185,
+        "actionId": "open-rclick2",
+        "file": "../assets/sfx/soft-ui-click.wav",
+        "gain": 0.57,
+        "role": "sfx",
+        "kind": "click",
+        "syncOffset": 0.015
+      },
+      {
+        "at": 32.835,
+        "actionId": "open-term",
+        "file": "../assets/sfx/soft-ui-click.wav",
+        "gain": 0.57,
+        "role": "sfx",
+        "kind": "click",
+        "syncOffset": 0.015
+      },
+      {
+        "at": 35.2,
+        "actionId": "tool-select",
+        "file": "../assets/sfx/click-alt.wav",
+        "gain": 3.3,
+        "role": "sfx",
+        "kind": "click-alt"
+      },
+      {
+        "at": 35.485,
+        "actionId": "tool-rclick",
+        "file": "../assets/sfx/soft-ui-click.wav",
+        "gain": 0.57,
+        "role": "sfx",
+        "kind": "click",
+        "syncOffset": 0.015,
+        "onBeat": true,
+        "beatDivision": 2
+      },
+      {
+        "at": 36.45,
+        "actionId": "tool-sub",
+        "file": "../assets/sfx/toggle.wav",
+        "gain": 1.6,
+        "role": "sfx",
+        "kind": "toggle"
+      },
+      {
+        "at": 38.3,
+        "actionId": "tool-select2",
+        "file": "../assets/sfx/click-alt.wav",
+        "gain": 3.3,
+        "role": "sfx",
+        "kind": "click-alt"
+      },
+      {
+        "at": 38.485,
+        "actionId": "tool-rclick2",
+        "file": "../assets/sfx/soft-ui-click.wav",
+        "gain": 0.57,
+        "role": "sfx",
+        "kind": "click",
+        "syncOffset": 0.015,
+        "onBeat": true,
+        "beatDivision": 2
+      },
+      {
+        "at": 39.35,
+        "actionId": "tool-sub2",
+        "file": "../assets/sfx/toggle.wav",
+        "gain": 1.6,
+        "role": "sfx",
+        "kind": "toggle"
+      },
+      {
+        "at": 40.26,
+        "actionId": "tool-compare",
+        "file": "../assets/sfx/sweep.wav",
+        "gain": 2.1,
+        "role": "sfx",
+        "kind": "sweep",
+        "syncOffset": 0.34
+      },
+      {
+        "at": 42.865,
+        "actionId": "more-shortcuts",
+        "file": "../assets/sfx/sweep.wav",
+        "gain": 2.0,
+        "role": "sfx",
+        "kind": "sweep",
+        "syncOffset": 0.135
+      },
+      {
+        "at": 43.4,
+        "actionId": "more-qr",
+        "file": "../assets/sfx/whoosh.wav",
+        "gain": 2.6,
+        "role": "sfx",
+        "kind": "whoosh",
+        "syncOffset": 0.2
+      },
+      {
+        "at": 45.1,
+        "actionId": "more-list",
+        "file": "../assets/sfx/click-alt.wav",
+        "gain": 3.0,
+        "role": "sfx",
+        "kind": "click-alt"
+      },
+      {
+        "at": 49.465,
+        "actionId": "safe-row",
+        "file": "../assets/sfx/sweep.wav",
+        "gain": 2.6,
+        "role": "sfx",
+        "kind": "sweep",
+        "syncOffset": 0.135
+      },
+      {
+        "at": 51.4,
+        "actionId": "safe-granted",
+        "file": "../assets/sfx/success.wav",
+        "gain": 2.6,
+        "role": "sfx",
+        "kind": "success"
+      },
+      {
+        "at": 52.2,
+        "actionId": "safe-chips",
+        "file": "../assets/sfx/pop.wav",
+        "gain": 1.2,
+        "role": "sfx",
+        "kind": "pop"
+      },
+      {
+        "at": 53.66,
+        "actionId": "end-in",
+        "file": "../assets/sfx/sweep.wav",
+        "gain": 2.8,
+        "role": "sfx",
+        "kind": "sweep",
+        "syncOffset": 0.34,
+        "onBeat": true,
+        "beatDivision": 2
+      }
+    ]
+  },
+  "shots": [
+    {
+      "id": "brand",
+      "start": 0,
+      "end": 3,
+      "type": "title",
+      "headlineEn": "Right-click. Done.",
+      "headline": "右键一下，就办好了。",
+      "description": "",
+      "descriptionAt": 1.15,
+      "plainExplanation": "RightKit 是 macOS 访达的右键菜单工具。",
+      "claim": false,
+      "source": [],
+      "component": "website app icon + wordmark",
+      "actions": [
+        {
+          "id": "brand-icon",
+          "at": 0.15,
+          "action": "app icon pops in over the blurred ripple",
+          "soundRequired": true
+        },
+        {
+          "id": "brand-word",
+          "at": 0.55,
+          "action": "wordmark and tagline rise",
+          "soundRequired": false
+        }
+      ],
+      "scene": "brand2"
+    },
+    {
+      "id": "cold",
+      "scene": "cold",
+      "start": 3,
+      "end": 7,
+      "type": "title",
+      "label": "macOS 访达",
+      "headlineEn": "Start with a right-click",
+      "headline": "从一次右键开始",
+      "description": "",
+      "descriptionAt": 0,
+      "plainExplanation": "品牌之后，Q 版 Riko 站在一只右键为珊瑚色的大鼠标旁，蓄力后按下右键，官网同款右键菜单从按键处向上弹出，「新建文件」高亮，镜头推进到下一镜。首帧由 gpt-image-2.5 按角色设定生成，动作由 grok-imagine-video-1.5 图生视频（只用前 1.85 秒），回弹、菜单和推进由代码完成。",
+      "claim": false,
+      "source": [],
+      "component": "ai-generated chibi (ai-clips/chibi/press-a.png → press.mp4, 0-1.85s) + website-adapter menu (main.js buildMenu)",
+      "actions": [
+        {
+          "id": "cold-press",
+          "at": 1.5,
+          "action": "Riko presses the coral right button; the real menu springs out",
+          "soundRequired": true
+        },
+        {
+          "id": "cold-highlight",
+          "at": 2.3,
+          "action": "New File row highlights",
+          "soundRequired": false
+        },
+        {
+          "id": "cold-push",
+          "at": 3.4,
+          "action": "camera pushes into the menu",
+          "soundRequired": true
+        }
+      ]
+    },
+    {
+      "id": "new",
+      "start": 7,
+      "end": 17,
+      "type": "workspace",
+      "headlineEn": "New File",
+      "headline": "在哪里右键，就在哪里新建",
+      "description": "在空白处右键，选好类型，文件就建在这个文件夹里。",
+      "descriptionAt": 0.3,
+      "plainExplanation": "在访达窗口空白处右键，选「新建文件」里的类型，文件直接建在当前文件夹，并进入重命名。再建一次同名文件，会自动变成「未命名 2.md」，不覆盖。",
+      "claim": true,
+      "source": [
+        "repo:docs/features.md#L70",
+        "repo:docs/features.md#L180",
+        "repo:docs/features.md#L95"
+      ],
+      "component": "website-adapter: website/src/index.html .finder + main.js buildMenu() + ai-generated Riko (ai-clips/riko-point-16x9.mp4)",
+      "actions": [
+        {
+          "id": "new-rclick",
+          "at": 2,
+          "action": "right-click blank space, menu opens",
+          "soundRequired": true
+        },
+        {
+          "id": "new-sub",
+          "at": 2.85,
+          "action": "New File submenu opens",
+          "soundRequired": true
+        },
+        {
+          "id": "new-pick",
+          "at": 3.8,
+          "action": "click Markdown",
+          "soundRequired": true
+        },
+        {
+          "id": "new-pop",
+          "at": 4,
+          "action": "未命名.md appears in rename style",
+          "soundRequired": true
+        },
+        {
+          "id": "new-types",
+          "at": 5,
+          "action": "12 type chips rise",
+          "soundRequired": false
+        },
+        {
+          "id": "new-rclick2",
+          "at": 6.5,
+          "action": "right-click again",
+          "soundRequired": true
+        },
+        {
+          "id": "new-pick2",
+          "at": 8.3,
+          "action": "click Markdown",
+          "soundRequired": true
+        },
+        {
+          "id": "new-pop2",
+          "at": 8.5,
+          "action": "未命名 2.md appears, numbered",
+          "soundRequired": true
+        }
+      ],
+      "num": "01",
+      "note": "重名自动编号，从不覆盖。",
+      "scene": "new2"
+    },
+    {
+      "id": "send",
+      "start": 17,
+      "end": 26,
+      "type": "workspace",
+      "headlineEn": "Copy To · Move To",
+      "headline": "常用的文件夹，一步就到",
+      "description": "选中文件，右键「复制到」，选一个常用文件夹就完成。",
+      "descriptionAt": 0.3,
+      "plainExplanation": "选中「季度报告.docx」，右键「复制到」，子菜单列出设定好的文件夹，点「文稿」就复制过去。超过 1 秒的复制和移动会显示进度窗口，有进度条、当前文件名和「取消」。",
+      "claim": true,
+      "source": [
+        "repo:docs/features.md#L141",
+        "repo:docs/features.md#L143",
+        "repo:docs/features.md#L270",
+        "file:../recordings/progress.mov"
+      ],
+      "component": "website-adapter: website/src/index.html .finder + main.js buildMenu() + flyTo() + screen recording recordings/progress.mov",
+      "actions": [
+        {
+          "id": "send-select",
+          "at": 1.5,
+          "action": "select 季度报告.docx",
+          "soundRequired": true
+        },
+        {
+          "id": "send-rclick",
+          "at": 2,
+          "action": "right-click file",
+          "soundRequired": true
+        },
+        {
+          "id": "send-sub",
+          "at": 2.85,
+          "action": "Copy To submenu",
+          "soundRequired": true
+        },
+        {
+          "id": "send-pick",
+          "at": 3.45,
+          "action": "click 文稿",
+          "soundRequired": true
+        },
+        {
+          "id": "send-fly",
+          "at": 3.5,
+          "action": "icon flies to sidebar",
+          "soundRequired": true
+        },
+        {
+          "id": "send-done",
+          "at": 4,
+          "action": "sidebar flash and status",
+          "soundRequired": true
+        },
+        {
+          "id": "send-progress",
+          "at": 5.0,
+          "action": "real progress window floats in",
+          "soundRequired": true
+        }
+      ],
+      "num": "02",
+      "note": "超过 1 秒的操作会显示进度，随时可以取消。",
+      "scene": "send2"
+    },
+    {
+      "id": "open",
+      "start": 26,
+      "end": 34,
+      "type": "workspace",
+      "headlineEn": "Open in App",
+      "headline": "直接在终端或编辑器里打开",
+      "description": "终端打开所在的目录，编辑器打开项目本身。",
+      "descriptionAt": 0.3,
+      "plainExplanation": "选中文件夹用 Visual Studio Code 打开，打开的是这个文件夹；选中文件用终端打开，打开的是文件所在的「桌面」。首次启动会自动找到终端、Ghostty、Visual Studio Code 和 Xcode。",
+      "claim": true,
+      "source": [
+        "repo:docs/features.md#L111",
+        "repo:docs/features.md#L124",
+        "repo:docs/features.md#L126"
+      ],
+      "component": "website-adapter: website/src/index.html .finder + main.js buildMenu()",
+      "actions": [
+        {
+          "id": "open-select",
+          "at": 1.3,
+          "action": "select 项目资料",
+          "soundRequired": true
+        },
+        {
+          "id": "open-rclick",
+          "at": 2,
+          "action": "right-click folder",
+          "soundRequired": true
+        },
+        {
+          "id": "open-sub",
+          "at": 2.85,
+          "action": "Open in App submenu",
+          "soundRequired": true
+        },
+        {
+          "id": "open-vscode",
+          "at": 4,
+          "action": "click Visual Studio Code",
+          "soundRequired": true
+        },
+        {
+          "id": "open-select2",
+          "at": 4.8,
+          "action": "select 笔记.md",
+          "soundRequired": true
+        },
+        {
+          "id": "open-rclick2",
+          "at": 5.2,
+          "action": "right-click file",
+          "soundRequired": true
+        },
+        {
+          "id": "open-term",
+          "at": 6.85,
+          "action": "click 终端",
+          "soundRequired": true
+        }
+      ],
+      "num": "03"
+    },
+    {
+      "id": "toolbox",
+      "start": 34,
+      "end": 43,
+      "type": "workspace",
+      "headlineEn": "Toolbox",
+      "headline": "16 个小工具，只显示用得上的",
+      "description": "选图片时出现转换和图标集，选文件夹时出现解散文件夹。",
+      "descriptionAt": 0.3,
+      "plainExplanation": "工具箱里有 16 个命令，但只列出对当前选择有用的：选「封面.png」能看到转换图片和两种图标集，选「项目资料」则出现解散文件夹。",
+      "claim": true,
+      "source": [
+        "repo:docs/features.md#L162",
+        "repo:docs/features.md#L180",
+        "repo:website/content.json"
+      ],
+      "component": "website-adapter: website/src/index.html .finder + main.js buildMenu() toolbox filter",
+      "actions": [
+        {
+          "id": "tool-select",
+          "at": 1.2,
+          "action": "select 封面.png",
+          "soundRequired": true
+        },
+        {
+          "id": "tool-rclick",
+          "at": 1.5,
+          "action": "right-click image",
+          "soundRequired": true
+        },
+        {
+          "id": "tool-sub",
+          "at": 2.45,
+          "action": "image toolbox opens",
+          "soundRequired": true
+        },
+        {
+          "id": "tool-select2",
+          "at": 4.3,
+          "action": "select 项目资料",
+          "soundRequired": true
+        },
+        {
+          "id": "tool-rclick2",
+          "at": 4.5,
+          "action": "right-click folder",
+          "soundRequired": true
+        },
+        {
+          "id": "tool-sub2",
+          "at": 5.35,
+          "action": "folder toolbox opens",
+          "soundRequired": true
+        },
+        {
+          "id": "tool-compare",
+          "at": 6.6,
+          "action": "two toolbox lists side by side",
+          "soundRequired": true
+        },
+        {
+          "id": "tool-mark",
+          "at": 7.2,
+          "action": "differences highlighted",
+          "soundRequired": false
+        }
+      ],
+      "num": "04"
+    },
+    {
+      "id": "more",
+      "scene": "more2",
+      "start": 43,
+      "end": 49,
+      "type": "detail",
+      "num": "05",
+      "label": "更多入口",
+      "headlineEn": "More ways in",
+      "headline": "聚焦、快捷指令、系统服务",
+      "description": "快捷指令里有 9 个动作，二维码在本机生成，选中文字还能直接翻译。",
+      "descriptionAt": 0.3,
+      "plainExplanation": "RightKit 向聚焦和快捷指令提供 9 个动作；二维码窗口在本机生成二维码，不上传文本；系统服务里还能用 Google 或百度翻译选中的文字。",
+      "claim": true,
+      "source": [
+        "repo:docs/features.md#L280",
+        "repo:docs/features.md#L276",
+        "repo:docs/features.md#L278",
+        "file:../recordings/shortcuts.mov",
+        "file:../recordings/qrcode.mov"
+      ],
+      "component": "screen recordings recordings/shortcuts.mov, recordings/qrcode.mov (cropped, sharing badge covered) + ai-generated chibi still ai-clips/chibi/juggle.png",
+      "actions": [
+        {
+          "id": "more-shortcuts",
+          "at": 0.0,
+          "action": "Shortcuts panel floats in",
+          "soundRequired": true
+        },
+        {
+          "id": "more-qr",
+          "at": 0.6,
+          "action": "QR window floats in",
+          "soundRequired": true
+        },
+        {
+          "id": "more-list",
+          "at": 2.1,
+          "action": "RightKit clicked, nine actions appear",
+          "soundRequired": true
+        },
+        {
+          "id": "more-typed",
+          "at": 4.6,
+          "action": "URL typed, QR code final",
+          "soundRequired": false
+        }
+      ]
+    },
+    {
+      "id": "safe",
+      "scene": "safe2",
+      "start": 49,
+      "end": 54,
+      "type": "detail",
+      "num": "06",
+      "label": "放心用",
+      "headlineEn": "Safe by default",
+      "headline": "只碰你授权的文件夹",
+      "description": "运行在 App 沙盒里，访问哪个文件夹由你决定。",
+      "descriptionAt": 0.3,
+      "chips": [
+        "删除前先确认",
+        "系统目录受保护",
+        "重名从不覆盖"
+      ],
+      "plainExplanation": "两个版本都运行在 App Sandbox 里，只能访问用户通过系统面板授权的文件夹；欢迎窗口里授权后那一行显示「riko 已授权」。彻底删除先确认，系统目录受保护，重名自动编号。",
+      "claim": true,
+      "source": [
+        "repo:docs/features.md#L284",
+        "repo:docs/features.md#L236",
+        "repo:docs/features.md#L254",
+        "file:../recordings/welcome.mov"
+      ],
+      "component": "ai-generated chibi (ai-clips/chibi/shield.png → shield.mp4) + screen recording recordings/welcome.mov (authorization row)",
+      "actions": [
+        {
+          "id": "safe-row",
+          "at": 0.6,
+          "action": "authorization row floats in",
+          "soundRequired": true
+        },
+        {
+          "id": "safe-granted",
+          "at": 2.4,
+          "action": "row becomes “riko 已授权”",
+          "soundRequired": true
+        },
+        {
+          "id": "safe-chips",
+          "at": 3.2,
+          "action": "three chips rise",
+          "soundRequired": true
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "start": 54,
+      "end": 60,
+      "type": "end",
+      "headlineEn": "Right-click. Done.",
+      "headline": "右键，就办好了。",
+      "description": "官网免费开源 · Mac App Store ¥8 · 需要 macOS 26 或更高版本",
+      "descriptionAt": 0.55,
+      "plainExplanation": "官网版免费开源；商店版已在 Mac App Store 上架，中文区售价 ¥8，功能相同。需要 macOS 26 或更高版本。结尾用 Apple 官方「Mac App Store 下载」徽章。",
+      "claim": true,
+      "source": [
+        "repo:website/content.json",
+        "repo:website/site.json"
+      ],
+      "component": "website end card + ai-generated wave (ai-clips/riko-wave-flat.mp4, first frame ai-clips/frame-wave-16x9.png from official cta-character.png)",
+      "actions": [
+        {
+          "id": "end-in",
+          "at": 0,
+          "action": "end card",
+          "soundRequired": true
+        },
+        {
+          "id": "end-riko",
+          "at": 0.3,
+          "action": "Riko jumps in",
+          "soundRequired": false
+        },
+        {
+          "id": "end-resolve",
+          "at": 4.5,
+          "action": "music resolves",
+          "soundRequired": false
+        }
+      ],
+      "scene": "end2",
+      "storeLabel": "在 Mac App Store 下载",
+      "url": "rightkit.yiliang.app"
+    }
+  ]
+}

@@ -8,3 +8,12 @@ assets/*.wav
 !assets/sfx/
 assets/sfx/soft-ui-click.wav
 vertical/assets/
+# AI footage: only the clips the film uses are kept (they cannot be regenerated identically).
+ai-clips/**/*.mp4
+!ai-clips/riko-point-16x9.mp4
+!ai-clips/chibi/shield.mp4
+!ai-clips/chibi/press.mp4
+!ai-clips/riko-wave-flat.mp4
+public/clips/
+v2/assets/*.wav
+!renders/rightkit-intro-v2-zh.mp4
