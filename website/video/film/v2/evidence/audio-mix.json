@@ -1,0 +1,1104 @@
+{
+  "planSha256": "9f09d02cf7a38cd068f945492539008fc39fc49e7dafd0c74f87a2a8208cd045",
+  "music": {
+    "file": "assets/music.wav",
+    "gain": 0.6,
+    "sha256": "6802770ecfa6e400fd13a2227560b2ff3988672452681e305e54f6520af4a04c"
+  },
+  "cues": [
+    {
+      "at": 0.15,
+      "actionId": "brand-icon",
+      "file": "../assets/sfx/pop.wav",
+      "gain": 1.9,
+      "role": "sfx",
+      "kind": "pop",
+      "sha256": "ea11b896eb402c995a63f01ff298f0def88deed0ce96d37eb5f52d266b654dc9"
+    },
+    {
+      "at": 4.485,
+      "actionId": "cold-press",
+      "file": "../assets/sfx/soft-ui-click.wav",
+      "gain": 0.9,
+      "role": "sfx",
+      "kind": "click",
+      "syncOffset": 0.015,
+      "sha256": "47e05d1abcb2a75b8a244e8968c3129b3f4a0aa8a871a3d387ad73daef6ff501"
+    },
+    {
+      "at": 4.5,
+      "actionId": "cold-press",
+      "file": "../assets/sfx/pop.wav",
+      "gain": 1.5,
+      "role": "sfx",
+      "kind": "pop",
+      "sha256": "ea11b896eb402c995a63f01ff298f0def88deed0ce96d37eb5f52d266b654dc9"
+    },
+    {
+      "at": 6.2,
+      "actionId": "cold-push",
+      "file": "../assets/sfx/whoosh.wav",
+      "gain": 1.2,
+      "role": "sfx",
+      "kind": "whoosh",
+      "syncOffset": 0.2,
+      "sha256": "1e7e24117c5b226510e2e9bb438055f5a84bcb7cc97ca2a5938e8f280937a193"
+    },
+    {
+      "at": 8.985,
+      "actionId": "new-rclick",
+      "file": "../assets/sfx/soft-ui-click.wav",
+      "gain": 0.57,
+      "role": "sfx",
+      "kind": "click",
+      "syncOffset": 0.015,
+      "onBeat": true,
+      "beatDivision": 2,
+      "sha256": "47e05d1abcb2a75b8a244e8968c3129b3f4a0aa8a871a3d387ad73daef6ff501"
+    },
+    {
+      "at": 9.85,
+      "actionId": "new-sub",
+      "file": "../assets/sfx/toggle.wav",
+      "gain": 1.6,
+      "role": "sfx",
+      "kind": "toggle",
+      "sha256": "509be1af88150e4acf3c273ae29ab404027876fb61d705de5f21d7a62b99d6b6"
+    },
+    {
+      "at": 10.785,
+      "actionId": "new-pick",
+      "file": "../assets/sfx/soft-ui-click.wav",
+      "gain": 0.57,
+      "role": "sfx",
+      "kind": "click",
+      "syncOffset": 0.015,
+      "sha256": "47e05d1abcb2a75b8a244e8968c3129b3f4a0aa8a871a3d387ad73daef6ff501"
+    },
+    {
+      "at": 11.0,
+      "actionId": "new-pop",
+      "file": "../assets/sfx/pop.wav",
+      "gain": 1.9,
+      "role": "sfx",
+      "kind": "pop",
+      "onBeat": true,
+      "beatDivision": 2,
+      "sha256": "ea11b896eb402c995a63f01ff298f0def88deed0ce96d37eb5f52d266b654dc9"
+    },
+    {
+      "at": 13.485,
+      "actionId": "new-rclick2",
+      "file": "../assets/sfx/soft-ui-click.wav",
+      "gain": 0.57,
+      "role": "sfx",
+      "kind": "click",
+      "syncOffset": 0.015,
+      "onBeat": true,
+      "beatDivision": 2,
+      "sha256": "47e05d1abcb2a75b8a244e8968c3129b3f4a0aa8a871a3d387ad73daef6ff501"
+    },
+    {
+      "at": 15.285,
+      "actionId": "new-pick2",
+      "file": "../assets/sfx/soft-ui-click.wav",
+      "gain": 0.57,
+      "role": "sfx",
+      "kind": "click",
+      "syncOffset": 0.015,
+      "sha256": "47e05d1abcb2a75b8a244e8968c3129b3f4a0aa8a871a3d387ad73daef6ff501"
+    },
+    {
+      "at": 15.5,
+      "actionId": "new-pop2",
+      "file": "../assets/sfx/pop.wav",
+      "gain": 1.9,
+      "role": "sfx",
+      "kind": "pop",
+      "onBeat": true,
+      "beatDivision": 2,
+      "sha256": "ea11b896eb402c995a63f01ff298f0def88deed0ce96d37eb5f52d266b654dc9"
+    },
+    {
+      "at": 18.5,
+      "actionId": "send-select",
+      "file": "../assets/sfx/click-alt.wav",
+      "gain": 3.3,
+      "role": "sfx",
+      "kind": "click-alt",
+      "sha256": "7700032cc4caa89af1b41e407bf60e48f07e4d4f69e372ef78df0632666fb527"
+    },
+    {
+      "at": 18.985,
+      "actionId": "send-rclick",
+      "file": "../assets/sfx/soft-ui-click.wav",
+      "gain": 0.57,
+      "role": "sfx",
+      "kind": "click",
+      "syncOffset": 0.015,
+      "onBeat": true,
+      "beatDivision": 2,
+      "sha256": "47e05d1abcb2a75b8a244e8968c3129b3f4a0aa8a871a3d387ad73daef6ff501"
+    },
+    {
+      "at": 19.85,
+      "actionId": "send-sub",
+      "file": "../assets/sfx/toggle.wav",
+      "gain": 1.6,
+      "role": "sfx",
+      "kind": "toggle",
+      "sha256": "509be1af88150e4acf3c273ae29ab404027876fb61d705de5f21d7a62b99d6b6"
+    },
+    {
+      "at": 20.3,
+      "actionId": "send-fly",
+      "file": "../assets/sfx/whoosh.wav",
+      "gain": 0.8,
+      "role": "sfx",
+      "kind": "whoosh",
+      "syncOffset": 0.2,
+      "onBeat": true,
+      "beatDivision": 2,
+      "sha256": "1e7e24117c5b226510e2e9bb438055f5a84bcb7cc97ca2a5938e8f280937a193"
+    },
+    {
+      "at": 20.435,
+      "actionId": "send-pick",
+      "file": "../assets/sfx/soft-ui-click.wav",
+      "gain": 0.57,
+      "role": "sfx",
+      "kind": "click",
+      "syncOffset": 0.015,
+      "sha256": "47e05d1abcb2a75b8a244e8968c3129b3f4a0aa8a871a3d387ad73daef6ff501"
+    },
+    {
+      "at": 21.0,
+      "actionId": "send-done",
+      "file": "../assets/sfx/success.wav",
+      "gain": 3.0,
+      "role": "sfx",
+      "kind": "success",
+      "onBeat": true,
+      "beatDivision": 2,
+      "sha256": "91522be11e71b96367384523bc578eea1f70d93485647b77a22777eb41969ccc"
+    },
+    {
+      "at": 21.865,
+      "actionId": "send-progress",
+      "file": "../assets/sfx/sweep.wav",
+      "gain": 2.0,
+      "role": "sfx",
+      "kind": "sweep",
+      "syncOffset": 0.135,
+      "sha256": "0314aeff52ddc02f88cdf855d66c579f2b93312709dd9c49b6ea63dc7cbb4078"
+    },
+    {
+      "at": 27.3,
+      "actionId": "open-select",
+      "file": "../assets/sfx/click-alt.wav",
+      "gain": 3.3,
+      "role": "sfx",
+      "kind": "click-alt",
+      "sha256": "7700032cc4caa89af1b41e407bf60e48f07e4d4f69e372ef78df0632666fb527"
+    },
+    {
+      "at": 27.985,
+      "actionId": "open-rclick",
+      "file": "../assets/sfx/soft-ui-click.wav",
+      "gain": 0.57,
+      "role": "sfx",
+      "kind": "click",
+      "syncOffset": 0.015,
+      "onBeat": true,
+      "beatDivision": 2,
+      "sha256": "47e05d1abcb2a75b8a244e8968c3129b3f4a0aa8a871a3d387ad73daef6ff501"
+    },
+    {
+      "at": 28.85,
+      "actionId": "open-sub",
+      "file": "../assets/sfx/toggle.wav",
+      "gain": 1.6,
+      "role": "sfx",
+      "kind": "toggle",
+      "sha256": "509be1af88150e4acf3c273ae29ab404027876fb61d705de5f21d7a62b99d6b6"
+    },
+    {
+      "at": 29.985,
+      "actionId": "open-vscode",
+      "file": "../assets/sfx/soft-ui-click.wav",
+      "gain": 0.57,
+      "role": "sfx",
+      "kind": "click",
+      "syncOffset": 0.015,
+      "onBeat": true,
+      "beatDivision": 2,
+      "sha256": "47e05d1abcb2a75b8a244e8968c3129b3f4a0aa8a871a3d387ad73daef6ff501"
+    },
+    {
+      "at": 30.8,
+      "actionId": "open-select2",
+      "file": "../assets/sfx/click-alt.wav",
+      "gain": 3.3,
+      "role": "sfx",
+      "kind": "click-alt",
+      "sha256": "7700032cc4caa89af1b41e407bf60e48f07e4d4f69e372ef78df0632666fb527"
+    },
+    {
+      "at": 31.185,
+      "actionId": "open-rclick2",
+      "file": "../assets/sfx/soft-ui-click.wav",
+      "gain": 0.57,
+      "role": "sfx",
+      "kind": "click",
+      "syncOffset": 0.015,
+      "sha256": "47e05d1abcb2a75b8a244e8968c3129b3f4a0aa8a871a3d387ad73daef6ff501"
+    },
+    {
+      "at": 32.835,
+      "actionId": "open-term",
+      "file": "../assets/sfx/soft-ui-click.wav",
+      "gain": 0.57,
+      "role": "sfx",
+      "kind": "click",
+      "syncOffset": 0.015,
+      "sha256": "47e05d1abcb2a75b8a244e8968c3129b3f4a0aa8a871a3d387ad73daef6ff501"
+    },
+    {
+      "at": 35.2,
+      "actionId": "tool-select",
+      "file": "../assets/sfx/click-alt.wav",
+      "gain": 3.3,
+      "role": "sfx",
+      "kind": "click-alt",
+      "sha256": "7700032cc4caa89af1b41e407bf60e48f07e4d4f69e372ef78df0632666fb527"
+    },
+    {
+      "at": 35.485,
+      "actionId": "tool-rclick",
+      "file": "../assets/sfx/soft-ui-click.wav",
+      "gain": 0.57,
+      "role": "sfx",
+      "kind": "click",
+      "syncOffset": 0.015,
+      "onBeat": true,
+      "beatDivision": 2,
+      "sha256": "47e05d1abcb2a75b8a244e8968c3129b3f4a0aa8a871a3d387ad73daef6ff501"
+    },
+    {
+      "at": 36.45,
+      "actionId": "tool-sub",
+      "file": "../assets/sfx/toggle.wav",
+      "gain": 1.6,
+      "role": "sfx",
+      "kind": "toggle",
+      "sha256": "509be1af88150e4acf3c273ae29ab404027876fb61d705de5f21d7a62b99d6b6"
+    },
+    {
+      "at": 38.3,
+      "actionId": "tool-select2",
+      "file": "../assets/sfx/click-alt.wav",
+      "gain": 3.3,
+      "role": "sfx",
+      "kind": "click-alt",
+      "sha256": "7700032cc4caa89af1b41e407bf60e48f07e4d4f69e372ef78df0632666fb527"
+    },
+    {
+      "at": 38.485,
+      "actionId": "tool-rclick2",
+      "file": "../assets/sfx/soft-ui-click.wav",
+      "gain": 0.57,
+      "role": "sfx",
+      "kind": "click",
+      "syncOffset": 0.015,
+      "onBeat": true,
+      "beatDivision": 2,
+      "sha256": "47e05d1abcb2a75b8a244e8968c3129b3f4a0aa8a871a3d387ad73daef6ff501"
+    },
+    {
+      "at": 39.35,
+      "actionId": "tool-sub2",
+      "file": "../assets/sfx/toggle.wav",
+      "gain": 1.6,
+      "role": "sfx",
+      "kind": "toggle",
+      "sha256": "509be1af88150e4acf3c273ae29ab404027876fb61d705de5f21d7a62b99d6b6"
+    },
+    {
+      "at": 40.26,
+      "actionId": "tool-compare",
+      "file": "../assets/sfx/sweep.wav",
+      "gain": 2.1,
+      "role": "sfx",
+      "kind": "sweep",
+      "syncOffset": 0.34,
+      "sha256": "0314aeff52ddc02f88cdf855d66c579f2b93312709dd9c49b6ea63dc7cbb4078"
+    },
+    {
+      "at": 42.865,
+      "actionId": "more-shortcuts",
+      "file": "../assets/sfx/sweep.wav",
+      "gain": 2.0,
+      "role": "sfx",
+      "kind": "sweep",
+      "syncOffset": 0.135,
+      "sha256": "0314aeff52ddc02f88cdf855d66c579f2b93312709dd9c49b6ea63dc7cbb4078"
+    },
+    {
+      "at": 43.4,
+      "actionId": "more-qr",
+      "file": "../assets/sfx/whoosh.wav",
+      "gain": 2.6,
+      "role": "sfx",
+      "kind": "whoosh",
+      "syncOffset": 0.2,
+      "sha256": "1e7e24117c5b226510e2e9bb438055f5a84bcb7cc97ca2a5938e8f280937a193"
+    },
+    {
+      "at": 45.1,
+      "actionId": "more-list",
+      "file": "../assets/sfx/click-alt.wav",
+      "gain": 3.0,
+      "role": "sfx",
+      "kind": "click-alt",
+      "sha256": "7700032cc4caa89af1b41e407bf60e48f07e4d4f69e372ef78df0632666fb527"
+    },
+    {
+      "at": 49.465,
+      "actionId": "safe-row",
+      "file": "../assets/sfx/sweep.wav",
+      "gain": 2.6,
+      "role": "sfx",
+      "kind": "sweep",
+      "syncOffset": 0.135,
+      "sha256": "0314aeff52ddc02f88cdf855d66c579f2b93312709dd9c49b6ea63dc7cbb4078"
+    },
+    {
+      "at": 51.4,
+      "actionId": "safe-granted",
+      "file": "../assets/sfx/success.wav",
+      "gain": 2.6,
+      "role": "sfx",
+      "kind": "success",
+      "sha256": "91522be11e71b96367384523bc578eea1f70d93485647b77a22777eb41969ccc"
+    },
+    {
+      "at": 52.2,
+      "actionId": "safe-chips",
+      "file": "../assets/sfx/pop.wav",
+      "gain": 1.2,
+      "role": "sfx",
+      "kind": "pop",
+      "sha256": "ea11b896eb402c995a63f01ff298f0def88deed0ce96d37eb5f52d266b654dc9"
+    },
+    {
+      "at": 53.66,
+      "actionId": "end-in",
+      "file": "../assets/sfx/sweep.wav",
+      "gain": 2.8,
+      "role": "sfx",
+      "kind": "sweep",
+      "syncOffset": 0.34,
+      "onBeat": true,
+      "beatDivision": 2,
+      "sha256": "0314aeff52ddc02f88cdf855d66c579f2b93312709dd9c49b6ea63dc7cbb4078"
+    }
+  ],
+  "master": {
+    "file": "assets/master.wav",
+    "sha256": "594b4199a4f31aaa1df73f078e208a7901400b337fb657460f0873a2e6ebbdc2"
+  },
+  "sfxStem": {
+    "file": "assets/sfx-stem.wav",
+    "sha256": "71802fa06fae264c779a2e4f925a0effd7f2244570f2dfe86b9731636f49ca94"
+  },
+  "musicStem": {
+    "file": "assets/music-ducked.wav",
+    "sha256": "a990a5c1c7509d5323224ec7cdd5ed136037e24f1f4dd18f97694b9e1ba4f2fb"
+  },
+  "ducking": {
+    "method": "cue-envelope",
+    "windows": [
+      {
+        "actionId": "brand-icon",
+        "kind": "pop",
+        "start": 0.10999999999999999,
+        "attackEnd": 0.15,
+        "holdEnd": 0.27,
+        "end": 0.51,
+        "db": 3.5
+      },
+      {
+        "actionId": "cold-press",
+        "kind": "click",
+        "start": 4.46,
+        "attackEnd": 4.5,
+        "holdEnd": 4.6,
+        "end": 4.8,
+        "db": 3
+      },
+      {
+        "actionId": "cold-press",
+        "kind": "pop",
+        "start": 4.46,
+        "attackEnd": 4.5,
+        "holdEnd": 4.62,
+        "end": 4.86,
+        "db": 3.5
+      },
+      {
+        "actionId": "cold-push",
+        "kind": "whoosh",
+        "start": 6.36,
+        "attackEnd": 6.4,
+        "holdEnd": 6.5600000000000005,
+        "end": 6.86,
+        "db": 4
+      },
+      {
+        "actionId": "new-rclick",
+        "kind": "click",
+        "start": 8.96,
+        "attackEnd": 9.0,
+        "holdEnd": 9.1,
+        "end": 9.299999999999999,
+        "db": 3
+      },
+      {
+        "actionId": "new-sub",
+        "kind": "toggle",
+        "start": 9.81,
+        "attackEnd": 9.85,
+        "holdEnd": 9.969999999999999,
+        "end": 10.209999999999999,
+        "db": 3
+      },
+      {
+        "actionId": "new-pick",
+        "kind": "click",
+        "start": 10.760000000000002,
+        "attackEnd": 10.8,
+        "holdEnd": 10.9,
+        "end": 11.1,
+        "db": 3
+      },
+      {
+        "actionId": "new-pop",
+        "kind": "pop",
+        "start": 10.96,
+        "attackEnd": 11.0,
+        "holdEnd": 11.12,
+        "end": 11.36,
+        "db": 3.5
+      },
+      {
+        "actionId": "new-rclick2",
+        "kind": "click",
+        "start": 13.46,
+        "attackEnd": 13.5,
+        "holdEnd": 13.6,
+        "end": 13.799999999999999,
+        "db": 3
+      },
+      {
+        "actionId": "new-pick2",
+        "kind": "click",
+        "start": 15.260000000000002,
+        "attackEnd": 15.3,
+        "holdEnd": 15.4,
+        "end": 15.6,
+        "db": 3
+      },
+      {
+        "actionId": "new-pop2",
+        "kind": "pop",
+        "start": 15.46,
+        "attackEnd": 15.5,
+        "holdEnd": 15.62,
+        "end": 15.86,
+        "db": 3.5
+      },
+      {
+        "actionId": "send-select",
+        "kind": "click-alt",
+        "start": 18.46,
+        "attackEnd": 18.5,
+        "holdEnd": 18.6,
+        "end": 18.8,
+        "db": 3
+      },
+      {
+        "actionId": "send-rclick",
+        "kind": "click",
+        "start": 18.96,
+        "attackEnd": 19.0,
+        "holdEnd": 19.1,
+        "end": 19.3,
+        "db": 3
+      },
+      {
+        "actionId": "send-sub",
+        "kind": "toggle",
+        "start": 19.810000000000002,
+        "attackEnd": 19.85,
+        "holdEnd": 19.970000000000002,
+        "end": 20.21,
+        "db": 3
+      },
+      {
+        "actionId": "send-fly",
+        "kind": "whoosh",
+        "start": 20.46,
+        "attackEnd": 20.5,
+        "holdEnd": 20.66,
+        "end": 20.96,
+        "db": 4
+      },
+      {
+        "actionId": "send-pick",
+        "kind": "click",
+        "start": 20.41,
+        "attackEnd": 20.45,
+        "holdEnd": 20.55,
+        "end": 20.75,
+        "db": 3
+      },
+      {
+        "actionId": "send-done",
+        "kind": "success",
+        "start": 20.96,
+        "attackEnd": 21.0,
+        "holdEnd": 21.35,
+        "end": 21.700000000000003,
+        "db": 5
+      },
+      {
+        "actionId": "send-progress",
+        "kind": "sweep",
+        "start": 21.96,
+        "attackEnd": 22.0,
+        "holdEnd": 22.2,
+        "end": 22.55,
+        "db": 4
+      },
+      {
+        "actionId": "open-select",
+        "kind": "click-alt",
+        "start": 27.26,
+        "attackEnd": 27.3,
+        "holdEnd": 27.400000000000002,
+        "end": 27.6,
+        "db": 3
+      },
+      {
+        "actionId": "open-rclick",
+        "kind": "click",
+        "start": 27.96,
+        "attackEnd": 28.0,
+        "holdEnd": 28.1,
+        "end": 28.3,
+        "db": 3
+      },
+      {
+        "actionId": "open-sub",
+        "kind": "toggle",
+        "start": 28.810000000000002,
+        "attackEnd": 28.85,
+        "holdEnd": 28.970000000000002,
+        "end": 29.21,
+        "db": 3
+      },
+      {
+        "actionId": "open-vscode",
+        "kind": "click",
+        "start": 29.96,
+        "attackEnd": 30.0,
+        "holdEnd": 30.1,
+        "end": 30.3,
+        "db": 3
+      },
+      {
+        "actionId": "open-select2",
+        "kind": "click-alt",
+        "start": 30.76,
+        "attackEnd": 30.8,
+        "holdEnd": 30.900000000000002,
+        "end": 31.1,
+        "db": 3
+      },
+      {
+        "actionId": "open-rclick2",
+        "kind": "click",
+        "start": 31.16,
+        "attackEnd": 31.2,
+        "holdEnd": 31.3,
+        "end": 31.5,
+        "db": 3
+      },
+      {
+        "actionId": "open-term",
+        "kind": "click",
+        "start": 32.81,
+        "attackEnd": 32.85,
+        "holdEnd": 32.95,
+        "end": 33.150000000000006,
+        "db": 3
+      },
+      {
+        "actionId": "tool-select",
+        "kind": "click-alt",
+        "start": 35.160000000000004,
+        "attackEnd": 35.2,
+        "holdEnd": 35.300000000000004,
+        "end": 35.50000000000001,
+        "db": 3
+      },
+      {
+        "actionId": "tool-rclick",
+        "kind": "click",
+        "start": 35.46,
+        "attackEnd": 35.5,
+        "holdEnd": 35.6,
+        "end": 35.800000000000004,
+        "db": 3
+      },
+      {
+        "actionId": "tool-sub",
+        "kind": "toggle",
+        "start": 36.410000000000004,
+        "attackEnd": 36.45,
+        "holdEnd": 36.57,
+        "end": 36.81,
+        "db": 3
+      },
+      {
+        "actionId": "tool-select2",
+        "kind": "click-alt",
+        "start": 38.26,
+        "attackEnd": 38.3,
+        "holdEnd": 38.4,
+        "end": 38.6,
+        "db": 3
+      },
+      {
+        "actionId": "tool-rclick2",
+        "kind": "click",
+        "start": 38.46,
+        "attackEnd": 38.5,
+        "holdEnd": 38.6,
+        "end": 38.800000000000004,
+        "db": 3
+      },
+      {
+        "actionId": "tool-sub2",
+        "kind": "toggle",
+        "start": 39.31,
+        "attackEnd": 39.35,
+        "holdEnd": 39.47,
+        "end": 39.71,
+        "db": 3
+      },
+      {
+        "actionId": "tool-compare",
+        "kind": "sweep",
+        "start": 40.56,
+        "attackEnd": 40.6,
+        "holdEnd": 40.800000000000004,
+        "end": 41.150000000000006,
+        "db": 4
+      },
+      {
+        "actionId": "more-shortcuts",
+        "kind": "sweep",
+        "start": 42.96,
+        "attackEnd": 43.0,
+        "holdEnd": 43.2,
+        "end": 43.550000000000004,
+        "db": 4
+      },
+      {
+        "actionId": "more-qr",
+        "kind": "whoosh",
+        "start": 43.56,
+        "attackEnd": 43.6,
+        "holdEnd": 43.76,
+        "end": 44.059999999999995,
+        "db": 4
+      },
+      {
+        "actionId": "more-list",
+        "kind": "click-alt",
+        "start": 45.06,
+        "attackEnd": 45.1,
+        "holdEnd": 45.2,
+        "end": 45.400000000000006,
+        "db": 3
+      },
+      {
+        "actionId": "safe-row",
+        "kind": "sweep",
+        "start": 49.56,
+        "attackEnd": 49.6,
+        "holdEnd": 49.800000000000004,
+        "end": 50.150000000000006,
+        "db": 4
+      },
+      {
+        "actionId": "safe-granted",
+        "kind": "success",
+        "start": 51.36,
+        "attackEnd": 51.4,
+        "holdEnd": 51.75,
+        "end": 52.1,
+        "db": 5
+      },
+      {
+        "actionId": "safe-chips",
+        "kind": "pop",
+        "start": 52.160000000000004,
+        "attackEnd": 52.2,
+        "holdEnd": 52.32,
+        "end": 52.56,
+        "db": 3.5
+      },
+      {
+        "actionId": "end-in",
+        "kind": "sweep",
+        "start": 53.96,
+        "attackEnd": 54.0,
+        "holdEnd": 54.2,
+        "end": 54.550000000000004,
+        "db": 4
+      }
+    ],
+    "overlap": "deepest-envelope-wins"
+  },
+  "timing": [
+    {
+      "actionId": "brand-icon",
+      "fileStart": 0.15,
+      "audibleLandmark": 0.15,
+      "actionTime": 0.15,
+      "errorFrames": 0.0
+    },
+    {
+      "actionId": "cold-press",
+      "fileStart": 4.485,
+      "audibleLandmark": 4.5,
+      "actionTime": 4.5,
+      "errorFrames": 0.0
+    },
+    {
+      "actionId": "cold-press",
+      "fileStart": 4.5,
+      "audibleLandmark": 4.5,
+      "actionTime": 4.5,
+      "errorFrames": 0.0
+    },
+    {
+      "actionId": "cold-push",
+      "fileStart": 6.2,
+      "audibleLandmark": 6.4,
+      "actionTime": 6.4,
+      "errorFrames": 0.0
+    },
+    {
+      "actionId": "new-rclick",
+      "fileStart": 8.985,
+      "audibleLandmark": 9.0,
+      "actionTime": 9,
+      "errorFrames": 0.0,
+      "nearestBeat": 9.0,
+      "beatErrorFrames": 0.0
+    },
+    {
+      "actionId": "new-sub",
+      "fileStart": 9.85,
+      "audibleLandmark": 9.85,
+      "actionTime": 9.85,
+      "errorFrames": 0.0
+    },
+    {
+      "actionId": "new-pick",
+      "fileStart": 10.785,
+      "audibleLandmark": 10.8,
+      "actionTime": 10.8,
+      "errorFrames": 0.0
+    },
+    {
+      "actionId": "new-pop",
+      "fileStart": 11.0,
+      "audibleLandmark": 11.0,
+      "actionTime": 11,
+      "errorFrames": 0.0,
+      "nearestBeat": 11.0,
+      "beatErrorFrames": 0.0
+    },
+    {
+      "actionId": "new-rclick2",
+      "fileStart": 13.485,
+      "audibleLandmark": 13.5,
+      "actionTime": 13.5,
+      "errorFrames": 0.0,
+      "nearestBeat": 13.5,
+      "beatErrorFrames": 0.0
+    },
+    {
+      "actionId": "new-pick2",
+      "fileStart": 15.285,
+      "audibleLandmark": 15.3,
+      "actionTime": 15.3,
+      "errorFrames": 0.0
+    },
+    {
+      "actionId": "new-pop2",
+      "fileStart": 15.5,
+      "audibleLandmark": 15.5,
+      "actionTime": 15.5,
+      "errorFrames": 0.0,
+      "nearestBeat": 15.5,
+      "beatErrorFrames": 0.0
+    },
+    {
+      "actionId": "send-select",
+      "fileStart": 18.5,
+      "audibleLandmark": 18.5,
+      "actionTime": 18.5,
+      "errorFrames": 0.0
+    },
+    {
+      "actionId": "send-rclick",
+      "fileStart": 18.985,
+      "audibleLandmark": 19.0,
+      "actionTime": 19,
+      "errorFrames": 0.0,
+      "nearestBeat": 19.0,
+      "beatErrorFrames": 0.0
+    },
+    {
+      "actionId": "send-sub",
+      "fileStart": 19.85,
+      "audibleLandmark": 19.85,
+      "actionTime": 19.85,
+      "errorFrames": 0.0
+    },
+    {
+      "actionId": "send-fly",
+      "fileStart": 20.3,
+      "audibleLandmark": 20.5,
+      "actionTime": 20.5,
+      "errorFrames": 0.0,
+      "nearestBeat": 20.5,
+      "beatErrorFrames": 0.0
+    },
+    {
+      "actionId": "send-pick",
+      "fileStart": 20.435,
+      "audibleLandmark": 20.45,
+      "actionTime": 20.45,
+      "errorFrames": 0.0
+    },
+    {
+      "actionId": "send-done",
+      "fileStart": 21.0,
+      "audibleLandmark": 21.0,
+      "actionTime": 21,
+      "errorFrames": 0.0,
+      "nearestBeat": 21.0,
+      "beatErrorFrames": 0.0
+    },
+    {
+      "actionId": "send-progress",
+      "fileStart": 21.865,
+      "audibleLandmark": 22.0,
+      "actionTime": 22.0,
+      "errorFrames": 0.0
+    },
+    {
+      "actionId": "open-select",
+      "fileStart": 27.3,
+      "audibleLandmark": 27.3,
+      "actionTime": 27.3,
+      "errorFrames": 0.0
+    },
+    {
+      "actionId": "open-rclick",
+      "fileStart": 27.985,
+      "audibleLandmark": 28.0,
+      "actionTime": 28,
+      "errorFrames": 0.0,
+      "nearestBeat": 28.0,
+      "beatErrorFrames": 0.0
+    },
+    {
+      "actionId": "open-sub",
+      "fileStart": 28.85,
+      "audibleLandmark": 28.85,
+      "actionTime": 28.85,
+      "errorFrames": 0.0
+    },
+    {
+      "actionId": "open-vscode",
+      "fileStart": 29.985,
+      "audibleLandmark": 30.0,
+      "actionTime": 30,
+      "errorFrames": 0.0,
+      "nearestBeat": 30.0,
+      "beatErrorFrames": 0.0
+    },
+    {
+      "actionId": "open-select2",
+      "fileStart": 30.8,
+      "audibleLandmark": 30.8,
+      "actionTime": 30.8,
+      "errorFrames": 0.0
+    },
+    {
+      "actionId": "open-rclick2",
+      "fileStart": 31.185,
+      "audibleLandmark": 31.2,
+      "actionTime": 31.2,
+      "errorFrames": 0.0
+    },
+    {
+      "actionId": "open-term",
+      "fileStart": 32.835,
+      "audibleLandmark": 32.85,
+      "actionTime": 32.85,
+      "errorFrames": 0.0
+    },
+    {
+      "actionId": "tool-select",
+      "fileStart": 35.2,
+      "audibleLandmark": 35.2,
+      "actionTime": 35.2,
+      "errorFrames": 0.0
+    },
+    {
+      "actionId": "tool-rclick",
+      "fileStart": 35.485,
+      "audibleLandmark": 35.5,
+      "actionTime": 35.5,
+      "errorFrames": 0.0,
+      "nearestBeat": 35.5,
+      "beatErrorFrames": 0.0
+    },
+    {
+      "actionId": "tool-sub",
+      "fileStart": 36.45,
+      "audibleLandmark": 36.45,
+      "actionTime": 36.45,
+      "errorFrames": 0.0
+    },
+    {
+      "actionId": "tool-select2",
+      "fileStart": 38.3,
+      "audibleLandmark": 38.3,
+      "actionTime": 38.3,
+      "errorFrames": 0.0
+    },
+    {
+      "actionId": "tool-rclick2",
+      "fileStart": 38.485,
+      "audibleLandmark": 38.5,
+      "actionTime": 38.5,
+      "errorFrames": 0.0,
+      "nearestBeat": 38.5,
+      "beatErrorFrames": 0.0
+    },
+    {
+      "actionId": "tool-sub2",
+      "fileStart": 39.35,
+      "audibleLandmark": 39.35,
+      "actionTime": 39.35,
+      "errorFrames": 0.0
+    },
+    {
+      "actionId": "tool-compare",
+      "fileStart": 40.26,
+      "audibleLandmark": 40.6,
+      "actionTime": 40.6,
+      "errorFrames": 0.0
+    },
+    {
+      "actionId": "more-shortcuts",
+      "fileStart": 42.865,
+      "audibleLandmark": 43.0,
+      "actionTime": 43.0,
+      "errorFrames": 0.0
+    },
+    {
+      "actionId": "more-qr",
+      "fileStart": 43.4,
+      "audibleLandmark": 43.6,
+      "actionTime": 43.6,
+      "errorFrames": 0.0
+    },
+    {
+      "actionId": "more-list",
+      "fileStart": 45.1,
+      "audibleLandmark": 45.1,
+      "actionTime": 45.1,
+      "errorFrames": 0.0
+    },
+    {
+      "actionId": "safe-row",
+      "fileStart": 49.465,
+      "audibleLandmark": 49.6,
+      "actionTime": 49.6,
+      "errorFrames": 0.0
+    },
+    {
+      "actionId": "safe-granted",
+      "fileStart": 51.4,
+      "audibleLandmark": 51.4,
+      "actionTime": 51.4,
+      "errorFrames": 0.0
+    },
+    {
+      "actionId": "safe-chips",
+      "fileStart": 52.2,
+      "audibleLandmark": 52.2,
+      "actionTime": 52.2,
+      "errorFrames": 0.0
+    },
+    {
+      "actionId": "end-in",
+      "fileStart": 53.66,
+      "audibleLandmark": 54.0,
+      "actionTime": 54,
+      "errorFrames": 0.0,
+      "nearestBeat": 54.0,
+      "beatErrorFrames": 0.0
+    }
+  ],
+  "warnings": [],
+  "normalization": {
+    "requested": "linear",
+    "normalization_type": "dynamic",
+    "measurement": {
+      "input_i": "-21.97",
+      "input_tp": "-6.05",
+      "input_lra": "2.30",
+      "input_thresh": "-32.01",
+      "output_i": "-15.71",
+      "output_tp": "-1.50",
+      "output_lra": "2.00",
+      "output_thresh": "-25.73",
+      "normalization_type": "dynamic",
+      "target_offset": "-0.29"
+    },
+    "output": {
+      "input_i": "-21.97",
+      "input_tp": "-6.05",
+      "input_lra": "2.30",
+      "input_thresh": "-32.01",
+      "output_i": "-15.99",
+      "output_tp": "-1.50",
+      "output_lra": "2.00",
+      "output_thresh": "-26.01",
+      "normalization_type": "dynamic",
+      "target_offset": "-0.01"
+    }
+  },
+  "listeningStatus": "Not auditioned by script; listen to isolated SFX, final mix and encoded MP4."
+}

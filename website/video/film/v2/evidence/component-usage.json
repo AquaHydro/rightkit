@@ -1,0 +1,300 @@
+{
+  "skipped": [
+    {
+      "shot": "设置窗口、哈希窗口",
+      "reason": "没有录屏；本片不需要这两个镜头"
+    }
+  ],
+  "shots": [
+    {
+      "shotId": "cold",
+      "featureEntry": "Q 版 Riko 按下右键 + 真实右键菜单",
+      "components": [
+        "ai-clips/chibi/press.mp4（0–1.85s）",
+        "website/src/main.js buildMenu()"
+      ],
+      "reuseMode": "ai-generated + website-adapter",
+      "imageModel": "gpt-image-2.5（Medio Gen 改图，参考图：图标角色层 character.png + 两张现有 Q 版插画）",
+      "model": "grok-imagine-video-1.5（Medio Gen 图生视频）",
+      "firstFrame": "ai-clips/chibi/frame-press-a.png",
+      "stateDriver": "src/timeline.js data-clip / data-menu",
+      "exceptions": []
+    },
+    {
+      "shotId": "brand",
+      "featureEntry": "品牌开场",
+      "components": [
+        "website/public/img/app-icon-512.png",
+        "website/public/fonts/nunito-latin.woff2"
+      ],
+      "styleEntries": [
+        "website/src/styles.css (.wordmark .dot .tagline em, .clip-ping 波纹参数)"
+      ],
+      "stateDriver": "src/timeline.js data-pop / data-ring",
+      "adapters": [],
+      "reuseMode": "brand-asset",
+      "exceptions": []
+    },
+    {
+      "shotId": "new",
+      "featureEntry": "F-010 / F-061 新建文件",
+      "components": [
+        "website/src/index.html .finder",
+        "website/src/main.js buildMenu() iconHTML() displayName()",
+        "website/content.json demo",
+        "website/src/index.html .types (类型标签)",
+        "website/assets/character/hero-character.png (public/img/hero-character-1120.webp)",
+        "ai-clips/riko-point-16x9.mp4（mix-blend-mode: lighten 融入舞台）"
+      ],
+      "styleEntries": [
+        "website/src/styles.css (.finder .menu .mi .ric .file .toast .fake-cursor .grid-bg .glow)",
+        "src/layout.css (film layout overrides only)"
+      ],
+      "stateDriver": "src/timeline.js：data-menu / data-win(active, selected, renaming) / data-pop / data-toast / cursor path",
+      "adapters": [
+        "src/site-adapter.jsx"
+      ],
+      "reuseMode": "website-adapter",
+      "note": "网页模拟的访达菜单，外观按 docs/design/menu-system.html；访达右键菜单由系统绘制，无法在浏览器导入原组件（brief 第 5 节已授权）。",
+      "exceptions": [],
+      "aiModel": "grok-imagine-video-1.5（Medio Gen 图生视频）"
+    },
+    {
+      "shotId": "send",
+      "featureEntry": "F-031 / F-032 / F-030 复制到与常用目录",
+      "components": [
+        "website/src/index.html .finder",
+        "website/src/main.js buildMenu()，flyTo() 的轨迹与曲线",
+        "website/content.json demo.toast",
+        "feature-copy-move-640.webp",
+        "recordings/progress.mov"
+      ],
+      "styleEntries": [
+        "website/src/styles.css (.finder .menu .mi .ric .file .toast .fake-cursor .grid-bg .glow)",
+        "src/layout.css (film layout overrides only)"
+      ],
+      "stateDriver": "src/timeline.js data-fly 复刻 flyTo() 的 520ms cubic-bezier(0.5,0,0.2,1)、侧栏 .flash",
+      "adapters": [
+        "src/site-adapter.jsx"
+      ],
+      "reuseMode": "website-adapter",
+      "note": "去掉第一版后半的「常用目录」，换成进度窗口真实录屏（0 到 2.75s，800×296 裁切，缩放 0.95）",
+      "exceptions": []
+    },
+    {
+      "shotId": "open",
+      "featureEntry": "F-020 / F-023 在应用中打开",
+      "components": [
+        "website/src/index.html .finder",
+        "website/src/main.js buildMenu()",
+        "website/src/index.html .apps（app 图标，来源见 website/assets/apps/SOURCES.md）",
+        "feature-open-app-640.webp"
+      ],
+      "styleEntries": [
+        "website/src/styles.css (.finder .menu .mi .ric .file .toast .fake-cursor .grid-bg .glow)",
+        "src/layout.css (film layout overrides only)"
+      ],
+      "stateDriver": "src/timeline.js；toast 文案按 main.js openApp() 的规则：终端对文件打开所在目录「桌面」",
+      "adapters": [
+        "src/site-adapter.jsx"
+      ],
+      "reuseMode": "website-adapter",
+      "note": "网页模拟的访达菜单，外观按 docs/design/menu-system.html；访达右键菜单由系统绘制，无法在浏览器导入原组件（brief 第 5 节已授权）。",
+      "exceptions": []
+    },
+    {
+      "shotId": "toolbox",
+      "featureEntry": "F-040 / F-061 工具箱",
+      "components": [
+        "website/src/index.html .finder",
+        "website/src/main.js buildMenu() 工具箱按 for 过滤",
+        "feature-toolbox-640.webp"
+      ],
+      "styleEntries": [
+        "website/src/styles.css (.finder .menu .mi .ric .file .toast .fake-cursor .grid-bg .glow)",
+        "src/layout.css (film layout overrides only)"
+      ],
+      "stateDriver": "src/timeline.js；对比卡片是同一 buildMenu() 输出的静态 .menu",
+      "adapters": [
+        "src/site-adapter.jsx"
+      ],
+      "reuseMode": "website-adapter",
+      "note": "网页模拟的访达菜单，外观按 docs/design/menu-system.html；访达右键菜单由系统绘制，无法在浏览器导入原组件（brief 第 5 节已授权）。",
+      "exceptions": [
+        "对比阶段把两份子菜单并排，是编排镜头，不是访达里的真实状态"
+      ]
+    },
+    {
+      "shotId": "more",
+      "featureEntry": "快捷指令 9 个动作",
+      "components": [
+        "recordings/shortcuts.mov"
+      ],
+      "reuseMode": "screen-recording",
+      "edit": "3.0 到 6.95s，只裁右侧动作栏 592×720，缩放 0.95；系统「共享中」标记用标题栏同色白块遮住（v2/prep_clips.sh）",
+      "stateDriver": "src/timeline.js data-clip",
+      "exceptions": []
+    },
+    {
+      "shotId": "more",
+      "featureEntry": "二维码窗口",
+      "components": [
+        "recordings/qrcode.mov"
+      ],
+      "reuseMode": "screen-recording",
+      "edit": "0.8 到 5.8s，窗口 640×832，缩放 0.78；系统「共享中」标记用标题栏同色白块遮住（v2/prep_clips.sh）",
+      "stateDriver": "src/timeline.js data-clip",
+      "exceptions": []
+    },
+    {
+      "shotId": "more",
+      "featureEntry": "Q 版 Riko 抛接小插画",
+      "components": [
+        "ai-clips/chibi/juggle.png"
+      ],
+      "reuseMode": "ai-generated (still)",
+      "imageModel": "gpt-image-2.5（Medio Gen 改图，参考图：图标角色层 character.png + 两张现有 Q 版插画）",
+      "stateDriver": "src/timeline.js data-float",
+      "exceptions": [
+        "Grok 动画里小图标会变形（ai-clips/chibi/juggle.mp4），改用静态图"
+      ]
+    },
+    {
+      "shotId": "safe",
+      "featureEntry": "Q 版 Riko 抱着文件夹",
+      "components": [
+        "ai-clips/chibi/shield.png",
+        "ai-clips/chibi/shield.mp4"
+      ],
+      "reuseMode": "ai-generated",
+      "imageModel": "gpt-image-2.5（Medio Gen 改图，参考图：图标角色层 character.png + 两张现有 Q 版插画）",
+      "model": "grok-imagine-video-1.5（Medio Gen 图生视频）",
+      "firstFrame": "ai-clips/chibi/frame-shield-16x9.png",
+      "stateDriver": "src/timeline.js data-clip",
+      "exceptions": []
+    },
+    {
+      "shotId": "safe",
+      "featureEntry": "欢迎窗口授权行",
+      "components": [
+        "recordings/welcome.mov"
+      ],
+      "reuseMode": "screen-recording",
+      "edit": "8.4 到 11.9s，只裁授权那一行 800×136（状态卡片的「访达扩展未启用」不入画）；系统「共享中」标记用标题栏同色白块遮住（v2/prep_clips.sh）",
+      "stateDriver": "src/timeline.js data-clip",
+      "exceptions": []
+    },
+    {
+      "shotId": "end",
+      "featureEntry": "结尾",
+      "components": [
+        "ai-clips/riko-wave-flat.mp4"
+      ],
+      "reuseMode": "ai-generated",
+      "stateDriver": "src/timeline.js data-float",
+      "exceptions": [],
+      "model": "grok-imagine-video-1.5（Medio Gen 图生视频）",
+      "firstFrame": "ai-clips/frame-wave-16x9.png（官方 cta-character.png）"
+    }
+  ],
+  "aiGenerationLog": [
+    {
+      "clip": "riko-point.mp4",
+      "attempts": 1,
+      "kept": false,
+      "why": "直接用竖版立绘，输出 1248×1664 竖片、底色变成 #171213"
+    },
+    {
+      "clip": "riko-wave.mp4",
+      "attempts": 1,
+      "kept": false,
+      "why": "方形输出，光晕过强"
+    },
+    {
+      "clip": "riko-point-16x9.mp4",
+      "attempts": 1,
+      "kept": true,
+      "why": "先把立绘合成到 16:9 深色底再生成，比例和留白都对"
+    },
+    {
+      "clip": "riko-wave-16x9.mp4",
+      "attempts": 1,
+      "kept": true,
+      "why": "同上；后半段光晕变强，正好配合结尾"
+    },
+    {
+      "clip": "frame-shield.png",
+      "attempts": 2,
+      "kept": true,
+      "why": "第一次网关 502，重试成功"
+    },
+    {
+      "clip": "cursor-open.mp4 / shield.mp4 / frame-cursor.png",
+      "attempts": 1,
+      "kept": true,
+      "why": "一次可用"
+    },
+    {
+      "round": 2,
+      "clip": "cursor-open.mp4 / shield.mp4 / riko-wave-16x9.mp4",
+      "kept": false,
+      "why": "用户反馈写实 3D 空镜与项目画风违和，全部撤下"
+    },
+    {
+      "round": 2,
+      "clip": "chibi/click.png, juggle.png, shield.png",
+      "attempts": "各 1 次（shield 第一次 502 重试）",
+      "kept": true,
+      "why": "按角色设定的固定风格段落与 Q 版模板生成，透明底"
+    },
+    {
+      "round": 2,
+      "clip": "chibi/click.mp4",
+      "attempts": 1,
+      "kept": true,
+      "why": "画风完全保住，按键两次"
+    },
+    {
+      "round": 2,
+      "clip": "chibi/shield.mp4",
+      "attempts": 1,
+      "kept": true,
+      "why": "画风保住，动作轻"
+    },
+    {
+      "round": 2,
+      "clip": "chibi/juggle.mp4",
+      "attempts": 1,
+      "kept": false,
+      "why": "牌子上的二维码、放大镜图标在动画里变成箭头"
+    },
+    {
+      "round": 2,
+      "clip": "riko-wave（重做）",
+      "attempts": 3,
+      "kept": false,
+      "why": "一次 404，两次 503「No eligible Grok media accounts」，改用官方立绘"
+    },
+    {
+      "round": 3,
+      "clip": "首尾帧按压（frame-press-a + b）",
+      "attempts": 2,
+      "kept": false,
+      "why": "Grok 返回 HTTP 400，暂不支持首尾两帧"
+    },
+    {
+      "round": 3,
+      "clip": "chibi/press.mp4",
+      "attempts": 1,
+      "kept": true,
+      "why": "单首帧，按下落在 1.375s；1.85s 后发卡丢失、小白鼠飞出画面，只用前 1.85s"
+    },
+    {
+      "round": 3,
+      "clip": "riko-wave-flat.mp4",
+      "attempts": 1,
+      "kept": true,
+      "why": "扁平风格，无光晕，发卡全程保持"
+    }
+  ]
+}
