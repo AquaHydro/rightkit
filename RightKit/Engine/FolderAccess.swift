@@ -1,0 +1,69 @@
+import Foundation
+import RightKitCore
+import Synchronization
+
+/// F-080：RightKit 在沙盒里能访问的文件夹（technical.md 沙盒与文件访问）。
+/// 保存的文件夹在启动时解析 security-scoped bookmark 并一直保持访问；文件夹选择面板给的 URL 在本次运行内可访问。
+/// 命令分派入口和快捷指令用 `isAuthorized` 判断目标能不能读写。可以从任意线程调用。
+final class FolderAccess: Sendable {
+    static let shared = FolderAccess()
+
+    /// 已授权文件夹的标准化路径。开始访问后在整个运行期间保持，不结束。
+    private let roots = Mutex(Set<String>())
+
+    /// 解析 bookmark 并开始访问。成功时返回路径和 bookmark 已更新的条目；失败返回 nil，调用方把它标为需要重新授权。
+    func activate(_ entry: FolderEntry) -> FolderEntry? {
+        guard let data = entry.bookmark else { return nil }
+        var stale = false
+        guard let url = try? URL(resolvingBookmarkData: data, options: [.withSecurityScope, .withoutUI, .withoutMounting],
+                                 bookmarkDataIsStale: &stale)
+        else { return nil }
+        let path = PathRules.standardized(url.path(percentEncoded: false))
+        let started = roots.withLock { paths in
+            guard !paths.contains(path) else { return true }
+            guard url.startAccessingSecurityScopedResource() else { return false }
+            paths.insert(path)
+            return true
+        }
+        guard started else { return nil }
+        var copy = entry
+        copy.path = path
+        copy.needsAuthorization = false
+        if stale, let fresh = FolderStore.bookmark(for: url) { copy.bookmark = fresh }
+        return copy
+    }
+
+    /// 用户刚在文件夹选择面板里选中的文件夹或文件。
+    func grant(_ url: URL) {
+        let path = PathRules.standardized(url.path(percentEncoded: false))
+        _ = roots.withLock { $0.insert(path) }
+    }
+
+    func isAuthorized(_ url: URL) -> Bool {
+        let path = PathRules.standardized(url.path(percentEncoded: false))
+        let authorizedRoots = roots.withLock { Array($0) }
+        if PathRules.isInsideAny(path, of: authorizedRoots) { return true }
+        // 快捷指令可能提供不同路径的同一目录（例如系统的 /.nofollow 视图）。
+        // 由文件系统确认关系，不通过删前缀或猜路径扩大授权范围。
+        // 只解析父目录里的符号链接：最后一级若是指向授权目录的链接，操作的是链接本身，不算在授权目录内。
+        // 和 `PathRules.isInsideAny` 一致，`/` 不算授权目录。
+        let item = url.deletingLastPathComponent().resolvingSymlinksInPath().appending(path: url.lastPathComponent)
+        return authorizedRoots.contains { root in
+            guard root != "/" else { return false }
+            var relationship = FileManager.URLRelationship.other
+            do {
+                try FileManager.default.getRelationship(&relationship,
+                    ofDirectoryAt: URL(filePath: root, directoryHint: .isDirectory).resolvingSymlinksInPath(),
+                    toItemAt: item)
+                return relationship == .same || relationship == .contains
+            } catch {
+                return false
+            }
+        }
+    }
+
+    /// 第一个不在任何已授权文件夹内的项目。
+    func firstUnauthorized(_ urls: [URL]) -> URL? {
+        urls.first { !isAuthorized($0) }
+    }
+}

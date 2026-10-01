@@ -1,0 +1,70 @@
+{
+  "sourceLanguage": "zh-Hans",
+  "version": "1.0",
+  "strings": {
+    "用 ${applicationName} 拷贝路径": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy path with ${applicationName}"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "用 ${applicationName} 拷贝路径"
+          }
+        }
+      }
+    },
+    "用 ${applicationName} 新建文件": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New file with ${applicationName}"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "用 ${applicationName} 新建文件"
+          }
+        }
+      }
+    },
+    "用 ${applicationName} 生成二维码": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Make a QR code with ${applicationName}"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "用 ${applicationName} 生成二维码"
+          }
+        }
+      }
+    },
+    "用 ${applicationName} 计算文件哈希": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calculate file hashes with ${applicationName}"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "用 ${applicationName} 计算文件哈希"
+          }
+        }
+      }
+    }
+  }
+}

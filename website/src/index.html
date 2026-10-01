@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="{{ t.lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ t.meta.title }}</title>
+<meta name="description" content="{{ t.meta.description }}">
+<meta name="theme-color" content="#2A2B31">
+<meta name="color-scheme" content="light dark">
+<link rel="canonical" href="{{ site.url }}{{ t.path }}">
+<link rel="alternate" hreflang="{{ t.lang }}" href="{{ site.url }}{{ t.path }}">
+<link rel="alternate" hreflang="{{ t.alt.lang }}" href="{{ site.url }}{{ t.alt.path }}">
+<link rel="alternate" hreflang="x-default" href="{{ site.url }}/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ t.meta.title }}">
+<meta property="og:description" content="{{ t.meta.description }}">
+<meta property="og:url" content="{{ site.url }}{{ t.path }}">
+<meta property="og:image" content="{{ site.url }}/img/og.jpg">
+<meta property="og:locale" content="{{ t.ogLocale }}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="64x64" href="{{ base }}img/app-icon-64.png">
+<link rel="apple-touch-icon" href="{{ base }}img/app-icon-180.png">
+<link rel="preload" href="{{ base }}fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="{{ base }}img/hero-character{% if theme.ak %}-ak{% endif %}-1120.webp" imagesrcset="{{ base }}img/hero-character{% if theme.ak %}-ak{% endif %}-560.webp 560w, {{ base }}img/hero-character{% if theme.ak %}-ak{% endif %}-1120.webp 1120w" imagesizes="(max-width: 760px) 70vw, 34vw" fetchpriority="high">
+<link rel="stylesheet" href="{{ base }}styles.css">{% if theme.ak %}
+<link rel="stylesheet" href="{{ base }}ak-ui/tokens.css">
+<link rel="preload" href="{{ base }}fonts/oswald-variable.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="{{ base }}ak-ui.css">{% endif %}
+<script>document.documentElement.classList.add("js")</script>
+</head>
+<body{% if theme.ak %} data-ak-ui{% endif %}>
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-doc-plus" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M12 11v6M9 14h6"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></symbol>
+  <symbol id="i-app" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M10 14l5-5M10.5 9H15v4.5"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+  <symbol id="i-scissors" viewBox="0 0 24 24"><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="6.5" cy="17.5" r="2.5"/><path d="M8.6 8 20 18M8.6 16 20 6"/></symbol>
+  <symbol id="i-folder-plus" viewBox="0 0 24 24"><path d="M3.5 7.5a2 2 0 0 1 2-2h3.8l2 2h7.2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z"/><path d="M12 10.5v5M9.5 13h5"/></symbol>
+  <symbol id="i-folder-arrow" viewBox="0 0 24 24"><path d="M3.5 7.5a2 2 0 0 1 2-2h3.8l2 2h7.2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z"/><path d="M9 13h6M12.5 10.5 15 13l-2.5 2.5"/></symbol>
+  <symbol id="i-folder-q" viewBox="0 0 24 24"><path d="M3.5 7.5a2 2 0 0 1 2-2h3.8l2 2h7.2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z"/><path d="M10.4 11.3a1.7 1.7 0 1 1 2.3 1.6c-.5.2-.7.5-.7 1v.3M12 16.4v.1"/></symbol>
+  <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.5 5.5a4 4 0 0 0 4.9 4.9l-8.7 8.7a2 2 0 0 1-2.8-2.8l8.7-8.7a4 4 0 0 0-2.1-2.1z"/><path d="m4 4 3 3M4 7l3-3"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9.5 6 6 6-6 6"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3.5 5 6v5.5c0 4.2 3 7.6 7 9 4-1.4 7-4.8 7-9V6z"/><path d="m9 12 2.2 2.2L15.5 10"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5M12 14.5v2"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11" height="12" rx="2.5"/><path d="M15.5 8.5V6a2.5 2.5 0 0 0-2.5-2.5H7A2.5 2.5 0 0 0 4.5 6v7A2.5 2.5 0 0 0 7 15.5h1.5"/></symbol>
+  <symbol id="i-progress" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3.5 7.5a2 2 0 0 1 2-2h3.8l2 2h7.2a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z"/><path d="M3.5 10h17"/></symbol>
+  <symbol id="i-laptop" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="10" rx="1.8"/><path d="M3 18.5h18"/></symbol>
+  <symbol id="i-shortcuts" viewBox="0 0 24 24"><rect x="4" y="4" width="11" height="11" rx="3"/><rect x="9" y="9" width="11" height="11" rx="3"/></symbol>
+  <symbol id="i-qr" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><path d="M14 14h2.5v2.5H14zM17.5 17.5H20V20h-2.5zM14 19v1M19 14h1"/></symbol>
+  <symbol id="i-translate" viewBox="0 0 24 24"><path d="M4 6h9M8.5 4v2M11 6c-.8 3.5-3 6.2-6 7.5M6.5 9c1 1.8 2.6 3.2 4.5 4"/><path d="m12 20 4-9 4 9M13.4 17h5.2"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19.5h14"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M13 7l5 5-5 5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24"><path class="fill" d="M12 2.5a9.5 9.5 0 0 0-3 18.5c.5.1.7-.2.7-.5v-1.7c-2.7.6-3.3-1.2-3.3-1.2-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.1-.2-4.4-1.1-4.4-4.7 0-1 .4-1.9 1-2.6-.1-.2-.4-1.2.1-2.5 0 0 .8-.3 2.6 1a9 9 0 0 1 4.8 0c1.8-1.3 2.6-1 2.6-1 .5 1.3.2 2.3.1 2.5.6.7 1 1.6 1 2.6 0 3.7-2.3 4.5-4.4 4.7.3.3.7.9.7 1.8v2.7c0 .3.2.6.7.5A9.5 9.5 0 0 0 12 2.5z"/></symbol>
+</svg>
+
+<a class="skip" href="#main">{{ t.nav.skip }}</a>
+
+<header class="nav" data-nav>
+  <div class="nav-inner">
+    <a class="brand" href="./">
+      <img src="{{ base }}img/app-icon-64.png" width="28" height="28" alt="">
+      <span>RightKit</span>
+    </a>
+    {% if theme.ak %}<nav class="nav-links ak-nav-links" aria-label="RightKit">
+      <a href="#new" data-ak-section-link><span>{{ t.akNav.features }}</span>{% if t.akNav.featuresLocal %}<small>{{ t.akNav.featuresLocal }}</small>{% endif %}</a>
+      <a href="#toolbox" data-ak-section-link><span>{{ t.akNav.toolbox }}</span>{% if t.akNav.toolboxLocal %}<small>{{ t.akNav.toolboxLocal }}</small>{% endif %}</a>
+      <a href="#workbench" data-ak-section-link><span>{{ t.akNav.workbench }}</span>{% if t.akNav.workbenchLocal %}<small>{{ t.akNav.workbenchLocal }}</small>{% endif %}</a>
+      <a href="#profile"><span>{{ t.akNav.profile }}</span>{% if t.akNav.profileLocal %}<small>{{ t.akNav.profileLocal }}</small>{% endif %}</a>
+      <a href="#pricing" data-ak-section-link><span>{{ t.akNav.pricing }}</span>{% if t.akNav.pricingLocal %}<small>{{ t.akNav.pricingLocal }}</small>{% endif %}</a>
+      <a href="#faq" data-ak-section-link><span>{{ t.akNav.faq }}</span>{% if t.akNav.faqLocal %}<small>{{ t.akNav.faqLocal }}</small>{% endif %}</a>
+    </nav>{% else %}<nav class="nav-links" aria-label="RightKit">
+      <a href="#new">{{ t.nav.features }}</a>
+      <a href="#toolbox">{{ t.nav.toolbox }}</a>
+      <a href="#pricing">{{ t.nav.pricing }}</a>
+      <a href="#faq">{{ t.nav.faq }}</a>
+    </nav>{% endif %}
+    <div class="nav-actions">
+      <a class="lang" href="{{ home }}{{ t.alt.href|raw }}" hreflang="{{ t.alt.lang }}" lang="{{ t.alt.lang }}" aria-label="{{ t.nav.language }}">{{ t.alt.short }}</a>
+      <a class="btn btn-primary btn-sm" href="{{ site.download }}"><svg class="ic"><use href="#i-download"/></svg>{{ t.nav.download }}</a>
+    </div>
+  </div>
+</header>
+
+{% if theme.ak %}<aside class="ak-section-index" aria-label="{{ t.akNav.index }}">
+  <span class="ak-section-index-giant" data-ak-section-current aria-hidden="true">00</span>
+  <span class="ak-section-index-count" aria-hidden="true">// <span data-ak-index-current>00</span> / 11</span>
+  <span class="ak-section-index-title" data-ak-index-title>RIGHTKIT</span>
+</aside>{% endif %}<main id="main">
+  <section class="hero band ink" aria-labelledby="hero-title">
+    <div class="grid-bg" aria-hidden="true"{% if theme.ak %} data-depth="0.04"{% endif %}></div>{% if theme.ak %}
+    <div class="hero-plane" data-depth="0.12" aria-hidden="true"></div>
+    <div class="ak-hero-rule ak-hero-rule--one" aria-hidden="true"></div><div class="ak-hero-rule ak-hero-rule--two" aria-hidden="true"></div><div class="ak-hero-rule ak-hero-rule--three" aria-hidden="true"></div><div class="ak-hero-rule ak-hero-rule--vertical" aria-hidden="true"></div>
+    <span class="ak-coral-plane" aria-hidden="true"></span>
+    <span class="ak-hero-word" aria-hidden="true">RIGHT / CLICK</span>
+    <video class="ak-hero-video" poster="{{ base }}img/hero-pv-poster-ak.webp" muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true" tabindex="-1"><source data-src="{{ base }}video/hero-pv-ak.mp4" type="video/mp4"></video>
+    <canvas class="ak-particle-field hero-particles" data-pattern="wave" data-depth="0.08" aria-hidden="true"></canvas>
+    <button type="button" class="motion-toggle" data-motion-toggle aria-pressed="true" hidden>{{ t.hero.motion }}</button>{% endif %}
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <p class="kicker intro" style="--d:0"><span class="kicker-line"></span>{{ t.hero.kicker }}</p>
+        <h1 id="hero-title">
+          <span class="wordmark intro" style="--d:1">RightKit<span class="dot">.</span></span>
+          <span class="tagline intro" style="--d:2">{{ t.hero.title1 }}<br><em>{{ t.hero.title2 }}</em></span>
+        </h1>
+        <p class="lead intro" style="--d:3">{{ t.hero.lead }}</p>
+        <div class="actions intro" style="--d:4">
+          <a class="btn btn-primary" href="{{ site.download }}"><svg class="ic"><use href="#i-download"/></svg>{{ t.hero.download }}</a>
+          <a class="btn btn-ghost" href="{{ site.github }}"><svg class="ic ic-fill"><use href="#i-github"/></svg>{{ t.hero.github }}</a>
+        </div>
+        <p class="fineprint intro" style="--d:5">{{ t.hero.requirement }}</p>
+        <ul class="tags intro" style="--d:6">
+          {% for tag in t.hero.tags %}<li>{{ tag }}</li>{% endfor %}
+        </ul>
+      </div>
+
+      <div class="hero-stage" data-stage>
+        <div class="glow" aria-hidden="true"{% if theme.ak %} data-depth="0.22"{% endif %}></div>
+        <div class="character"{% if theme.ak %} data-depth="0.16"{% endif %}>
+          <img class="character-img" src="{{ base }}img/hero-character{% if theme.ak %}-ak{% endif %}-1120.webp" srcset="{{ base }}img/hero-character{% if theme.ak %}-ak{% endif %}-560.webp 560w, {{ base }}img/hero-character{% if theme.ak %}-ak{% endif %}-1120.webp 1120w" sizes="(max-width: 760px) 70vw, 34vw" width="1120" height="1400" alt="{{ t.hero.charAlt }}" fetchpriority="high">
+          <span class="clip-ping" aria-hidden="true"></span>
+        </div>
+
+        <div class="demo">
+          <div class="finder" data-finder role="group" aria-label="{{ t.demo.windowLabel }}">
+            <div class="finder-bar">
+              <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="finder-title">{{ t.demo.windowTitle }}</span>
+            </div>
+            <div class="finder-body">
+              <aside class="finder-side" aria-hidden="true">
+                <p>{{ t.demo.sidebarTitle }}</p>
+                <ul>
+                  {% for place in t.demo.places %}<li data-place="{{ place.path }}"><svg class="ic"><use href="#i-folder"/></svg>{{ place.name }}</li>{% endfor %}
+                </ul>
+              </aside>
+              <div class="finder-content" data-content tabindex="-1">
+                <ul class="files" data-files></ul>
+                <div class="toast" data-toast role="status" aria-live="polite"></div>
+              </div>
+            </div>
+          </div>
+          <p class="demo-hint">
+            <span data-hint-mouse>{{ t.demo.hint }}</span><span data-hint-touch hidden>{{ t.demo.hintTouch }}</span>
+            <button type="button" class="link-btn" data-open-menu>{{ t.demo.openMenu }}</button>
+          </p>
+        </div>
+        <span class="fake-cursor" data-cursor aria-hidden="true"></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      {% for word in t.ticker %}<span>{{ word }}</span><i></i>{% endfor %}{% for word in t.ticker %}<span>{{ word }}</span><i></i>{% endfor %}
+    </div>
+  </div>
+
+  <section id="new" class="band paper feature"{% if theme.ak %} data-ak-word="NEW"{% endif %} aria-labelledby="new-title">
+    <div class="wrap feature-inner">
+      <div class="feature-copy">
+        <p class="section-label reveal"><span>// {{ t.sections.new.num }}</span>{{ t.sections.new.label }}</p>
+        <h2 id="new-title" class="reveal">{{ t.sections.new.title }}</h2>
+        <p class="body reveal">{{ t.sections.new.body }}</p>
+        <ul class="types reveal" aria-label="{{ t.sections.new.label }}">
+          {% for ext in t.sections.new.types %}<li><span class="doc-ic" data-ext="{{ ext }}"></span>.{{ ext }}</li>{% endfor %}
+        </ul>
+        <p class="note reveal">{{ t.sections.new.note }}</p>
+      </div>
+      <figure class="feature-art reveal">
+        <img{% if theme.ak %} data-depth="0.1"{% endif %} src="{{ base }}img/feature-new-file{% if theme.ak %}-ak{% endif %}-640.webp" srcset="{{ base }}img/feature-new-file{% if theme.ak %}-ak{% endif %}-320.webp 320w, {{ base }}img/feature-new-file{% if theme.ak %}-ak{% endif %}-640.webp 640w" sizes="(max-width: 760px) 60vw, 320px" width="640" height="960" alt="{{ t.sections.new.imgAlt }}" loading="lazy" decoding="async">
+      </figure>
+    </div>
+  </section>
+
+  <section id="send" class="band ink feature flip"{% if theme.ak %} data-ak-word="SEND"{% endif %} aria-labelledby="send-title">
+    <div class="wrap feature-inner">
+      <div class="feature-copy">
+        <p class="section-label reveal"><span>// {{ t.sections.send.num }}</span>{{ t.sections.send.label }}</p>
+        <h2 id="send-title" class="reveal">{{ t.sections.send.title }}</h2>
+        <p class="body reveal">{{ t.sections.send.body }}</p>
+        <div class="mini-menu reveal" aria-hidden="true">
+          <div class="mm-card">
+            <div class="mm-row active"><svg class="ic"><use href="#i-folder-plus"/></svg><span>{{ t.demo.menu.copyTo }}</span><svg class="ic chev"><use href="#i-chevron"/></svg></div>
+            <div class="mm-row"><svg class="ic"><use href="#i-folder-arrow"/></svg><span>{{ t.demo.menu.moveTo }}</span><svg class="ic chev"><use href="#i-chevron"/></svg></div>
+          </div>
+          <div class="mm-card">
+            {% for name in t.sections.send.menu %}<div class="mm-row"><span class="folder-ic"></span><span>{{ name }}</span></div>{% endfor %}
+            <div class="mm-sep"></div>
+            <div class="mm-row"><svg class="ic"><use href="#i-folder-q"/></svg><span>{{ t.demo.menu.chooseFolder }}</span></div>
+          </div>
+        </div>
+        <p class="note reveal">{{ t.sections.send.note }}</p>
+      </div>
+      <figure class="feature-art reveal">
+        <img{% if theme.ak %} data-depth="0.1"{% endif %} src="{{ base }}img/feature-copy-move{% if theme.ak %}-ak{% endif %}-640.webp" srcset="{{ base }}img/feature-copy-move{% if theme.ak %}-ak{% endif %}-320.webp 320w, {{ base }}img/feature-copy-move{% if theme.ak %}-ak{% endif %}-640.webp 640w" sizes="(max-width: 760px) 60vw, 320px" width="640" height="960" alt="{{ t.sections.send.imgAlt }}" loading="lazy" decoding="async">
+      </figure>
+    </div>
+  </section>
+
+  <section id="open" class="band paper feature"{% if theme.ak %} data-ak-word="OPEN"{% endif %} aria-labelledby="open-title">
+    <div class="wrap feature-inner">
+      <div class="feature-copy">
+        <p class="section-label reveal"><span>// {{ t.sections.open.num }}</span>{{ t.sections.open.label }}</p>
+        <h2 id="open-title" class="reveal">{{ t.sections.open.title }}</h2>
+        <p class="body reveal">{{ t.sections.open.body }}</p>
+        <ul class="apps reveal">
+          {% for app in t.sections.open.apps %}<li><img class="app-ic" src="{{ base }}img/apps/{{ app.icon }}-64.webp" srcset="{{ base }}img/apps/{{ app.icon }}-128.webp 2x" width="32" height="32" alt="" loading="lazy" decoding="async">{{ app.name }}</li>{% endfor %}
+        </ul>
+        <p class="note reveal">{{ t.sections.open.note }}</p>
+      </div>
+      <figure class="feature-art reveal">
+        <img{% if theme.ak %} data-depth="0.1"{% endif %} src="{{ base }}img/feature-open-app{% if theme.ak %}-ak{% endif %}-640.webp" srcset="{{ base }}img/feature-open-app{% if theme.ak %}-ak{% endif %}-320.webp 320w, {{ base }}img/feature-open-app{% if theme.ak %}-ak{% endif %}-640.webp 640w" sizes="(max-width: 760px) 60vw, 320px" width="640" height="960" alt="{{ t.sections.open.imgAlt }}" loading="lazy" decoding="async">
+      </figure>
+    </div>
+  </section>
+
+  <section id="toolbox" class="band ink toolbox{% if theme.ak %} ak-structure{% endif %}"{% if theme.ak %} data-ak-word="TOOLBOX"{% endif %} aria-labelledby="toolbox-title">
+    <div class="wrap">
+      <div class="toolbox-head">
+        <div>
+          <p class="section-label reveal"><span>// {{ t.sections.toolbox.num }}</span>{{ t.sections.toolbox.label }}</p>
+          <h2 id="toolbox-title" class="reveal">{{ t.sections.toolbox.title }}</h2>
+          <p class="body reveal">{{ t.sections.toolbox.body }}</p>
+        </div>
+        <figure class="toolbox-art reveal">
+          <img{% if theme.ak %} data-depth="0.1"{% endif %} src="{{ base }}img/feature-toolbox{% if theme.ak %}-ak{% endif %}-640.webp" srcset="{{ base }}img/feature-toolbox{% if theme.ak %}-ak{% endif %}-320.webp 320w, {{ base }}img/feature-toolbox{% if theme.ak %}-ak{% endif %}-640.webp 640w" sizes="(max-width: 760px) 50vw, 260px" width="640" height="960" alt="{{ t.sections.toolbox.imgAlt }}" loading="lazy" decoding="async">
+        </figure>
+      </div>
+      <ol class="tool-groups">
+        {% for group in t.toolbox.groups %}<li class="tool-group reveal">
+          <span class="tool-group-num">0{{ loop.index }}</span>
+          <ul>
+            {% for tool in group %}<li class="tool"><span class="tool-title">{{ tool.title }}</span><span class="tool-desc">{{ tool.desc }}</span></li>{% endfor %}
+          </ul>
+        </li>{% endfor %}
+      </ol>
+    </div>
+  </section>
+
+{% if theme.ak %}  <section id="workbench" class="band ink ak-workbench ak-structure" data-ak-word="WORKBENCH" aria-labelledby="workbench-title">
+    <div class="wrap ak-workbench-inner">
+      <div class="ak-workbench-copy">
+        <p class="section-label reveal"><span>// 05</span>{{ t.akWorkbench.label }}</p>
+        <h2 id="workbench-title" class="reveal">{{ t.akWorkbench.title }}</h2>
+        <p class="body reveal">{{ t.akWorkbench.body }}</p>
+        <nav class="ak-workbench-directory" aria-label="{{ t.akWorkbench.title }}">
+          {% for link in t.akWorkbench.links %}<a href="{% if link.github %}{{ site.github }}{% else %}{{ link.href }}{% endif %}" data-workbench-key="{{ link.key }}"><span class="ak-workbench-label" aria-hidden="true">{{ link.label }}</span><span>{{ link.name }}</span><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>{% endfor %}
+        </nav>
+      </div>
+      <figure class="ak-workbench-scene">
+        <img src="{{ base }}img/workbench-scene-ak-1536.webp" srcset="{{ base }}img/workbench-scene-ak-768.webp 768w, {{ base }}img/workbench-scene-ak-1536.webp 1536w" sizes="(max-width: 900px) 100vw, 860px" width="1536" height="1024" alt="{{ t.akWorkbench.sceneAlt }}" loading="lazy" decoding="async">
+        {% for link in t.akWorkbench.links %}<a class="ak-workbench-hotspot" style="--x: {{ link.x }}; --y: {{ link.y }}" href="{% if link.github %}{{ site.github }}{% else %}{{ link.href }}{% endif %}" data-workbench-key="{{ link.key }}" tabindex="-1" aria-hidden="true"><span>{{ link.label }}</span><small>{{ link.name }}</small></a>{% endfor %}
+      </figure>
+    </div>
+  </section>
+{% endif %}  <section id="trust" class="band paper cards-section{% if theme.ak %} ak-structure{% endif %}"{% if theme.ak %} data-ak-word="TRUST"{% endif %} aria-labelledby="trust-title">
+    <div class="wrap">
+      <p class="section-label reveal"><span>// {% if theme.ak %}06{% else %}{{ t.sections.trust.num }}{% endif %}</span>{{ t.sections.trust.label }}</p>
+      <h2 id="trust-title" class="reveal">{{ t.sections.trust.title }}</h2>
+      <p class="body reveal">{{ t.sections.trust.body }}</p>
+      <ul class="cards cards-3">
+        {% for item in t.sections.trust.items %}<li class="card reveal">
+          <svg class="card-ic"><use href="#i-{{ item.icon }}"/></svg>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.body }}</p>
+        </li>{% endfor %}
+      </ul>
+    </div>
+  </section>
+
+  <section id="more" class="band ink cards-section{% if theme.ak %} ak-structure{% endif %}"{% if theme.ak %} data-ak-word="ARCHIVE"{% endif %} aria-labelledby="more-title">
+    <div class="wrap">
+{% if theme.ak %}      <div class="ak-world" data-ak-world>
+        <div class="ak-world-heading">
+          <p class="section-label reveal"><span>// 07</span>{{ t.akWorld.label }}</p>
+          <h2 id="more-title" class="reveal">{{ t.sections.more.title }}</h2>
+          <p class="body reveal">{{ t.akWorld.intro }}</p>
+        </div>
+        <div class="ak-world-layout">
+          <div class="ak-world-terms" role="group" aria-label="{{ t.akWorld.label }}">
+            {% for item in t.sections.more.items %}<button type="button" data-ak-world-select data-icon="{{ item.icon }}" data-body="{{ item.body }}" aria-pressed="{% if loop.first %}true{% else %}false{% endif %}"><span class="ak-world-term-local">{{ item.title }}</span><span class="ak-world-term-en">{{ item.akEnglish }}</span></button>{% endfor %}
+          </div>
+          <div class="ak-world-stage">
+            <canvas data-ak-world-canvas aria-hidden="true"></canvas>
+            <div class="ak-world-static" aria-hidden="true"><svg class="card-ic"><use data-ak-world-static-use href="#i-{{ t.sections.more.items.0.icon }}"/></svg></div>
+            <div class="ak-world-detail"><h3 data-ak-world-title>{{ t.sections.more.items.0.title }}</h3><p data-ak-world-body>{{ t.sections.more.items.0.body }}</p></div>
+            <div class="ak-world-controls"><button type="button" data-ak-world-prev aria-label="{{ t.akWorld.prev }}">←</button><span data-ak-world-current aria-live="polite">01 / 03</span><button type="button" data-ak-world-next aria-label="{{ t.akWorld.next }}">→</button></div>
+            <div class="ak-world-progress" data-ak-world-progress aria-hidden="true"><span style="width: 33.333%"></span></div>
+          </div>
+        </div>
+      </div>
+{% else %}      <p class="section-label reveal"><span>// {{ t.sections.more.num }}</span>{{ t.sections.more.label }}</p>
+      <h2 id="more-title" class="reveal">{{ t.sections.more.title }}</h2>
+      <ul class="cards cards-3">
+        {% for item in t.sections.more.items %}<li class="card reveal">
+          <svg class="card-ic"><use href="#i-{{ item.icon }}"/></svg>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.body }}</p>
+        </li>{% endfor %}
+      </ul>
+{% endif %}    </div>
+  </section>
+
+{% if theme.ak %}  <section id="profile" class="band ink ak-profile" aria-labelledby="profile-title">
+    <span class="ak-profile-outline" aria-hidden="true">RIKO</span><span class="ak-profile-rule" aria-hidden="true"></span>
+    <div class="wrap ak-profile-inner" data-ak-profile-gallery aria-label="{{ t.profile.galleryLabel }}">
+      <div class="ak-profile-info">
+        <p class="section-label reveal"><span>// 08</span>{{ t.profile.name }}</p>
+        <p class="ak-profile-eyebrow">{{ t.profile.eyebrow }}</p>
+        <div class="ak-profile-head"><img src="{{ base }}img/app-icon-64.png" width="64" height="64" alt=""><h2 id="profile-title">{{ t.profile.name }}{% if t.profile.localName %} <small>{{ t.profile.localName }}</small>{% endif %}</h2></div>
+        <p class="ak-profile-partner"><span aria-hidden="true">◆</span>{{ t.profile.partner }}</p>
+        <p class="ak-profile-copy">{{ t.profile.body }}</p>
+        <div class="ak-profile-controls">
+          <button type="button" data-ak-gallery-prev aria-label="{{ t.profile.prev }}">←</button>
+          <span data-ak-gallery-current aria-live="polite">1 / 4</span>
+          <button type="button" data-ak-gallery-next aria-label="{{ t.profile.next }}">→</button>
+          <button type="button" data-ak-gallery-open>{{ t.profile.open }}</button>
+        </div>
+        <div class="ak-profile-thumbs" role="group" aria-label="{{ t.profile.galleryLabel }}">
+          {% for image in t.profile.images %}<button type="button" data-ak-gallery-select aria-label="{{ image.label }}" aria-pressed="{% if loop.first %}true{% else %}false{% endif %}" tabindex="{% if loop.first %}0{% else %}-1{% endif %}"><img src="{{ base }}img/{{ image.src }}" width="64" height="80" alt="" loading="lazy"><span>{{ image.label }}</span></button>{% endfor %}
+        </div>
+        <div class="ak-profile-progress" aria-hidden="true"><span></span></div>
+      </div>
+      <div class="ak-profile-stage" data-ak-gallery-stage>
+        <img class="ak-profile-echo" src="{{ base }}img/profile-riko-stand-ak-1024.webp" width="1024" height="1536" alt="" aria-hidden="true" loading="lazy">
+        {% for image in t.profile.images %}<figure id="ak-profile-{{ image.id }}" data-ak-gallery-item{% if loop.first %}{% else %} hidden{% endif %}><img src="{{ base }}img/{{ image.src }}" width="640" height="960" alt="{{ image.alt }}" loading="lazy"><figcaption>{{ image.label }}</figcaption></figure>{% endfor %}
+      </div>
+      <dialog class="ak-profile-dialog" data-ak-gallery-dialog aria-label="{{ t.profile.galleryLabel }}"><button type="button" data-ak-gallery-close aria-label="{{ t.profile.close }}">×</button><img src="" alt=""></dialog>
+    </div>
+  </section>
+{% endif %}  <section id="pricing" class="band paper pricing"{% if theme.ak %} data-ak-word="PRICING"{% endif %} aria-labelledby="pricing-title">
+    <div class="wrap">
+      <p class="section-label reveal"><span>// {% if theme.ak %}09{% else %}{{ t.sections.pricing.num }}{% endif %}</span>{{ t.sections.pricing.label }}</p>
+      <h2 id="pricing-title" class="reveal">{{ t.sections.pricing.title }}</h2>
+      <p class="body reveal">{{ t.sections.pricing.body }}</p>
+      <ul class="plans">
+        {% for plan in t.sections.pricing.plans %}<li class="plan reveal{% if plan.primary %} plan-primary{% endif %}" data-plan>
+          <div class="plan-art" aria-hidden="true">
+            <img src="{{ base }}img/{{ plan.art }}{% if theme.ak %}-ak{% endif %}-840.webp" srcset="{{ base }}img/{{ plan.art }}{% if theme.ak %}-ak{% endif %}-420.webp 420w, {{ base }}img/{{ plan.art }}{% if theme.ak %}-ak{% endif %}-840.webp 840w" sizes="(max-width: 1080px) min(82vw, 360px), 400px" width="840" height="1260" alt="" loading="lazy" decoding="async">
+            <video src="{{ base }}video/{{ plan.art }}{% if theme.ak %}-ak{% endif %}.mp4" muted loop playsinline preload="none" disablepictureinpicture tabindex="-1"></video>
+          </div>
+          <div class="plan-body">
+            <h3><span>0{{ loop.index }}</span>{{ plan.name }}</h3>
+            <p class="price">{{ plan.price }}<span>{{ plan.unit }}</span></p>
+            <ul>{% for f in plan.features %}<li><svg class="ic"><use href="#i-check"/></svg>{{ f }}</li>{% endfor %}</ul>
+            {% if plan.primary %}<a class="btn btn-primary" href="{{ site.download }}"><svg class="ic"><use href="#i-download"/></svg>{{ plan.cta }}</a>{% else %}{% if plan.github %}<a class="btn btn-outline" href="{{ site.github }}"><svg class="ic ic-fill"><use href="#i-github"/></svg>{{ plan.cta }}</a>{% else %}{% if site.appStore %}<a class="btn btn-outline" href="{{ site.appStore }}">{{ plan.cta }}</a>{% else %}<span class="btn btn-outline btn-soon" aria-disabled="true">{{ plan.soon }}</span>{% endif %}{% endif %}{% endif %}
+          </div>
+        </li>{% endfor %}
+      </ul>
+    </div>
+  </section>
+
+  <section id="download" class="band cta" aria-labelledby="cta-title">
+    <div class="cta-glow" aria-hidden="true"></div>{% if theme.ak %}
+    <div class="grid-bg" data-depth="0.04" aria-hidden="true"></div>
+    <div class="hero-plane cta-plane" data-depth="0.12" aria-hidden="true"></div>
+    <span class="ak-cta-word" aria-hidden="true">RIKO</span>
+    <canvas class="ak-particle-field cta-particles" data-pattern="orbit" data-depth="0.08" aria-hidden="true"></canvas>
+    <button type="button" class="motion-toggle" data-motion-toggle aria-pressed="true" hidden>{{ t.hero.motion }}</button>{% endif %}
+    <div class="wrap cta-inner">
+      <div class="cta-copy">
+        <p class="kicker reveal"><span class="kicker-line"></span>{{ t.cta.kicker }}</p>
+        <h2 id="cta-title" class="reveal">{{ t.cta.title1 }}<br><em>{{ t.cta.title2 }}</em></h2>
+        <p class="body reveal">{{ t.cta.body }}</p>
+        <div class="actions reveal">
+          <a class="btn btn-primary btn-lg" href="{{ site.download }}"><svg class="ic"><use href="#i-download"/></svg>{{ t.cta.download }}</a>
+          <a class="btn btn-ghost" href="{{ site.github }}"><svg class="ic ic-fill"><use href="#i-github"/></svg>{{ t.cta.github }}</a>
+        </div>
+        <p class="fineprint reveal">{{ t.cta.requirement }}</p>
+      </div>
+      <figure class="cta-art reveal">
+        <img{% if theme.ak %} data-depth="0.1"{% endif %} src="{{ base }}img/cta-character{% if theme.ak %}-ak{% endif %}-960.webp" srcset="{{ base }}img/cta-character{% if theme.ak %}-ak{% endif %}-480.webp 480w, {{ base }}img/cta-character{% if theme.ak %}-ak{% endif %}-960.webp 960w" sizes="(max-width: 760px) 80vw, 460px" width="960" height="960" alt="{{ t.cta.imgAlt }}" loading="lazy" decoding="async">
+      </figure>
+    </div>
+  </section>
+
+  <section id="faq" class="band paper faq"{% if theme.ak %} data-ak-word="FAQ"{% endif %} aria-labelledby="faq-title">
+    <div class="wrap faq-inner">
+      <div class="faq-head">
+        <p class="section-label reveal"><span>// {% if theme.ak %}10{% else %}{{ t.faq.num }}{% endif %}</span>{{ t.faq.label }}</p>
+        <h2 id="faq-title" class="reveal">{{ t.faq.title }}</h2>
+        <figure class="faq-art reveal">
+          <img src="{{ base }}img/feature-empty-error{% if theme.ak %}-ak{% endif %}-480.webp" srcset="{{ base }}img/feature-empty-error{% if theme.ak %}-ak{% endif %}-240.webp 240w, {{ base }}img/feature-empty-error{% if theme.ak %}-ak{% endif %}-480.webp 480w" sizes="200px" width="480" height="720" alt="{{ t.faq.imgAlt }}" loading="lazy" decoding="async">
+          <figcaption>{{ t.faq.more }} <a href="{{ site.contact }}">{{ t.faq.moreLink }}<svg class="ic"><use href="#i-arrow"/></svg></a></figcaption>
+        </figure>
+      </div>
+      <div class="faq-list">
+        {% for item in t.faq.items %}<details class="reveal">
+          <summary>{% if theme.ak %}<span class="faq-num" aria-hidden="true">0{{ loop.index }}</span><span>{{ item.q }}</span>{% else %}{{ item.q }}{% endif %}<svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+          <p>{{ item.a }}</p>
+        </details>{% endfor %}
+      </div>
+    </div>
+  </section>
+{% if theme.ak %}
+  <section id="links" class="band ink ak-links ak-structure" data-ak-word="MORE" aria-labelledby="links-title">
+    <div class="wrap">
+      <p class="section-label reveal"><span>// 11</span>{{ t.akLinks.label }}</p>
+      <h2 id="links-title" class="reveal">{{ t.akLinks.title }}</h2>
+      <div class="ak-link-panels">
+      {% for link in t.akLinks.items %}<a class="ak-link-panel" style="--tint: {{ link.tint }}" href="{% if link.download %}{{ site.download }}{% else %}{% if link.github %}{{ site.github }}{% else %}{{ link.href }}{% endif %}{% endif %}">
+        <img src="{{ base }}img/{{ link.art }}" width="1024" height="1536" alt="" loading="lazy" decoding="async">
+        <span class="ak-link-panel-content"><svg class="ic{% if link.fill %} ic-fill{% endif %}" aria-hidden="true"><use href="#i-{{ link.icon }}"/></svg><strong>{{ link.title }}</strong><span class="ak-link-panel-en">{{ link.english }}</span><span class="ak-link-panel-body">{{ link.body }}</span><span class="ak-link-panel-more">{{ t.akLinks.viewMore }}<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
+      </a>{% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}</main>
+
+<footer class="footer band ink">
+  <div class="wrap footer-inner">
+    <a class="brand" href="./">
+      <img src="{{ base }}img/app-icon-64.png" width="28" height="28" alt="">
+      <span>RightKit</span>
+    </a>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="{{ site.download }}">{{ t.footer.download }}</a>
+      <a href="{{ site.github }}">{{ t.footer.github }}</a>
+      <a href="{{ site.releases }}">{{ t.footer.releases }}</a>
+      <a href="{{ site.contact }}">{{ t.footer.issues }}</a>
+      <a href="privacy/">{{ t.footer.privacy }}</a>
+      <a href="{{ home }}{{ t.alt.href|raw }}" hreflang="{{ t.alt.lang }}" lang="{{ t.alt.lang }}">{{ t.alt.label }}</a>
+    </nav>
+    <p class="copyright">{{ t.footer.copyright }}<br><span class="trademarks">{{ t.footer.trademarks }}</span></p>
+  </div>
+  <p class="footer-mark" aria-hidden="true">RightKit</p>
+</footer>
+
+<script type="application/json" id="demo-data">{{ t.demo|json }}</script>
+<script type="application/json" id="tool-data">{{ t.toolbox.groups|json }}</script>
+<script src="{{ base }}main.js" defer></script>{% if theme.ak %}
+<script type="module" src="{{ base }}ak.js"></script>{% endif %}
+</body>
+</html>

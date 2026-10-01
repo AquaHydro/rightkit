@@ -1,0 +1,12 @@
+{
+  "name": "riko-mv-under-the-right-click",
+  "private": true,
+  "type": "module",
+  "description": "Riko music video 'Under the Right Click': riso-cel WebGL pipeline adapted from Pdoom-video-anime-version",
+  "scripts": {
+    "serve": "node server.mjs",
+    "render": "node render.mjs --range=0:208.15 --workers=4 --out=out/frames"
+  },
+  "license": "SEE LICENSE IN NOTICE.md",
+  "dependencies": { "puppeteer-core": "^25.12.0" }
+}

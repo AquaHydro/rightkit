@@ -1,0 +1,106 @@
+# 推 v 开头的标签时发布（technical.md 发布）：
+#   1. 官网版：Developer ID 签名、公证、打 DMG，发布到这个标签的 GitHub Release（F-081 从这里检查更新）。
+#   2. 商店版：归档、导出、检查后上传 App Store Connect。放在 app-store 环境里，这个环境只允许 v* 标签使用。
+# 手动运行（Actions → Release → Run workflow）是试运行：两个渠道都完整签名、公证和检查，但不发 Release、不传商店。
+# 需要的 secrets 见 scripts/ci/setup_signing.sh。
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  direct:
+    name: 官网版
+    runs-on: xcode-27
+    timeout-minutes: 90
+    permissions:
+      contents: write
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: 标签与版本号一致
+        id: version
+        if: github.event_name == 'push'
+        run: scripts/ci/check_version_tag.sh "$GITHUB_REF_NAME"
+
+      - name: 安装 XcodeGen
+        run: brew install xcodegen
+
+      - name: 准备签名
+        run: scripts/ci/setup_signing.sh
+        env:
+          SIGNING_CERTS_P12_BASE64: ${{ secrets.SIGNING_CERTS_P12_BASE64 }}
+          SIGNING_CERTS_P12_PASSWORD: ${{ secrets.SIGNING_CERTS_P12_PASSWORD }}
+          ASC_KEY_P8_BASE64: ${{ secrets.ASC_KEY_P8_BASE64 }}
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+
+      - name: 签名、公证并打 DMG
+        run: make release
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+
+      - name: 保存 DMG
+        uses: actions/upload-artifact@v4
+        with:
+          name: RightKit-${{ steps.version.outputs.version || github.sha }}-dmg
+          path: .build/release/RightKit-*.dmg
+          if-no-files-found: error
+
+      - name: 发布 GitHub Release
+        if: github.event_name == 'push'
+        run: |
+          dmg=".build/release/RightKit-${VERSION}.dmg"
+          shasum -a 256 "$dmg" | tee "$dmg.sha256"
+          gh release create "$GITHUB_REF_NAME" "$dmg" "$dmg.sha256" \
+            --verify-tag --title "RightKit ${VERSION}" --generate-notes
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.version }}
+
+      - name: 清理签名
+        if: always()
+        run: scripts/ci/cleanup_signing.sh
+
+  appstore:
+    name: 商店版
+    needs: direct
+    runs-on: xcode-27
+    timeout-minutes: 90
+    # app-store 环境只允许 v* 标签，试运行不上传，不进这个环境。
+    environment: ${{ github.event_name == 'push' && 'app-store' || '' }}
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: 安装 XcodeGen
+        run: brew install xcodegen
+
+      - name: 准备签名
+        run: scripts/ci/setup_signing.sh
+        env:
+          SIGNING_CERTS_P12_BASE64: ${{ secrets.SIGNING_CERTS_P12_BASE64 }}
+          SIGNING_CERTS_P12_PASSWORD: ${{ secrets.SIGNING_CERTS_P12_PASSWORD }}
+          ASC_KEY_P8_BASE64: ${{ secrets.ASC_KEY_P8_BASE64 }}
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+
+      - name: 构建、检查并上传 App Store Connect
+        run: make ${{ github.event_name == 'push' && 'upload-appstore' || 'release-appstore' }}
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+
+      - name: 清理签名
+        if: always()
+        run: scripts/ci/cleanup_signing.sh

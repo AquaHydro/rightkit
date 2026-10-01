@@ -1,0 +1,34 @@
+Timestamp               Ty Process[PID:TID]
+2026-09-26 01:41:58.920 Df RightKitFinder[29125:3acd04] [app.rightkit.mac.finder:menu] Monitoring /Users/liao
+2026-09-26 01:41:58.927 Df RightKitFinder[29124:3accfc] [app.rightkit.mac.finder:menu] Monitoring /Users/liao
+2026-09-26 01:43:48.187 E  RightKit[28772:3ad2f2] [app.rightkit.mac:xpc] Check-in failed: 无法与帮助程序通信。
+2026-09-26 01:43:48.187 E  RightKit[28772:3ad2f2] [app.rightkit.mac:xpc] Agent connection invalidated
+2026-09-26 01:43:48.187 E  RightKit[28772:3ad2f2] [app.rightkit.mac:xpc] Check-in failed: 无法与帮助程序通信。
+2026-09-26 01:43:48.328 E  RightKit[28772:3abd6a] [app.rightkit.mac:app] Agent registration failed: 未能完成该操作。Operation not permitted, status 2
+2026-09-26 01:44:37.260 Df RightKitFinder[29124:3ace77] [app.rightkit.mac.finder:menu] menu kind=0 folder=/Users/liao/RKAcceptance-20260926/allowed/ items=1 -> 在应用中打开[终端|Ghostty|Visual Studio Code|Xcode]|剪切|复制到[下载|桌面|文稿|—|选择文件夹…]|移动到[下载|桌面|文稿|—|选择文件夹…]|工具箱[拷贝路径|拷贝名称|—|根据文件名新建文件夹|发送替身到桌面|隔空投送|授予写入权限|文件信息（哈希）…|—|隐藏所选|隐藏扩展名|—|彻底删除…]
+2026-09-26 01:45:03.700 Df RightKitFinder[29124:3ace77] [app.rightkit.mac.finder:menu] menu kind=0 folder=/Users/liao/RKAcceptance-20260926/allowed/ items=1 -> 在应用中打开[终端|Ghostty|Visual Studio Code|Xcode]|剪切|复制到[下载|桌面|文稿|—|选择文件夹…]|移动到[下载|桌面|文稿|—|选择文件夹…]|工具箱[拷贝路径|拷贝名称|—|根据文件名新建文件夹|发送替身到桌面|隔空投送|授予写入权限|文件信息（哈希）…|—|隐藏所选|隐藏扩展名|—|彻底删除…]
+2026-09-26 01:45:10.215 Df RightKitFinder[29124:3ace77] [app.rightkit.mac.finder:menu] perform copyName
+2026-09-26 01:45:10.216 E  RightKitFinder[29124:3ae046] [app.rightkit.mac.finder:xpc] Agent unavailable: 无法与帮助程序通信。
+2026-09-26 01:45:10.360 Df RightKitFinder[29125:3acd04] [app.rightkit.mac.finder:menu] Monitoring /Users/liao
+2026-09-26 01:45:10.360 Df RightKitFinder[29124:3accfc] [app.rightkit.mac.finder:menu] Monitoring /Users/liao
+2026-09-26 01:45:10.511 E  RightKit[29666:3ae04e] [app.rightkit.mac:app] Agent registration failed: 未能完成该操作。Operation not permitted, status 2
+2026-09-26 01:45:10.515 E  RightKit[29666:3ae0a0] [app.rightkit.mac:xpc] Agent connection invalidated
+2026-09-26 01:45:10.515 E  RightKit[29666:3ae0a0] [app.rightkit.mac:xpc] Check-in failed: 无法与帮助程序通信。
+2026-09-26 01:45:10.750 E  RightKit[29666:3ae04e] [app.rightkit.mac:app] Agent registration failed: 未能完成该操作。Operation not permitted, status 2
+2026-09-26 01:45:15.856 E  RightKit[29666:3ae0e1] [app.rightkit.mac:xpc] Agent connection invalidated
+2026-09-26 01:45:15.856 E  RightKit[29666:3ae0e1] [app.rightkit.mac:xpc] Check-in failed: 无法与帮助程序通信。
+2026-09-26 01:45:21.198 E  RightKit[29666:3ae0dd] [app.rightkit.mac:xpc] Agent connection invalidated
+2026-09-26 01:45:21.198 E  RightKit[29666:3ae0dd] [app.rightkit.mac:xpc] Check-in failed: 无法与帮助程序通信。
+2026-09-26 01:45:26.538 E  RightKit[29666:3ae058] [app.rightkit.mac:xpc] Agent connection invalidated
+2026-09-26 01:45:26.538 E  RightKit[29666:3ae0a0] [app.rightkit.mac:xpc] Check-in failed: 无法与帮助程序通信。
+2026-09-26 01:45:31.881 E  RightKit[29666:3ae058] [app.rightkit.mac:xpc] Agent connection invalidated
+2026-09-26 01:45:31.881 E  RightKit[29666:3ae0e3] [app.rightkit.mac:xpc] Check-in failed: 无法与帮助程序通信。
+2026-09-26 01:45:37.132 E  RightKit[29666:3ae058] [app.rightkit.mac:xpc] Agent connection invalidated
+2026-09-26 01:45:37.132 E  RightKit[29666:3ae058] [app.rightkit.mac:xpc] Check-in failed: 无法与帮助程序通信。
+2026-09-26 01:45:42.472 E  RightKit[29666:3ae278] [app.rightkit.mac:xpc] Agent connection invalidated
+2026-09-26 01:45:42.472 E  RightKit[29666:3ae0e3] [app.rightkit.mac:xpc] Check-in failed: 无法与帮助程序通信。
+2026-09-26 01:45:45.237 E  launchd[1:3ae246] [app.rightkit.mac.agent:] Unknown key for plist importer (key: _Quarantined type: bool)
+2026-09-26 01:45:45.237 E  launchd[1:3ae246] [app.rightkit.mac.agent:] Unknown key for plist importer (key: SHA256 type: data)
+2026-09-26 01:46:06.389 Df RightKitFinder[29124:3ae168] [app.rightkit.mac.finder:menu] menu kind=0 folder=/Users/liao/RKAcceptance-20260926/allowed/ items=1 -> 在应用中打开[终端|Ghostty|Visual Studio Code|Xcode]|剪切|复制到[下载|桌面|文稿|—|选择文件夹…]|移动到[下载|桌面|文稿|—|选择文件夹…]|工具箱[拷贝路径|拷贝名称|—|根据文件名新建文件夹|发送替身到桌面|隔空投送|授予写入权限|文件信息（哈希）…|—|隐藏所选|隐藏扩展名|—|彻底删除…]
+2026-09-26 01:46:13.378 Df RightKitFinder[29124:3ae168] [app.rightkit.mac.finder:menu] perform copyName
+2026-09-26 01:46:13.397 Df RightKit[29666:3ae04e] [app.rightkit.mac:router] handle copyName items=1

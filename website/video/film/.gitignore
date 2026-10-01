@@ -1,0 +1,10 @@
+node_modules/
+renders/*
+!renders/rightkit-intro-zh.mp4
+!renders/rightkit-intro-vertical.mp4
+dist/
+.build/
+assets/*.wav
+!assets/sfx/
+assets/sfx/soft-ui-click.wav
+vertical/assets/

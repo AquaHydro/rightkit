@@ -1,0 +1,4 @@
+# xcode-27 是 GitHub 托管的 Xcode 27 runner（公开预览），actionlint 还不认识这个标签。
+self-hosted-runner:
+  labels:
+    - xcode-27

@@ -1,0 +1,1352 @@
+{
+  "zh": {
+    "lang": "zh-Hans",
+    "ogLocale": "zh_CN",
+    "path": "/",
+    "alt": {
+      "label": "English",
+      "short": "EN",
+      "path": "/en/",
+      "href": "en/",
+      "lang": "en"
+    },
+    "meta": {
+      "title": "RightKit：让访达的右键菜单更好用",
+      "description": "RightKit 给访达的右键菜单加上新建文件、拷贝到、移动到、用应用打开和 16 个文件工具。免费、开源，适用于 macOS 26。"
+    },
+    "nav": {
+      "skip": "跳到主要内容",
+      "features": "功能",
+      "toolbox": "工具箱",
+      "pricing": "价格",
+      "faq": "常见问题",
+      "download": "下载",
+      "language": "切换到英文"
+    },
+    "akNav": { "features": "FEATURES", "toolbox": "TOOLBOX", "profile": "PROFILE", "workbench": "WORKBENCH", "pricing": "PRICING", "faq": "FAQ", "profileLocal": "角色", "featuresLocal": "功能", "toolboxLocal": "工具箱", "workbenchLocal": "工作台", "pricingLocal": "价格", "faqLocal": "常见问题", "index": "章节索引" },
+    "akWorkbench": {
+      "label": "工作台",
+      "title": "Riko 的工作台",
+      "body": "从 Riko 的工作台出发，看看 RightKit 怎样把常用操作带到访达右键菜单。",
+      "sceneAlt": "等距视角的深色工作台，摆着文件夹架、笔记本电脑、小显示器、剪贴板、一叠文件卡、带珊瑚色条纹的装备箱和一只小白鼠",
+      "links": [
+        { "key": "new", "label": "NEW", "name": "新建文件", "href": "#new", "x": "28%", "y": "54%" },
+        { "key": "send", "label": "SEND", "name": "复制到与移动到", "href": "#send", "x": "19.5%", "y": "36%" },
+        { "key": "open", "label": "OPEN", "name": "在应用中打开", "href": "#open", "x": "43.5%", "y": "37%" },
+        { "key": "toolbox", "label": "TOOLS", "name": "工具箱", "href": "#toolbox", "x": "79%", "y": "41%" },
+        { "key": "download", "label": "GET", "name": "下载 RightKit", "href": "#download", "x": "36.5%", "y": "64.5%" },
+        { "key": "github", "label": "CODE", "name": "GitHub 源代码", "github": true, "x": "61%", "y": "31%" }
+      ]
+    },
+    "akWorld": { "label": "词条浏览", "intro": "选择词条，了解右键菜单之外的功能。", "prev": "上一个词条", "next": "下一个词条" },
+    "akLinks": {
+      "label": "探索入口",
+      "title": "继续探索 RightKit",
+      "viewMore": "VIEW MORE",
+      "items": [
+        { "key": "download", "title": "官网版下载", "english": "DOWNLOAD", "body": "免费下载，全部功能都能用。", "icon": "download", "art": "profile-riko-wave-ak-1024.webp", "tint": "#30d158", "download": true },
+        { "key": "github", "title": "GitHub 源代码", "english": "SOURCE CODE", "body": "查看源代码和最新版本。", "icon": "github", "art": "profile-riko-file-ak-1024.webp", "tint": "#bf5af2", "github": true, "fill": true },
+        { "key": "privacy", "title": "隐私说明", "english": "PRIVACY", "body": "了解文件和设置怎样留在你的 Mac 上。", "icon": "shield", "art": "profile-riko-ok-ak-1024.webp", "tint": "#0a84ff", "href": "privacy/" }
+      ]
+    },
+    "hero": {
+      "kicker": "RIGHT-CLICK, DONE",
+      "motion": "背景动效",
+      "title1": "右键一下，",
+      "title2": "就办好了。",
+      "lead": "RightKit 给访达的右键菜单加上新建文件、拷贝到、移动到、用应用打开和一整套文件工具。",
+      "download": "下载 RightKit",
+      "github": "GitHub",
+      "requirement": "免费 · 需要 macOS 26 或更高版本",
+      "tags": [
+        "12 种新建模板",
+        "16 个工具",
+        "中英双语",
+        "开源"
+      ],
+      "charAlt": "RightKit 的角色 Riko 伸手点向右键菜单，肩上趴着一只小白鼠"
+    },
+    "profile": {
+      "eyebrow": "RIGHTKIT :// PROFILE",
+      "name": "Riko",
+      "localName": "莉可",
+      "partner": "伙伴：小白鼠",
+      "body": "开朗、手快、靠得住的右键小帮手。珊瑚色头发、卷起的呆毛，还有那枚光标菜单发卡，是她最显眼的标记。肩上的小白鼠只有右边一只耳朵是珊瑚色。",
+      "galleryLabel": "Riko 形象档案",
+      "open": "查看大图",
+      "close": "关闭大图",
+      "prev": "上一张",
+      "next": "下一张",
+      "images": [
+        { "id": "portrait", "label": "Riko", "alt": "Riko 的全身立绘，珊瑚色短发、光标发卡和肩上的小白鼠", "src": "profile-riko-stand-ak-1024.webp" },
+        { "id": "ok", "label": "准备好了", "alt": "Riko 微笑眨眼，比出 OK 手势，小白鼠在肩上", "src": "profile-riko-ok-ak-1024.webp" },
+        { "id": "wave", "label": "打个招呼", "alt": "Riko 侧身站立，伸手挥手问好，小白鼠在肩上", "src": "profile-riko-wave-ak-1024.webp" },
+        { "id": "file", "label": "整理就绪", "alt": "Riko 抱着一张无字文件卡，小白鼠在肩上", "src": "profile-riko-file-ak-1024.webp" }
+      ]
+    },
+    "ticker": [
+      "新建文件",
+      "拷贝到",
+      "移动到",
+      "在应用中打开",
+      "拷贝路径",
+      "转换图片",
+      "生成图标集",
+      "文件哈希",
+      "隔空投送",
+      "二维码"
+    ],
+    "sections": {
+      "new": {
+        "id": "new",
+        "num": "01",
+        "label": "新建",
+        "title": "在哪里右键，就在哪里新建。",
+        "body": "文本、Markdown、Word、Excel、PowerPoint、JSON、Shell 脚本等 12 种类型，也可以把任意文件存成自己的模板。重名自动编号，从不覆盖。",
+        "note": "菜单里的顺序和开关都可以在设置里调整。",
+        "imgAlt": "Riko 从卫衣口袋里变出一张新文件",
+        "types": [
+          "txt",
+          "md",
+          "rtf",
+          "docx",
+          "xlsx",
+          "pptx",
+          "json",
+          "xml",
+          "html",
+          "css",
+          "js",
+          "sh"
+        ]
+      },
+      "send": {
+        "id": "send",
+        "num": "02",
+        "label": "复制到 · 移动到",
+        "title": "常用的文件夹，一步就到。",
+        "body": "「复制到」和「移动到」直接列出你设定的目标文件夹，「常用目录」一键在访达里打开。文件多、体积大时显示进度，随时可以取消。",
+        "note": "默认放好了下载、桌面和文稿，可以增删。",
+        "imgAlt": "Riko 把一张文件卡片扔进蓝色文件夹",
+        "menu": [
+          "下载",
+          "桌面",
+          "文稿",
+          "项目资料"
+        ]
+      },
+      "open": {
+        "id": "open",
+        "num": "03",
+        "label": "在应用中打开",
+        "title": "直接在终端或编辑器里打开。",
+        "body": "终端打开所在的目录，编辑器打开项目本身。首次启动会自动找到终端、Ghostty、Visual Studio Code 和 Xcode，也可以添加任何应用。",
+        "note": "路径里有空格、引号也没关系。",
+        "imgAlt": "Riko 用钥匙形状的光标打开一个应用窗口",
+        "apps": [
+          {
+            "name": "终端",
+            "icon": "terminal"
+          },
+          {
+            "name": "Ghostty",
+            "icon": "ghostty"
+          },
+          {
+            "name": "Visual Studio Code",
+            "icon": "vscode"
+          },
+          {
+            "name": "Xcode",
+            "icon": "xcode"
+          }
+        ]
+      },
+      "toolbox": {
+        "id": "toolbox",
+        "num": "04",
+        "label": "工具箱",
+        "title": "16 个小工具，收在一个子菜单里。",
+        "body": "只显示和当前选择有关的命令：选图片时出现转换和图标集，选文件夹时出现解散文件夹。每个命令都可以关掉或重新排序。",
+        "imgAlt": "Riko 打开一个装满小工具的珊瑚色工具箱"
+      },
+      "trust": {
+        "id": "trust",
+        "num": "05",
+        "label": "放心用",
+        "title": "右键很快，也很稳。",
+        "body": "右键菜单很容易误点，所以 RightKit 在关键的地方多想了一步。",
+        "items": [
+          {
+            "icon": "shield",
+            "title": "删除前先确认",
+            "body": "「彻底删除」不经过废纸篓，所以默认先弹确认，而且没有默认按钮。"
+          },
+          {
+            "icon": "lock",
+            "title": "系统目录受保护",
+            "body": "系统目录和你的主目录不能通过 RightKit 删除。"
+          },
+          {
+            "icon": "copy",
+            "title": "从不覆盖",
+            "body": "新建、复制、移动遇到重名时自动编号，原文件保持不变。"
+          },
+          {
+            "icon": "progress",
+            "title": "进度可以取消",
+            "body": "耗时超过 1 秒的操作显示进度，取消后清理写了一半的文件。"
+          },
+          {
+            "icon": "folder",
+            "title": "只在你指定的地方出现",
+            "body": "菜单只在你授权的文件夹里出现，建议授权主目录，之后可以自己改。"
+          },
+          {
+            "icon": "laptop",
+            "title": "在本机完成",
+            "body": "文件操作都在你的 Mac 上进行，二维码也在本机生成。"
+          }
+        ]
+      },
+      "more": {
+        "id": "more",
+        "num": "06",
+        "label": "更多入口",
+        "title": "不止右键菜单。",
+        "items": [
+          {
+            "icon": "shortcuts",
+            "akEnglish": "SHORTCUTS",
+            "title": "快捷指令与聚焦",
+            "body": "拷贝路径、新建文件、文件哈希、转换图片、生成图标集等动作可以放进快捷指令。"
+          },
+          {
+            "icon": "qr",
+            "akEnglish": "QR CODE",
+            "title": "二维码",
+            "body": "选中文字，从系统服务生成二维码，可以拷贝图片或存成 PNG。"
+          },
+          {
+            "icon": "translate",
+            "akEnglish": "TRANSLATE",
+            "title": "翻译",
+            "body": "选中文字，用 Google 翻译或百度翻译打开，目标语言跟随界面语言。"
+          }
+        ]
+      },
+      "pricing": {
+        "id": "pricing",
+        "num": "07",
+        "label": "价格",
+        "title": "免费开源，也可以支持一下。",
+        "body": "两个版本功能完全相同，源代码都在 GitHub 公开。官网版免费；商店版 8 元，由 App Store 负责更新，也是对开发的一点支持。",
+        "plans": [
+          {
+            "name": "官网版",
+            "price": "免费",
+            "unit": "全部功能",
+            "features": [
+              "全部功能，没有限制",
+              "从 GitHub Release 下载 DMG",
+              "应用内检查新版本"
+            ],
+            "cta": "下载 RightKit",
+            "art": "pricing-free",
+            "primary": true
+          },
+          {
+            "name": "商店版",
+            "price": "¥8",
+            "unit": "一次买断",
+            "features": [
+              "和官网版功能相同",
+              "由 App Store 自动更新",
+              "支持 RightKit 继续开发"
+            ],
+            "cta": "在 App Store 购买",
+            "soon": "即将上架 App Store",
+            "art": "pricing-store",
+            "primary": false
+          },
+          {
+            "name": "一起参与",
+            "price": "开源",
+            "unit": "欢迎贡献",
+            "features": [
+              "源代码在 GitHub 公开",
+              "反馈问题和建议",
+              "提交代码和翻译"
+            ],
+            "cta": "前往 GitHub",
+            "art": "pricing-oss",
+            "github": true,
+            "primary": false
+          }
+        ]
+      }
+    },
+    "toolbox": {
+      "groups": [
+        [
+          {
+            "id": "copyPath",
+            "title": "拷贝路径",
+            "desc": "把完整路径放进剪贴板。",
+            "for": [
+              "folder",
+              "file",
+              "image"
+            ]
+          },
+          {
+            "id": "copyName",
+            "title": "拷贝名称",
+            "desc": "拷贝访达里显示的名称。",
+            "for": [
+              "folder",
+              "file",
+              "image"
+            ]
+          }
+        ],
+        [
+          {
+            "id": "newFolderFromName",
+            "title": "根据文件名新建文件夹",
+            "desc": "用文件名建文件夹，再把文件放进去。",
+            "for": [
+              "file",
+              "image"
+            ]
+          },
+          {
+            "id": "alias",
+            "title": "发送替身到桌面",
+            "desc": "在桌面放一个替身，重名自动编号。",
+            "for": [
+              "folder",
+              "file",
+              "image"
+            ]
+          },
+          {
+            "id": "airdrop",
+            "title": "隔空投送",
+            "desc": "直接调出隔空投送。",
+            "for": [
+              "folder",
+              "file",
+              "image"
+            ]
+          },
+          {
+            "id": "grantWrite",
+            "title": "授予写入权限",
+            "desc": "给当前用户加上写入权限，不递归。",
+            "for": [
+              "folder",
+              "file",
+              "image"
+            ]
+          },
+          {
+            "id": "hash",
+            "title": "文件信息（哈希）…",
+            "desc": "计算 MD5、SHA-1、SHA-256 和 SHA-512。",
+            "for": [
+              "file",
+              "image"
+            ]
+          }
+        ],
+        [
+          {
+            "id": "hideSelected",
+            "title": "隐藏所选",
+            "desc": "切换项目的隐藏标记。",
+            "for": [
+              "folder",
+              "file",
+              "image"
+            ]
+          },
+          {
+            "id": "hideExtension",
+            "title": "隐藏扩展名",
+            "desc": "切换文件扩展名的显示。",
+            "for": [
+              "file",
+              "image"
+            ]
+          }
+        ],
+        [
+          {
+            "id": "convertImage",
+            "title": "转换图片…",
+            "desc": "转成 PNG、JPEG、HEIC 或 TIFF。",
+            "for": [
+              "image"
+            ]
+          },
+          {
+            "id": "macIconset",
+            "title": "生成 macOS 图标集",
+            "desc": "一张图生成 .iconset 和 .icns。",
+            "for": [
+              "image"
+            ]
+          },
+          {
+            "id": "iosIconset",
+            "title": "生成 iOS 图标集",
+            "desc": "一次导出 13 种尺寸的 PNG。",
+            "for": [
+              "image"
+            ]
+          },
+          {
+            "id": "wallpaper",
+            "title": "设为壁纸",
+            "desc": "设为主显示器的壁纸。",
+            "for": [
+              "image"
+            ]
+          },
+          {
+            "id": "folderIcon",
+            "title": "设置文件夹图标…",
+            "desc": "用一张图片给文件夹换图标。",
+            "for": [
+              "folder",
+              "image"
+            ]
+          }
+        ],
+        [
+          {
+            "id": "dissolve",
+            "title": "解散文件夹",
+            "desc": "把里面的项目移出来，空文件夹放进废纸篓。",
+            "for": [
+              "folder"
+            ]
+          },
+          {
+            "id": "delete",
+            "title": "彻底删除…",
+            "desc": "不经过废纸篓，删除前会先确认。",
+            "for": [
+              "folder",
+              "file",
+              "image"
+            ]
+          }
+        ]
+      ]
+    },
+    "cta": {
+      "kicker": "GET RIGHTKIT",
+      "body": "把第一个想省掉的步骤交给 Riko。",
+      "download": "下载 RightKit",
+      "github": "在 GitHub 上查看",
+      "requirement": "版本 {version} · 需要 macOS 26 或更高版本",
+      "imgAlt": "Riko 和小白鼠一起开心地跳起来挥手",
+      "title1": "右键，",
+      "title2": "就办好了。"
+    },
+    "faq": {
+      "num": "08",
+      "label": "常见问题",
+      "title": "常见问题",
+      "items": [
+        {
+          "q": "RightKit 收费吗？",
+          "a": "官网版免费，全部功能都能用，源代码在 GitHub 公开。Mac App Store 上的商店版售价 8 元，功能相同，由 App Store 负责更新，购买就是对开发的支持。"
+        },
+        {
+          "q": "需要什么系统？",
+          "a": "macOS 26 或更高版本。RightKit 按 macOS 26 的原生界面设计，不支持更早的系统。"
+        },
+        {
+          "q": "装好以后右键菜单里没有 RightKit？",
+          "a": "打开「系统设置 > 通用 > 登录项与扩展」，启用 RightKit 的访达扩展。RightKit 的设置窗口也会显示扩展当前的状态。"
+        },
+        {
+          "q": "为什么有些文件夹里没有菜单？",
+          "a": "菜单只在你授权的文件夹里出现。首次启动时建议授权主目录，之后可以在设置的「通用」里修改。"
+        },
+        {
+          "q": "会上传我的文件吗？",
+          "a": "不会。所有文件操作都在你的 Mac 上完成。只有在你主动使用「翻译」时，选中的文字会发送到你选择的翻译网站。"
+        },
+        {
+          "q": "彻底删除安全吗？",
+          "a": "彻底删除不经过废纸篓，所以默认先弹确认。系统目录和你的主目录受到保护，不能通过 RightKit 删除。"
+        },
+        {
+          "q": "能添加自己的文件模板吗？",
+          "a": "可以。在设置的「新建文件」里把任意文件添加为模板，RightKit 会保存一份副本。"
+        },
+        {
+          "q": "支持哪些语言？",
+          "a": "简体中文和英文，默认跟随系统，也可以在设置里切换。"
+        }
+      ],
+      "more": "没找到答案？",
+      "moreLink": "发邮件给我们",
+      "imgAlt": "Riko 坐在文件夹上思考，小白鼠举着问号牌"
+    },
+    "footer": {
+      "download": "下载",
+      "github": "GitHub",
+      "releases": "更新日志",
+      "issues": "反馈问题",
+      "privacy": "隐私政策",
+      "character": "角色 Riko",
+      "copyright": "© {year} RightKit",
+      "trademarks": "终端和 Xcode 是 Apple Inc. 的商标，Visual Studio Code 是 Microsoft Corporation 的商标，Ghostty 图标归 Ghostty 项目所有。"
+    },
+    "demo": {
+      "windowTitle": "桌面",
+      "hint": "在窗口里右键试试",
+      "hintTouch": "在窗口里长按试试",
+      "openMenu": "打开菜单",
+      "windowLabel": "模拟的访达窗口，可以右键试用 RightKit",
+      "sidebarTitle": "个人收藏",
+      "home": "/Users/riko",
+      "folder": "/Users/riko/Desktop",
+      "untitled": "未命名",
+      "files": [
+        {
+          "name": "笔记.md",
+          "kind": "file",
+          "ext": "md"
+        },
+        {
+          "name": "季度报告.docx",
+          "kind": "file",
+          "ext": "docx"
+        },
+        {
+          "name": "封面.png",
+          "kind": "image",
+          "ext": "png"
+        },
+        {
+          "name": "项目资料",
+          "kind": "folder"
+        }
+      ],
+      "places": [
+        {
+          "name": "下载",
+          "path": "/Users/riko/Downloads"
+        },
+        {
+          "name": "桌面",
+          "path": "/Users/riko/Desktop"
+        },
+        {
+          "name": "文稿",
+          "path": "/Users/riko/Documents"
+        }
+      ],
+      "types": [
+        {
+          "ext": "txt",
+          "title": "文本文档"
+        },
+        {
+          "ext": "md",
+          "title": "Markdown"
+        },
+        {
+          "ext": "rtf",
+          "title": "RTF 文稿"
+        },
+        {
+          "ext": "docx",
+          "title": "Word 文档"
+        },
+        {
+          "ext": "xlsx",
+          "title": "Excel 工作簿"
+        },
+        {
+          "ext": "pptx",
+          "title": "PowerPoint 演示文稿"
+        }
+      ],
+      "apps": [
+        {
+          "id": "terminal",
+          "title": "终端",
+          "role": "terminal"
+        },
+        {
+          "id": "vscode",
+          "title": "Visual Studio Code",
+          "role": "editor"
+        }
+      ],
+      "menu": {
+        "newFile": "新建文件",
+        "favorites": "常用目录",
+        "openInApp": "在应用中打开",
+        "copyCurrentPath": "拷贝当前路径",
+        "cut": "剪切",
+        "copyTo": "复制到",
+        "moveTo": "移动到",
+        "toolbox": "工具箱",
+        "chooseFolder": "选择文件夹…",
+        "showSelected": "显示所选",
+        "showExtension": "显示扩展名"
+      },
+      "toast": {
+        "created": "已创建「{name}」",
+        "copied": "已拷贝：{text}",
+        "cut": "已剪切「{name}」，到别处粘贴就能移动。",
+        "copiedTo": "已把「{name}」复制到「{dest}」",
+        "movedTo": "已把「{name}」移动到「{dest}」",
+        "openedFolder": "已在访达中打开「{dest}」",
+        "openedApp": "已用{app}打开「{name}」",
+        "chooseFolder": "这里会弹出窗口，让你选择目标文件夹。",
+        "tool": "{title}：{desc}",
+        "sameFolder": "「{name}」已经在「{dest}」里了。",
+        "createdIn": "已在「{dest}」里创建「{name}」",
+        "deleteDemo": "会先确认再彻底删除。演示里不会真的删除。",
+        "newFolder": "已新建文件夹「{dest}」，并把「{name}」放了进去。",
+        "hidden": "已隐藏「{name}」",
+        "shown": "已显示「{name}」",
+        "dissolved": "已解散「{name}」，里面的项目移到了这里。"
+      }
+    },
+    "privacy": {
+      "title": "隐私政策",
+      "home": "",
+      "updated": "最后更新：2026 年 9 月 25 日",
+      "intro": "RightKit 不收集、不存储、也不上传你的任何个人数据。没有账号、广告和使用统计。",
+      "sections": [
+        {
+          "title": "你的文件",
+          "body": [
+            "新建、拷贝、移动、转换图片、计算哈希等操作都在你的 Mac 上完成，文件不会离开本机。RightKit 运行在 App Sandbox 里，只能访问你授权的文件夹。"
+          ]
+        },
+        {
+          "title": "设置",
+          "body": [
+            "模板、常用目录和各项开关只保存在本机。卸载 RightKit 时可以一并删除。"
+          ]
+        },
+        {
+          "title": "二维码",
+          "body": [
+            "二维码在本机生成，文本不会上传。"
+          ]
+        },
+        {
+          "title": "翻译",
+          "body": [
+            "使用「使用 Google 翻译」或「使用百度翻译」时，RightKit 会把你选中的文本放进网址，用默认浏览器打开对应的翻译网站。文本由浏览器发给该网站，适用该网站的隐私政策。RightKit 本身不发送也不保存这段文本。"
+          ]
+        },
+        {
+          "title": "检查更新（仅官网版）",
+          "body": [
+            "官网版会向 GitHub 查询最新版本号。这次请求不带任何个人信息，但 GitHub 会像处理普通网页访问一样看到你的 IP 地址。可以在设置里关闭自动检查更新。App Store 版不做这个请求，由 App Store 负责更新。"
+          ]
+        },
+        {
+          "title": "本网站",
+          "body": [
+            "本网站是静态页面，不使用 Cookie，也没有统计和追踪脚本。托管服务商可能为了安全和运维记录常规访问日志。"
+          ]
+        },
+        {
+          "title": "变更和联系",
+          "body": [
+            "本政策如有变更，会更新这个页面和上面的日期。有任何问题，请发邮件到 contact@yiliang.me。"
+          ]
+        }
+      ]
+    }
+  },
+  "en": {
+    "lang": "en",
+    "ogLocale": "en_US",
+    "path": "/en/",
+    "alt": {
+      "label": "简体中文",
+      "short": "中文",
+      "path": "/",
+      "href": "",
+      "lang": "zh-Hans"
+    },
+    "meta": {
+      "title": "RightKit: a better right-click menu for Finder",
+      "description": "RightKit adds New File, Copy To, Move To, Open in App and 16 file tools to the Finder context menu. Free and open source, for macOS 26."
+    },
+    "nav": {
+      "skip": "Skip to main content",
+      "features": "Features",
+      "toolbox": "Toolbox",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "download": "Download",
+      "language": "Switch to Chinese"
+    },
+    "akNav": { "features": "FEATURES", "toolbox": "TOOLBOX", "profile": "PROFILE", "workbench": "WORKBENCH", "pricing": "PRICING", "faq": "FAQ", "profileLocal": "", "featuresLocal": "", "toolboxLocal": "", "workbenchLocal": "", "pricingLocal": "", "faqLocal": "", "index": "Section index" },
+    "akWorkbench": {
+      "label": "WORKBENCH",
+      "title": "Riko's Workbench",
+      "body": "Start at Riko's desk and see how RightKit brings everyday actions into Finder's context menu.",
+      "sceneAlt": "An isometric dark workbench with a folder rack, a laptop, a small monitor, a clipboard, a stack of file cards, an equipment case with coral stripes and a small white mouse",
+      "links": [
+        { "key": "new", "label": "NEW", "name": "New File", "href": "#new", "x": "28%", "y": "54%" },
+        { "key": "send", "label": "SEND", "name": "Copy To and Move To", "href": "#send", "x": "19.5%", "y": "36%" },
+        { "key": "open", "label": "OPEN", "name": "Open in App", "href": "#open", "x": "43.5%", "y": "37%" },
+        { "key": "toolbox", "label": "TOOLS", "name": "Toolbox", "href": "#toolbox", "x": "79%", "y": "41%" },
+        { "key": "download", "label": "GET", "name": "Download RightKit", "href": "#download", "x": "36.5%", "y": "64.5%" },
+        { "key": "github", "label": "CODE", "name": "GitHub source code", "github": true, "x": "61%", "y": "31%" }
+      ]
+    },
+    "akWorld": { "label": "TERM BROWSER", "intro": "Select a term to explore what RightKit does beyond the context menu.", "prev": "Previous term", "next": "Next term" },
+    "akLinks": {
+      "label": "EXPLORE",
+      "title": "Explore RightKit",
+      "viewMore": "VIEW MORE",
+      "items": [
+        { "key": "download", "title": "Direct download", "english": "DOWNLOAD", "body": "Free, with every feature.", "icon": "download", "art": "profile-riko-wave-ak-1024.webp", "tint": "#30d158", "download": true },
+        { "key": "github", "title": "GitHub source code", "english": "SOURCE CODE", "body": "Browse the code and the latest release.", "icon": "github", "art": "profile-riko-file-ak-1024.webp", "tint": "#bf5af2", "github": true, "fill": true },
+        { "key": "privacy", "title": "Privacy", "english": "PRIVACY", "body": "See how your files and settings stay on your Mac.", "icon": "shield", "art": "profile-riko-ok-ak-1024.webp", "tint": "#0a84ff", "href": "privacy/" }
+      ]
+    },
+    "hero": {
+      "kicker": "RIGHT-CLICK, DONE",
+      "motion": "Background motion",
+      "title1": "Right-click.",
+      "title2": "Done.",
+      "lead": "RightKit adds New File, Copy To, Move To, Open in App and a full toolbox to the Finder context menu.",
+      "download": "Download RightKit",
+      "github": "GitHub",
+      "requirement": "Free · Requires macOS 26 or later",
+      "tags": [
+        "12 file templates",
+        "16 tools",
+        "English and Chinese",
+        "Open source"
+      ],
+      "charAlt": "Riko, the RightKit character, reaching toward a context menu with a white mouse on her shoulder"
+    },
+    "profile": {
+      "eyebrow": "RIGHTKIT :// PROFILE",
+      "name": "Riko",
+      "localName": "",
+      "partner": "Companion: the white mouse",
+      "body": "Cheerful, quick handed, and dependable, Riko is your right click helper. Coral hair, a curled ahoge, and her cursor menu hair clip make her easy to spot. The mouse on her shoulder has one coral ear on the viewer's right.",
+      "galleryLabel": "Riko character profile",
+      "open": "View full image",
+      "close": "Close image",
+      "prev": "Previous image",
+      "next": "Next image",
+      "images": [
+        { "id": "portrait", "label": "Riko", "alt": "Full body Riko with coral hair, cursor clip, and a white mouse on her shoulder", "src": "profile-riko-stand-ak-1024.webp" },
+        { "id": "ok", "label": "All set", "alt": "Riko smiles and winks with an OK gesture, the mouse on her shoulder", "src": "profile-riko-ok-ak-1024.webp" },
+        { "id": "wave", "label": "Hello", "alt": "Riko stands at an angle and waves hello, the mouse on her shoulder", "src": "profile-riko-wave-ak-1024.webp" },
+        { "id": "file", "label": "Files ready", "alt": "Riko holds a blank file card, the mouse on her shoulder", "src": "profile-riko-file-ak-1024.webp" }
+      ]
+    },
+    "ticker": [
+      "New File",
+      "Copy To",
+      "Move To",
+      "Open in App",
+      "Copy Path",
+      "Convert Image",
+      "Icon Sets",
+      "File Hashes",
+      "AirDrop",
+      "QR Code"
+    ],
+    "sections": {
+      "new": {
+        "id": "new",
+        "num": "01",
+        "label": "New File",
+        "title": "Create files right where you click.",
+        "body": "Plain text, Markdown, Word, Excel, PowerPoint, JSON, shell scripts and more: 12 types built in, plus any file you save as your own template. Name clashes get a number. Nothing is overwritten.",
+        "note": "Reorder or turn off any type in Settings.",
+        "imgAlt": "Riko pulls a new file out of her hoodie pocket",
+        "types": [
+          "txt",
+          "md",
+          "rtf",
+          "docx",
+          "xlsx",
+          "pptx",
+          "json",
+          "xml",
+          "html",
+          "css",
+          "js",
+          "sh"
+        ]
+      },
+      "send": {
+        "id": "send",
+        "num": "02",
+        "label": "Copy To · Move To",
+        "title": "Your folders, one step away.",
+        "body": "Copy To and Move To list the folders you choose. Favorite Folders opens them in Finder with one click. Large jobs show progress and can be cancelled at any time.",
+        "note": "Downloads, Desktop and Documents are set up for you.",
+        "imgAlt": "Riko tosses a file card into a blue folder",
+        "menu": [
+          "Downloads",
+          "Desktop",
+          "Documents",
+          "Projects"
+        ]
+      },
+      "open": {
+        "id": "open",
+        "num": "03",
+        "label": "Open in App",
+        "title": "Open it in Terminal or your editor.",
+        "body": "Terminals open the folder. Editors open the item itself. RightKit finds Terminal, Ghostty, Visual Studio Code and Xcode on first launch, and you can add any app.",
+        "note": "Spaces and quotes in paths are handled safely.",
+        "imgAlt": "Riko unlocks an app window with a key-shaped cursor",
+        "apps": [
+          {
+            "name": "Terminal",
+            "icon": "terminal"
+          },
+          {
+            "name": "Ghostty",
+            "icon": "ghostty"
+          },
+          {
+            "name": "Visual Studio Code",
+            "icon": "vscode"
+          },
+          {
+            "name": "Xcode",
+            "icon": "xcode"
+          }
+        ]
+      },
+      "toolbox": {
+        "id": "toolbox",
+        "num": "04",
+        "label": "Toolbox",
+        "title": "16 small tools in one submenu.",
+        "body": "Only the commands that fit your selection appear: image tools for images, Dissolve Folder for folders. Turn off or reorder any of them.",
+        "imgAlt": "Riko opens a coral toolbox full of tiny tools"
+      },
+      "trust": {
+        "id": "trust",
+        "num": "05",
+        "label": "Peace of Mind",
+        "title": "Fast to use. Safe by default.",
+        "body": "Context menus are easy to misclick, so RightKit takes extra care where it matters.",
+        "items": [
+          {
+            "icon": "shield",
+            "title": "Confirms before deleting",
+            "body": "Delete Permanently skips the Trash, so it asks first, with no default button."
+          },
+          {
+            "icon": "lock",
+            "title": "Protected locations",
+            "body": "System folders and your home folder can't be deleted through RightKit."
+          },
+          {
+            "icon": "copy",
+            "title": "Never overwrites",
+            "body": "New, copied and moved items get a number when a name is taken."
+          },
+          {
+            "icon": "progress",
+            "title": "Cancel any time",
+            "body": "Jobs over a second show progress. Cancelling cleans up half-written files."
+          },
+          {
+            "icon": "folder",
+            "title": "Only where you want it",
+            "body": "The menu appears only in folders you authorize. Your home folder is a good start."
+          },
+          {
+            "icon": "laptop",
+            "title": "Runs on your Mac",
+            "body": "File operations stay on your Mac. QR codes are generated locally too."
+          }
+        ]
+      },
+      "more": {
+        "id": "more",
+        "num": "06",
+        "label": "More Ways In",
+        "title": "Beyond the context menu.",
+        "items": [
+          {
+            "icon": "shortcuts",
+            "akEnglish": "SHORTCUTS",
+            "title": "Shortcuts and Spotlight",
+            "body": "Copy Path, New File, File Hashes, Convert Image, icon sets and more are available as actions."
+          },
+          {
+            "icon": "qr",
+            "akEnglish": "QR CODE",
+            "title": "QR codes",
+            "body": "Turn selected text into a QR code from the Services menu. Copy it or save it as PNG."
+          },
+          {
+            "icon": "translate",
+            "akEnglish": "TRANSLATE",
+            "title": "Translate",
+            "body": "Open selected text in Google Translate or Baidu Translate, in your interface language."
+          }
+        ]
+      },
+      "pricing": {
+        "id": "pricing",
+        "num": "07",
+        "label": "Pricing",
+        "title": "Free and open source. Or chip in a dollar.",
+        "body": "Both versions have the same features, and the source code is on GitHub. The direct download is free. The Mac App Store version costs $0.99, updates through the App Store and helps fund development.",
+        "plans": [
+          {
+            "name": "Direct download",
+            "price": "$0",
+            "unit": "Free forever",
+            "features": [
+              "Every feature, no limits",
+              "DMG from GitHub Releases",
+              "Checks for updates in the app"
+            ],
+            "cta": "Download RightKit",
+            "art": "pricing-free",
+            "primary": true
+          },
+          {
+            "name": "Mac App Store",
+            "price": "$0.99",
+            "unit": "One-time purchase",
+            "features": [
+              "Same features as the free version",
+              "Updates through the App Store",
+              "Helps keep RightKit going"
+            ],
+            "cta": "Buy on the App Store",
+            "soon": "Coming soon to the App Store",
+            "art": "pricing-store",
+            "primary": false
+          },
+          {
+            "name": "Get involved",
+            "price": "Open",
+            "unit": "Contributions welcome",
+            "features": [
+              "Source code on GitHub",
+              "Report issues and ideas",
+              "Contribute code and translations"
+            ],
+            "cta": "Go to GitHub",
+            "art": "pricing-oss",
+            "github": true,
+            "primary": false
+          }
+        ]
+      }
+    },
+    "toolbox": {
+      "groups": [
+        [
+          {
+            "id": "copyPath",
+            "title": "Copy Path",
+            "desc": "Puts the full path on the clipboard.",
+            "for": [
+              "folder",
+              "file",
+              "image"
+            ]
+          },
+          {
+            "id": "copyName",
+            "title": "Copy Name",
+            "desc": "Copies the name shown in Finder.",
+            "for": [
+              "folder",
+              "file",
+              "image"
+            ]
+          }
+        ],
+        [
+          {
+            "id": "newFolderFromName",
+            "title": "New Folder from Name",
+            "desc": "Makes a folder named after the file and moves it in.",
+            "for": [
+              "file",
+              "image"
+            ]
+          },
+          {
+            "id": "alias",
+            "title": "Make Alias on Desktop",
+            "desc": "Puts an alias on your desktop.",
+            "for": [
+              "folder",
+              "file",
+              "image"
+            ]
+          },
+          {
+            "id": "airdrop",
+            "title": "AirDrop",
+            "desc": "Opens AirDrop right away.",
+            "for": [
+              "folder",
+              "file",
+              "image"
+            ]
+          },
+          {
+            "id": "grantWrite",
+            "title": "Grant Write Permission",
+            "desc": "Adds write access for you, without recursing.",
+            "for": [
+              "folder",
+              "file",
+              "image"
+            ]
+          },
+          {
+            "id": "hash",
+            "title": "File Info (Hashes)…",
+            "desc": "Computes MD5, SHA-1, SHA-256 and SHA-512.",
+            "for": [
+              "file",
+              "image"
+            ]
+          }
+        ],
+        [
+          {
+            "id": "hideSelected",
+            "title": "Hide Selected",
+            "desc": "Toggles the hidden flag.",
+            "for": [
+              "folder",
+              "file",
+              "image"
+            ]
+          },
+          {
+            "id": "hideExtension",
+            "title": "Hide Extension",
+            "desc": "Toggles the file extension.",
+            "for": [
+              "file",
+              "image"
+            ]
+          }
+        ],
+        [
+          {
+            "id": "convertImage",
+            "title": "Convert Image…",
+            "desc": "Converts to PNG, JPEG, HEIC or TIFF.",
+            "for": [
+              "image"
+            ]
+          },
+          {
+            "id": "macIconset",
+            "title": "Make macOS Icon Set",
+            "desc": "Builds an .iconset and .icns from one image.",
+            "for": [
+              "image"
+            ]
+          },
+          {
+            "id": "iosIconset",
+            "title": "Make iOS Icon Set",
+            "desc": "Exports PNGs in 13 sizes at once.",
+            "for": [
+              "image"
+            ]
+          },
+          {
+            "id": "wallpaper",
+            "title": "Set as Wallpaper",
+            "desc": "Sets it as your main display's wallpaper.",
+            "for": [
+              "image"
+            ]
+          },
+          {
+            "id": "folderIcon",
+            "title": "Set Folder Icon…",
+            "desc": "Gives a folder a new icon from an image.",
+            "for": [
+              "folder",
+              "image"
+            ]
+          }
+        ],
+        [
+          {
+            "id": "dissolve",
+            "title": "Dissolve Folder",
+            "desc": "Moves the contents out and trashes the empty folder.",
+            "for": [
+              "folder"
+            ]
+          },
+          {
+            "id": "delete",
+            "title": "Delete Permanently…",
+            "desc": "Skips the Trash and asks first.",
+            "for": [
+              "folder",
+              "file",
+              "image"
+            ]
+          }
+        ]
+      ]
+    },
+    "cta": {
+      "kicker": "GET RIGHTKIT",
+      "body": "Hand Riko the first step you'd rather skip.",
+      "download": "Download RightKit",
+      "github": "View on GitHub",
+      "requirement": "Version {version} · Requires macOS 26 or later",
+      "imgAlt": "Riko and the white mouse jump and wave happily",
+      "title1": "Right-click.",
+      "title2": "Done."
+    },
+    "faq": {
+      "num": "08",
+      "label": "FAQ",
+      "title": "Frequently asked questions",
+      "items": [
+        {
+          "q": "Does RightKit cost anything?",
+          "a": "The direct download is free, with every feature, and the source code is on GitHub. The Mac App Store version costs $0.99, has the same features and updates through the App Store. Buying it supports development."
+        },
+        {
+          "q": "Which macOS do I need?",
+          "a": "macOS 26 or later. RightKit is built on the native macOS 26 interface and doesn't support earlier versions."
+        },
+        {
+          "q": "I installed it, but the menu doesn't show up.",
+          "a": "Open System Settings > General > Login Items & Extensions and turn on the RightKit Finder extension. RightKit's Settings window also shows the extension's status."
+        },
+        {
+          "q": "Why is there no menu in some folders?",
+          "a": "The menu only appears in folders you authorize. Authorizing your home folder on first launch is recommended, and you can change it in Settings > General."
+        },
+        {
+          "q": "Are my files uploaded?",
+          "a": "No. All file operations happen on your Mac. Only when you choose Translate is the selected text sent to the translation site you picked."
+        },
+        {
+          "q": "Is Delete Permanently safe?",
+          "a": "It skips the Trash, so RightKit asks first by default. System folders and your home folder are protected and can't be deleted."
+        },
+        {
+          "q": "Can I add my own file templates?",
+          "a": "Yes. Add any file as a template under New File in Settings. RightKit keeps its own copy."
+        },
+        {
+          "q": "Which languages are supported?",
+          "a": "English and Simplified Chinese. It follows your system by default, and you can switch in Settings."
+        }
+      ],
+      "more": "Didn't find your answer?",
+      "moreLink": "Email us",
+      "imgAlt": "Riko sits on a folder thinking while the mouse holds up a question mark"
+    },
+    "footer": {
+      "download": "Download",
+      "github": "GitHub",
+      "releases": "Release notes",
+      "issues": "Report an issue",
+      "privacy": "Privacy",
+      "character": "Meet Riko",
+      "copyright": "© {year} RightKit",
+      "trademarks": "Terminal and Xcode are trademarks of Apple Inc. Visual Studio Code is a trademark of Microsoft Corporation. The Ghostty icon belongs to the Ghostty project."
+    },
+    "demo": {
+      "windowTitle": "Desktop",
+      "hint": "Right-click inside the window",
+      "hintTouch": "Long-press inside the window",
+      "openMenu": "Open menu",
+      "windowLabel": "A simulated Finder window. Right-click to try RightKit.",
+      "sidebarTitle": "Favorites",
+      "home": "/Users/riko",
+      "folder": "/Users/riko/Desktop",
+      "untitled": "Untitled",
+      "files": [
+        {
+          "name": "Notes.md",
+          "kind": "file",
+          "ext": "md"
+        },
+        {
+          "name": "Q3 Report.docx",
+          "kind": "file",
+          "ext": "docx"
+        },
+        {
+          "name": "Cover.png",
+          "kind": "image",
+          "ext": "png"
+        },
+        {
+          "name": "Projects",
+          "kind": "folder"
+        }
+      ],
+      "places": [
+        {
+          "name": "Downloads",
+          "path": "/Users/riko/Downloads"
+        },
+        {
+          "name": "Desktop",
+          "path": "/Users/riko/Desktop"
+        },
+        {
+          "name": "Documents",
+          "path": "/Users/riko/Documents"
+        }
+      ],
+      "types": [
+        {
+          "ext": "txt",
+          "title": "Plain Text"
+        },
+        {
+          "ext": "md",
+          "title": "Markdown"
+        },
+        {
+          "ext": "rtf",
+          "title": "Rich Text"
+        },
+        {
+          "ext": "docx",
+          "title": "Word Document"
+        },
+        {
+          "ext": "xlsx",
+          "title": "Excel Workbook"
+        },
+        {
+          "ext": "pptx",
+          "title": "PowerPoint Presentation"
+        }
+      ],
+      "apps": [
+        {
+          "id": "terminal",
+          "title": "Terminal",
+          "role": "terminal"
+        },
+        {
+          "id": "vscode",
+          "title": "Visual Studio Code",
+          "role": "editor"
+        }
+      ],
+      "menu": {
+        "newFile": "New File",
+        "favorites": "Favorite Folders",
+        "openInApp": "Open in App",
+        "copyCurrentPath": "Copy Current Path",
+        "cut": "Cut",
+        "copyTo": "Copy To",
+        "moveTo": "Move To",
+        "toolbox": "Toolbox",
+        "chooseFolder": "Choose Folder…",
+        "showSelected": "Show Selected",
+        "showExtension": "Show Extension"
+      },
+      "toast": {
+        "created": "Created “{name}”",
+        "copied": "Copied: {text}",
+        "cut": "Cut “{name}”. Paste it anywhere to move it.",
+        "copiedTo": "Copied “{name}” to {dest}",
+        "movedTo": "Moved “{name}” to {dest}",
+        "openedFolder": "Opened {dest} in Finder",
+        "openedApp": "Opened “{name}” in {app}",
+        "chooseFolder": "A panel opens here so you can pick the destination.",
+        "tool": "{title}: {desc}",
+        "sameFolder": "“{name}” is already in {dest}.",
+        "createdIn": "Created “{name}” in {dest}",
+        "deleteDemo": "RightKit asks before deleting permanently. Nothing is deleted in this demo.",
+        "newFolder": "Made the folder “{dest}” and moved “{name}” into it.",
+        "hidden": "Hid “{name}”",
+        "shown": "Showed “{name}”",
+        "dissolved": "Dissolved “{name}”. Its contents moved here."
+      }
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "home": "en/",
+      "updated": "Last updated: September 25, 2026",
+      "intro": "RightKit does not collect, store, or upload any of your personal data. There are no accounts, ads, or usage analytics.",
+      "sections": [
+        {
+          "title": "Your files",
+          "body": [
+            "Creating, copying, moving, converting images, computing hashes and every other file action happens on your Mac. Your files never leave it. RightKit runs in the App Sandbox and can only access folders you authorize."
+          ]
+        },
+        {
+          "title": "Settings",
+          "body": [
+            "Templates, favorite folders and preferences are stored only on your Mac. You can remove them when you uninstall RightKit."
+          ]
+        },
+        {
+          "title": "QR codes",
+          "body": [
+            "QR codes are generated on your Mac. The text is never uploaded."
+          ]
+        },
+        {
+          "title": "Translation",
+          "body": [
+            "When you use the Google Translate or Baidu Translate service, RightKit puts the selected text in a link and opens that translation website in your default browser. Your browser sends the text to that website, and its privacy policy applies. RightKit itself does not send or keep the text."
+          ]
+        },
+        {
+          "title": "Update checks (website version only)",
+          "body": [
+            "The website version asks GitHub for the latest version number. The request contains no personal information, but GitHub sees your IP address as with any web request. You can turn off automatic update checks in Settings. The App Store version makes no such request; the App Store handles updates."
+          ]
+        },
+        {
+          "title": "This website",
+          "body": [
+            "This website is a static site. It uses no cookies and no analytics or tracking scripts. The hosting provider may keep standard access logs for security and operations."
+          ]
+        },
+        {
+          "title": "Changes and contact",
+          "body": [
+            "If this policy changes, this page and the date above will be updated. For any questions, email contact@yiliang.me."
+          ]
+        }
+      ]
+    }
+  }
+}
