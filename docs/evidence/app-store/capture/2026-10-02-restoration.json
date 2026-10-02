@@ -1,0 +1,7 @@
+{
+  "finder_language_override_absent": true,
+  "services_back_to_defaults": true,
+  "capture_processes_absent": true,
+  "capture_fixture_removed": true,
+  "capture_group_removed": true
+}

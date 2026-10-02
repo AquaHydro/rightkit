@@ -170,9 +170,21 @@
         "body": "只显示和当前选择有关的命令：选图片时出现转换和图标集，选文件夹时出现解散文件夹。每个命令都可以关掉或重新排序。",
         "imgAlt": "Riko 打开一个装满小工具的珊瑚色工具箱"
       },
+      "settings": {
+        "id": "settings",
+        "num": "05",
+        "label": "按自己习惯设置",
+        "title": "想要哪些，自己挑。",
+        "body": "新建类型、功能组和工具箱命令，都能在设置里按自己的习惯调整。",
+        "items": [
+          { "icon": "doc-plus", "title": "挑选新建类型", "body": "12 种内置类型可以单独开关、拖动排序，还能加入自己的模板。" },
+          { "icon": "check", "title": "切换功能组", "body": "新建、剪切粘贴、复制移动、常用目录和在应用中打开，都能各自开关。" },
+          { "icon": "wrench", "title": "整理工具箱", "body": "16 个命令可以逐个开关，并在各自分组里调整顺序。" }
+        ]
+      },
       "trust": {
         "id": "trust",
-        "num": "05",
+        "num": "06",
         "label": "放心用",
         "title": "右键很快，也很稳。",
         "body": "右键菜单很容易误点，所以 RightKit 在关键的地方多想了一步。",
@@ -211,7 +223,7 @@
       },
       "more": {
         "id": "more",
-        "num": "06",
+        "num": "07",
         "label": "更多入口",
         "title": "不止右键菜单。",
         "items": [
@@ -237,7 +249,7 @@
       },
       "pricing": {
         "id": "pricing",
-        "num": "07",
+        "num": "08",
         "label": "价格",
         "title": "免费开源，也可以支持一下。",
         "body": "两个版本功能完全相同，源代码都在 GitHub 公开。官网版免费；商店版 8 元，由 App Store 负责更新，也是对开发的一点支持。",
@@ -457,7 +469,7 @@
       "title2": "就办好了。"
     },
     "faq": {
-      "num": "08",
+      "num": "09",
       "label": "常见问题",
       "title": "常见问题",
       "items": [
@@ -845,9 +857,21 @@
         "body": "Only the commands that fit your selection appear: image tools for images, Dissolve Folder for folders. Turn off or reorder any of them.",
         "imgAlt": "Riko opens a coral toolbox full of tiny tools"
       },
+      "settings": {
+        "id": "settings",
+        "num": "05",
+        "label": "Make it yours",
+        "title": "Pick what works for you.",
+        "body": "Choose file types, turn feature groups on or off, and arrange the tools you use most.",
+        "items": [
+          { "icon": "doc-plus", "title": "Choose file types", "body": "Turn each of the 12 built-in types on or off, reorder them, or add your own templates." },
+          { "icon": "check", "title": "Switch feature groups", "body": "Control New File, Cut and Paste, Copy and Move, Favorite Folders, and Open in App separately." },
+          { "icon": "wrench", "title": "Arrange your toolbox", "body": "Turn any of the 16 commands on or off and reorder them within their groups." }
+        ]
+      },
       "trust": {
         "id": "trust",
-        "num": "05",
+        "num": "06",
         "label": "Peace of Mind",
         "title": "Fast to use. Safe by default.",
         "body": "Context menus are easy to misclick, so RightKit takes extra care where it matters.",
@@ -886,7 +910,7 @@
       },
       "more": {
         "id": "more",
-        "num": "06",
+        "num": "07",
         "label": "More Ways In",
         "title": "Beyond the context menu.",
         "items": [
@@ -912,7 +936,7 @@
       },
       "pricing": {
         "id": "pricing",
-        "num": "07",
+        "num": "08",
         "label": "Pricing",
         "title": "Free and open source. Or chip in a dollar.",
         "body": "Both versions have the same features, and the source code is on GitHub. The direct download is free. The Mac App Store version costs $0.99, updates through the App Store and helps fund development.",
@@ -1132,7 +1156,7 @@
       "title2": "Done."
     },
     "faq": {
-      "num": "08",
+      "num": "09",
       "label": "FAQ",
       "title": "Frequently asked questions",
       "items": [

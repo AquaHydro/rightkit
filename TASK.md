@@ -11,7 +11,9 @@
 - [x] 在 App Store Connect 新建 App：bundle ID `app.rightkit.mac.store`，按上架资料填名称、副标题、描述、关键词、隐私政策和技术支持网址、价格、隐私问卷（不收集数据）、年龄分级（4+）。隐私答复已发布。
 - [x] 送审备注：把上架资料里的英文备注贴进 App Review Information，不需要演示账号。
 - [x] App 沙盒信息：用户已删掉 App Sandbox Information 里 `com.apple.security.temporary-exception.apple-events` 那一行，商店版已不再申请。
-- [x] 商店截图：`docs/evidence/app-store/zh` 与 `en` 各 5 张 2560 × 1600 产品图，已上传 App Store Connect 并按 01 至 05 排序。英文产品图用英文介绍配中文实机界面，用户已接受。
+- [x] 商店截图：`docs/evidence/app-store/zh` 与 `en` 各 5 张 2560 × 1600 产品图，已上传 App Store Connect 并按 01 至 05 排序。当时英文产品图用英文介绍配中文实机界面。2026-10-02 已按新的要求重拍本地中英文真实界面，见 [截图记录](docs/evidence/app-store/README.md)。
+- [x] 在 App Store Connect 的 0.1.3 待提交草稿中替换中英文各 5 张新截图；2026-10-02 核对顺序、MD5 和 Apple 处理状态全部通过，见 [上传记录](docs/evidence/app-store/capture/2026-10-02-asc-upload.json)。
+- [ ] 0.1.3 (7)：推 `v0.1.3` 标签构建上传后，关联构建并按上架资料更新描述、关键词和新功能说明，由用户提交审核；截图只有该版本审核并发布后才会替换线上旧图。
 - [x] 上传商店版：本机 `make upload-appstore` 上传 `0.1.1 (4)`；App Store Connect 显示上传完成、二进制已验证。出口合规从 `Info.plist` 读为「否」。
 - [x] 设置 App 供应国家或地区：App Store Connect 显示全部 175 个国家或地区为「App 发布时供应」，包含中国大陆。
 - [x] 付费 App 协议与商务资料：Connect 显示付费协议有效、银行账户可用、报税表使用中；该 App 的欧盟数字服务法交易商声明已提交。

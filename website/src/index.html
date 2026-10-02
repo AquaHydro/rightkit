@@ -86,7 +86,7 @@
 
 {% if theme.ak %}<aside class="ak-section-index" aria-label="{{ t.akNav.index }}">
   <span class="ak-section-index-giant" data-ak-section-current aria-hidden="true">00</span>
-  <span class="ak-section-index-count" aria-hidden="true">// <span data-ak-index-current>00</span> / 11</span>
+  <span class="ak-section-index-count" aria-hidden="true">// <span data-ak-index-current>00</span> / 12</span>
   <span class="ak-section-index-title" data-ak-index-title>RIGHTKIT</span>
 </aside>{% endif %}<main id="main">
   <section class="hero band ink" aria-labelledby="hero-title">
@@ -240,10 +240,25 @@
     </div>
   </section>
 
+  <section id="settings" class="band paper cards-section{% if theme.ak %} ak-structure{% endif %}"{% if theme.ak %} data-ak-word="SETTINGS"{% endif %} aria-labelledby="settings-title">
+    <div class="wrap">
+      <p class="section-label reveal"><span>// {{ t.sections.settings.num }}</span>{{ t.sections.settings.label }}</p>
+      <h2 id="settings-title" class="reveal">{{ t.sections.settings.title }}</h2>
+      <p class="body reveal">{{ t.sections.settings.body }}</p>
+      <ul class="cards cards-3">
+        {% for item in t.sections.settings.items %}<li class="card reveal">
+          <svg class="card-ic" aria-hidden="true"><use href="#i-{{ item.icon }}"/></svg>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.body }}</p>
+        </li>{% endfor %}
+      </ul>
+    </div>
+  </section>
+
 {% if theme.ak %}  <section id="workbench" class="band ink ak-workbench ak-structure" data-ak-word="WORKBENCH" aria-labelledby="workbench-title">
     <div class="wrap ak-workbench-inner">
       <div class="ak-workbench-copy">
-        <p class="section-label reveal"><span>// 05</span>{{ t.akWorkbench.label }}</p>
+        <p class="section-label reveal"><span>// 06</span>{{ t.akWorkbench.label }}</p>
         <h2 id="workbench-title" class="reveal">{{ t.akWorkbench.title }}</h2>
         <p class="body reveal">{{ t.akWorkbench.body }}</p>
         <nav class="ak-workbench-directory" aria-label="{{ t.akWorkbench.title }}">
@@ -258,7 +273,7 @@
   </section>
 {% endif %}  <section id="trust" class="band paper cards-section{% if theme.ak %} ak-structure{% endif %}"{% if theme.ak %} data-ak-word="TRUST"{% endif %} aria-labelledby="trust-title">
     <div class="wrap">
-      <p class="section-label reveal"><span>// {% if theme.ak %}06{% else %}{{ t.sections.trust.num }}{% endif %}</span>{{ t.sections.trust.label }}</p>
+      <p class="section-label reveal"><span>// {% if theme.ak %}07{% else %}{{ t.sections.trust.num }}{% endif %}</span>{{ t.sections.trust.label }}</p>
       <h2 id="trust-title" class="reveal">{{ t.sections.trust.title }}</h2>
       <p class="body reveal">{{ t.sections.trust.body }}</p>
       <ul class="cards cards-3">
@@ -275,7 +290,7 @@
     <div class="wrap">
 {% if theme.ak %}      <div class="ak-world" data-ak-world>
         <div class="ak-world-heading">
-          <p class="section-label reveal"><span>// 07</span>{{ t.akWorld.label }}</p>
+          <p class="section-label reveal"><span>// 08</span>{{ t.akWorld.label }}</p>
           <h2 id="more-title" class="reveal">{{ t.sections.more.title }}</h2>
           <p class="body reveal">{{ t.akWorld.intro }}</p>
         </div>
@@ -308,7 +323,7 @@
     <span class="ak-profile-outline" aria-hidden="true">RIKO</span><span class="ak-profile-rule" aria-hidden="true"></span>
     <div class="wrap ak-profile-inner" data-ak-profile-gallery aria-label="{{ t.profile.galleryLabel }}">
       <div class="ak-profile-info">
-        <p class="section-label reveal"><span>// 08</span>{{ t.profile.name }}</p>
+        <p class="section-label reveal"><span>// 09</span>{{ t.profile.name }}</p>
         <p class="ak-profile-eyebrow">{{ t.profile.eyebrow }}</p>
         <div class="ak-profile-head"><img src="{{ base }}img/app-icon-64.png" width="64" height="64" alt=""><h2 id="profile-title">{{ t.profile.name }}{% if t.profile.localName %} <small>{{ t.profile.localName }}</small>{% endif %}</h2></div>
         <p class="ak-profile-partner"><span aria-hidden="true">◆</span>{{ t.profile.partner }}</p>
@@ -333,7 +348,7 @@
   </section>
 {% endif %}  <section id="pricing" class="band paper pricing"{% if theme.ak %} data-ak-word="PRICING"{% endif %} aria-labelledby="pricing-title">
     <div class="wrap">
-      <p class="section-label reveal"><span>// {% if theme.ak %}09{% else %}{{ t.sections.pricing.num }}{% endif %}</span>{{ t.sections.pricing.label }}</p>
+      <p class="section-label reveal"><span>// {% if theme.ak %}10{% else %}{{ t.sections.pricing.num }}{% endif %}</span>{{ t.sections.pricing.label }}</p>
       <h2 id="pricing-title" class="reveal">{{ t.sections.pricing.title }}</h2>
       <p class="body reveal">{{ t.sections.pricing.body }}</p>
       <ul class="plans">
@@ -380,7 +395,7 @@
   <section id="faq" class="band paper faq"{% if theme.ak %} data-ak-word="FAQ"{% endif %} aria-labelledby="faq-title">
     <div class="wrap faq-inner">
       <div class="faq-head">
-        <p class="section-label reveal"><span>// {% if theme.ak %}10{% else %}{{ t.faq.num }}{% endif %}</span>{{ t.faq.label }}</p>
+        <p class="section-label reveal"><span>// {% if theme.ak %}11{% else %}{{ t.faq.num }}{% endif %}</span>{{ t.faq.label }}</p>
         <h2 id="faq-title" class="reveal">{{ t.faq.title }}</h2>
         <figure class="faq-art reveal">
           <img src="{{ base }}img/feature-empty-error{% if theme.ak %}-ak{% endif %}-480.webp" srcset="{{ base }}img/feature-empty-error{% if theme.ak %}-ak{% endif %}-240.webp 240w, {{ base }}img/feature-empty-error{% if theme.ak %}-ak{% endif %}-480.webp 480w" sizes="200px" width="480" height="720" alt="{{ t.faq.imgAlt }}" loading="lazy" decoding="async">

@@ -23,6 +23,10 @@
 
 所以商店名用「RightKit: Context Menu Toolkit」，中文区用「RightKit 右键工具箱」。0.1.1 (4) 曾用「RightKit: Finder Toolkit」「RightKit 访达工具箱」，被审核指南 5.2.5 拒绝：名称、副标题和关键词不能用 Finder、访达等苹果商标；描述里说明在访达中使用可以保留。应用内、图标和官网仍叫 RightKit：审核指南 2.3.8 要求商店名和设备上显示的名称相似，保留 RightKit 前缀就满足。
 
+## 当前状态
+
+线上是 0.1.2，下一版是 0.1.3 (7)。推广文本随时可改，下面两种语言的推广文本已于 2026-10-02 改好并同步到线上。描述、关键词、截图和「此版本的新功能」只能随新版本送审：下面的内容比线上新（关键词补满、改正「所有操作在本机完成」、使用前补上授权文件夹），中英文截图已于 2026-10-02 按「截图」一节重拍并上传到 0.1.3 草稿，等 0.1.3 发布后替换线上。
+
 ## 简体中文
 
 **名称**（30 字以内）：RightKit 右键工具箱
@@ -31,12 +35,14 @@
 
 **推广文本**（170 字以内，随时可改，不用送审）：
 
-右键一下，就办好了。在访达里右键新建文件、把项目复制或移动到常用位置、用终端或编辑器打开，还有 16 个文件小工具。
+在访达里右键就能新建 Word、Markdown 等文件，把文件一步送到常用文件夹，或直接用终端、编辑器打开。另有哈希、图标集、图片转换等 16 个小工具。
+
+不要和副标题重复，商店页上两者紧挨着显示。
 
 **关键词**（100 字符以内，逗号分隔，不重复名称）：
 
 ```text
-右键菜单,文件管理,新建文件,复制到,移动到,剪切,粘贴,终端,文件工具,图标,哈希,隐藏文件,二维码,效率
+右键菜单,新建文件,新建文档,复制路径,拷贝路径,复制到,移动到,剪切粘贴,发送到,终端,哈希,MD5,SHA256,图标生成,icns,图片转换,隐藏文件,替身,二维码,文件管理
 ```
 
 **描述**：
@@ -74,20 +80,21 @@ RightKit 给访达的右键菜单加上新建文件、剪切粘贴、复制到�
 
 放心用
 • 彻底删除前先确认，系统目录和主目录受保护
-• 所有操作在你的 Mac 上完成，不收集任何数据
+• 文件操作都在你的 Mac 上完成，不收集任何数据
 • 运行在 App Sandbox 里，只访问你授权的文件夹
 • 右键菜单只在你授权的文件夹里出现
 
-使用前，请在「系统设置 → 通用 → 登录项与扩展」里打开 RightKit 的访达扩展。RightKit 的设置窗口会显示扩展状态，并提供跳转。
+首次打开时授权一个文件夹（建议个人主文件夹），再在「系统设置 → 通用 → 登录项与扩展」里打开 RightKit 的访达扩展。RightKit 的设置窗口会显示扩展状态，并提供跳转。
 
 支持简体中文和英文，需要 macOS 26 或更高版本。
 ```
 
-**此版本的新功能**（0.1.2）：
+**此版本的新功能**（0.1.3）：
+
+写用户能感知的变化，不写「请求被拒收」「后台重试」这类实现细节。
 
 ```text
-- 修复访达菜单命令无法送达 RightKit 的问题，同时解决它在后台反复重试导致的卡顿。
-- 打开 RightKit 或从访达触发命令时，窗口和提示现在会显示在最前面。
+- 修复在「最近使用」、搜索结果和标签里右键「复制到」「移动到」「在应用中打开」等操作没有反应的问题。
 ```
 
 ## English (U.S.)
@@ -98,12 +105,12 @@ RightKit 给访达的右键菜单加上新建文件、剪切粘贴、复制到�
 
 **Promotional Text**:
 
-Right-click. Done. Create files, copy or move items to your favorite folders, open them in Terminal or your editor, and use 16 file tools, right in Finder.
+Right-click in Finder to create Word or Markdown files, send items to favorite folders, or open them in Terminal or an editor. Plus 16 file tools, from hashes to icons.
 
 **Keywords**:
 
 ```text
-right click,file manager,new file,copy to,move to,cut,paste,terminal,hidden files,icon,hash,qr,alias
+new file,copy path,copy to,move to,cut,paste,terminal,md5,sha256,icns,iconset,hidden files,qr,alias
 ```
 
 **Description**:
@@ -141,20 +148,19 @@ Beyond the context menu
 
 Built to be safe
 • Delete Permanently asks first. System folders and your home folder are protected.
-• Everything happens on your Mac. No data is collected.
+• All file operations happen on your Mac. No data is collected.
 • Runs in the App Sandbox and only accesses folders you authorize
 • The context menu appears only in folders you authorize
 
-Before you start, turn on the RightKit Finder extension in System Settings > General > Login Items & Extensions. RightKit's Settings window shows the extension's status and takes you there.
+When you first open RightKit, authorize a folder (your home folder is recommended), then turn on the RightKit Finder extension in System Settings > General > Login Items & Extensions. RightKit's Settings window shows the extension's status and takes you there.
 
 English and Simplified Chinese. Requires macOS 26 or later.
 ```
 
-**What's New in This Version** (0.1.2):
+**What's New in This Version** (0.1.3):
 
 ```text
-- Fixed Finder menu commands not reaching RightKit, and the slowdown caused by it retrying in the background.
-- Windows and alerts now come to the front when you open RightKit or run a command from Finder.
+- Fixed Copy To, Move To, Open in App and other actions doing nothing when you right-click items in Recents, search results or tags.
 ```
 
 ## App 隐私
@@ -178,10 +184,26 @@ Mac 截图要 16:10，四种尺寸任选其一：1280 × 800、1440 × 900、256
 1. 右键菜单总览：在访达空白处右键，展开「新建文件」。标题「右键一下，就办好了。」
 2. 复制到、移动到：选中文件右键，展开「移动到」，能看到发送到目录。标题「常用的文件夹，一步就到。」
 3. 在应用中打开：展开「在应用中打开」，列出终端和编辑器。标题「直接在终端或编辑器里打开。」
-4. 工具箱：展开「工具箱」，五组命令都可见。标题「16 个小工具，收在一个子菜单里。」
-5. 设置窗口：「通用」页，扩展状态显示「已启用」。标题「状态一目了然。」
+4. 工具箱：展开「工具箱」，五组命令都可见。标题「16 个小工具，收在一个子菜单里。」选中图片时「解散文件夹」按规格不出现，菜单里只有 15 项，16 个无法同时出现。
+5. 设置窗口：「工具箱」或「新建文件」页，展示开关、拖动排序和自定义模板。标题「想要哪些，自己挑。」官网对应位置同步改。
 
 用演示账户和测试文件夹截图，不要露出个人文件名。标题文案与官网一致。
+
+拍摄要求：
+
+- 菜单里只留系统和 RightKit 的项目。先在「系统设置 → 键盘 → 键盘快捷键 → 服务」临时关掉其他应用的服务（如「用 QQ 闪传发文件」），Ghostty 的「New Ghostty Tab Here / Window Here」同样属于服务，也要临时关闭；另关掉其他应用的访达扩展（如微信输入法的「隔空传送」），拍完恢复。
+- 鼠标指针不要压住高亮项的文字；子菜单完整留在窗口内，不贴下沿。
+- 英文图要拍真实英文界面：RightKit 语言设为 English，访达单独切英文，拍完用 `defaults delete com.apple.finder AppleLanguages` 恢复并重启访达。
+
+```sh
+defaults write com.apple.finder AppleLanguages '("en")' && killall Finder
+```
+
+2026-10-02 已完成本地中英文各 5 张新图，见 [证据目录](evidence/app-store/README.md)：菜单没有 QQ、Ghostty 服务和其他扩展项目；英文图使用真实英文 Finder 和 RightKit 界面；01 指针避开菜单文字；05 展示新建类型的开关和自定义模板。官网对应第五段文案已更新源文件。
+
+线上 0.1.2 仍是 0.1.1 起使用的旧图，包含上述问题；新图已上传 App Store Connect 的 0.1.3 待提交草稿，两个语言各 5 张按 01 至 05 排序，全部处理完成并核对 MD5。尚未提交审核或发布。
+
+App 预览视频可选，最多 3 段：1920 × 1080，15 至 30 秒，只能用 App 实录画面。官网宣传片带角色动画，不能直接用。
 
 ## 送审备注（App Review Information → Notes）
 
