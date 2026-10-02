@@ -86,15 +86,15 @@ import Testing
 @Suite struct TranslationTests {
     @Test func encodesText() throws {
         let text = "a&b=c #d/中文\n"
-        let google = try TranslationService.google.url(for: text, chineseTarget: true).absoluteString
+        let google = try TranslationService.google.url(for: text, language: .simplifiedChinese).absoluteString
         #expect(google.contains("tl=zh-CN") && google.hasSuffix("text=a%26b%3Dc%20%23d%2F%E4%B8%AD%E6%96%87%0A"))
-        let baidu = try TranslationService.baidu.url(for: "hi", chineseTarget: false).absoluteString
+        let baidu = try TranslationService.baidu.url(for: "hi", language: .english).absoluteString
         #expect(baidu == "https://fanyi.baidu.com/#auto/en/hi")
     }
 
     @Test func rejectsLongText() {
         #expect(throws: TranslationService.Failure.tooLong) {
-            try TranslationService.google.url(for: String(repeating: "中", count: 3000), chineseTarget: true)
+            try TranslationService.google.url(for: String(repeating: "中", count: 3000), language: .simplifiedChinese)
         }
     }
 }

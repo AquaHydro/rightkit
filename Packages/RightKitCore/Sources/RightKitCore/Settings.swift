@@ -2,7 +2,31 @@ import Foundation
 
 public enum Theme: String, Codable, CaseIterable, Sendable { case system, light, dark }
 
-public enum AppLanguage: String, Codable, CaseIterable, Sendable { case system, english, simplifiedChinese }
+/// Persisted identifiers remain stable as new localizations are added.
+public enum AppLanguage: String, Codable, CaseIterable, Sendable {
+    case system, english, simplifiedChinese, japanese, korean
+
+    public var localizationCode: String? {
+        switch self {
+        case .system: nil
+        case .english: "en"
+        case .simplifiedChinese: "zh-Hans"
+        case .japanese: "ja"
+        case .korean: "ko"
+        }
+    }
+
+    /// Language names stay recognizable regardless of the active interface language.
+    public var nativeName: String {
+        switch self {
+        case .system: L("跟随系统")
+        case .english: "English"
+        case .simplifiedChinese: "简体中文"
+        case .japanese: "日本語"
+        case .korean: "한국어"
+        }
+    }
+}
 
 public enum ImageFormat: String, Codable, CaseIterable, Sendable {
     case png, jpeg, heic, tiff

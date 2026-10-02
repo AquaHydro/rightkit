@@ -32,11 +32,11 @@ final class ServiceProvider: NSObject {
 }
 
 enum Translator {
-    /// 中文界面译成中文，英文界面译成英文，源语言自动检测。
+    /// 目标语言跟随应用语言，源语言自动检测。
     @MainActor
     static func open(_ text: String, with service: TranslationService) {
         do {
-            let url = try service.url(for: text, chineseTarget: L10n.isChinese)
+            let url = try service.url(for: text, language: L10n.language)
             if !NSWorkspace.shared.open(url) { Alerts.show(L("无法打开翻译页面。")) }
         } catch {
             Alerts.show(L("文本过长，无法打开翻译页面。"))

@@ -38,9 +38,9 @@ struct GeneralPane: View {
                     RowLabel(title: L("主题"), symbol: "circle.lefthalf.filled", tint: .intentLook)
                 }
                 Picker(selection: $model.settings.language) {
-                    Text(L("跟随系统")).tag(AppLanguage.system)
-                    Text("English").tag(AppLanguage.english)
-                    Text("简体中文").tag(AppLanguage.simplifiedChinese)
+                    ForEach(AppLanguage.allCases, id: \.self) { language in
+                        Text(verbatim: language.nativeName).tag(language)
+                    }
                 } label: {
                     RowLabel(title: L("语言"), symbol: "globe", tint: .intentGo)
                 }
@@ -169,6 +169,8 @@ struct ExtensionStatusCard: View {
                 Button(L("重启访达"), action: restart)
             }
         }
+        // Status may stay unchanged while the language changes in another window.
+        .id(model.settings.language)
         .animation(.default, value: status)
     }
 }

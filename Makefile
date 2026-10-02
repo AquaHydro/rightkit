@@ -22,7 +22,9 @@ test: generate
 # 统一验证入口（technical.md 构建与验证入口）。
 verify: test build build-appstore
 	python3 scripts/check_docs.py
-	python3 scripts/strings.py check
+	python3 -B -m unittest discover -s scripts/tests
+	python3 scripts/strings.py check $(APP)
+	python3 scripts/strings.py check .build/DerivedData/Build/Products/Debug-AppStore/RightKit.app
 	python3 scripts/check_office_templates.py
 	python3 scripts/check_intents.py $(APP)
 	git diff --check

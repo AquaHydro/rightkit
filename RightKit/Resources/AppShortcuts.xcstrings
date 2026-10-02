@@ -15,6 +15,18 @@
             "state": "translated",
             "value": "用 ${applicationName} 拷贝路径"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "${applicationName}でパスをコピー"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "${applicationName}에서 경로 복사"
+          }
         }
       }
     },
@@ -30,6 +42,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "用 ${applicationName} 新建文件"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "${applicationName}で新規ファイルを作成"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "${applicationName}에서 새 파일 생성"
           }
         }
       }
@@ -47,6 +71,18 @@
             "state": "translated",
             "value": "用 ${applicationName} 生成二维码"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "${applicationName}でQRコードを作成"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "${applicationName}에서 QR 코드 생성"
+          }
         }
       }
     },
@@ -62,6 +98,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "用 ${applicationName} 计算文件哈希"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "${applicationName}でファイルのハッシュ値を計算"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "${applicationName}에서 파일 해시 계산"
           }
         }
       }

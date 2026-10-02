@@ -15,6 +15,18 @@
             "state": "translated",
             "value": "名称"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "名前"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이름"
+          }
         }
       }
     },
@@ -30,6 +42,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "图片"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "画像"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이미지"
           }
         }
       }
@@ -47,6 +71,18 @@
             "state": "translated",
             "value": "图片格式"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "画像形式"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이미지 형식"
+          }
         }
       }
     },
@@ -62,6 +98,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "在原图旁边生成 .iconset 和 .icns。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "元の画像と同じ場所に .iconset と .icns を作成します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "원본 이미지 옆에 .iconset 및 .icns 파일을 생성합니다."
           }
         }
       }
@@ -79,6 +127,18 @@
             "state": "translated",
             "value": "在原图旁边生成一组 iOS 图标 PNG。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "元の画像と同じ場所に iOS アイコン用の PNG ファイル一式を作成します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "원본 이미지 옆에 iOS 아이콘용 PNG 파일 세트를 생성합니다."
+          }
         }
       }
     },
@@ -94,6 +154,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "在应用中打开"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アプリで開く"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "앱으로 열기"
           }
         }
       }
@@ -111,6 +183,18 @@
             "state": "translated",
             "value": "在本机把文本生成二维码，打开二维码窗口。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このMacでテキストからQRコードを作成し、QRコードのウインドウを開きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 Mac에서 텍스트로 QR 코드를 생성하고 QR 코드 창을 엽니다."
+          }
         }
       }
     },
@@ -126,6 +210,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "应用"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アプリ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "앱"
           }
         }
       }
@@ -143,6 +239,18 @@
             "state": "translated",
             "value": "打开工具"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開くアプリ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "열기 앱"
+          }
         }
       }
     },
@@ -158,6 +266,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "把图片转换成 PNG、JPEG、HEIC 或 TIFF，输出在原图旁边。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "画像を PNG、JPEG、HEIC、または TIFF に変換し、元の画像と同じ場所に保存します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이미지를 PNG, JPEG, HEIC 또는 TIFF로 변환하여 원본 이미지 옆에 저장합니다."
           }
         }
       }
@@ -175,6 +295,18 @@
             "state": "translated",
             "value": "把项目在访达中显示的名称拷贝到剪贴板，多项时每项一行。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finderに表示される項目名をクリップボードにコピーします。複数の項目は1行に1つずつ記載します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder에 표시되는 항목 이름을 클립보드에 복사합니다. 여러 항목은 한 줄에 하나씩 복사합니다."
+          }
         }
       }
     },
@@ -190,6 +322,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "把项目的路径拷贝到剪贴板，多项时每项一行。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "項目のパスをクリップボードにコピーします。複数の項目は1行に1つずつ記載します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "항목의 경로를 클립보드에 복사합니다. 여러 항목은 한 줄에 하나씩 복사합니다."
           }
         }
       }
@@ -207,6 +351,18 @@
             "state": "translated",
             "value": "拷贝名称"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "名前をコピー"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이름 복사"
+          }
         }
       }
     },
@@ -222,6 +378,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "拷贝路径"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パスをコピー"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "경로 복사"
           }
         }
       }
@@ -239,6 +407,18 @@
             "state": "translated",
             "value": "文件"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイル"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일"
+          }
         }
       }
     },
@@ -254,6 +434,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "文件哈希"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイルのハッシュ値"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일 해시"
           }
         }
       }
@@ -271,6 +463,18 @@
             "state": "translated",
             "value": "文件夹"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォルダ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "폴더"
+          }
         }
       }
     },
@@ -286,6 +490,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "文件类型"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイルの種類"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일 유형"
           }
         }
       }
@@ -303,6 +519,18 @@
             "state": "translated",
             "value": "文本"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "テキスト"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "텍스트"
+          }
         }
       }
     },
@@ -318,6 +546,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "新建文件"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新規ファイル"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새 파일"
           }
         }
       }
@@ -335,6 +575,18 @@
             "state": "translated",
             "value": "格式"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "形式"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "형식"
+          }
         }
       }
     },
@@ -350,6 +602,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "生成 iOS 图标集"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iOSアイコンセットを作成"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iOS 아이콘 세트 생성"
           }
         }
       }
@@ -367,6 +631,18 @@
             "state": "translated",
             "value": "生成 macOS 图标集"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOSアイコンセットを作成"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS 아이콘 세트 생성"
+          }
         }
       }
     },
@@ -382,6 +658,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "生成二维码"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "QRコードを作成"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "QR 코드 생성"
           }
         }
       }
@@ -399,6 +687,18 @@
             "state": "translated",
             "value": "用内置类型或自定义模板新建文件。没有指定文件夹时创建在桌面。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "標準のファイル形式またはカスタムテンプレートからファイルを作成します。フォルダを指定しない場合はデスクトップに作成します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기본 파일 유형이나 사용자 지정 템플릿으로 파일을 생성합니다. 폴더를 지정하지 않으면 데스크탑에 생성합니다."
+          }
         }
       }
     },
@@ -414,6 +714,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "终端打开所在文件夹，编辑器打开项目本身。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ターミナルでは項目が入っているフォルダを、エディタでは項目自体を開きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "터미널은 항목이 있는 폴더를 열고, 편집기는 항목 자체를 엽니다."
           }
         }
       }
@@ -431,6 +743,18 @@
             "state": "translated",
             "value": "计算文件的 MD5、SHA-1、SHA-256 和 SHA-512。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイルの MD5、SHA-1、SHA-256、SHA-512 を計算します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일의 MD5, SHA-1, SHA-256 및 SHA-512를 계산합니다."
+          }
         }
       }
     },
@@ -447,6 +771,18 @@
             "state": "translated",
             "value": "转换图片"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "画像を変換"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이미지 변환"
+          }
         }
       }
     },
@@ -462,6 +798,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "项目"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "項目"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "항목"
           }
         }
       }

@@ -16,6 +16,18 @@
             "state": "translated",
             "value": "RightKit 只在你确认后请访达重新启动，让右键菜单生效。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKitは、確認後にFinderを再起動してコンテキストメニューを有効にするため、Finderの操作を求めます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKit은 사용자가 확인한 후 Finder를 다시 시작하여 단축 메뉴를 활성화하기 위해 Finder 제어 권한을 요청합니다."
+          }
         }
       }
     }

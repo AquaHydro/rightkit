@@ -209,6 +209,18 @@ import Testing
         }
     }
 
+    @Test(arguments: [AppLanguage.japanese, .korean])
+    func eastAsianMenuTitles(language: AppLanguage) {
+        L10n.$override.withValue(language) {
+            let nodes = menu(.container)
+            #expect(titles(nodes) == [L("新建文件"), L("常用目录"), L("在应用中打开"), L("拷贝当前路径")])
+            #expect(nodes[0].children.first?.title == L("文本文档"))
+            var s = settings
+            s.newItems.append(NewItemEntry(kind: .custom(CustomTemplate(name: "週報 주간 보고", storedFileName: "x", fileExtension: "key")), enabled: true))
+            #expect(menu(.container, settings: s)[0].children.last?.title == "週報 주간 보고")
+        }
+    }
+
     @Test func monitoredPathMatchingKeepsExistingNormalizationAndBoundaryRules() {
         let roots = ["/", "/Users/tester/./work//", "/Volumes/Other", "/Users/tester/work/../kept"]
         let paths = ["/", "/Users/tester/work", "/Users/tester/work//./a", "/Users/tester/worker/a", "/Volumes/Other/a",
