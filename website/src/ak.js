@@ -53,8 +53,8 @@ const heroObserver = video && "IntersectionObserver" in window ? new Intersectio
 if (heroObserver) heroObserver.observe(video.closest(".hero"));
 syncMotion();
 
-// Track all eleven chapters in normal document scroll. Native anchors remain available without JS.
-const sections = ["new", "send", "open", "toolbox", "workbench", "trust", "more", "profile", "pricing", "faq", "links"]
+// Track all twelve chapters in normal document scroll. Native anchors remain available without JS.
+const sections = ["new", "send", "open", "toolbox", "settings", "workbench", "trust", "more", "profile", "pricing", "faq", "links"]
   .map((id) => document.getElementById(id)).filter(Boolean);
 const indexNumber = document.querySelector("[data-ak-index-current]");
 const indexTitle = document.querySelector("[data-ak-index-title]");

@@ -1,0 +1,108 @@
+{
+  "appId": "6816212746",
+  "version": "0.1.3",
+  "versionId": "196f557e-0fa3-4cc3-901f-3d1404701fb3",
+  "platform": "MAC_OS",
+  "submitted": false,
+  "localizations": [
+    {
+      "locale": "en-US",
+      "localizationId": "25622a51-8678-4beb-b243-2626fd260a17",
+      "screenshots": [
+        {
+          "order": 1,
+          "fileName": "01-new-file.png",
+          "assetId": "69400019-6472-870a-800d-e9c3e6a63995",
+          "md5": "ad8e6a69176d7ac2f3a6933aa6b6fbba",
+          "state": "COMPLETE"
+        },
+        {
+          "order": 2,
+          "fileName": "02-move-to.png",
+          "assetId": "51000019-6472-870a-8010-4596edfa9f13",
+          "md5": "a4fcc20f68fa874d5263840a0f3eed10",
+          "state": "COMPLETE"
+        },
+        {
+          "order": 3,
+          "fileName": "03-open-in-app.png",
+          "assetId": "ecc00019-6472-870a-803f-0a73d09e8699",
+          "md5": "9fdcf3c69914f0be421c4d469f3a24a6",
+          "state": "COMPLETE"
+        },
+        {
+          "order": 4,
+          "fileName": "04-toolbox.png",
+          "assetId": "4f400019-6472-870a-803f-4a9c63c4d99f",
+          "md5": "feae8763c94fdf7ba8612d6604174b2a",
+          "state": "COMPLETE"
+        },
+        {
+          "order": 5,
+          "fileName": "05-settings.png",
+          "assetId": "91c00019-6472-870a-800e-09eb3a66bbb4",
+          "md5": "8b31454041a24449863fbf582023ca23",
+          "state": "COMPLETE"
+        }
+      ]
+    },
+    {
+      "locale": "zh-Hans",
+      "localizationId": "e4279689-d947-4b48-af38-05937639e30d",
+      "screenshots": [
+        {
+          "order": 1,
+          "fileName": "01-new-file.png",
+          "assetId": "fb400019-6472-870a-8034-1912bf89d653",
+          "md5": "9d2e7d51d02a0898b7adb82088f018f0",
+          "state": "COMPLETE"
+        },
+        {
+          "order": 2,
+          "fileName": "02-move-to.png",
+          "assetId": "bac00019-6472-870a-802b-08536ff27585",
+          "md5": "9a1ebd231af1ce6a257775ddb67d8bc4",
+          "state": "COMPLETE"
+        },
+        {
+          "order": 3,
+          "fileName": "03-open-in-app.png",
+          "assetId": "8f800019-6472-870a-802e-0f787c8ea056",
+          "md5": "0ad04f0ea1e7b7167f3d8e7cd00e078d",
+          "state": "COMPLETE"
+        },
+        {
+          "order": 4,
+          "fileName": "04-toolbox.png",
+          "assetId": "b1000019-6472-870a-8015-285f1de99a01",
+          "md5": "f544d8df73876b38a82cb3fb8762a0dd",
+          "state": "COMPLETE"
+        },
+        {
+          "order": 5,
+          "fileName": "05-settings.png",
+          "assetId": "7ec00019-6472-870a-8006-01ca81953e0f",
+          "md5": "6559b9d814ad7272d43e34752a919feb",
+          "state": "COMPLETE"
+        }
+      ]
+    }
+  ],
+  "versions": [
+    {
+      "id": "196f557e-0fa3-4cc3-901f-3d1404701fb3",
+      "version": "0.1.3",
+      "state": "PREPARE_FOR_SUBMISSION"
+    },
+    {
+      "id": "28db3e16-dd14-48b6-bfa0-85bf54b55216",
+      "version": "0.1.2",
+      "state": "READY_FOR_SALE"
+    },
+    {
+      "id": "458e7118-6ec8-4af1-b8a0-3ced4bcfb2e6",
+      "version": "0.1.1",
+      "state": "READY_FOR_SALE"
+    }
+  ]
+}

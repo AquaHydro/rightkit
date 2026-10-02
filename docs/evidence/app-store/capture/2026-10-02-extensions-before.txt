@@ -1,0 +1,4 @@
++    com.tencent.inputmethod.wetype.FinderSync(2.2.3)
++    app.rightkit.mac.store.finder(0.1.2)
++    app.rightkit.mac.finder(0.1.2)
+     app.rightkit.capture.finder(0.1.2)
