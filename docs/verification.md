@@ -45,6 +45,7 @@
 | `V-081` | `F-081` | 用本地假服务或注入的响应测试：新版本、同版本、旧版本、预发布、标签格式错误、网络失败六种情况的提示与规格一致；「稍后」后自动检查不再提示同一版本；「前往下载」打开 Release 网页，没有下载任何文件 | `Planned` |
 | `V-082` | `F-082` | `make release` 和 `make release-appstore` 的签名检查都通过（`scripts/release/check_signature.sh`）；Finder 扩展声明 `LSUIElement = YES` 并通过 App Store Connect 自动校验；两个渠道的 bundle ID、App Group、XPC 服务名和 entitlements 与工程边界一致；三个 target 都开了沙盒；商店版二进制里没有 `api.github.com`、`github.com/AquaHydro/rightkit/releases` 字符串和 `network.client` 权限，关于里只有「反馈问题」，仓库私有期间打开邮件 `contact@yiliang.me`；官网中英文下载按钮都指向最新 GitHub Release；两个版本同时安装时设置互不影响 | `Passed` |
 | `V-083` | `F-044`、`F-056`、`F-057`、`F-074` | 沙盒构建下回归：替身在真实桌面而不是容器里；设为壁纸生效；设置文件夹图标生效；快捷指令对已授权和未授权文件夹的输出结果与 `F-080` 一致；agent 在沙盒里仍能校验扩展和主程序的签名，拒绝其他进程；主程序没运行时点访达菜单，主程序被拉起但不开设置窗口；停用后台项目后点菜单，主程序打开「通用」页；扩展状态在沙盒里仍能区分「已启用」和「未运行」；生成 macOS 图标集时 `iconutil` 在沙盒里正常运行 | `Passed` |
+| `V-084` | `F-060`、`F-032` | 在「最近使用」和搜索结果里选中监视目录内的文件，复制到、移动到、在应用中打开都能完成，主程序没有拒收请求的日志；空白处右键没有 RightKit 菜单。两个渠道代码相同，真机只验官网版 Debug，商店版靠同一份共享代码和构建检查 | `Passed` |
 
 ## 哈希向量
 

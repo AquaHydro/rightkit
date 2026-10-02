@@ -31,6 +31,15 @@ import Testing
         }
     }
 
+    @Test func virtualFolderIsDropped() throws {
+        for virtual in ["x-apple-finder:recents", "https://example.com/a", "file:"] {
+            let e = CommandEnvelope(command: Command(.copyTo), folder: URL(string: virtual), items: [URL(filePath: "/Users/t/a.txt")])
+            #expect(e.folder == nil, "\(virtual)")
+            let r = try CommandEnvelope.validate(try data(e))
+            #expect(r.folder == nil && r.items.count == 1)
+        }
+    }
+
     @Test func unknownActionIsMalformed() throws {
         var json = try JSONSerialization.jsonObject(with: try data(CommandEnvelope(command: Command(.cut), folder: nil, items: []))) as! [String: Any]
         json["command"] = ["action": "rm -rf"]

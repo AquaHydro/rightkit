@@ -39,7 +39,8 @@ public struct CommandEnvelope: Codable, Equatable, Sendable {
 
     public init(command: Command, folder: URL?, items: [URL], sentAt: Date = Date()) {
         self.command = command
-        self.folder = folder?.absoluteString
+        // 「最近使用」、搜索结果等虚拟位置没有真实文件夹，访达给的不是文件路径。丢掉它，选中项仍可正常处理。
+        self.folder = folder.flatMap { $0.isFileURL && $0.path(percentEncoded: false).hasPrefix("/") ? $0.absoluteString : nil }
         self.items = items.map(\.absoluteString)
         self.sentAt = sentAt
     }

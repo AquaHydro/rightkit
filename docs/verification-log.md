@@ -2,6 +2,19 @@
 
 [验收](verification.md) 里需要真正打开访达的用例记录在这里。每次记录系统版本、构建、监视目录、步骤、结果和菜单回调日志。
 
+## 2026-10-01 虚拟位置右键（V-084）
+
+- 系统：macOS 27.0.1，Xcode 27.0。构建：`fix/virtual-folder-targets` 分支，官网版 Debug，开发签名，`RIGHTKIT_SKIP_LOGIN_ITEM=1` 启动。商店版扩展在测试期间临时关闭，结束后恢复开启。
+- 问题：商店版 0.1.2 (6) 在「最近使用」里右键复制到、移动到、在应用中打开都没有反应。日志为扩展 `menu kind=0 folder= items=1`，主程序 `Rejected request: invalidURL`。访达在虚拟位置给出的当前文件夹不是文件路径，信封校验失败，整条请求被丢弃。
+- 监视目录：欢迎窗口授权测试自己创建的 `~/rk-e2e-virtual`，里面只有两个测试文件和 `dest` 文件夹，结束后移到废纸篓。
+- 方法：用 `.savedSearch` 打开按文件名搜索 `rkvirtualprobe*` 的搜索结果窗口（与「最近使用」同为没有真实文件夹的位置），通过辅助功能选中文件、打开右键菜单并逐项点击。
+- 结果：
+  - 「复制到 > 选择文件夹…」选 `dest`：文件复制到 `dest`，源文件保留。
+  - 「移动到 > 选择文件夹…」选 `dest`：文件移到 `dest`。
+  - 「工具箱 > 拷贝路径」：剪贴板为文件完整路径。
+  - 空白处右键：没有 RightKit 菜单项。
+  - 日志只有 `perform copyTo/moveTo/copyPath` 和主程序 `handle ... items=1`，没有 `Rejected request`。
+
 ## App Store Connect 首次上传（V-082）
 
 - Xcode 27.0，本地 `make upload-appstore`，商店版 `app.rightkit.mac.store`。首次尝试 `0.1.1 (3)` 被 Apple 自动校验拒绝：Finder 扩展的 Info.plist 缺少 `LSUIElement`。该构建未完成上传。
