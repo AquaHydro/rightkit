@@ -27,8 +27,8 @@ RightKit 照搬结构和节奏，价格卡也学了 hover 播放视频的做法�
 
 | 风格 | 网址 | 样式 |
 | --- | --- | --- |
-| 经典（默认） | `/`、`/en/` | `styles.css`，本文「视觉」和「动画」里没有特别标注的部分 |
-| ak-ui | `/ak/`、`/ak/en/` | `styles.css` 之后再加载 `ak-ui.css`，按 [ak-ui](https://github.com/YunYouJun/ak-ui) 的 terminal 强度改几何和交互反馈 |
+| 经典（默认） | `/`、`/en/`、`/ja/`、`/ko/` | `styles.css`，本文「视觉」和「动画」里没有特别标注的部分 |
+| ak-ui | `/ak/`、`/ak/en/`、`/ak/ja/`、`/ak/ko/` | `styles.css` 之后再加载 `ak-ui.css`，按 [ak-ui](https://github.com/YunYouJun/ak-ui) 的 terminal 强度改几何和交互反馈 |
 
 ak-ui 风格使用 terminal 强度重新编排首屏和角色内容，品牌不变：珊瑚色、Nunito 字标、Riko 和模拟访达窗口都保留。首屏用电影画幅视频、稀疏结构线、平直珊瑚色块、超大描边字和固定章节索引建立沉浸构图。中段增加只在 ak 版出现的「Riko 的工作台」和「Riko 档案」：工作台用原创等距场景与 HTML 热点串起真实功能入口，档案用全身立绘、灰度回声和可键盘操作的缩略图介绍现有角色设定。「更多入口」在 ak 版改为词条粒子浏览，常见问题之后增加三个真实链接组成的通高竖幅。全站角色素材都换成 ak 版（文件名加 `-ak`，见[素材清单](#素材清单)）。模拟窗口和菜单仍然照 macOS 26 的样子画，不套 ak-ui 几何。背景视频、背景粒子和词条粒子的浮动共用「背景动效」开关；减弱动态效果时视频和粒子静止，词条区直接显示静态图标。ak-ui 页面的 canonical 指向经典版对应页面。
 
@@ -77,7 +77,7 @@ ak-ui 风格在此基础上改为：
 - 首屏最底层是原创低动态 PV 视频，静态海报始终可用。视频使用上下暗边形成电影画幅，离开首屏、关闭背景动效或开启减弱动态效果时暂停。
 - 页面右侧固定章节索引显示半裁的大号编号和当前区块标题（共 11 个区块，首屏显示 `00`）。它放在 1200px 内容列右侧的留白里、贴近屏幕底部，不压文案、模拟窗口和 Riko 的脸；窗口宽度小于 1420px 时留白不够，直接隐藏，当前位置由导航的 `aria-current` 表示。中文页导航以窄体英文大写为主标签、中文为小标签，英文页只显示英文；当前项同时有珊瑚信号线和 `aria-current`。
 - 下载区用同样的结构线和被裁切的 `RIKO` 空心字呼应首屏，并保留一层旋涡粒子（`orbit`）。
-- 鼠标视差（ak-ui `createDashboardDepth`）：首屏的线格、粒子、斜面、光晕和 Riko，下载区的线格、斜面、粒子和 Riko，四个功能区和工具箱的插画，都按不同深度反向移动。首屏模拟窗口不动，保证点击位置稳定。只对精确指针生效，触屏不动；减弱动态效果时回到中心。
+- 鼠标视差（ak-ui `createDashboardDepth`）：首屏的线格、粒子、斜面、光晕和 Riko，下载区的线格、斜面、粒子和 Riko，四个功能区和工具箱的插画，都按不同深度反向移动。首屏模拟窗口不动，保证点击位置稳定。首屏的标题与说明使用同一块随内容高度伸展的珊瑚背景，字标保持单行，避免本地化文案超过固定背景边界。只对精确指针生效，触屏不动；减弱动态效果时回到中心。
 - 首屏和下载区各有一个「背景动效」开关（桌面在右上，手机在底部），两个开关同步控制全部粒子，`aria-pressed` 表示状态，亮起的方块表示正在播放。粒子离开视口、页面隐藏或减弱动态效果时自动暂停，减弱动态效果时开关隐藏。
 - Riko 档案的主立绘前景越过结构线，背后复用当前立绘做灰度低透明度回声，最底层是深灰空心字。缩略图选择使用 ak-ui `createMediaGallery`，支持方向键、Home、End 和触摸横滑；切换顺序是旧立绘淡出、空场短暂停留、新立绘进入，回声随后出现。
 - 「Riko 的工作台」参考明日方舟官网「泰拉万象」：深色底上一张接近单色的原创等距场景，场景里的物件上浮着「斜线小方框加英文标签」的热点（文件卡叠对应新建，文件夹架对应复制移动，笔记本对应在应用中打开，装备箱对应工具箱，小显示器对应 GitHub，剪贴板对应下载）。热点坐标写在 `content.json` 的 `akWorkbench.links[].x/y`，换图后要重新对位。左侧目录是可访问的主入口；场景热点只给鼠标和触摸用（`aria-hidden`，不进 Tab 顺序），目录和热点在 hover 或 focus 时互相点亮，热点展开中文名。900px 以下热点只显示方框和英文标签，不展开中文名，点击区域放大到约 36px，仍可点击跳转。
@@ -113,7 +113,7 @@ ak-ui 风格在此基础上改为：
 | ak 专属 | `// 11 继续探索` | `--ink` | 官网版下载、GitHub 源代码、隐私说明三个通高竖幅 | `profile-riko-wave-ak`、`profile-riko-file-ak`、`profile-riko-ok-ak` |
 | 12 | 页脚 | `--ink` | 链接（含隐私政策）、版权、底部一个大号描边字标 | 无 |
 
-隐私政策是单独的页面，中文在 `/privacy/`，英文在 `/en/privacy/`，模板 `website/src/privacy.html`，文案在 `content.json` 的 `privacy`。它是 App Store Connect 要填的隐私政策网址，内容必须和应用的实际网络行为一致：翻译只打开浏览器，只有官网版检查更新。
+隐私政策是单独的页面，简体中文、英文、日文、韩文分别在 `/privacy/`、`/en/privacy/`、`/ja/privacy/`、`/ko/privacy/`，ak 风格在相同路径前加 `/ak/`，模板 `website/src/privacy.html`，文案在 `content.json` 的 `privacy`。它是 App Store Connect 要填的隐私政策网址，内容必须和应用的实际网络行为一致：翻译只打开浏览器，只有官网版检查更新。
 
 下载区原计划用珊瑚渐变满宽底，但 Riko 的发色和珊瑚底几乎一样，头发会融进背景，所以改成深色底加珊瑚光晕。
 
@@ -133,7 +133,7 @@ ak-ui 风格在此基础上改为：
 
 ### 文案
 
-所有文案都在 `website/content.json`，中英两套结构相同。标语和按钮：
+所有文案都在 `website/content.json`，中英日韩四套共用结构。标语和按钮：
 
 | 位置 | 中文 | English |
 | --- | --- | --- |
@@ -204,17 +204,17 @@ Hero 里的访达窗口用 HTML 和 CSS 绘制。窗口里有 4 个项目：一�
 | `website/assets/apps/*.png` | 「在应用中打开」里终端、Ghostty、Visual Studio Code、Xcode 的真实图标 | 已用，按 macOS 图标网格导出 64 和 128。来源和权利人见 `website/assets/apps/SOURCES.md`，页脚写明商标归属 |
 | 应用图标 | favicon、导航、分享图 | 从 `RightKit/Resources/AppIcon.icon` 合成，导出 64、180、512 |
 | `public/img/og.jpg` | 1200 × 630 分享图 | 由 `website/tools/og.html` 渲染（`node website/tools/render_og.mjs`，需要 Playwright） |
-| 应用截图或录屏 | 真实访达菜单和设置窗口 | 待做，需要在 Mac 上截取。首屏已经用 HTML 模拟菜单，截图以后可以放进功能分区 |
+| 应用截图或录屏 | 真实访达菜单和设置窗口 | 日文与韩文设置页使用 `docs/evidence/localization/` 的生产视图隔离截图，放在设置功能分区并注明下一版本预览；真实 Finder 录屏仍待单独验收 |
 
 [AquaHydro/rightkit#2](https://github.com/AquaHydro/rightkit/pull/2) 审查时提出的 6 项修改都已经在该 PR 里修好：阴影、画布尺寸、文件夹颜色、锁的颜色、透明度和体积。
 
 ## 技术
 
-- 静态站，只用 Python 标准库构建：`python3 website/build.py`（或 `make website`）把 `src/index.html` 按 `content.json` 渲染成 `dist/index.html`（中文）和 `dist/en/index.html`（英文），ak-ui 风格渲染到 `dist/ak/` 下，再复制 `public/`、`styles.css`、`ak-ui.css`、`main.js` 和 `ak.js`。两种风格共用 `public/` 里的图片、字体和视频。`make website-serve` 在本地 8000 端口预览。
+- 静态站，只用 Python 标准库构建：`python3 website/build.py`（或 `make website`）把 `src/index.html` 按 `content.json` 渲染成 `dist/index.html`（中文）和 `dist/en/index.html`（英文）、`dist/ja/index.html`（日文）和 `dist/ko/index.html`（韩文），ak-ui 风格渲染到 `dist/ak/` 下，再复制 `public/`、`styles.css`、`ak-ui.css`、`main.js` 、`ak.js` 和 `language.js`。两种风格共用 `public/` 里的图片、字体和视频。`make website-serve` 在本地 8000 端口预览。
 - 模板语法只有变量、循环和条件，见 `build.py` 开头的说明。
 - 资源路径都是相对路径，放在域名根目录或 GitHub Pages 这类子路径下都能用。`dist/` 不入库，部署时构建。
-- 不引入前端框架和第三方运行时。ak-ui 风格用它的 `tokens.css`，以及原样复制的 `js/site/particles.mjs`、`js/site/shared.mjs`、`js/site/sections.mjs`、`js/site/gallery.mjs`、`js/effects.mjs` 和 `js/dashboard-depth.mjs`，都放在 `public/ak-ui/` 并附 MIT 许可证；`src/ak.js` 只在 ak-ui 页面以 `type=module` 加载。品牌到 `--ak-*` 语义变量的映射和全部 ak-ui 样式写在 `src/ak-ui.css`，经典版的 `styles.css` 不改。模板只在 `{% if theme.ak %}` 分支增加 ak 专属结构。页面之间的链接用 `home`，资源用 `base`，所以 `/ak/` 下切换语言不会跳回经典版。字体自托管 Nunito、Geist Mono 和 Oswald，许可证在 `public/fonts/`。中文走系统字体。
-- 语言：导航和页脚都有切换链接，页面声明 `hreflang`。不根据浏览器语言自动跳转，也不弹切换提示。
+- 不引入前端框架和第三方运行时。ak-ui 风格用它的 `tokens.css`，以及原样复制的 `js/site/particles.mjs`、`js/site/shared.mjs`、`js/site/sections.mjs`、`js/site/gallery.mjs`、`js/effects.mjs` 和 `js/dashboard-depth.mjs`，都放在 `public/ak-ui/` 并附 MIT 许可证；`src/ak.js` 只在 ak-ui 页面以 `type=module` 加载。品牌到 `--ak-*` 语义变量的映射和全部 ak-ui 样式写在 `src/ak-ui.css`，经典版的 `styles.css` 不改。模板只在 `{% if theme.ak %}` 分支增加 ak 专属结构。页面之间的链接用 `home`，资源用 `base`，所以 `/ak/` 下切换语言不会跳回经典版。字体自托管 Nunito、Geist Mono 和 Oswald，许可证在 `public/fonts/`。中日韩文走系统字体。
+- 语言：导航使用原生 `details` 展开四语链接，页脚提供同一组链接，当前语言带文字和选中标记。只在默认中文入口按浏览器偏好匹配，手动选择保存在本机并优先使用；明确语言路径不重定向，`?lang=zh` 保留中文。切换保留风格、首页或隐私页、查询参数和锚点。存储不可用、没有 JavaScript 时链接仍可用。两种风格声明四语 `hreflang` 与 `x-default`，ak 的 canonical 和 alternate 保持指向经典版对应页面。
 - 首屏立绘用 `fetchpriority="high"` 并预加载，其余图片懒加载。
 - 官网域名 `https://rightkit.example` 仍待确定；下载已固定跳转 GitHub 最新 Release。域名、下载地址、GitHub 链接和版本号统一放在 `site.json`。
 - 经典版继续遵守首屏传输量不超过 500KB、移动端 LCP 在 2.5 秒以内的预算。ak 版以电影背景和高质量角色展示为优先，视频使用 `preload="metadata"` 和静态海报兜底，不设同一体积预算。
@@ -226,5 +226,5 @@ Hero 里的访达窗口用 HTML 和 CSS 绘制。窗口里有 4 个项目：一�
 3. 开启「减弱动态效果」后没有浮动、跑马灯和开屏动画，内容完整可见。
 4. 所有文字和背景的对比度达到 WCAG AA。
 5. 页面上的每一项功能描述都能在功能规格里找到对应的 `F-xxx`。
-6. 中英两版文案都没有 em dash。
+6. 中英日韩四版文案都没有 em dash，菜单名与应用资源一致；检查日/韩桌面与手机视口、语言菜单键盘操作、同页切换、存储失败与无 JavaScript 回退。
 7. 价格卡：鼠标移入播放、移出停止；键盘 Tab 到卡片里的按钮时播放；手机宽度下卡片横向滑动并吸附，进入视口的那张才播放；开启减弱动态效果时不播放也不下载视频。视频播放过程中发卡位置和形状不变（抽帧检查）。

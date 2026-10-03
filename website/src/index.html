@@ -7,14 +7,15 @@
 <meta name="description" content="{{ t.meta.description }}">
 <meta name="theme-color" content="#2A2B31">
 <meta name="color-scheme" content="light dark">
-<link rel="canonical" href="{{ site.url }}{{ t.path }}">
-<link rel="alternate" hreflang="{{ t.lang }}" href="{{ site.url }}{{ t.path }}">
-<link rel="alternate" hreflang="{{ t.alt.lang }}" href="{{ site.url }}{{ t.alt.path }}">
-<link rel="alternate" hreflang="x-default" href="{{ site.url }}/">
+<link rel="canonical" href="{{ page.canonical }}">
+{% for language in languages %}<link rel="alternate" hreflang="{{ language.lang }}" href="{{ language.canonical }}">
+{% endfor %}<link rel="alternate" hreflang="x-default" href="{{ page.default }}">
+<script type="application/json" id="language-data">{{ languageConfig|json }}</script>
+<script src="{{ base }}language.js"></script>
 <meta property="og:type" content="website">
 <meta property="og:title" content="{{ t.meta.title }}">
 <meta property="og:description" content="{{ t.meta.description }}">
-<meta property="og:url" content="{{ site.url }}{{ t.path }}">
+<meta property="og:url" content="{{ page.canonical }}">
 <meta property="og:image" content="{{ site.url }}/img/og.jpg">
 <meta property="og:locale" content="{{ t.ogLocale }}">
 <meta name="twitter:card" content="summary_large_image">
@@ -60,7 +61,7 @@
 
 <header class="nav" data-nav>
   <div class="nav-inner">
-    <a class="brand" href="./">
+    <a class="brand" href="{{ page.home }}">
       <img src="{{ base }}img/app-icon-64.png" width="28" height="28" alt="">
       <span>RightKit</span>
     </a>
@@ -78,7 +79,12 @@
       <a href="#faq">{{ t.nav.faq }}</a>
     </nav>{% endif %}
     <div class="nav-actions">
-      <a class="lang" href="{{ home }}{{ t.alt.href|raw }}" hreflang="{{ t.alt.lang }}" lang="{{ t.alt.lang }}" aria-label="{{ t.nav.language }}">{{ t.alt.short }}</a>
+      <details class="language-switch">
+        <summary class="lang" aria-label="{{ t.nav.language }}">{{ currentLanguage.short }}</summary>
+        <nav class="language-options" aria-label="{{ t.nav.language }}">
+          {% for language in languages %}<a href="{{ language.href }}" hreflang="{{ language.lang }}" lang="{{ language.lang }}" data-language="{{ language.key }}"{% if language.current %} aria-current="page"{% endif %}>{{ language.name }}{% if language.current %}<span class="language-current" aria-hidden="true">✓</span>{% endif %}</a>{% endfor %}
+        </nav>
+      </details>
       <a class="btn btn-primary btn-sm" href="{{ site.download }}"><svg class="ic"><use href="#i-download"/></svg>{{ t.nav.download }}</a>
     </div>
   </div>
@@ -93,7 +99,6 @@
     <div class="grid-bg" aria-hidden="true"{% if theme.ak %} data-depth="0.04"{% endif %}></div>{% if theme.ak %}
     <div class="hero-plane" data-depth="0.12" aria-hidden="true"></div>
     <div class="ak-hero-rule ak-hero-rule--one" aria-hidden="true"></div><div class="ak-hero-rule ak-hero-rule--two" aria-hidden="true"></div><div class="ak-hero-rule ak-hero-rule--three" aria-hidden="true"></div><div class="ak-hero-rule ak-hero-rule--vertical" aria-hidden="true"></div>
-    <span class="ak-coral-plane" aria-hidden="true"></span>
     <span class="ak-hero-word" aria-hidden="true">RIGHT / CLICK</span>
     <video class="ak-hero-video" poster="{{ base }}img/hero-pv-poster-ak.webp" muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true" tabindex="-1"><source data-src="{{ base }}video/hero-pv-ak.mp4" type="video/mp4"></video>
     <canvas class="ak-particle-field hero-particles" data-pattern="wave" data-depth="0.08" aria-hidden="true"></canvas>
@@ -101,11 +106,17 @@
     <div class="wrap hero-inner">
       <div class="hero-copy">
         <p class="kicker intro" style="--d:0"><span class="kicker-line"></span>{{ t.hero.kicker }}</p>
-        <h1 id="hero-title">
+        {% if theme.ak %}<div class="wordmark intro" style="--d:1" aria-hidden="true">RightKit<span class="dot">.</span></div>
+        <div class="ak-hero-description">
+          <h1 id="hero-title" aria-label="RightKit. {{ t.hero.title1 }} {{ t.hero.title2 }}">
+            <span class="tagline intro" style="--d:2">{{ t.hero.title1 }}<br><em>{{ t.hero.title2 }}</em></span>
+          </h1>
+          <p class="lead intro" style="--d:3">{{ t.hero.lead }}</p>
+        </div>{% else %}<h1 id="hero-title">
           <span class="wordmark intro" style="--d:1">RightKit<span class="dot">.</span></span>
           <span class="tagline intro" style="--d:2">{{ t.hero.title1 }}<br><em>{{ t.hero.title2 }}</em></span>
         </h1>
-        <p class="lead intro" style="--d:3">{{ t.hero.lead }}</p>
+        <p class="lead intro" style="--d:3">{{ t.hero.lead }}</p>{% endif %}
         <div class="actions intro" style="--d:4">
           <a class="btn btn-primary" href="{{ site.download }}"><svg class="ic"><use href="#i-download"/></svg>{{ t.hero.download }}</a>
           <a class="btn btn-ghost" href="{{ site.github }}"><svg class="ic ic-fill"><use href="#i-github"/></svg>{{ t.hero.github }}</a>
@@ -252,6 +263,10 @@
           <p>{{ item.body }}</p>
         </li>{% endfor %}
       </ul>
+      {% if t.sections.settings.preview %}<figure class="settings-preview reveal">
+        <img src="{{ base }}img/screenshots/{{ t.sections.settings.preview.src }}" width="1280" height="1240" alt="{{ t.sections.settings.preview.alt }}" loading="lazy" decoding="async">
+        <figcaption>{{ t.sections.settings.preview.caption }}</figcaption>
+      </figure>{% endif %}
     </div>
   </section>
 
@@ -416,7 +431,7 @@
       <p class="section-label reveal"><span>// 11</span>{{ t.akLinks.label }}</p>
       <h2 id="links-title" class="reveal">{{ t.akLinks.title }}</h2>
       <div class="ak-link-panels">
-      {% for link in t.akLinks.items %}<a class="ak-link-panel" style="--tint: {{ link.tint }}" href="{% if link.download %}{{ site.download }}{% else %}{% if link.github %}{{ site.github }}{% else %}{{ link.href }}{% endif %}{% endif %}">
+      {% for link in t.akLinks.items %}<a class="ak-link-panel" style="--tint: {{ link.tint }}" href="{% if link.download %}{{ site.download }}{% else %}{% if link.github %}{{ site.github }}{% else %}{% if link.privacy %}{{ page.privacy }}{% else %}{{ link.href }}{% endif %}{% endif %}{% endif %}">
         <img src="{{ base }}img/{{ link.art }}" width="1024" height="1536" alt="" loading="lazy" decoding="async">
         <span class="ak-link-panel-content"><svg class="ic{% if link.fill %} ic-fill{% endif %}" aria-hidden="true"><use href="#i-{{ link.icon }}"/></svg><strong>{{ link.title }}</strong><span class="ak-link-panel-en">{{ link.english }}</span><span class="ak-link-panel-body">{{ link.body }}</span><span class="ak-link-panel-more">{{ t.akLinks.viewMore }}<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
       </a>{% endfor %}
@@ -427,17 +442,17 @@
 
 <footer class="footer band ink">
   <div class="wrap footer-inner">
-    <a class="brand" href="./">
+    <a class="brand" href="{{ page.home }}">
       <img src="{{ base }}img/app-icon-64.png" width="28" height="28" alt="">
       <span>RightKit</span>
     </a>
-    <nav class="footer-links" aria-label="Footer">
+    <nav class="footer-links" aria-label="{{ t.footer.navigation }}">
       <a href="{{ site.download }}">{{ t.footer.download }}</a>
       <a href="{{ site.github }}">{{ t.footer.github }}</a>
       <a href="{{ site.releases }}">{{ t.footer.releases }}</a>
       <a href="{{ site.contact }}">{{ t.footer.issues }}</a>
-      <a href="privacy/">{{ t.footer.privacy }}</a>
-      <a href="{{ home }}{{ t.alt.href|raw }}" hreflang="{{ t.alt.lang }}" lang="{{ t.alt.lang }}">{{ t.alt.label }}</a>
+      <a href="{{ page.privacy }}">{{ t.footer.privacy }}</a>
+      {% for language in languages %}<a href="{{ language.href }}" hreflang="{{ language.lang }}" lang="{{ language.lang }}" data-language="{{ language.key }}"{% if language.current %} aria-current="page"{% endif %}>{{ language.name }}</a>{% endfor %}
     </nav>
     <p class="copyright">{{ t.footer.copyright }}<br><span class="trademarks">{{ t.footer.trademarks }}</span></p>
   </div>
