@@ -4,7 +4,7 @@ APP := $(DERIVED)/Build/Products/Debug/RightKit.app
 XCODE_FLAGS ?=
 XCODEBUILD := xcodebuild -project RightKit.xcodeproj -scheme RightKit -derivedDataPath $(DERIVED) -allowProvisioningUpdates $(XCODE_FLAGS)
 
-.PHONY: generate build build-appstore test verify run release release-unsigned release-appstore upload-appstore website website-serve website-deploy
+.PHONY: generate build build-appstore test verify run release release-unsigned release-appstore upload-appstore website website-serve website-deploy website-test
 
 generate:
 	xcodegen generate
@@ -22,6 +22,7 @@ test: generate
 # 统一验证入口（technical.md 构建与验证入口）。
 verify: test build build-appstore
 	python3 scripts/check_docs.py
+	$(MAKE) website-test
 	python3 -B -m unittest discover -s scripts/tests
 	python3 scripts/strings.py check $(APP)
 	python3 scripts/strings.py check .build/DerivedData/Build/Products/Debug-AppStore/RightKit.app
@@ -60,3 +61,8 @@ website-serve: website
 # 部署官网到 Cloudflare Pages 项目 rightkit（https://rightkit.yiliang.app）。第一次会打开浏览器登录。
 website-deploy: website
 	npx -y wrangler@latest pages deploy website/dist --project-name rightkit --branch main
+
+# 官网国际化：实际静态产物检查和浏览器语言控制器的失败场景。
+website-test:
+	python3 -B -m unittest discover -s website/tests -p 'test_*.py'
+	node --test website/tests/language.test.mjs

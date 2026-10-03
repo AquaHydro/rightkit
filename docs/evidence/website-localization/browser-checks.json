@@ -1,0 +1,82 @@
+[
+  {
+    "theme": "classic",
+    "view": "desktop",
+    "url": "http://localhost:8765/ja/",
+    "descriptionContainsLead": true,
+    "heading": "RightKit.\n          右クリックで、すぐに完了。",
+    "lang": "ja",
+    "scrollWidth": 1440,
+    "width": 1440
+  },
+  {
+    "theme": "classic",
+    "view": "mobile",
+    "url": "http://localhost:8765/ja/",
+    "descriptionContainsLead": true,
+    "heading": "RightKit.\n          右クリックで、すぐに完了。",
+    "lang": "ja",
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "theme": "classic",
+    "view": "desktop",
+    "url": "http://localhost:8765/ko/",
+    "descriptionContainsLead": true,
+    "heading": "RightKit.\n          오른쪽 클릭 한 번.끝.",
+    "lang": "ko",
+    "scrollWidth": 1440,
+    "width": 1440
+  },
+  {
+    "theme": "classic",
+    "view": "mobile",
+    "url": "http://localhost:8765/ko/",
+    "descriptionContainsLead": true,
+    "heading": "RightKit.\n          오른쪽 클릭 한 번.끝.",
+    "lang": "ko",
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "theme": "ak",
+    "view": "desktop",
+    "url": "http://localhost:8765/ak/ja/",
+    "descriptionContainsLead": true,
+    "heading": "RightKit. 右クリックで、 すぐに完了。",
+    "lang": "ja",
+    "scrollWidth": 1440,
+    "width": 1440
+  },
+  {
+    "theme": "ak",
+    "view": "mobile",
+    "url": "http://localhost:8765/ak/ja/",
+    "descriptionContainsLead": true,
+    "heading": "RightKit. 右クリックで、 すぐに完了。",
+    "lang": "ja",
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "theme": "ak",
+    "view": "desktop",
+    "url": "http://localhost:8765/ak/ko/",
+    "descriptionContainsLead": true,
+    "heading": "RightKit. 오른쪽 클릭 한 번. 끝.",
+    "lang": "ko",
+    "scrollWidth": 1440,
+    "width": 1440
+  },
+  {
+    "theme": "ak",
+    "view": "mobile",
+    "url": "http://localhost:8765/ak/ko/",
+    "descriptionContainsLead": true,
+    "heading": "RightKit. 오른쪽 클릭 한 번. 끝.",
+    "lang": "ko",
+    "scrollWidth": 390,
+    "width": 390
+  }
+]

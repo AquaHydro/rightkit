@@ -93,6 +93,8 @@
 
 主程序的系统资源保持独立：`Localizable.xcstrings` 提供 App Intents 文案，`AppShortcuts.xcstrings` 提供调用短语，`InfoPlist.xcstrings` 提供权限说明，各语言的 `ServicesMenu.strings` 提供系统服务名称。它们跟随 macOS 的应用语言。翻译服务的网站语言代码在 `TranslationService` 中集中映射，不让视图知道网站的编码差异。
 
+官网使用静态四语内容和共享模板，`website/build.py` 统一生成语言路由、链接与 SEO 元数据；独立 `language.js` 只处理浏览器偏好和手动选择，不耦合演示菜单或样式控制器。`make website-test` 校验全部生成页面和语言控制器的失败场景，并纳入 `make verify`。
+
 `python3 scripts/strings.py check` 检查四种语言的全部 catalog、系统服务键和格式占位符，并逐键核对两个渠道构建产物中的 `.strings`；`add` 更新中英文时保留已有日文、韩文翻译。
 
 ## 通信

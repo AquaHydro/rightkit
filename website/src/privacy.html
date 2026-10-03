@@ -7,9 +7,11 @@
 <meta name="description" content="{{ t.privacy.intro }}">
 <meta name="theme-color" content="#2A2B31">
 <meta name="color-scheme" content="light dark">
-<link rel="canonical" href="{{ site.url }}{{ t.path }}privacy/">
-<link rel="alternate" hreflang="{{ t.lang }}" href="{{ site.url }}{{ t.path }}privacy/">
-<link rel="alternate" hreflang="{{ t.alt.lang }}" href="{{ site.url }}{{ t.alt.path }}privacy/">
+<link rel="canonical" href="{{ page.canonical }}">
+{% for language in languages %}<link rel="alternate" hreflang="{{ language.lang }}" href="{{ language.canonical }}">
+{% endfor %}<link rel="alternate" hreflang="x-default" href="{{ page.default }}">
+<script type="application/json" id="language-data">{{ languageConfig|json }}</script>
+<script src="{{ base }}language.js"></script>
 <link rel="icon" type="image/png" sizes="64x64" href="{{ base }}img/app-icon-64.png">
 <link rel="apple-touch-icon" href="{{ base }}img/app-icon-180.png">
 <link rel="stylesheet" href="{{ base }}styles.css">{% if theme.ak %}
@@ -19,12 +21,17 @@
 <body{% if theme.ak %} data-ak-ui{% endif %}>
 <header class="nav scrolled">
   <div class="nav-inner">
-    <a class="brand" href="{{ home }}{{ t.privacy.home|raw }}">
+    <a class="brand" href="{{ page.home }}">
       <img src="{{ base }}img/app-icon-64.png" width="28" height="28" alt="">
       <span>RightKit</span>
     </a>
     <div class="nav-actions" style="margin-left: auto">
-      <a class="lang" href="{{ home }}{{ t.alt.href|raw }}privacy/" hreflang="{{ t.alt.lang }}" lang="{{ t.alt.lang }}" aria-label="{{ t.nav.language }}">{{ t.alt.short }}</a>
+      <details class="language-switch">
+        <summary class="lang" aria-label="{{ t.nav.language }}">{{ currentLanguage.short }}</summary>
+        <nav class="language-options" aria-label="{{ t.nav.language }}">
+          {% for language in languages %}<a href="{{ language.href }}" hreflang="{{ language.lang }}" lang="{{ language.lang }}" data-language="{{ language.key }}"{% if language.current %} aria-current="page"{% endif %}>{{ language.name }}{% if language.current %}<span class="language-current" aria-hidden="true">✓</span>{% endif %}</a>{% endfor %}
+        </nav>
+      </details>
     </div>
   </div>
 </header>

@@ -109,6 +109,20 @@ button { font: inherit; color: inherit; }
 .lang { min-width: 40px; height: 36px; display: grid; place-items: center; padding: 0 10px; border-radius: 999px; font: 500 12px/1 var(--font-mono); letter-spacing: 0.08em; text-decoration: none; color: var(--on-ink-2); border: 1px solid var(--line-ink); }
 .lang:hover { color: var(--on-ink); }
 
+/* Native disclosure keeps language links available without JavaScript. */
+.language-switch { position: relative; }
+.language-switch summary { display: flex; align-items: center; justify-content: center; cursor: pointer; list-style: none; min-width: 44px; min-height: 44px; }
+.language-switch summary::-webkit-details-marker { display: none; }
+.language-switch summary::after { content: "▾"; margin-inline-start: 6px; }
+.language-switch[open] summary { color: var(--on-ink); border-color: var(--coral); }
+.language-options { position: absolute; inset: calc(100% + 8px) 0 auto auto; min-width: 168px; padding: 6px; background: var(--ink-3); border: 1px solid var(--line-ink); border-radius: 12px; box-shadow: 0 8px 24px rgb(0 0 0 / 0.25); }
+.language-options a { display: flex; align-items: center; min-height: 44px; padding: 8px 12px; gap: 8px; border-radius: 6px; color: var(--on-ink); text-decoration: none; white-space: nowrap; }
+.language-options .language-current { margin-inline-start: auto; }
+.language-options a:hover, .language-options a:focus-visible { background: var(--ink-2); }
+.footer-links a[aria-current] { text-decoration: underline; text-underline-offset: 4px; }
+:lang(ja) { --font: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif; }
+:lang(ko) { --font: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; word-break: keep-all; overflow-wrap: anywhere; }
+
 /* Shared type */
 .kicker { display: flex; align-items: center; gap: 12px; font: 500 12px/1 var(--font-mono); letter-spacing: 0.24em; color: var(--coral); text-transform: uppercase; }
 .kicker-line { width: 28px; height: 1.5px; background: currentColor; }
@@ -136,7 +150,7 @@ h3 { font-size: 17px; line-height: 1.35; font-weight: 700; }
 .hero-inner { position: relative; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 32px; align-items: center; }
 .hero-copy { position: relative; z-index: 2; }
 .hero h1 { margin-top: 22px; }
-.wordmark { display: block; font: 900 clamp(60px, 8.6vw, 124px)/0.9 var(--font-display); letter-spacing: -0.035em; }
+.wordmark { display: block; white-space: nowrap; overflow-wrap: normal; word-break: normal; font: 900 clamp(60px, 8.6vw, 124px)/0.9 var(--font-display); letter-spacing: -0.035em; }
 .wordmark .dot { color: var(--coral); }
 .tagline { display: block; margin-top: 22px; font: 800 clamp(30px, 3.6vw, 50px)/1.18 var(--font-display); letter-spacing: -0.01em; }
 .tagline em { font-style: normal; background: var(--coral-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
@@ -470,3 +484,7 @@ h3 { font-size: 17px; line-height: 1.35; font-weight: 700; }
 .legal-body p { margin-top: 12px; color: var(--on-paper-2); }
 .legal-body .legal-updated { margin-top: 8px; font: 500 13px/1.4 var(--font-mono); }
 .legal-body a { color: var(--coral-ink); font-weight: 600; }
+
+.settings-preview { max-width: 640px; margin: 40px auto 0; }
+.settings-preview img { display: block; width: 100%; height: auto; border: 1px solid var(--line-paper); border-radius: 16px; }
+.settings-preview figcaption { margin-top: 12px; color: var(--on-paper-2); font-size: 14px; text-align: center; }
