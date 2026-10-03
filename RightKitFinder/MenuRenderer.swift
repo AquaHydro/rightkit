@@ -50,8 +50,7 @@ final class MenuRenderer {
             case .file(let path):
                 source = NSWorkspace.shared.icon(forFile: path)
             }
-            guard let sized = source.copy() as? NSImage else { return nil }
-            sized.size = NSSize(width: 16, height: 16)
+            let sized = Self.bitmap(NSSize(width: 16, height: 16)) { source.draw(in: $0) } ?? source
             icons[key] = sized
             return sized.copy() as? NSImage
         }
@@ -82,23 +81,30 @@ final class MenuRenderer {
 
     /// 保留 Finder 对 SF Symbol 位图的浅深色兼容处理，外观变化时重画。
     private static func menuSymbol(_ symbol: NSImage, isDark: Bool) -> NSImage {
-        let size = symbol.size
+        guard let image = bitmap(symbol.size, draw: { rect in
+            symbol.draw(in: rect)
+            NSColor(white: isDark ? 1 : 0, alpha: 0.85).set()
+            rect.fill(using: .sourceAtop)
+        }) else { return symbol }
+        image.isTemplate = true
+        return image
+    }
+
+    /// 画成只有一张 2x 位图的图像。访达跨进程拷贝菜单时会编码图像的全部尺寸，
+    /// 系统应用和文件图标直接交出去会触发从 16 到 1024 的整套图标生成。
+    private static func bitmap(_ size: NSSize, draw: (NSRect) -> Void) -> NSImage? {
         guard let rep = NSBitmapImageRep(
             bitmapDataPlanes: nil, pixelsWide: Int(size.width * 2), pixelsHigh: Int(size.height * 2),
             bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false,
             colorSpaceName: .deviceRGB, bytesPerRow: 0, bitsPerPixel: 0
-        ) else { return symbol }
+        ) else { return nil }
         rep.size = size
         NSGraphicsContext.saveGraphicsState()
         NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: rep)
-        let rect = NSRect(origin: .zero, size: size)
-        symbol.draw(in: rect)
-        NSColor(white: isDark ? 1 : 0, alpha: 0.85).set()
-        rect.fill(using: .sourceAtop)
+        draw(NSRect(origin: .zero, size: size))
         NSGraphicsContext.restoreGraphicsState()
         let image = NSImage(size: size)
         image.addRepresentation(rep)
-        image.isTemplate = true
         return image
     }
 }
