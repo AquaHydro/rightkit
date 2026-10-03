@@ -171,9 +171,11 @@
 		ABEEBF24484FF11CBB516AF7 /* UpdateChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateChecker.swift; sourceTree = "<group>"; };
 		ADA405D0647B60A10A293742 /* ImageTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTools.swift; sourceTree = "<group>"; };
 		ADAD5F5ED65F0F9210643F6B /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
+		B1A8D4015C44382905920709 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/ServicesMenu.strings; sourceTree = "<group>"; };
 		B30F7EDA28D87F770CBBF786 /* UpdateCheckTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCheckTests.swift; sourceTree = "<group>"; };
 		B5A7875E66A50B5B14E543B3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ServicesMenu.strings"; sourceTree = "<group>"; };
 		B7D7025EB26CD96CCC112A30 /* Template.xlsx */ = {isa = PBXFileReference; path = Template.xlsx; sourceTree = "<group>"; };
+		B867E4925A94FA5E05BCDC26 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/ServicesMenu.strings; sourceTree = "<group>"; };
 		B975BE7E41DA724E4F350F0D /* ProgressWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressWindowView.swift; sourceTree = "<group>"; };
 		BE0B8594054CDC309BC7B6B8 /* ServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
 		BEE740F24C39AF117980866B /* AppShortcuts.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = AppShortcuts.xcstrings; sourceTree = "<group>"; };
@@ -540,6 +542,8 @@
 			knownRegions = (
 				Base,
 				en,
+				ja,
+				ko,
 				"zh-Hans",
 			);
 			mainGroup = 864D990A80B8388EF5E6497F;
@@ -719,6 +723,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				E8D653F0040221B7EC7B3DB5 /* en */,
+				B867E4925A94FA5E05BCDC26 /* ja */,
+				B1A8D4015C44382905920709 /* ko */,
 				B5A7875E66A50B5B14E543B3 /* zh-Hans */,
 			);
 			name = ServicesMenu.strings;

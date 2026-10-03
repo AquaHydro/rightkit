@@ -3,7 +3,7 @@ import Synchronization
 
 /// 按设置里的语言选择 `.lproj`，主程序和扩展共用（F-004）。
 public enum L10n {
-    public static let supported = ["zh-Hans", "en"]
+    public static let supported = [AppLanguage.simplifiedChinese, .english, .japanese, .korean].compactMap(\.localizationCode)
     private static let current = Mutex<(code: String, bundle: Bundle)>(resolve(.system))
 
     public static func setLanguage(_ language: AppLanguage) {
@@ -14,16 +14,16 @@ public enum L10n {
     /// 只对当前任务生效的语言，测试用它避免互相干扰。
     @TaskLocal public static var override: AppLanguage?
 
-    public static var code: String { override.map(code(for:)) ?? current.withLock { $0.code } }
+    public static var code: String { override.map { code(for: $0) } ?? current.withLock { $0.code } }
     public static var bundle: Bundle { override.map { resolve($0).bundle } ?? current.withLock { $0.bundle } }
-    public static var isChinese: Bool { code == "zh-Hans" }
 
-    public static func code(for language: AppLanguage) -> String {
-        switch language {
-        case .english: "en"
-        case .simplifiedChinese: "zh-Hans"
-        case .system: Bundle.preferredLocalizations(from: supported, forPreferences: Locale.preferredLanguages).first ?? "zh-Hans"
-        }
+    public static var language: AppLanguage {
+        let activeCode = code
+        return AppLanguage.allCases.first { $0.localizationCode == activeCode } ?? .simplifiedChinese
+    }
+
+    public static func code(for language: AppLanguage, preferences: [String] = Locale.preferredLanguages) -> String {
+        language.localizationCode ?? Bundle.preferredLocalizations(from: supported, forPreferences: preferences).first ?? "zh-Hans"
     }
 
     private static func resolve(_ language: AppLanguage) -> (code: String, bundle: Bundle) {

@@ -87,6 +87,14 @@
 
 主程序修改设置后发出 Darwin 通知「App Group 加 `.settings`」（不带数据）。扩展收到后重读设置并更新 `directoryURLs`。这只是“设置变了”的提醒，不传命令。
 
+## 国际化
+
+`AppLanguage` 是共享设置中的稳定语言标识，原有编码不变；语言代码和原生名称由它统一提供。`L10n` 负责系统偏好匹配、选择共享资源 bundle 和格式化，主程序与 Finder 扩展都通过同一入口获取文案。共享的 `Localizable.xcstrings` 包含简体中文、英文、日文和韩文，不在各视图或扩展中维护翻译分支。
+
+主程序的系统资源保持独立：`Localizable.xcstrings` 提供 App Intents 文案，`AppShortcuts.xcstrings` 提供调用短语，`InfoPlist.xcstrings` 提供权限说明，各语言的 `ServicesMenu.strings` 提供系统服务名称。它们跟随 macOS 的应用语言。翻译服务的网站语言代码在 `TranslationService` 中集中映射，不让视图知道网站的编码差异。
+
+`python3 scripts/strings.py check` 检查四种语言的全部 catalog、系统服务键和格式占位符，并逐键核对两个渠道构建产物中的 `.strings`；`add` 更新中英文时保留已有日文、韩文翻译。
+
 ## 通信
 
 普通 App 进程不能自己发布带名字的 XPC 服务，只有 launchd 管理的任务可以。因此由主程序包内的 `RightKitAgent` 通过 LaunchAgent 的 `MachServices` 发布名为「App Group 加 `.command`」的本应用专用 XPC 服务。服务名是 App Group 的直接子名，沙盒里的扩展和主程序可以直接查找。agent 按需启动，launchd 只在有人查找这个服务时才运行它，不在登录时自动运行。消息包含 schema 版本、请求 ID、发出时间、动作、目标 URL 列表和可选参数。

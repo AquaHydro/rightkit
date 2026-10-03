@@ -14,6 +14,18 @@
             "state": "translated",
             "value": "%@ 已授权"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「%@」は許可済み"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 접근 허용됨"
+          }
         }
       }
     },
@@ -29,6 +41,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Excel 工作簿"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Excel ワークブック"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Excel 통합 문서"
           }
         }
       }
@@ -46,6 +70,18 @@
             "state": "translated",
             "value": "PowerPoint 演示文稿"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PowerPoint プレゼンテーション"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PowerPoint 프레젠테이션"
+          }
         }
       }
     },
@@ -61,6 +97,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "RTF 文稿"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RTF 書類"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RTF 문서"
           }
         }
       }
@@ -78,6 +126,18 @@
             "state": "translated",
             "value": "RightKit %@ 可用"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKit %@ が利用可能です"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKit %@ 사용 가능"
+          }
         }
       }
     },
@@ -93,6 +153,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "RightKit 仅在这些文件夹及其子文件夹的访达菜单中显示。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKit はこれらのフォルダとそのサブフォルダの Finder メニューにのみ表示されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKit은 이 폴더와 하위 폴더의 Finder 메뉴에만 표시됩니다."
           }
         }
       }
@@ -110,6 +182,18 @@
             "state": "translated",
             "value": "RightKit 只能在你授权的文件夹里新建、复制和整理文件。建议授权个人主文件夹。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKit はアクセスを許可したフォルダ内でのみファイルの作成、コピー、整理ができます。ホームフォルダへのアクセスを許可することをおすすめします。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKit은 접근을 허용한 폴더에서만 파일을 생성, 복사, 정리할 수 있습니다. 홈 폴더에 대한 접근을 허용하는 것이 좋습니다."
+          }
         }
       }
     },
@@ -125,6 +209,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "RightKit 已是最新版本。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKit は最新バージョンです。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKit이 최신 버전입니다."
           }
         }
       }
@@ -142,6 +238,18 @@
             "state": "translated",
             "value": "RightKit 无权访问“%@”。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKit は「%@」にアクセスできません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKit이 ‘%@’에 접근할 수 없습니다."
+          }
         }
       }
     },
@@ -157,6 +265,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Shell 脚本"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "シェルスクリプト"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "셸 스크립트"
           }
         }
       }
@@ -174,6 +294,18 @@
             "state": "translated",
             "value": "Word 文档"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Word 書類"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Word 문서"
+          }
         }
       }
     },
@@ -189,6 +321,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "iconutil 生成 ICNS 文件失败。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iconutil で ICNS ファイルを生成できませんでした。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iconutil이 ICNS 파일을 생성하지 못했습니다."
           }
         }
       }
@@ -206,6 +350,18 @@
             "state": "translated",
             "value": "“%@”不是可读取的图片。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「%@」は読み込み可能な画像ではありません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "읽을 수 없는 이미지입니다: ‘%@’."
+          }
         }
       }
     },
@@ -221,6 +377,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "“%@”已不在系统中。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「%@」はこの Mac にありません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 Mac에서 더 이상 찾을 수 없습니다: ‘%@’."
           }
         }
       }
@@ -238,6 +406,18 @@
             "state": "translated",
             "value": "一切就绪，去访达里右键试试。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "準備ができました。Finder で右クリックしてみましょう。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "준비가 끝났습니다. Finder에서 오른쪽 클릭해 보세요."
+          }
         }
       }
     },
@@ -253,6 +433,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "不能添加根目录、系统目录，或个人主目录的上级目录。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ルートフォルダ、システムフォルダ、ホームフォルダの親フォルダは追加できません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "루트 폴더, 시스템 폴더 또는 홈 폴더의 상위 폴더는 추가할 수 없습니다."
           }
         }
       }
@@ -270,6 +462,18 @@
             "state": "translated",
             "value": "主题"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "テーマ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "테마"
+          }
         }
       }
     },
@@ -285,6 +489,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "二维码"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "QR コード"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "QR 코드"
           }
         }
       }
@@ -302,6 +518,18 @@
             "state": "translated",
             "value": "二维码预览"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "QR コードのプレビュー"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "QR 코드 미리보기"
+          }
         }
       }
     },
@@ -317,6 +545,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "仅支持为文件计算哈希。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ハッシュ値を計算できるのはファイルのみです。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일의 해시만 계산할 수 있습니다."
           }
         }
       }
@@ -334,6 +574,18 @@
             "state": "translated",
             "value": "你正在使用 %@。前往下载页面获取新版本。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "現在 %@ を使用しています。ダウンロードページで新しいバージョンを入手できます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "현재 사용 중인 버전은 %@입니다. 다운로드 페이지에서 새 버전을 받으세요."
+          }
         }
       }
     },
@@ -349,6 +601,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "使用该文件类型的默认应用打开。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このファイル形式のデフォルトアプリで開きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 파일 유형의 기본 앱으로 엽니다."
           }
         }
       }
@@ -366,6 +630,18 @@
             "state": "translated",
             "value": "关于"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKit について"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKit 정보"
+          }
         }
       }
     },
@@ -381,6 +657,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "分栏"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セクション"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "섹션"
           }
         }
       }
@@ -398,6 +686,18 @@
             "state": "translated",
             "value": "创建"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "作成"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "생성"
+          }
         }
       }
     },
@@ -413,6 +713,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "创建前询问文件名"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "作成前にファイル名を確認"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "생성 전에 파일 이름 묻기"
           }
         }
       }
@@ -430,6 +742,18 @@
             "state": "translated",
             "value": "创建后自动打开文件"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "作成後にファイルを開く"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "생성 후 파일 자동으로 열기"
+          }
         }
       }
     },
@@ -445,6 +769,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "前往下载"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ダウンロードページへ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다운로드 페이지로 이동"
           }
         }
       }
@@ -462,6 +798,18 @@
             "state": "translated",
             "value": "剪切"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カット"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "잘라내기"
+          }
         }
       }
     },
@@ -477,6 +825,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "剪切和粘贴"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カットとペースト"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "잘라내기 및 붙여넣기"
           }
         }
       }
@@ -494,6 +854,18 @@
             "state": "translated",
             "value": "功能"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "機能"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기능"
+          }
         }
       }
     },
@@ -509,6 +881,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "反馈问题"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "問題を報告"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "문제 보고"
           }
         }
       }
@@ -526,6 +910,18 @@
             "state": "translated",
             "value": "发送到"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "送信先"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "보내기"
+          }
         }
       }
     },
@@ -541,6 +937,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "发送替身到桌面"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "エイリアスをデスクトップに作成"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "데스크탑에 가상본 만들기"
           }
         }
       }
@@ -558,6 +966,18 @@
             "state": "translated",
             "value": "取消"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "キャンセル"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "취소"
+          }
         }
       }
     },
@@ -573,6 +993,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "受保护位置的拒绝提示不受这个开关影响。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保護された場所への操作を拒否する通知は、この設定の影響を受けません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "보호된 위치에 대한 작업 거부 알림에는 이 설정이 적용되지 않습니다."
           }
         }
       }
@@ -590,6 +1022,18 @@
             "state": "translated",
             "value": "受保护的位置"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保護された場所"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "보호된 위치"
+          }
         }
       }
     },
@@ -605,6 +1049,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "右键一下，就办好了。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "右クリックで、すぐに完了。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "오른쪽 클릭 한 번으로 끝."
           }
         }
       }
@@ -622,6 +1078,18 @@
             "state": "translated",
             "value": "后台服务已关闭"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バックグラウンドサービスがオフです"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "백그라운드 서비스가 꺼져 있습니다"
+          }
         }
       }
     },
@@ -637,6 +1105,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "启动与菜单栏"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "起動とメニューバー"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시작 및 메뉴 막대"
           }
         }
       }
@@ -654,6 +1134,18 @@
             "state": "translated",
             "value": "图片与图标"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "画像とアイコン"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이미지 및 아이콘"
+          }
         }
       }
     },
@@ -669,6 +1161,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "在“系统设置 → 通用 → 登录项与扩展”中打开 RightKit 的访达扩展，右键菜单才会出现。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「システム設定 → 一般 → ログイン項目と機能拡張」で RightKit の Finder 機能拡張をオンにすると、右クリックメニューに表示されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘시스템 설정 → 일반 → 로그인 항목 및 확장 프로그램’에서 RightKit의 Finder 확장 프로그램을 켜면 오른쪽 클릭 메뉴에 표시됩니다."
           }
         }
       }
@@ -686,6 +1190,18 @@
             "state": "translated",
             "value": "在应用中打开"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アプリで開く"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "앱으로 열기"
+          }
         }
       }
     },
@@ -701,6 +1217,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "在菜单项中显示图标"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メニュー項目にアイコンを表示"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "메뉴 항목에 아이콘 표시"
           }
         }
       }
@@ -718,6 +1246,18 @@
             "state": "translated",
             "value": "在访达空白处右键，一键打开这些文件夹。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder の空白部分を右クリックすると、これらのフォルダをすぐに開けます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder의 빈 공간을 오른쪽 클릭하면 이 폴더를 바로 열 수 있습니다."
+          }
         }
       }
     },
@@ -733,6 +1273,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "在访达里右键，就能新建文件、把项目复制或移动到常用位置、用指定应用打开，以及使用一组文件工具。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder で右クリックして、ファイルの作成、よく使う場所へのコピーや移動、指定したアプリでの表示、ファイルツールを利用できます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder에서 오른쪽 클릭하여 파일을 만들고, 자주 쓰는 위치로 복사하거나 이동하고, 지정한 앱으로 열고, 파일 도구를 사용할 수 있습니다."
           }
         }
       }
@@ -750,6 +1302,18 @@
             "state": "translated",
             "value": "复制"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コピー"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "복사"
+          }
         }
       }
     },
@@ -765,6 +1329,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "复制到"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コピー先"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "복사 위치"
           }
         }
       }
@@ -782,6 +1358,18 @@
             "state": "translated",
             "value": "复制到和移动到"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コピーと移動"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "복사 및 이동"
+          }
         }
       }
     },
@@ -797,6 +1385,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "外观"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "外観"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모양"
           }
         }
       }
@@ -814,6 +1414,18 @@
             "state": "translated",
             "value": "好"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "확인"
+          }
         }
       }
     },
@@ -829,6 +1441,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "存储为 PNG…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PNG として保存…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PNG로 저장…"
           }
         }
       }
@@ -846,6 +1470,18 @@
             "state": "translated",
             "value": "工具箱"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ツールボックス"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "도구 상자"
+          }
         }
       }
     },
@@ -861,6 +1497,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "已拷贝"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コピーしました"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "복사됨"
           }
         }
       }
@@ -878,6 +1526,18 @@
             "state": "translated",
             "value": "常用目录"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "よく使うフォルダ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "자주 사용하는 폴더"
+          }
         }
       }
     },
@@ -893,6 +1553,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "开始使用"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "はじめる"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시작하기"
           }
         }
       }
@@ -910,6 +1582,18 @@
             "state": "translated",
             "value": "彻底删除"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完全に削除"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "완전히 삭제"
+          }
         }
       }
     },
@@ -925,6 +1609,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "彻底删除 %d 个项目？"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d 項目を完全に削除しますか？"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "항목 %d개를 완전히 삭제하시겠습니까?"
           }
         }
       }
@@ -942,6 +1638,18 @@
             "state": "translated",
             "value": "彻底删除“%@”？"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「%@」を完全に削除しますか？"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘%@’ 항목을 완전히 삭제하시겠습니까?"
+          }
         }
       }
     },
@@ -957,6 +1665,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "彻底删除…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完全に削除…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "완전히 삭제…"
           }
         }
       }
@@ -974,6 +1694,18 @@
             "state": "translated",
             "value": "彻底删除前二次确认"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完全に削除する前に確認"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "완전히 삭제하기 전에 확인"
+          }
         }
       }
     },
@@ -989,6 +1721,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "恢复默认"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "デフォルトに戻す"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기본값으로 복원"
           }
         }
       }
@@ -1006,6 +1750,18 @@
             "state": "translated",
             "value": "打开工具"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開くアプリ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "열기 앱"
+          }
         }
       }
     },
@@ -1021,6 +1777,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "打开方式"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開く方法"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "열기 방식"
           }
         }
       }
@@ -1038,6 +1806,18 @@
             "state": "translated",
             "value": "打开系统设置"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "システム設定を開く"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시스템 설정 열기"
+          }
         }
       }
     },
@@ -1053,6 +1833,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "拖动可在分组内调整顺序。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ドラッグしてグループ内の順序を変更できます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "드래그하여 그룹 내 순서를 변경할 수 있습니다."
           }
         }
       }
@@ -1070,6 +1862,18 @@
             "state": "translated",
             "value": "拖动可调整菜单中的顺序。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ドラッグしてメニューの順序を変更できます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "드래그하여 메뉴 순서를 변경할 수 있습니다."
+          }
         }
       }
     },
@@ -1085,6 +1889,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "拷贝"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コピー"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "복사"
           }
         }
       }
@@ -1102,6 +1918,18 @@
             "state": "translated",
             "value": "拷贝名称"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "名前をコピー"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이름 복사"
+          }
         }
       }
     },
@@ -1117,6 +1945,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "拷贝图片"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "画像をコピー"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이미지 복사"
           }
         }
       }
@@ -1134,6 +1974,18 @@
             "state": "translated",
             "value": "拷贝当前路径"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "現在のパスをコピー"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "현재 경로 복사"
+          }
         }
       }
     },
@@ -1149,6 +2001,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "拷贝路径"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パスをコピー"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "경로 복사"
           }
         }
       }
@@ -1166,6 +2030,18 @@
             "state": "translated",
             "value": "按住 Option 键右键点按程序坞中的访达，选择“重新开启”。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Option キーを押しながら Dock の Finder を右クリックし、「再度開く」を選択してください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Option 키를 누른 채 Dock의 Finder를 오른쪽 클릭한 다음 ‘재실행’을 선택하세요."
+          }
         }
       }
     },
@@ -1181,6 +2057,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "授予写入权限"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "書き込み権限を付与"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "쓰기 권한 부여"
           }
         }
       }
@@ -1198,6 +2086,18 @@
             "state": "translated",
             "value": "授权"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アクセスを許可"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "접근 허용"
+          }
         }
       }
     },
@@ -1213,6 +2113,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "授权…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アクセスを許可…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "접근 허용…"
           }
         }
       }
@@ -1230,6 +2142,18 @@
             "state": "translated",
             "value": "授权访问个人文件夹"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ホームフォルダへのアクセスを許可"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "홈 폴더 접근 허용"
+          }
         }
       }
     },
@@ -1245,6 +2169,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "文件"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイル"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일"
           }
         }
       }
@@ -1262,6 +2198,18 @@
             "state": "translated",
             "value": "文件信息"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイル情報"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일 정보"
+          }
         }
       }
     },
@@ -1277,6 +2225,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "文件信息（哈希）"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイル情報（ハッシュ）"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일 정보(해시)"
           }
         }
       }
@@ -1294,6 +2254,18 @@
             "state": "translated",
             "value": "文件信息（哈希）…"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイル情報（ハッシュ）…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일 정보(해시)…"
+          }
         }
       }
     },
@@ -1309,6 +2281,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "文件类型"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイル形式"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일 유형"
           }
         }
       }
@@ -1326,6 +2310,18 @@
             "state": "translated",
             "value": "文本"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "テキスト"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "텍스트"
+          }
         }
       }
     },
@@ -1341,6 +2337,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "文本文档"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "テキスト書類"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "텍스트 문서"
           }
         }
       }
@@ -1358,6 +2366,18 @@
             "state": "translated",
             "value": "文本过长，无法打开翻译页面。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "テキストが長すぎるため、翻訳ページを開けません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "텍스트가 너무 길어 번역 페이지를 열 수 없습니다."
+          }
         }
       }
     },
@@ -1373,6 +2393,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "新建文件"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新規ファイル"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새 파일"
           }
         }
       }
@@ -1390,6 +2422,18 @@
             "state": "translated",
             "value": "无扩展名"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拡張子なし"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "확장자 없음"
+          }
         }
       }
     },
@@ -1405,6 +2449,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "无法保存二维码。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "QR コードを保存できません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "QR 코드를 저장할 수 없습니다."
           }
         }
       }
@@ -1422,6 +2478,18 @@
             "state": "translated",
             "value": "无法创建文件。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイルを作成できません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일을 생성할 수 없습니다."
+          }
         }
       }
     },
@@ -1437,6 +2505,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "无法创建文件夹。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォルダを作成できません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "폴더를 생성할 수 없습니다."
           }
         }
       }
@@ -1454,6 +2534,18 @@
             "state": "translated",
             "value": "无法创建替身。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "エイリアスを作成できません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "가상본을 만들 수 없습니다."
+          }
         }
       }
     },
@@ -1469,6 +2561,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "无法剪切项目。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "項目をカットできません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "항목을 잘라낼 수 없습니다."
           }
         }
       }
@@ -1486,6 +2590,18 @@
             "state": "translated",
             "value": "无法复制项目。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "項目をコピーできません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "항목을 복사할 수 없습니다."
+          }
         }
       }
     },
@@ -1501,6 +2617,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "无法导入模板。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "テンプレートを読み込めません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "템플릿을 가져올 수 없습니다."
           }
         }
       }
@@ -1518,6 +2646,18 @@
             "state": "translated",
             "value": "无法彻底删除项目。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "項目を完全に削除できません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "항목을 완전히 삭제할 수 없습니다."
+          }
         }
       }
     },
@@ -1533,6 +2673,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "无法打开所选项目。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選択した項目を開けません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "선택한 항목을 열 수 없습니다."
           }
         }
       }
@@ -1550,6 +2702,18 @@
             "state": "translated",
             "value": "无法打开文件。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイルを開けません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일을 열 수 없습니다."
+          }
         }
       }
     },
@@ -1565,6 +2729,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "无法打开翻译页面。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "翻訳ページを開けません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "번역 페이지를 열 수 없습니다."
           }
         }
       }
@@ -1582,6 +2758,18 @@
             "state": "translated",
             "value": "无法打开设置。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定を開けません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설정을 열 수 없습니다."
+          }
         }
       }
     },
@@ -1597,6 +2785,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "无法拷贝名称。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "名前をコピーできません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이름을 복사할 수 없습니다."
           }
         }
       }
@@ -1614,6 +2814,18 @@
             "state": "translated",
             "value": "无法拷贝路径。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パスをコピーできません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "경로를 복사할 수 없습니다."
+          }
         }
       }
     },
@@ -1629,6 +2841,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "无法授予写入权限。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "書き込み権限を付与できません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "쓰기 권한을 부여할 수 없습니다."
           }
         }
       }
@@ -1646,6 +2870,18 @@
             "state": "translated",
             "value": "无法更改可见性。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "表示状態を変更できません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "표시 상태를 변경할 수 없습니다."
+          }
         }
       }
     },
@@ -1661,6 +2897,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "无法更改扩展名显示状态。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拡張子の表示状態を変更できません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "확장자 표시 상태를 변경할 수 없습니다."
           }
         }
       }
@@ -1678,6 +2926,18 @@
             "state": "translated",
             "value": "无法检查更新。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アップデートを確認できません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "업데이트를 확인할 수 없습니다."
+          }
         }
       }
     },
@@ -1693,6 +2953,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "无法生成图标集。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アイコンセットを生成できません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아이콘 세트를 생성할 수 없습니다."
           }
         }
       }
@@ -1710,6 +2982,18 @@
             "state": "translated",
             "value": "无法用“%@”打开。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「%@」で開けません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다음 앱으로 열 수 없습니다: ‘%@’."
+          }
         }
       }
     },
@@ -1725,6 +3009,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "无法监视这个文件夹"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このフォルダを監視できません"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 폴더를 감시할 수 없습니다"
           }
         }
       }
@@ -1742,6 +3038,18 @@
             "state": "translated",
             "value": "无法移动项目。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "項目を移動できません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "항목을 이동할 수 없습니다."
+          }
         }
       }
     },
@@ -1757,6 +3065,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "无法解散文件夹。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォルダを解除できません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "폴더를 해제할 수 없습니다."
           }
         }
       }
@@ -1774,6 +3094,18 @@
             "state": "translated",
             "value": "无法设置壁纸。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "壁紙を設定できません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "배경화면을 설정할 수 없습니다."
+          }
         }
       }
     },
@@ -1789,6 +3121,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "无法设置文件夹图标。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォルダアイコンを設定できません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "폴더 아이콘을 설정할 수 없습니다."
           }
         }
       }
@@ -1806,6 +3150,18 @@
             "state": "translated",
             "value": "无法读取文件。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイルを読み込めません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일을 읽을 수 없습니다."
+          }
         }
       }
     },
@@ -1821,6 +3177,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "无法转换“%@”。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「%@」を変換できません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다음 항목을 변환할 수 없습니다: ‘%@’."
           }
         }
       }
@@ -1838,6 +3206,18 @@
             "state": "translated",
             "value": "无法转换图片。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "画像を変換できません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이미지를 변환할 수 없습니다."
+          }
         }
       }
     },
@@ -1853,6 +3233,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "无法重新启动访达。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder を再起動できません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder를 재시동할 수 없습니다."
           }
         }
       }
@@ -1870,6 +3262,18 @@
             "state": "translated",
             "value": "显示与隐藏"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "表示と非表示"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "표시 및 숨기기"
+          }
         }
       }
     },
@@ -1885,6 +3289,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "显示所选"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選択項目を表示"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "선택 항목 표시"
           }
         }
       }
@@ -1902,6 +3318,18 @@
             "state": "translated",
             "value": "显示扩展名"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拡張子を表示"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "확장자 표시"
+          }
         }
       }
     },
@@ -1917,6 +3345,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "显示菜单栏图标"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メニューバーアイコンを表示"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "메뉴 막대 아이콘 표시"
           }
         }
       }
@@ -1934,6 +3374,18 @@
             "state": "translated",
             "value": "更改…"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "変更…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "변경…"
+          }
         }
       }
     },
@@ -1949,6 +3401,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "有新版本时提醒你，并打开下载页面。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新しいバージョンがある場合に通知し、ダウンロードページを開きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새 버전이 있으면 알리고 다운로드 페이지를 엽니다."
           }
         }
       }
@@ -1966,6 +3430,18 @@
             "state": "translated",
             "value": "未命名"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "名称未設定"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이름 없음"
+          }
         }
       }
     },
@@ -1981,6 +3457,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "根据文件名新建文件夹"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイル名からフォルダを作成"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일 이름으로 폴더 만들기"
           }
         }
       }
@@ -1998,6 +3486,18 @@
             "state": "translated",
             "value": "检查更新…"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アップデートを確認…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "업데이트 확인…"
+          }
         }
       }
     },
@@ -2013,6 +3513,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "检测已安装工具"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "インストール済みのアプリを検出"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설치된 앱 찾기"
           }
         }
       }
@@ -2030,6 +3542,18 @@
             "state": "translated",
             "value": "欢迎使用 RightKit"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKit へようこそ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKit에 오신 것을 환영합니다"
+          }
         }
       }
     },
@@ -2045,6 +3569,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "正在复制 %d 个项目…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d 項目をコピー中…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "항목 %d개 복사 중…"
           }
         }
       }
@@ -2062,6 +3598,18 @@
             "state": "translated",
             "value": "正在复制“%@”…"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「%@」をコピー中…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘%@’ 복사 중…"
+          }
         }
       }
     },
@@ -2077,6 +3625,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "正在生成图标集…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アイコンセットを生成中…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아이콘 세트 생성 중…"
           }
         }
       }
@@ -2094,6 +3654,18 @@
             "state": "translated",
             "value": "正在移动 %d 个项目…"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d 項目を移動中…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "항목 %d개 이동 중…"
+          }
         }
       }
     },
@@ -2109,6 +3681,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "正在移动“%@”…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「%@」を移動中…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘%@’ 이동 중…"
           }
         }
       }
@@ -2126,6 +3710,18 @@
             "state": "translated",
             "value": "正在解散文件夹…"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォルダを解除中…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "폴더 해제 중…"
+          }
         }
       }
     },
@@ -2141,6 +3737,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "正在计算哈希…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ハッシュ値を計算中…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "해시 계산 중…"
           }
         }
       }
@@ -2158,6 +3766,18 @@
             "state": "translated",
             "value": "正在转换 %d 张图片…"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d 枚の画像を変換中…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이미지 %d개 변환 중…"
+          }
         }
       }
     },
@@ -2173,6 +3793,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "正在转换“%@”…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「%@」を変換中…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘%@’ 변환 중…"
           }
         }
       }
@@ -2190,6 +3822,18 @@
             "state": "translated",
             "value": "此操作无法撤销。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この操作は取り消せません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 작업은 실행 취소할 수 없습니다."
+          }
         }
       }
     },
@@ -2205,6 +3849,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "没有监视目录，访达菜单不会出现。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "監視フォルダがないため、Finder メニューに表示されません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "감시 폴더가 없어 Finder 메뉴가 표시되지 않습니다."
           }
         }
       }
@@ -2222,6 +3878,18 @@
             "state": "translated",
             "value": "浅色"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ライト"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "라이트"
+          }
         }
       }
     },
@@ -2237,6 +3905,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "深色"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ダーク"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다크"
           }
         }
       }
@@ -2254,6 +3934,18 @@
             "state": "translated",
             "value": "添加"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "追加"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "추가"
+          }
         }
       }
     },
@@ -2269,6 +3961,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "添加应用…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アプリを追加…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "앱 추가…"
           }
         }
       }
@@ -2286,6 +3990,18 @@
             "state": "translated",
             "value": "添加文件夹…"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォルダを追加…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "폴더 추가…"
+          }
         }
       }
     },
@@ -2301,6 +4017,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "添加模板"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "テンプレートを追加"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "템플릿 추가"
           }
         }
       }
@@ -2318,6 +4046,18 @@
             "state": "translated",
             "value": "添加模板…"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "テンプレートを追加…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "템플릿 추가…"
+          }
         }
       }
     },
@@ -2333,6 +4073,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "版本 %@（%@）"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バージョン %@（%@）"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "버전 %@(%@)"
           }
         }
       }
@@ -2350,6 +4102,18 @@
             "state": "translated",
             "value": "生成 iOS 图标集"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iOS アイコンセットを生成"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iOS 아이콘 세트 생성"
+          }
         }
       }
     },
@@ -2365,6 +4129,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "生成 macOS 图标集"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS アイコンセットを生成"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS 아이콘 세트 생성"
           }
         }
       }
@@ -2382,6 +4158,18 @@
             "state": "translated",
             "value": "登录时启动"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ログイン時に起動"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로그인 시 실행"
+          }
         }
       }
     },
@@ -2397,6 +4185,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "监视目录"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "監視フォルダ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "감시 폴더"
           }
         }
       }
@@ -2414,6 +4214,18 @@
             "state": "translated",
             "value": "目录"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォルダ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "폴더"
+          }
         }
       }
     },
@@ -2429,6 +4241,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "移动"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移動"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이동"
           }
         }
       }
@@ -2446,6 +4270,18 @@
             "state": "translated",
             "value": "移动到"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移動先"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이동 위치"
+          }
         }
       }
     },
@@ -2461,6 +4297,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "移除"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "削除"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "제거"
           }
         }
       }
@@ -2478,6 +4326,18 @@
             "state": "translated",
             "value": "稍后"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "後で"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "나중에"
+          }
         }
       }
     },
@@ -2493,6 +4353,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "稍后设置"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "後で設定"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "나중에 설정"
           }
         }
       }
@@ -2510,6 +4382,18 @@
             "state": "translated",
             "value": "粘贴"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ペースト"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "붙여넣기"
+          }
         }
       }
     },
@@ -2525,6 +4409,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "系统目录与个人主目录无法通过 RightKit 删除。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "システムフォルダとホームフォルダは RightKit で削除できません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시스템 폴더와 홈 폴더는 RightKit으로 삭제할 수 없습니다."
           }
         }
       }
@@ -2542,6 +4438,18 @@
             "state": "translated",
             "value": "终端"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ターミナル"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "터미널"
+          }
         }
       }
     },
@@ -2557,6 +4465,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "终端打开所在文件夹，编辑器打开所选项目。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ターミナルでは項目があるフォルダを、エディタでは選択した項目を開きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "터미널은 항목이 있는 폴더를 열고, 편집기는 선택한 항목을 엽니다."
           }
         }
       }
@@ -2574,6 +4494,18 @@
             "state": "translated",
             "value": "编辑器"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "エディタ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "편집기"
+          }
         }
       }
     },
@@ -2589,6 +4521,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "自动检查更新"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アップデートを自動確認"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "자동으로 업데이트 확인"
           }
         }
       }
@@ -2606,6 +4550,18 @@
             "state": "translated",
             "value": "角色"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "役割"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "역할"
+          }
         }
       }
     },
@@ -2621,6 +4577,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "解散与删除"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォルダの解除と削除"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "폴더 해제 및 삭제"
           }
         }
       }
@@ -2638,6 +4606,18 @@
             "state": "translated",
             "value": "解散文件夹"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォルダを解除"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "폴더 해제"
+          }
         }
       }
     },
@@ -2653,6 +4633,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "让 RightKit 随登录运行，右键操作即点即用。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ログイン時に RightKit を起動すると、右クリック操作をすぐに使えます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로그인할 때 RightKit을 실행하면 오른쪽 클릭 기능을 바로 사용할 수 있습니다."
           }
         }
       }
@@ -2670,6 +4662,18 @@
             "state": "translated",
             "value": "设为壁纸"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "壁紙に設定"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "배경화면으로 설정"
+          }
         }
       }
     },
@@ -2685,6 +4689,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "设置…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설정…"
           }
         }
       }
@@ -2702,6 +4718,18 @@
             "state": "translated",
             "value": "设置文件夹图标"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォルダアイコンを設定"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "폴더 아이콘 설정"
+          }
         }
       }
     },
@@ -2717,6 +4745,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "设置文件夹图标…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォルダアイコンを設定…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "폴더 아이콘 설정…"
           }
         }
       }
@@ -2734,6 +4774,18 @@
             "state": "translated",
             "value": "访达会短暂关闭并重新打开。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder がいったん終了し、再び開きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder가 잠시 종료되었다가 다시 열립니다."
+          }
         }
       }
     },
@@ -2749,6 +4801,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "访达右键菜单工具。新建文件、复制移动、在应用中打开，以及一组文件工具。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder の右クリックメニューツール。ファイルの作成、コピーと移動、アプリで開く操作やファイルツールを利用できます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder 오른쪽 클릭 메뉴 도구입니다. 파일 생성, 복사 및 이동, 앱으로 열기와 파일 도구를 사용할 수 있습니다."
           }
         }
       }
@@ -2766,6 +4830,18 @@
             "state": "translated",
             "value": "访达扩展已启用"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder 機能拡張は有効です"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder 확장 프로그램이 켜져 있습니다"
+          }
         }
       }
     },
@@ -2781,6 +4857,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "访达扩展未启用"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder 機能拡張は無効です"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder 확장 프로그램이 꺼져 있습니다"
           }
         }
       }
@@ -2798,6 +4886,18 @@
             "state": "translated",
             "value": "访达扩展未运行"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder 機能拡張が動作していません"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder 확장 프로그램이 실행되고 있지 않습니다"
+          }
         }
       }
     },
@@ -2813,6 +4913,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "该文件夹已不存在。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このフォルダは存在しません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 폴더는 더 이상 존재하지 않습니다."
           }
         }
       }
@@ -2830,6 +4942,18 @@
             "state": "translated",
             "value": "语言"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "言語"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "언어"
+          }
         }
       }
     },
@@ -2845,6 +4969,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "请在“系统设置 → 通用 → 登录项与扩展 → 允许在后台”中打开 RightKit。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「システム設定 → 一般 → ログイン項目と機能拡張 → バックグラウンドでの実行を許可」で RightKit をオンにしてください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘시스템 설정 → 일반 → 로그인 항목 및 확장 프로그램 → 백그라운드에서 허용’에서 RightKit을 켜세요."
           }
         }
       }
@@ -2862,6 +4998,18 @@
             "state": "translated",
             "value": "请在“系统设置 → 隐私与安全性 → 自动化”中允许 RightKit 控制访达，或按住 Option 键右键点按程序坞中的访达，选择“重新开启”。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「システム設定 → プライバシーとセキュリティ → オートメーション」で RightKit に Finder の操作を許可するか、Option キーを押しながら Dock の Finder を右クリックして「再度開く」を選択してください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘시스템 설정 → 개인정보 보호 및 보안 → 자동화’에서 RightKit이 Finder를 제어하도록 허용하거나, Option 키를 누른 채 Dock의 Finder를 오른쪽 클릭하고 ‘재실행’을 선택하세요."
+          }
         }
       }
     },
@@ -2877,6 +5025,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "请在设置里把它所在的文件夹加入监视目录；如果那个文件夹显示「需要重新授权。」，点「重新授权…」。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定で対象のフォルダを監視フォルダに追加してください。そのフォルダに「再度アクセスを許可してください。」と表示されている場合は、「再度アクセスを許可…」をクリックしてください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설정에서 해당 폴더를 감시 폴더에 추가하세요. 폴더에 ‘접근 허용이 다시 필요합니다.’가 표시되면 ‘다시 접근 허용…’을 클릭하세요."
           }
         }
       }
@@ -2894,6 +5054,18 @@
             "state": "translated",
             "value": "跟随系统"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "システム設定に従う"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시스템 설정 따르기"
+          }
         }
       }
     },
@@ -2909,6 +5081,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "转换"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "変換"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "변환"
           }
         }
       }
@@ -2926,6 +5110,18 @@
             "state": "translated",
             "value": "转换 %d 张图片"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d 枚の画像を変換"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이미지 %d개 변환"
+          }
         }
       }
     },
@@ -2941,6 +5137,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "转换“%@”"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「%@」を変換"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘%@’ 변환"
           }
         }
       }
@@ -2958,6 +5166,18 @@
             "state": "translated",
             "value": "转换图片"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "画像を変換"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이미지 변환"
+          }
         }
       }
     },
@@ -2973,6 +5193,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "转换图片…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "画像を変換…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이미지 변환…"
           }
         }
       }
@@ -2990,6 +5222,18 @@
             "state": "translated",
             "value": "输入文本以生成二维码"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "QR コードにするテキストを入力"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "QR 코드를 만들 텍스트 입력"
+          }
         }
       }
     },
@@ -3005,6 +5249,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "输入新文件的名称："
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新しいファイルの名前を入力："
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새 파일의 이름 입력:"
           }
         }
       }
@@ -3022,6 +5278,18 @@
             "state": "translated",
             "value": "输入这个模板在菜单中的名称："
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このテンプレートのメニュー表示名を入力："
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "메뉴에 표시할 템플릿 이름 입력:"
+          }
         }
       }
     },
@@ -3037,6 +5305,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "还没有打开工具。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開くアプリがありません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "열기 앱이 없습니다."
           }
         }
       }
@@ -3054,6 +5334,18 @@
             "state": "translated",
             "value": "还没有文件夹。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォルダがありません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "폴더가 없습니다."
+          }
         }
       }
     },
@@ -3069,6 +5361,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "这些文件夹是「复制到」和「移动到」的目标。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "これらのフォルダは「コピー先」と「移動先」の対象です。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 폴더는 ‘복사 위치’와 ‘이동 위치’의 대상입니다."
           }
         }
       }
@@ -3086,6 +5390,18 @@
             "state": "translated",
             "value": "这台 Mac 无法使用隔空投送。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この Mac では AirDrop を使用できません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 Mac에서는 AirDrop을 사용할 수 없습니다."
+          }
         }
       }
     },
@@ -3101,6 +5417,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "进度"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "進行状況"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "진행 상황"
           }
         }
       }
@@ -3118,6 +5446,18 @@
             "state": "translated",
             "value": "退出 RightKit"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKit を終了"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RightKit 종료"
+          }
         }
       }
     },
@@ -3133,6 +5473,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "选择"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選択"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "선택"
           }
         }
       }
@@ -3150,6 +5502,18 @@
             "state": "translated",
             "value": "选择文件夹…"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォルダを選択…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "폴더 선택…"
+          }
         }
       }
     },
@@ -3165,6 +5529,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "通用"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一般"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "일반"
           }
         }
       }
@@ -3182,6 +5558,18 @@
             "state": "translated",
             "value": "部分项目无法传输。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一部の項目を転送できませんでした。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "일부 항목을 전송하지 못했습니다."
+          }
         }
       }
     },
@@ -3197,6 +5585,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "部分项目无法删除。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一部の項目を削除できませんでした。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "일부 항목을 삭제하지 못했습니다."
           }
         }
       }
@@ -3214,6 +5614,18 @@
             "state": "translated",
             "value": "部分项目无法完成。"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一部の項目を処理できませんでした。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "일부 항목을 처리하지 못했습니다."
+          }
         }
       }
     },
@@ -3229,6 +5641,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "重启一次访达，菜单就会出现。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder を再起動すると、メニューが表示されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder를 재시동하면 메뉴가 표시됩니다."
           }
         }
       }
@@ -3246,6 +5670,18 @@
             "state": "translated",
             "value": "重启访达"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder を再起動"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder 재시동"
+          }
         }
       }
     },
@@ -3261,6 +5697,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "重新启动"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "再起動"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "재시동"
           }
         }
       }
@@ -3278,6 +5726,18 @@
             "state": "translated",
             "value": "重新启动访达"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder を再起動"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder 재시동"
+          }
         }
       }
     },
@@ -3293,6 +5753,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "重新启动访达？"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder を再起動しますか？"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finder를 재시동하시겠습니까?"
           }
         }
       }
@@ -3310,6 +5782,18 @@
             "state": "translated",
             "value": "重新授权…"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "再度アクセスを許可…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다시 접근 허용…"
+          }
         }
       }
     },
@@ -3325,6 +5809,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "隐藏/显示所选"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選択項目を非表示／表示"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "선택 항목 숨기기/표시"
           }
         }
       }
@@ -3342,6 +5838,18 @@
             "state": "translated",
             "value": "隐藏/显示扩展名"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拡張子を非表示／表示"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "확장자 숨기기/표시"
+          }
         }
       }
     },
@@ -3357,6 +5865,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "隐藏或显示所选"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選択項目を非表示または表示"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "선택 항목 숨기기 또는 표시"
           }
         }
       }
@@ -3374,6 +5894,18 @@
             "state": "translated",
             "value": "隐藏或显示扩展名"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拡張子を非表示または表示"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "확장자 숨기기 또는 표시"
+          }
         }
       }
     },
@@ -3389,6 +5921,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "隐藏所选"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選択項目を非表示"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "선택 항목 숨기기"
           }
         }
       }
@@ -3406,6 +5950,18 @@
             "state": "translated",
             "value": "隐藏扩展名"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拡張子を非表示"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "확장자 숨기기"
+          }
         }
       }
     },
@@ -3422,6 +5978,18 @@
             "state": "translated",
             "value": "隔空投送"
           }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AirDrop"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AirDrop"
+          }
         }
       }
     },
@@ -3437,6 +6005,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "需要重新授权。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "再度アクセスを許可してください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "접근 허용이 다시 필요합니다."
           }
         }
       }
