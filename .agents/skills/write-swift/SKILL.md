@@ -22,7 +22,7 @@ Before editing implementation code, read these files in order:
 
 Treat `docs/features.md` as the behavior contract and `DESIGN.md` as the visual contract. Keep `F-xxx` and `V-xxx` identifiers stable. When behavior changes, update the feature and verification documents in the same change.
 
-Do not inspect, alter, re-sign, or replace `/Applications/RightKit.app`. Do not read or write its user configuration, templates, directories, or settings.
+During everyday development, do not alter, re-sign, or replace `/Applications/RightKit.app`, and do not read or write its user configuration, templates, directories, or settings. The only exceptions are the ones listed under the safety boundaries in `AGENTS.md`.
 
 ## Respect Target Boundaries
 
@@ -30,7 +30,8 @@ Keep responsibilities narrow:
 
 - `RightKitCore` contains deterministic domain logic: menu matching, names, collision numbering, protected-path rules, template descriptions, request validation, and hash result types. It does not import SwiftUI and does not perform file I/O.
 - `RightKitFinder` builds Finder menus from the synchronous selection snapshot and dispatches intents. It does not open user files, hash, transform images, or mutate files from a menu callback.
-- `RightKit` owns persistent settings, file mutations, XPC handling, system integration, and all user-facing windows, dialogs, and errors.
+- `RightKitAgent` is the LaunchAgent that publishes the XPC service, validates callers, and forwards requests to the app. It does not handle files.
+- `RightKit` owns persistent settings, file mutations, request processing, system integration, and all user-facing windows, dialogs, and errors.
 
 Finder Sync only supplies contextual menus inside configured monitored directories. Do not expand the monitored scope to `/`. The Finder toolbar is only a stable route to Settings and must not infer the current Finder folder or selection.
 
@@ -70,7 +71,7 @@ python3 scripts/check_docs.py
 git diff --check
 ```
 
-When the project build entrypoint exists, run the focused tests first and then `make verify`. Do not claim a build passed before an Xcode project and scheme exist.
+Run the focused tests first, then `make verify`.
 
 ## Work In Small Slices
 
