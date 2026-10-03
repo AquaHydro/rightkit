@@ -39,4 +39,4 @@
 
 ## 工程结构
 
-按 `docs/technical.md` 实现：SwiftUI 主程序、轻量 Finder Sync Extension，以及两者共享的纯逻辑模块。
+按 `docs/technical.md` 实现：SwiftUI 主程序、轻量 Finder Sync Extension、转发 XPC 请求的 `RightKitAgent`，以及共享的纯逻辑模块。
