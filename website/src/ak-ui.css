@@ -230,7 +230,11 @@
 .ak-hero-rule--vertical::before, .ak-hero-rule--vertical::after { content: "+"; position: absolute; left: -5px; color: var(--coral); background: var(--ink); font: 15px/1 var(--font-mono); }
 .ak-hero-rule--vertical::before { top: 20%; } .ak-hero-rule--vertical::after { top: 36%; }
 .ak-hero-word, .ak-cta-word { position: absolute; z-index: 1; left: -2%; bottom: -8%; white-space: nowrap; font: 700 clamp(120px,21vw,340px)/1 "Oswald", var(--font); color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.14); pointer-events: none; }
-.ak-coral-plane { position: absolute; z-index: 1; left: 0; top: 36%; width: min(48%,720px); height: 30%; background: linear-gradient(125deg,var(--coral-start),var(--coral-end)); pointer-events: none; }
+/* The accent band follows the translated heading and description, not viewport percentages. */
+.ak-hero-description { position: relative; isolation: isolate; margin-top: 22px; padding-block: 20px; }
+.ak-hero-description::before { content: ""; position: absolute; z-index: -1; inset: 0 -14% 0 calc(-1 * max(var(--gutter), (100vw - var(--wrap)) / 2)); background: linear-gradient(125deg,var(--coral-start),var(--coral-end)); pointer-events: none; }
+.ak-hero-description h1 { margin: 0; }
+.ak-hero-description .tagline { margin-top: 0; }
 .hero-copy .tagline, .hero-copy .lead { position: relative; color: var(--ink-3); }
 .hero-copy .tagline em { background: none; color: var(--ink-3); -webkit-text-fill-color: var(--ink-3); }
 .hero-stage { z-index: 2; }
@@ -296,9 +300,9 @@
   .ak-hero-word { font-size: 28vw; bottom: -2%; }
 }
 @media (max-width: 600px) {
-  .ak-coral-plane { width: 100%; height: 170px; top: 190px; }
-  .ak-hero-rule--two { top: 190px; } .ak-hero-rule--three { top: 360px; }
-  .hero-copy .tagline { margin-top: 20px; }
+  .ak-hero-description::before { right: calc(-1 * var(--gutter)); }
+  .ak-hero-rule--two { top: 190px; } .ak-hero-rule--three { top: 400px; }
+
   .ak-profile { padding-block: 72px; }
   .ak-profile-head h2 { font-size: 82px; }
   .ak-profile-thumbs { gap: 5px; }
@@ -464,3 +468,10 @@
   .ak-workbench-directory a, .ak-workbench-directory .ic, .ak-workbench-hotspot::before, .ak-workbench-hotspot small,
   [data-ak-world-select], .ak-world-progress > span, .ak-link-panel, .ak-link-panel img, .ak-link-panel::after { transition: none; }
 }
+
+/* Reuse the native language disclosure, adapted to the existing ak surfaces. */
+[data-ak-ui] .language-options { border-radius: var(--ak-radius-subtle); border-width: var(--ak-line-hairline); background: var(--ak-surface-inverse); }
+[data-ak-ui] .language-options a { border-radius: var(--ak-radius-subtle); }
+[data-ak-ui] .language-options a[aria-current] { border-inline-start: var(--ak-line-strong) solid var(--coral); }
+
+[data-ak-ui] .settings-preview img { border-radius: var(--ak-radius-subtle); border-width: var(--ak-line-hairline); }

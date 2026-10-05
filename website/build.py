@@ -28,6 +28,39 @@ DIST = ROOT / "dist"
 
 # Theme name -> URL prefix. Templates see theme.ak to add the ak-ui markup.
 THEMES = {"classic": "", "ak": "ak/"}
+LANGUAGES = {
+    "zh": {"name": "简体中文", "short": "中文"},
+    "en": {"name": "English", "short": "EN"},
+    "ja": {"name": "日本語", "short": "JA"},
+    "ko": {"name": "한국어", "short": "KO"},
+}
+
+
+def page_scope(site: dict, content: dict, key: str, theme: str, sub: str) -> dict:
+    prefix = THEMES[theme]
+    strings = content[key]
+    path = "/" + prefix + strings["path"].lstrip("/") + sub
+    depth = len([part for part in path.split("/") if part])
+    base = "../" * depth
+    languages = []
+    for code, labels in LANGUAGES.items():
+        locale = content[code]
+        language_path = prefix + locale["path"].lstrip("/") + sub
+        href = base + language_path or "./"
+        languages.append({**labels, "key": code, "lang": locale["lang"],
+                          "href": href + ("?lang=zh" if code == "zh" else ""),
+                          "canonical": site["url"] + locale["path"] + sub,
+                          "current": code == key})
+    home = base + prefix + strings["path"].lstrip("/") or "./"
+    explicit = "?lang=zh" if key == "zh" else ""
+    return {"site": site, "t": strings, "base": base, "home": base + prefix,
+            "theme": {theme: True}, "languages": languages,
+            "currentLanguage": LANGUAGES[key],
+            "page": {"canonical": site["url"] + strings["path"] + sub,
+                     "default": site["url"] + "/" + sub,
+                     "home": home + explicit, "privacy": home + "privacy/" + explicit},
+            "languageConfig": {"current": key, "defaultEntry": key == "zh", "languages": languages}}
+
 
 TOKEN = re.compile(r"\{\{\s*(.+?)\s*\}\}|\{%\s*(.+?)\s*%\}", re.S)
 
@@ -127,18 +160,14 @@ def main() -> int:
     if DIST.exists():
         shutil.rmtree(DIST)
     shutil.copytree(ROOT / "public", DIST)
-    for name in ("styles.css", "ak-ui.css", "main.js", "ak.js"):
+    for name in ("styles.css", "ak-ui.css", "main.js", "ak.js", "language.js"):
         shutil.copy2(SRC / name, DIST / name)
 
     for theme, prefix in THEMES.items():
-        for strings in content.values():
+        for key, strings in content.items():
             for sub, tree in pages.items():
                 path = "/" + prefix + strings["path"].lstrip("/") + sub
-                depth = len([part for part in path.split("/") if part])
-                # Relative asset paths keep the site working under a sub-path such as GitHub Pages.
-                # base points at the shared assets; home keeps page links inside the same theme.
-                base = "../" * depth
-                scope = {"site": site, "t": strings, "base": base, "home": base + prefix, "theme": {theme: True}}
+                scope = page_scope(site, content, key, theme, sub)
                 target = DIST / path.strip("/") / "index.html"
                 target.parent.mkdir(parents=True, exist_ok=True)
                 target.write_text(render(tree, scope), encoding="utf-8")
