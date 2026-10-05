@@ -41,6 +41,10 @@ python3 -m http.server 8765 --directory website/dist
 
 另有[语言菜单](ja-language-menu.jpg)、[韩文隐私手机页](ko-privacy-mobile.jpg)，以及设置截图在[日文桌面页](ja-settings-desktop.jpg)和[韩文手机页](ko-settings-mobile.jpg)里的实际展示。
 
+## 复审修复：演示侧边栏折行
+
+2026-10-05 复审发现，日文 1440 × 900 桌面页的模拟访达侧边栏里，「ダウンロード」「デスクトップ」折成两行（行高 50 px，见[修复前](ja-finder-sidebar-before.png)）。侧边栏加宽到 148 px，名称保持单行，过长时用省略号截断，不再折行。修复后用 Playwright Chromium 在 Linux 上对 `/ja/`、`/ko/`、`/ak/ja/`、`/en/`、`/?lang=zh` 逐项检查：侧边栏标题和三个位置名都只占一行，没有被截断（见[修复后](ja-finder-sidebar-after.png)）。官网测试 8 + 16 项重新通过。这次检查使用的是 Linux 字体，不能代替 macOS 上的视觉复测。
+
 ## 边界
 
 自动浏览器语言优先级由控制器测试覆盖；当前内置浏览器不支持原始 CDP 的 User-Agent / Accept-Language 覆盖，因此没有宣称用真实浏览器模拟日/韩系统语言。未在真实手机、VoiceOver、其他浏览器或线上部署环境验收。没有修改已安装 RightKit、上传 App Store 或部署官网。

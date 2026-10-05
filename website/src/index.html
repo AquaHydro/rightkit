@@ -144,7 +144,7 @@
               <aside class="finder-side" aria-hidden="true">
                 <p>{{ t.demo.sidebarTitle }}</p>
                 <ul>
-                  {% for place in t.demo.places %}<li data-place="{{ place.path }}"><svg class="ic"><use href="#i-folder"/></svg>{{ place.name }}</li>{% endfor %}
+                  {% for place in t.demo.places %}<li data-place="{{ place.path }}"><svg class="ic"><use href="#i-folder"/></svg><span>{{ place.name }}</span></li>{% endfor %}
                 </ul>
               </aside>
               <div class="finder-content" data-content tabindex="-1">

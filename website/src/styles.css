@@ -188,11 +188,14 @@ h3 { font-size: 17px; line-height: 1.35; font-weight: 700; }
 .lights i:nth-child(2) { background: #febc2e; }
 .lights i:nth-child(3) { background: #28c840; }
 .finder-title { position: absolute; inset: 0; display: grid; place-items: center; font-size: 13px; font-weight: 600; color: rgba(255, 255, 255, 0.85); pointer-events: none; }
-.finder-body { display: grid; grid-template-columns: 132px 1fr; min-height: 260px; }
+.finder-body { display: grid; grid-template-columns: 148px 1fr; min-height: 260px; }
 .finder-side { padding: 12px 8px; background: rgba(255, 255, 255, 0.03); border-right: 1px solid rgba(255, 255, 255, 0.06); font-size: 13px; }
 .finder-side p { padding: 0 8px 6px; font-size: 11px; font-weight: 600; color: rgba(255, 255, 255, 0.45); }
 .finder-side li { display: flex; align-items: center; gap: 7px; padding: 5px 8px; border-radius: 6px; color: rgba(255, 255, 255, 0.85); transition: background-color 0.3s ease; }
-.finder-side li .ic { width: 16px; height: 16px; color: #5ab8f5; }
+.finder-side li .ic { flex: none; width: 16px; height: 16px; color: #5ab8f5; }
+/* Sidebar names stay on one line like Finder; longer translations truncate instead of wrapping. */
+.finder-side li span { min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.finder-side p { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .finder-side li.current { background: rgba(255, 255, 255, 0.08); }
 .finder-side li.flash { background: rgba(10, 132, 255, 0.55); }
 .finder-content { position: relative; padding: 18px 14px 56px; outline: none; cursor: default; }
