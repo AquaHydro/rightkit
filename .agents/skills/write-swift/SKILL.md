@@ -39,11 +39,12 @@ Use the declared development identifiers without inventing replacements:
 
 - direct (website) channel app: `app.rightkit.mac`, Finder extension `app.rightkit.mac.finder`, App Group `Q9C87Z9H4G.app.rightkit.mac`
 - App Store channel app: `app.rightkit.mac.store`, Finder extension `app.rightkit.mac.store.finder`, App Group `Q9C87Z9H4G.app.rightkit.mac.store`
+- LaunchAgent `RightKitAgent`: signing identifier is the app bundle ID plus `.agent`; its launchd plist is generated from `RightKitAgent/LaunchAgent.plist`
 - XPC service: the App Group plus `.command`
 
 Both channels build from the same code. Identifiers come from build settings (`RK_APP_ID`, `RK_APP_GROUP`, `RK_URL_SCHEME`) via Info.plist and `ServiceNames`; never hard-code them in Swift. Only `APP_STORE` compile-time branches may differ, and every such difference must be listed in `F-082`.
 
-The extension and host share the App Group and development team. Validate the XPC caller before processing requests. Treat all request data, URLs, and file names as untrusted until validated.
+The extension and host share the App Group and development team. `RightKitAgent` accepts only this channel's extension or app from the same team, and the app accepts only this channel's agent; validate callers before processing requests. Treat all request data, URLs, and file names as untrusted until validated.
 
 ## Implement In Native Swift
 
