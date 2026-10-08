@@ -85,4 +85,21 @@ import Testing
         #expect(dark.tiffRepresentation != light.tiffRepresentation)
         #expect(try icon(false).tiffRepresentation == light.tiffRepresentation)
     }
+
+    /// 访达把菜单跨进程拷过去时会编码图标的全部尺寸，多尺寸的应用和文件图标会让每次右键多出约 270 ms。
+    @Test func appAndFileIconsAreSingleSmallBitmaps() throws {
+        let dir = try TempDir()
+        let file = try dir.file("a.txt", "a")
+        let nodes: [MenuIcon] = [.app(bundleID: "com.apple.finder"), .fileType(extension: "md"), .file(path: file.path)]
+        let result = MenuRenderer().render(nodes.map { MenuNode(title: "x", icon: $0, content: .command(Command(.copyPath))) },
+                                           target: nil, action: nil, isDark: false)
+        for item in result.menu.items {
+            let image = try #require(item.image)
+            #expect(image.size == NSSize(width: 16, height: 16))
+            #expect(image.representations.count == 1)
+            let rep = try #require(image.representations.first as? NSBitmapImageRep)
+            #expect(rep.pixelsWide == 32 && rep.pixelsHigh == 32)
+            #expect(!image.isTemplate, "应用和文件图标保留原色")
+        }
+    }
 }

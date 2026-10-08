@@ -1,0 +1,60 @@
+2026-10-03 22:25:06.680 Df RightKitFinder[11035] [app.rightkit.mac.finder:menu-performance] init_ms=2.206917 roots=2
+2026-10-03 22:25:06.680 Df RightKitFinder[11034] [app.rightkit.mac.finder:menu-performance] init_ms=2.048417 roots=2
+2026-10-03 22:25:06.701 Df RightKitFinder[11036] [app.rightkit.mac.finder:menu-performance] init_ms=2.329125 roots=2
+2026-10-03 22:25:07.929 Df RightKitFinder[11058] [app.rightkit.mac.finder:menu-performance] init_ms=4.123042 roots=2
+2026-10-03 22:25:14.908 Df RightKitFinder[11058] [app.rightkit.mac.finder:menu-performance] menu first=true kind=0 items=1 metadata_ms=0.198583 pending_ms=0.007125 rules_ms=6.198333 presentation_ms=17.876375 total_ms=24.280417
+2026-10-03 22:25:17.500 Df RightKitFinder[11058] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.087292 pending_ms=0.001708 rules_ms=2.517417 presentation_ms=2.268458 total_ms=4.874875
+2026-10-03 22:25:19.452 Df RightKitFinder[11058] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.129292 pending_ms=0.002167 rules_ms=2.110333 presentation_ms=4.322333 total_ms=6.564125
+2026-10-03 22:25:21.523 Df RightKitFinder[11058] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.100750 pending_ms=0.002042 rules_ms=1.906583 presentation_ms=4.384542 total_ms=6.393917
+2026-10-03 22:25:23.604 Df RightKitFinder[11058] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.100333 pending_ms=0.002542 rules_ms=2.339250 presentation_ms=4.193458 total_ms=6.635583
+2026-10-03 22:25:25.182 Df RightKitFinder[11167] [app.rightkit.mac.finder:menu-performance] init_ms=2.481500 roots=2
+2026-10-03 22:25:32.172 Df RightKitFinder[11167] [app.rightkit.mac.finder:menu-performance] menu first=true kind=0 items=1 metadata_ms=0.198083 pending_ms=0.007833 rules_ms=4.616333 presentation_ms=18.129375 total_ms=22.951625
+2026-10-03 22:25:34.271 Df RightKitFinder[11167] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.132542 pending_ms=0.003292 rules_ms=2.143958 presentation_ms=4.523875 total_ms=6.803667
+2026-10-03 22:25:36.369 Df RightKitFinder[11167] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.092292 pending_ms=0.002708 rules_ms=2.172542 presentation_ms=4.297750 total_ms=6.565292
+2026-10-03 22:25:38.436 Df RightKitFinder[11167] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.188542 pending_ms=0.003583 rules_ms=1.991917 presentation_ms=4.713875 total_ms=6.897917
+2026-10-03 22:25:40.487 Df RightKitFinder[11167] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.135167 pending_ms=0.002917 rules_ms=6.713333 presentation_ms=6.684083 total_ms=13.535500
+2026-10-03 22:25:42.047 Df RightKitFinder[11242] [app.rightkit.mac.finder:menu-performance] init_ms=2.026208 roots=2
+2026-10-03 22:25:49.023 Df RightKitFinder[11242] [app.rightkit.mac.finder:menu-performance] menu first=true kind=0 items=1 metadata_ms=0.247625 pending_ms=0.009125 rules_ms=5.067167 presentation_ms=17.266875 total_ms=22.590792
+2026-10-03 22:25:51.084 Df RightKitFinder[11242] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.120000 pending_ms=0.002625 rules_ms=1.403458 presentation_ms=3.385125 total_ms=4.911208
+2026-10-03 22:25:53.168 Df RightKitFinder[11242] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.139542 pending_ms=0.004125 rules_ms=2.186208 presentation_ms=3.636792 total_ms=5.966667
+2026-10-03 22:25:55.252 Df RightKitFinder[11242] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.087875 pending_ms=0.001958 rules_ms=1.872917 presentation_ms=4.489125 total_ms=6.451875
+2026-10-03 22:25:57.293 Df RightKitFinder[11242] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.094292 pending_ms=0.002167 rules_ms=3.244583 presentation_ms=4.546625 total_ms=7.887667
+2026-10-03 22:26:00.131 Df RightKitFinder[11350] [app.rightkit.mac.finder:menu-performance] init_ms=2.098667 roots=2
+2026-10-03 22:26:06.994 Df RightKitFinder[11350] [app.rightkit.mac.finder:menu-performance] menu first=true kind=0 items=1 metadata_ms=0.308750 pending_ms=0.011792 rules_ms=5.375292 presentation_ms=21.434833 total_ms=27.130667
+2026-10-03 22:26:08.803 Df RightKitFinder[11350] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.089042 pending_ms=0.001917 rules_ms=1.737000 presentation_ms=6.120292 total_ms=7.948250
+2026-10-03 22:26:10.620 Df RightKitFinder[11350] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.231625 pending_ms=0.003208 rules_ms=3.342667 presentation_ms=5.679000 total_ms=9.256500
+2026-10-03 22:26:12.422 Df RightKitFinder[11350] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.098083 pending_ms=0.002333 rules_ms=2.359542 presentation_ms=6.830750 total_ms=9.290708
+2026-10-03 22:26:14.222 Df RightKitFinder[11350] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.240958 pending_ms=0.005292 rules_ms=1.916792 presentation_ms=7.458417 total_ms=9.621458
+2026-10-03 22:26:15.513 Df RightKitFinder[11428] [app.rightkit.mac.finder:menu-performance] init_ms=2.202667 roots=2
+2026-10-03 22:26:22.512 Df RightKitFinder[11428] [app.rightkit.mac.finder:menu-performance] menu first=true kind=0 items=1 metadata_ms=0.269875 pending_ms=0.009292 rules_ms=4.518292 presentation_ms=23.109958 total_ms=27.907417
+2026-10-03 22:26:24.309 Df RightKitFinder[11428] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.139875 pending_ms=0.002583 rules_ms=2.594875 presentation_ms=7.445208 total_ms=10.182542
+2026-10-03 22:26:26.103 Df RightKitFinder[11428] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.248208 pending_ms=0.002958 rules_ms=2.758292 presentation_ms=6.316708 total_ms=9.326167
+2026-10-03 22:26:27.905 Df RightKitFinder[11428] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.119750 pending_ms=0.002833 rules_ms=1.966708 presentation_ms=7.909250 total_ms=9.998542
+2026-10-03 22:26:29.708 Df RightKitFinder[11428] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.196708 pending_ms=0.002792 rules_ms=2.709292 presentation_ms=7.011458 total_ms=9.920250
+2026-10-03 22:26:31.121 Df RightKitFinder[11578] [app.rightkit.mac.finder:menu-performance] init_ms=3.185500 roots=2
+2026-10-03 22:26:38.113 Df RightKitFinder[11578] [app.rightkit.mac.finder:menu-performance] menu first=true kind=0 items=1 metadata_ms=0.196667 pending_ms=0.007542 rules_ms=4.190125 presentation_ms=21.489292 total_ms=25.883625
+2026-10-03 22:26:39.907 Df RightKitFinder[11578] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.171708 pending_ms=0.003583 rules_ms=2.199042 presentation_ms=6.926083 total_ms=9.300417
+2026-10-03 22:26:41.707 Df RightKitFinder[11578] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.123042 pending_ms=0.003333 rules_ms=2.573375 presentation_ms=6.821042 total_ms=9.520792
+2026-10-03 22:26:43.506 Df RightKitFinder[11578] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.308750 pending_ms=0.006167 rules_ms=2.823167 presentation_ms=5.955833 total_ms=9.093917
+2026-10-03 22:26:45.289 Df RightKitFinder[11578] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.111000 pending_ms=0.002042 rules_ms=2.566833 presentation_ms=6.317792 total_ms=8.997667
+2026-10-03 22:26:48.241 Df RightKitFinder[11705] [app.rightkit.mac.finder:menu-performance] init_ms=2.099583 roots=2
+2026-10-03 22:26:48.837 Df RightKitFinder[11705] [app.rightkit.mac.finder:menu-performance] prewarm_ms=70.648208
+2026-10-03 22:26:54.727 Df RightKitFinder[11705] [app.rightkit.mac.finder:menu-performance] menu first=true kind=0 items=1 metadata_ms=0.179792 pending_ms=0.005417 rules_ms=2.968833 presentation_ms=15.239000 total_ms=18.393042
+2026-10-03 22:26:56.536 Df RightKitFinder[11705] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.126375 pending_ms=0.003125 rules_ms=1.878542 presentation_ms=6.377708 total_ms=8.385750
+2026-10-03 22:26:58.358 Df RightKitFinder[11705] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.111875 pending_ms=0.002417 rules_ms=4.499792 presentation_ms=7.078375 total_ms=11.692458
+2026-10-03 22:27:00.155 Df RightKitFinder[11705] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.209708 pending_ms=0.002958 rules_ms=1.672625 presentation_ms=8.467917 total_ms=10.353208
+2026-10-03 22:27:01.953 Df RightKitFinder[11705] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.104625 pending_ms=0.002417 rules_ms=1.807417 presentation_ms=6.555792 total_ms=8.470250
+2026-10-03 22:27:03.234 Df RightKitFinder[11783] [app.rightkit.mac.finder:menu-performance] init_ms=3.252708 roots=2
+2026-10-03 22:27:03.779 Df RightKitFinder[11783] [app.rightkit.mac.finder:menu-performance] prewarm_ms=21.542292
+2026-10-03 22:27:10.182 Df RightKitFinder[11783] [app.rightkit.mac.finder:menu-performance] menu first=true kind=0 items=1 metadata_ms=0.266292 pending_ms=0.008083 rules_ms=2.020208 presentation_ms=15.506667 total_ms=17.801250
+2026-10-03 22:27:11.986 Df RightKitFinder[11783] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.203833 pending_ms=0.002708 rules_ms=1.898042 presentation_ms=5.831333 total_ms=7.935917
+2026-10-03 22:27:13.806 Df RightKitFinder[11783] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.099458 pending_ms=0.002333 rules_ms=2.199792 presentation_ms=7.432500 total_ms=9.734083
+2026-10-03 22:27:15.528 Df RightKitFinder[11783] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.051000 pending_ms=0.001208 rules_ms=3.534250 presentation_ms=5.853917 total_ms=9.440375
+2026-10-03 22:27:17.272 Df RightKitFinder[11783] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.122750 pending_ms=0.002000 rules_ms=2.272083 presentation_ms=6.887083 total_ms=9.283917
+2026-10-03 22:27:18.525 Df RightKitFinder[11859] [app.rightkit.mac.finder:menu-performance] init_ms=1.967333 roots=2
+2026-10-03 22:27:19.070 Df RightKitFinder[11859] [app.rightkit.mac.finder:menu-performance] prewarm_ms=20.403625
+2026-10-03 22:27:25.444 Df RightKitFinder[11859] [app.rightkit.mac.finder:menu-performance] menu first=true kind=0 items=1 metadata_ms=0.135833 pending_ms=0.005208 rules_ms=1.645625 presentation_ms=13.475125 total_ms=15.261792
+2026-10-03 22:27:27.241 Df RightKitFinder[11859] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.184542 pending_ms=0.002625 rules_ms=2.253542 presentation_ms=7.476333 total_ms=9.917042
+2026-10-03 22:27:29.013 Df RightKitFinder[11859] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.151375 pending_ms=0.002833 rules_ms=2.123417 presentation_ms=6.356667 total_ms=8.634292
+2026-10-03 22:27:30.783 Df RightKitFinder[11859] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.213583 pending_ms=0.005750 rules_ms=1.680708 presentation_ms=8.273458 total_ms=10.173500
+2026-10-03 22:27:32.582 Df RightKitFinder[11859] [app.rightkit.mac.finder:menu-performance] menu first=false kind=0 items=1 metadata_ms=0.250792 pending_ms=0.003500 rules_ms=2.234542 presentation_ms=8.380667 total_ms=10.869500

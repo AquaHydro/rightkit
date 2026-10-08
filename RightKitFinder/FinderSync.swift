@@ -15,6 +15,7 @@ final class FinderSync: FIFinderSync, @unchecked Sendable {
     /// 最近一次菜单的命令和目标快照。访达会复制菜单项，只有 tag 能可靠带回来。
     private var commands: [Command] = []
     private var snapshot: (folder: URL?, items: [URL]) = (nil, [])
+    private var prewarm: DispatchWorkItem?
 
     override init() {
         let start = ProcessInfo.processInfo.systemUptime
@@ -50,6 +51,28 @@ final class FinderSync: FIFinderSync, @unchecked Sendable {
             .map { URL(filePath: $0, directoryHint: .isDirectory) }
         FIFinderSyncController.default().directoryURLs = Set(urls)
         log.notice("Monitoring \(urls.map(\.path).joined(separator: ", "), privacy: .public)")
+        schedulePrewarm()
+    }
+
+    /// 扩展启动或设置变化后，空闲时在后台搭一遍菜单并丢弃，让系统提前载入图标服务和图标，
+    /// 首次右键不再承担这部分开销。用独立的呈现器，不与菜单回调共享缓存。
+    private func schedulePrewarm() {
+        prewarm?.cancel()
+        let settings = settings
+        let work = DispatchWorkItem { [performance] in
+            guard let root = settings.activeMonitoredPaths.first(where: { $0 != "/" }) else { return }
+            let start = ProcessInfo.processInfo.systemUptime
+            let isDark = UserDefaults.standard.string(forKey: "AppleInterfaceStyle") == "Dark"
+            let file = SelectedItem(path: (root as NSString).appendingPathComponent("RightKit.txt"), isDirectory: false)
+            let renderer = MenuRenderer()
+            for input in [MenuInput(location: .items, folder: root, items: [file]), MenuInput(location: .container, folder: root)] {
+                _ = renderer.render(MenuBuilder.build(input, settings: settings, environment: Self.environment),
+                                    target: nil, action: nil, isDark: isDark)
+            }
+            performance.notice("prewarm_ms=\((ProcessInfo.processInfo.systemUptime - start) * 1000)")
+        }
+        prewarm = work
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: work)
     }
 
     // MARK: 工具栏（F-008）
