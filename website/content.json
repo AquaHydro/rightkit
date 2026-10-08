@@ -143,7 +143,7 @@
       "tags": [
         "12 种新建模板",
         "16 个工具",
-        "日文与韩文即将加入",
+        "中英日韩四种语言",
         "开源"
       ],
       "charAlt": "RightKit 的角色 Riko 伸手点向右键菜单，肩上趴着一只小白鼠"
@@ -618,7 +618,7 @@
         },
         {
           "q": "支持哪些语言？",
-          "a": "目前支持简体中文和 English，下一版本将加入日本語和 한국어。默认跟随系统，也可以在设置里切换。"
+          "a": "支持简体中文、English、日本語和 한국어。默认跟随系统，也可以在设置里切换。"
         }
       ],
       "more": "没找到答案？",
@@ -946,7 +946,7 @@
       "tags": [
         "12 file templates",
         "16 tools",
-        "Japanese & Korean coming next",
+        "4 languages",
         "Open source"
       ],
       "charAlt": "Riko, the RightKit character, reaching toward a context menu with a white mouse on her shoulder"
@@ -1421,7 +1421,7 @@
         },
         {
           "q": "Which languages are supported?",
-          "a": "English and Simplified Chinese are available now. The next version adds Japanese and Korean. It follows your system by default, and you can switch in Settings."
+          "a": "RightKit is available in English, Simplified Chinese, Japanese and Korean. It follows your system by default, and you can switch in Settings."
         }
       ],
       "more": "Didn't find your answer?",
@@ -1749,7 +1749,7 @@
       "tags": [
         "12 種類のテンプレート",
         "16 個のツール",
-        "次版で日本語・韓国語に対応",
+        "日本語・韓国語に対応",
         "オープンソース"
       ],
       "charAlt": "肩に白いネズミを乗せ、右クリックメニューに手を伸ばす RightKit のキャラクター Riko"
@@ -1903,8 +1903,8 @@
         ],
         "preview": {
           "src": "settings-ja.png",
-          "alt": "次のバージョンの RightKit 設定画面。日本語で表示された一般設定。",
-          "caption": "次のバージョンの日本語インターフェイス。実際の設定画面を使った隔離プレビューです。"
+          "alt": "RightKit の設定画面。日本語で表示された一般設定。",
+          "caption": "日本語で表示した RightKit の設定画面。"
         }
       },
       "trust": {
@@ -2228,7 +2228,7 @@
         },
         {
           "q": "対応言語は何ですか？",
-          "a": "現在は簡体字中国語と英語に対応しています。次のバージョンから日本語と韓国語にも対応します。標準ではシステムの言語に従い、設定で切り替えられます。"
+          "a": "日本語、英語、簡体字中国語、韓国語に対応しています。標準ではシステムの言語に従い、設定で切り替えられます。"
         }
       ],
       "more": "答えが見つかりませんか？",
@@ -2556,7 +2556,7 @@
       "tags": [
         "파일 템플릿 12종",
         "도구 16가지",
-        "다음 버전에서 일본어·한국어 지원",
+        "한국어·일본어 지원",
         "오픈 소스"
       ],
       "charAlt": "어깨에 흰 생쥐를 태우고 단축 메뉴를 향해 손을 뻗는 RightKit 캐릭터 Riko"
@@ -2710,8 +2710,8 @@
         ],
         "preview": {
           "src": "settings-ko.png",
-          "alt": "다음 버전 RightKit의 한국어 일반 설정 화면.",
-          "caption": "다음 버전의 한국어 인터페이스입니다. 실제 설정 화면을 사용한 격리 미리보기입니다."
+          "alt": "RightKit의 한국어 일반 설정 화면.",
+          "caption": "한국어로 표시한 RightKit 설정 화면입니다."
         }
       },
       "trust": {
@@ -3035,7 +3035,7 @@
         },
         {
           "q": "어떤 언어를 지원하나요?",
-          "a": "현재 영어와 중국어 간체를 지원합니다. 다음 버전에서 일본어와 한국어가 추가됩니다. 기본적으로 시스템 언어를 따르며 설정에서 변경할 수 있습니다."
+          "a": "한국어, 영어, 중국어 간체, 일본어를 지원합니다. 기본적으로 시스템 언어를 따르며 설정에서 변경할 수 있습니다."
         }
       ],
       "more": "원하는 답을 찾지 못하셨나요?",
