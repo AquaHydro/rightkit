@@ -2,25 +2,13 @@
 
 需要人工配合、或者只能在真机上完成的事项。完成后勾选；整组做完就删掉那一节。编号含义见[功能规格](docs/features.md)和[验收](docs/verification.md)。
 
-## 上架前必须完成
+## 0.1.4 发布
 
-资料都在 [App Store 上架资料](docs/app-store.md)：商店名「RightKit: Context Menu Toolkit」（中文区「RightKit 右键工具箱」），价格 1 美元，版权 `2026 Liao Yiliang`，联系邮箱 `contact@yiliang.me`（电话直接填在 App Store Connect）。
-首次提审过程、分工和剩余步骤见 [提审交接记录](docs/app-store-submission-log.md)。2026-09-26 已由用户提交审核；2026-09-28 被拒（5.2.5 名称和副标题用了 Finder；2.4.5(i) 不批准 Apple Events 临时例外），代码和资料已在 #17、#18 修好，2026-09-28 重新提交 `0.1.1 (5)`，等待审核。通过后仍需用户手动发布。
+资料在 [App Store 上架资料](docs/app-store.md)，过程见 [提审记录](docs/app-store-submission-log.md)。0.1.1 至 0.1.3 已上架。0.1.4 包含日文、韩文界面和右键菜单提速。
 
-- [x] 官网和隐私政策上线：`https://rightkit.yiliang.app`（Cloudflare Pages 项目 `rightkit`，`make website-deploy` 部署）。隐私政策 `/privacy/`、`/en/privacy/`。以后换正式域名时改 `website/site.json` 的 `url` 并重新部署。
-- [x] 在 App Store Connect 新建 App：bundle ID `app.rightkit.mac.store`，按上架资料填名称、副标题、描述、关键词、隐私政策和技术支持网址、价格、隐私问卷（不收集数据）、年龄分级（4+）。隐私答复已发布。
-- [x] 送审备注：把上架资料里的英文备注贴进 App Review Information，不需要演示账号。
-- [x] App 沙盒信息：用户已删掉 App Sandbox Information 里 `com.apple.security.temporary-exception.apple-events` 那一行，商店版已不再申请。
-- [x] 商店截图：`docs/evidence/app-store/zh` 与 `en` 各 5 张 2560 × 1600 产品图，已上传 App Store Connect 并按 01 至 05 排序。当时英文产品图用英文介绍配中文实机界面。2026-10-02 已按新的要求重拍本地中英文真实界面，见 [截图记录](docs/evidence/app-store/README.md)。
-- [x] 在 App Store Connect 的 0.1.3 待提交草稿中替换中英文各 5 张新截图；2026-10-02 核对顺序、MD5 和 Apple 处理状态全部通过，见 [上传记录](docs/evidence/app-store/capture/2026-10-02-asc-upload.json)。
-- [x] 0.1.3 (7)：推 `v0.1.3` 标签构建上传，关联构建并按上架资料更新描述、关键词和新功能说明；用户于 2026-10-02 提交审核，见 [提审记录](docs/app-store-submission-log.md)。
-- [ ] 0.1.3 审核通过后手动发布；发布后新截图才会替换线上旧图。
-- [x] 上传商店版：本机 `make upload-appstore` 上传 `0.1.1 (4)`；App Store Connect 显示上传完成、二进制已验证。出口合规从 `Info.plist` 读为「否」。
-- [x] 设置 App 供应国家或地区：App Store Connect 显示全部 175 个国家或地区为「App 发布时供应」，包含中国大陆。
-- [x] 付费 App 协议与商务资料：Connect 显示付费协议有效、银行账户可用、报税表使用中；该 App 的欧盟数字服务法交易商声明已提交。
-- [x] 用户正式提审：2026-09-26 12:32 提交 `0.1.1 (4)`，提交 ID `01dc116b-b85e-4cf4-950b-1fe5dd8056ff`；Connect 显示「等待审核」。
-- [ ] 处理 Apple 的实际审核反馈，直到审核通过。2026-09-28 第一次被拒，已改名、上传 `0.1.1 (5)`、更新审核备注并重新提交，见提审记录。
-- [ ] 审核通过后由用户手动发布，并检查商店页面、购买和首次启动；发布方式当前不是自动发布。
+- [ ] 合并版本号 PR 后推 `v0.1.4` 标签，Release 工作流发布 GitHub Release 并上传商店构建 `0.1.4 (8)`。
+- [ ] App Store Connect 建 0.1.4，关联构建，写入中英日韩资料，提交审核。
+- [ ] 审核通过后手动发布，再部署官网（`make website-deploy`），官网的日文、韩文说明已改为「已支持」。
 
 ## 自动化发布（GitHub Actions）
 
@@ -28,11 +16,11 @@
 - [x] 仓库已建 `app-store` 环境，只允许 `v*` 标签使用。私有仓库的免费方案不能要求手动批准。
 - [x] 其余 secrets 已存：`ASC_ISSUER_ID`、`SIGNING_CERTS_P12_BASE64`、`SIGNING_CERTS_P12_PASSWORD`。`.p12` 含 Developer ID Application 和 Apple Development；商店版证书由 Apple 云端代管。
 - [x] 试运行：2026-09-29 手动运行 Release（run `36555100086`）通过。官网版 app 和 DMG 公证通过并钉票；商店版 `.pkg` 由 3rd Party Mac Developer Installer 签名，签名检查通过。Xcode 导出商店版时会自动把构建号加一。
-- [ ] 第一次正式发布：改 `project.yml` 的 `MARKETING_VERSION` 和 `CURRENT_PROJECT_VERSION`，合并后推标签（如 `git tag v0.2.0 && git push origin v0.2.0`），看 Release 工作流跑通。
+- [x] 第一次正式发布：改 `project.yml` 的 `MARKETING_VERSION` 和 `CURRENT_PROJECT_VERSION`，合并后推标签（如 `git tag v0.2.0 && git push origin v0.2.0`），看 Release 工作流跑通。
 
 ## 真机验收
 
-- [ ] `V-007`：下一版本日文、韩文国际化。自动测试、双渠道资源打包和隔离 SwiftUI 检查已通过；仍需真实 Finder 菜单、菜单栏、重启持久化、日文/韩文 macOS 应用语言下的系统服务、快捷指令与权限提示验收。见 [国际化检查记录](docs/evidence/localization/README.md)。
+- [x] `V-007`：日文、韩文国际化。2026-10-08 用户真机验收通过，见 [验收记录](docs/verification-log.md)。
 
 - [x] `V-002`：默认值改过（登录时启动、监视目录、常用目录），需要重跑。2026-09-26 通过。
 - [x] `V-004`：欢迎窗口新增了授权行和登录时启动。2026-09-26 浅色和深色通过。
@@ -44,7 +32,7 @@
 
 ## 官网版发布
 
-- [ ] 第一个 GitHub Release：由 Release 工作流在推标签时自动创建（见上一节）。标签是 `v` 加三段数字，并且等于 `MARKETING_VERSION`。
+- [x] 第一个 GitHub Release：由 Release 工作流在推标签时自动创建（见上一节）。标签是 `v` 加三段数字，并且等于 `MARKETING_VERSION`。
 - [ ] 商店版上架后，在官网下载按钮旁放商店链接。
 
 ## 已知问题
