@@ -46,10 +46,12 @@ struct OpenInPane: View {
 }
 
 private struct OpenToolRow: View {
+    @Environment(\.settingsPageActivity) private var pageActivity
     @Binding var tool: OpenTool
     let remove: () -> Void
 
     var body: some View {
+        let _ = pageActivity?.activationRevision
         let appURL = OpenToolDetector.appURL(tool.bundleID)
         HStack(spacing: 12) {
             Toggle(isOn: $tool.enabled) { EmptyView() }

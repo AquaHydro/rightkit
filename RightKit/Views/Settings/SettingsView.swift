@@ -23,15 +23,7 @@ struct SettingsView: View {
     @State private var showingAbout = false
 
     var body: some View {
-        Group {
-            switch tab {
-            case .general: GeneralPane()
-            case .newFile: NewFilePane()
-            case .openIn: OpenInPane()
-            case .folders: FoldersPane()
-            case .toolbox: ToolboxPane()
-            }
-        }
+        SettingsPageHost(tab: tab, model: model)
         .frame(minWidth: 420, idealWidth: 640, minHeight: 360, idealHeight: 620)
         .navigationTitle("RightKit")
         .toolbar {
@@ -49,6 +41,71 @@ struct SettingsView: View {
         }
         // 切换语言后整棵视图用新文案重建。
         .id(model.settings.language)
+    }
+}
+
+/// SwiftUI continues to own selection and the toolbar. The native boundary only owns
+/// the lifetime and attachment of the real page hosts.
+private struct SettingsPageHost: NSViewRepresentable {
+    let tab: SettingsTab
+    let model: AppModel
+
+    final class Coordinator {
+        var environment: EnvironmentValues?
+    }
+
+    func makeCoordinator() -> Coordinator { Coordinator() }
+
+    func makeNSView(context: Context) -> SettingsPageContainer<SettingsTab> {
+        SettingsPageContainer()
+    }
+
+    func updateNSView(_ container: SettingsPageContainer<SettingsTab>, context: Context) {
+        let environment = context.environment
+        // Independent hosting roots only receive the values `root` forwards. Refresh them
+        // when one of those changes, never for a routine tab switch or a settings edit.
+        if let previous = context.coordinator.environment,
+           previous.locale != environment.locale || previous.dynamicTypeSize != environment.dynamicTypeSize {
+            for (key, page) in container.pages {
+                (page.view as? NSHostingView<AnyView>)?.rootView = root(for: key, activity: page.activity, environment: environment)
+            }
+        }
+        context.coordinator.environment = environment
+        container.makePage = { key, activity in
+            let host = NSHostingView(rootView: root(for: key, activity: activity, environment: environment))
+            // Nested page roots must not replace the containing SwiftUI Window's toolbar.
+            host.sceneBridgingOptions = []
+            // Window size belongs to SettingsView, not to a cached Form's ideal size.
+            host.sizingOptions = []
+            return host
+        }
+        container.select(tab)
+    }
+
+    static func dismantleNSView(_ container: SettingsPageContainer<SettingsTab>, coordinator: Coordinator) {
+        container.releasePages()
+        container.makePage = nil
+    }
+
+    private func root(for tab: SettingsTab, activity: SettingsPageActivity, environment: EnvironmentValues) -> AnyView {
+        AnyView(page(for: tab)
+            .environment(model)
+            .environment(\.locale, environment.locale)
+            .environment(\.dynamicTypeSize, environment.dynamicTypeSize)
+            // Appearance, display scale and read-only accessibility values come from
+            // this host's native window, so changing NSApp.appearance also updates
+            // retained pages without requiring a representable update.
+            .environment(\.settingsPageActivity, activity))
+    }
+
+    @ViewBuilder private func page(for tab: SettingsTab) -> some View {
+        switch tab {
+        case .general: GeneralPane()
+        case .newFile: NewFilePane()
+        case .openIn: OpenInPane()
+        case .folders: FoldersPane()
+        case .toolbox: ToolboxPane()
+        }
     }
 }
 

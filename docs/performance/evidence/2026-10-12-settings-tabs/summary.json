@@ -1,0 +1,115 @@
+{
+  "baseline_commit": "0470610c17b73cec2067a6e24cb27555e4692e88",
+  "rounds_per_page": 20,
+  "measurement": "AppStorage assignment through next-main-turn layout/display return, not compositor presentation",
+  "variants": {
+    "baseline": {
+      "pages": {
+        "general": {
+          "first_ms": null,
+          "hot_p50_ms": 94.36920833286422,
+          "hot_query_p50_ms": 3.4017916641460033
+        },
+        "newFile": {
+          "first_ms": 114.54862499886076,
+          "hot_p50_ms": 83.5027708326379,
+          "hot_query_p50_ms": 0.40027083741733804
+        },
+        "openIn": {
+          "first_ms": 50.89270833559567,
+          "hot_p50_ms": 68.11758333424223,
+          "hot_query_p50_ms": 1.1877500019181753
+        },
+        "folders": {
+          "first_ms": 85.3462083323393,
+          "hot_p50_ms": 113.41254166654835,
+          "hot_query_p50_ms": 13.634187514981022
+        },
+        "toolbox": {
+          "first_ms": 83.62966666754801,
+          "hot_p50_ms": 92.25250000054075,
+          "hot_query_p50_ms": 0.0
+        }
+      },
+      "max_rss_mib": 184.203125,
+      "window_content_size": [
+        640,
+        620
+      ],
+      "automated_assertions_passed": 106,
+      "automated_assertions_failed": 0,
+      "checks": [
+        {
+          "check": "language-bitmap-diff",
+          "passed": true
+        },
+        {
+          "check": "english-title-accessible",
+          "reason": "NSHostingView local AX getters cannot reliably expose SwiftUI leaf text; inspect with external accessibility or screenshots",
+          "status": "manual_required"
+        },
+        {
+          "check": "deleted-folder-refresh",
+          "observed": "missing",
+          "passed": true
+        }
+      ],
+      "os": "Version 27.0.1 (Build 26A434)",
+      "fixture": "3 monitored,6 favorites,6 sendTo,real local folder bookmarks,3 apps,stock newItems/toolbox"
+    },
+    "working": {
+      "pages": {
+        "general": {
+          "first_ms": null,
+          "hot_p50_ms": 37.93247916837572,
+          "hot_query_p50_ms": 3.5271875003672903
+        },
+        "newFile": {
+          "first_ms": 85.97979166734149,
+          "hot_p50_ms": 30.146541666908888,
+          "hot_query_p50_ms": 0.0
+        },
+        "openIn": {
+          "first_ms": 33.06966666787048,
+          "hot_p50_ms": 35.13116666727001,
+          "hot_query_p50_ms": 2.3708541648375103
+        },
+        "folders": {
+          "first_ms": 73.06716666425928,
+          "hot_p50_ms": 46.83729166572448,
+          "hot_query_p50_ms": 10.527062493565609
+        },
+        "toolbox": {
+          "first_ms": 54.334583332092734,
+          "hot_p50_ms": 31.635375000405475,
+          "hot_query_p50_ms": 0.0
+        }
+      },
+      "max_rss_mib": 194.0,
+      "window_content_size": [
+        640,
+        620
+      ],
+      "automated_assertions_passed": 106,
+      "automated_assertions_failed": 0,
+      "checks": [
+        {
+          "check": "language-bitmap-diff",
+          "passed": true
+        },
+        {
+          "check": "english-title-accessible",
+          "reason": "NSHostingView local AX getters cannot reliably expose SwiftUI leaf text; inspect with external accessibility or screenshots",
+          "status": "manual_required"
+        },
+        {
+          "check": "deleted-folder-refresh",
+          "observed": "missing",
+          "passed": true
+        }
+      ],
+      "os": "Version 27.0.1 (Build 26A434)",
+      "fixture": "3 monitored,6 favorites,6 sendTo,real local folder bookmarks,3 apps,stock newItems/toolbox"
+    }
+  }
+}

@@ -277,6 +277,7 @@ struct MonitoredFoldersSection: View {
 
 /// 文件夹列表的一行：图标、显示名、路径，失效或需要重新授权时显示提示。
 struct FolderRow: View {
+    @Environment(\.settingsPageActivity) private var pageActivity
     let entry: FolderEntry
     var showsToggle = true
     var isOn: Binding<Bool>?
@@ -285,6 +286,8 @@ struct FolderRow: View {
     let remove: () -> Void
 
     var body: some View {
+        // A retained row must query external filesystem state again on each visit.
+        let _ = pageActivity?.activationRevision
         let refreshed = FolderStore.refreshed(entry)
         let state = FolderStore.state(refreshed)
         let exists = state == .available
