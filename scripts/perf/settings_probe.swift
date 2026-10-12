@@ -30,6 +30,27 @@ enum SharedStore {
     static let suite = argument("--suite", fallback: "app.rightkit.settings-probe." + UUID().uuidString)
     static let defaults = UserDefaults(suiteName: suite)!
     static let interactive = CommandLine.arguments.contains("--interactive") || !CommandLine.arguments.contains("--output")
+    static let opener = WindowOpener()
+    static var startTemplateImport: (() -> Void)?
+    static let importSource = SharedStore.directory.appending(path: "import-fixture.txt")
+    static var importGate: CheckedContinuation<Void, Never>?
+    static var importReachedGate = false
+    static func pauseImport() async {
+        importReachedGate = true
+        await withCheckedContinuation { importGate = $0 }
+    }
+    static func container(in view: NSView) -> SettingsPageContainer<SettingsTab>? {
+        if let container = view as? SettingsPageContainer<SettingsTab> { return container }
+        for child in view.subviews {
+            if let found = container(in: child) { return found }
+        }
+        return nil
+    }
+    static func settle(_ window: NSWindow) async throws {
+        for _ in 0..<10 { await nextTurn(); layout(window) }
+        try await Task.sleep(for: .milliseconds(200))
+        layout(window)
+    }
     static var displayedTab = ""
     static var totals: [String: Double] = [:]
     static var counts: [String: Int] = [:]
@@ -169,6 +190,9 @@ enum SharedStore {
             let refreshedState = folderStates[deleted] ?? "not-rendered"
             assertions.append(["check": "deleted-folder-refresh", "passed": refreshedState == "missing", "observed": refreshedState])
             _ = try screenshot(window, to: URL(filePath: output.path + ".deleted-folder.png"))
+            if CommandLine.arguments.contains("--e2e") {
+                try await lifecycleChecks(model, window: window, output: output, assertions: &assertions)
+            }
             let data = try JSONSerialization.data(withJSONObject: [
                 "samples": samples, "assertions": assertions,
                 "succeeded": !assertions.contains(where: { ($0["passed"] as? Bool) == false }),
@@ -190,6 +214,100 @@ enum SharedStore {
             NSApp.terminate(nil)
         }
     }
+    /// Actual NSWindow close/orderFront notifications drive the production container.
+    /// A second temporary window owns key status, reproducing a visible settings
+    /// window behind another app without activating or changing the user's Finder.
+    static func lifecycleChecks(_ model: AppModel, window: NSWindow, output: URL,
+                                assertions: inout [[String: Any]]) async throws {
+        guard let root = window.contentView, let pages = container(in: root) else {
+            throw NSError(domain: "SettingsProbe.container-missing", code: 5)
+        }
+        func check(_ name: String, _ passed: Bool, _ details: String = "") {
+            assertions.append(["check": name, "passed": passed, "details": details])
+        }
+        _ = await switchTo(.newFile, window: window)
+        try await settle(window)
+        let cachedID = pages.pages[.newFile].map { ObjectIdentifier($0.view) }
+        _ = await switchTo(.toolbox, window: window)
+        try await settle(window)
+        check("inactive-page-detached", pages.pages[.newFile]?.view.superview == nil && pages.subviews.count == 1)
+        _ = await switchTo(.newFile, window: window)
+        try await settle(window)
+        check("page-cache-reused", cachedID != nil && pages.pages[.newFile].map { ObjectIdentifier($0.view) } == cachedID)
+        opener.openSettings()
+        try await settle(window)
+        check("repeated-open-retains-current-page", cachedID != nil && pages.pages[.newFile].map { ObjectIdentifier($0.view) } == cachedID)
+
+        try Data("Own temporary template fixture\n".utf8).write(to: importSource)
+        let originalCount = model.settings.newItems.count
+        for trigger in ["switch", "close"] {
+            _ = await switchTo(.newFile, window: window)
+            try await settle(window)
+            guard let activity = pages.pages[.newFile]?.activity, let startTemplateImport else {
+                throw NSError(domain: "SettingsProbe.import-trigger-missing", code: 6)
+            }
+            importReachedGate = false
+            startTemplateImport()
+            for _ in 0..<200 where !importReachedGate {
+                try await Task.sleep(for: .milliseconds(10))
+            }
+            guard importReachedGate, let task = activity.importTask else {
+                throw NSError(domain: "SettingsProbe.import-gate-timeout", code: 7)
+            }
+            let staged = try FileManager.default.contentsOfDirectory(atPath: TemplateLibrary.directory.path)
+            check("import-\(trigger)-staged-copy", staged.count == 1 && model.settings.newItems.count == originalCount)
+            weak let oldHost = pages.pages[.newFile]?.view
+            if trigger == "switch" {
+                _ = await switchTo(.toolbox, window: window)
+            } else {
+                window.close()
+            }
+            check("import-\(trigger)-cancel-requested", task.isCancelled)
+            importGate?.resume(); importGate = nil
+            await task.value
+            let remaining = try FileManager.default.contentsOfDirectory(atPath: TemplateLibrary.directory.path)
+            check("import-\(trigger)-cleanup", remaining.isEmpty && activity.importTask == nil
+                  && model.settings.newItems.count == originalCount, "remaining files: \(remaining.count)")
+            check("import-\(trigger)-source-preserved", (try Data(contentsOf: importSource)) == Data("Own temporary template fixture\n".utf8))
+            if trigger == "close" {
+                try await settle(window)
+                check("window-close-releases-cache", pages.pages.isEmpty && pages.subviews.isEmpty)
+                check("window-close-releases-host", oldHost == nil)
+                let blocker = NSWindow(contentRect: NSRect(x: 10, y: 10, width: 160, height: 80),
+                                       styleMask: [.titled], backing: .buffered, defer: false)
+                blocker.isReleasedWhenClosed = false
+                blocker.title = "Isolated E2E key window"
+                if !CommandLine.arguments.contains("--diagnose-inactive") { NSApp.activate(ignoringOtherApps: true) }
+                blocker.makeKeyAndOrderFront(nil)
+                try await settle(blocker)
+                if CommandLine.arguments.contains("--diagnose-inactive") {
+                    opener.openSettings()
+                } else {
+                    window.orderFront(nil)
+                }
+                try await settle(window)
+                check("window-reopen-visible-nonkey", window.isVisible && !window.isKeyWindow
+                      && (CommandLine.arguments.contains("--diagnose-inactive") ? !NSApp.isActive : blocker.isKeyWindow),
+                      "visible: \(window.isVisible), key: \(window.isKeyWindow), blocker key: \(blocker.isKeyWindow)")
+                let rebuilt = pages.pages[.newFile]?.view
+                check("window-reopen-current-page-not-empty", pages.selection == .newFile
+                      && rebuilt?.superview === pages && pages.subviews.count == 1
+                      && (rebuilt?.bounds.width ?? 0) > 0 && (rebuilt?.bounds.height ?? 0) > 0)
+                check("window-reopen-rebuilds-host", rebuilt != nil && pages.pages[.newFile]?.activity !== activity)
+                _ = try screenshot(window, to: URL(filePath: output.path + ".nonkey-reopen.png"))
+                blocker.close()
+                // A second close verifies that its close observer was restored.
+                window.close()
+                check("window-second-close-releases-cache", pages.pages.isEmpty && pages.subviews.isEmpty)
+                opener.openSettings()
+                try await settle(window)
+                check("window-second-reopen-not-empty", pages.pages[.newFile]?.view.superview === pages,
+                      "visible: \(window.isVisible), key: \(window.isKeyWindow), active: \(NSApp.isActive), occlusion: \(window.occlusionState.rawValue)")
+            }
+        }
+        startTemplateImport = nil
+    }
+
 }
 
 // Preview-only lifecycle delegate; never calls production service integration.
@@ -204,13 +322,21 @@ enum SharedStore {
 
 private struct SettingsProbeRoot: View {
     let model: AppModel
-    @Environment(\.openWindow) private var openWindow
     var body: some View {
         SettingsView()
             .environment(model)
             .defaultAppStorage(ProbeMetric.defaults)
-            .onAppear { PreviewLifecycleDelegate.reopen = { openWindow(id: "settings-probe") } }
-            .task { await ProbeMetric.run(model) }
+            .background(WindowBridge(opener: ProbeMetric.opener))
+            .onAppear { PreviewLifecycleDelegate.reopen = { ProbeMetric.opener.openSettings() } }
+            .task {
+                if CommandLine.arguments.contains("--e2e") {
+                    // The test controller intentionally survives the tested window's
+                    // SwiftUI task cancellation. Production work remains unchanged.
+                    Task { @MainActor in await ProbeMetric.run(model) }
+                } else {
+                    await ProbeMetric.run(model)
+                }
+            }
     }
 }
 
@@ -219,7 +345,7 @@ private struct SettingsProbeRoot: View {
     @State private var model: AppModel
     init() { _model = State(initialValue: ProbeMetric.fixture()) }
     var body: some Scene {
-        Window("RightKit Settings Probe", id: "settings-probe") {
+        Window("RightKit Settings Probe", id: WindowID.settings) {
             SettingsProbeRoot(model: model)
         }
         .windowToolbarStyle(.unified)

@@ -15,6 +15,9 @@ final class WindowOpener {
     func open(id: String) {
         perform { [weak self] in
             Alerts.bringToFront()
+            if id == WindowID.settings {
+                NotificationCenter.default.post(name: SettingsWindowPresentation.willOpen, object: nil)
+            }
             self?.openWindowAction?(id: id)
         }
     }

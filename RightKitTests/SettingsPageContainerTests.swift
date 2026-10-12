@@ -105,6 +105,36 @@ struct SettingsPageContainerTests {
         window.close()
     }
 
+    @Test func explicitOpeningRebuildsClosedSelectionWithoutKeyOrOcclusionChanges() throws {
+        _ = NSApplication.shared
+        let container = SettingsPageContainer<Int>()
+        let window = window(containing: container)
+        defer { window.close() }
+        var created: [Int] = []
+        container.makePage = { key, _ in created.append(key); return NSTextField(string: "Page \(key)") }
+        container.select(0)
+        let first = try #require(container.pages[0]?.view)
+        NotificationCenter.default.post(name: SettingsWindowPresentation.willOpen, object: nil)
+        #expect(container.pages[0]?.view === first)
+        #expect(created == [0])
+
+        NotificationCenter.default.post(name: NSWindow.willCloseNotification, object: window)
+        container.select(1)
+        #expect(container.pages.isEmpty)
+        // No native visibility notification is delivered by this hostless window.
+        NotificationCenter.default.post(name: SettingsWindowPresentation.willOpen, object: nil)
+        #expect(created == [0, 1])
+        #expect(container.pages[1]?.view.superview === container)
+        #expect(container.selection == 1)
+        NotificationCenter.default.post(name: SettingsWindowPresentation.willOpen, object: nil)
+        #expect(created == [0, 1])
+        NotificationCenter.default.post(name: NSWindow.willCloseNotification, object: window)
+        #expect(container.pages.isEmpty)
+        NotificationCenter.default.post(name: SettingsWindowPresentation.willOpen, object: nil)
+        #expect(created == [0, 1, 1])
+        #expect(container.pages[1]?.view.superview === container)
+    }
+
     @Test func releasingForLanguageRebuildCancelsTasks() throws {
         let container = SettingsPageContainer<Int>()
         container.makePage = { _, _ in NSHostingView(rootView: Text("Page")) }

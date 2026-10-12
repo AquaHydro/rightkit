@@ -2,6 +2,11 @@ import AppKit
 import Observation
 import SwiftUI
 
+/// Explicit process-local presentation lifecycle, sent only by settings-opening requests.
+enum SettingsWindowPresentation {
+    static let willOpen = Notification.Name("RightKit.settingsWillOpen")
+}
+
 /// A settings page stays alive between visits, but its work only belongs to the active page.
 @MainActor @Observable
 final class SettingsPageActivity {
@@ -46,6 +51,30 @@ final class SettingsPageContainer<Key: Hashable>: NSView {
     var makePage: ((Key, SettingsPageActivity) -> NSView)?
     private weak var observedWindow: NSWindow?
     private var isClosed = false
+
+    override init(frame frameRect: NSRect) {
+        super.init(frame: frameRect)
+        NotificationCenter.default.addObserver(self, selector: #selector(prepareForPresentation),
+                                               name: SettingsWindowPresentation.willOpen, object: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        NotificationCenter.default.addObserver(self, selector: #selector(prepareForPresentation),
+                                               name: SettingsWindowPresentation.willOpen, object: nil)
+    }
+
+    /// OpenWindowAction can reuse the same closed Window without becoming key or
+    /// changing its occlusion state. Rebuild from the explicit opening request.
+    @objc func prepareForPresentation() {
+        guard isClosed else { return }
+        isClosed = false
+        if let observedWindow {
+            NotificationCenter.default.addObserver(self, selector: #selector(windowWillClose),
+                                                   name: NSWindow.willCloseNotification, object: observedWindow)
+        }
+        if let selection { select(selection) }
+    }
 
     func select(_ key: Key) {
         guard !isClosed else { selection = key; return }
@@ -110,10 +139,7 @@ final class SettingsPageContainer<Key: Hashable>: NSView {
     /// soon as it is visible instead of waiting for it to become key.
     @objc private func windowDidBecomeVisible(_ notification: Notification) {
         guard isClosed, observedWindow?.isVisible == true else { return }
-        isClosed = false
-        NotificationCenter.default.addObserver(self, selector: #selector(windowWillClose),
-                                               name: NSWindow.willCloseNotification, object: observedWindow)
-        if let selection { select(selection) }
+        prepareForPresentation()
     }
 
     private func stopObservingWindow() {
