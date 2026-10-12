@@ -118,6 +118,7 @@ targets:
     sources:
       - path: RightKitTests
       - path: RightKit/Engine
+      - path: RightKit/Views/Settings/SettingsPageContainer.swift
       - path: RightKitFinder/MenuRenderer.swift
       - path: RightKitFinder/PendingPasteState.swift
     dependencies:

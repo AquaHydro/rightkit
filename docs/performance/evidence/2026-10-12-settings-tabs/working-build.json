@@ -1,0 +1,28 @@
+{
+  "baseline_commit": "0470610c17b73cec2067a6e24cb27555e4692e88",
+  "variant": "working",
+  "source_sha256": {
+    "RightKit/Views/WelcomeView.swift": "d2e5aadd0dd8af2a07f0534fe424cdcc5c4548200cf93952d83ac72a4b172be8",
+    "RightKit/App/AppModel.swift": "c6828d95aec4a7f74737d96a3cff74c65a68a3994c44eaca3ba0b0d965dd135b",
+    "RightKit/App/WindowOpener.swift": "5727a620914886f934433a50c5c50b850650aa6194f5e3df1e2d0d73ecc3dfa8",
+    "RightKit/Services/Alerts.swift": "614f668daddc7cc9daac34c7066db094207c9356a39f1096eaab5245e556a5d1",
+    "RightKit/Services/TemplateLibrary.swift": "b5c23036b4d914ad2d18ff9c6daca6cc960eefb7184c6becebf065830235a192",
+    "RightKit/Views/Settings/AboutPane.swift": "37ec3c122686175bf47da7b4bc87567b6f6fc22072e2c00115d09329d5f02ea3",
+    "RightKit/Views/Settings/FoldersPane.swift": "1718572daef8c913193531c90cdb2e3ff89d1811442539b68e0653d9cb1526bd",
+    "RightKit/Views/Settings/GeneralPane.swift": "42efd31d0ddfec7c46837e896472dfd0d43a6a1934e7a86bb45549d95f24236a",
+    "RightKit/Views/Settings/NewFilePane.swift": "5fd6e38a4a2d6afb695c22374716d1042e0876b271f9f13713d36db92a8fec1e",
+    "RightKit/Views/Settings/OpenInPane.swift": "6af440eb78293323d2c1014310e5335d6945eca8358c3291b5b0b912c5995231",
+    "RightKit/Views/Settings/SettingsPageContainer.swift": "85a0f29078390e506e8185295da23f131d7836ec92fb60ed6f6d9f86ba4d720a",
+    "RightKit/Views/Settings/SettingsView.swift": "77caf243de13a0e97a333d2ac2c1fb140397e3952f7147ae3c1d86e867eb99ce",
+    "RightKit/Views/Settings/ToolboxPane.swift": "0721a3e61761342bc773777e166bbcac0a8441ab4459b54eb5dee9163772ac7a",
+    "RightKit/Engine/BatchWorker.swift": "1c6c4f36b27cbf33b3500ec6f4840a2d6988bf8d97f6317423b8fcf63120a213",
+    "RightKit/Engine/FileEngine.swift": "2a927078f97110face58ed213150b13bc5a392f11fb1e30fe6b03fb246fcdb86",
+    "RightKit/Engine/FolderAccess.swift": "b6ee3bb03711bf3258db589e65ceae449e362ab69a43ee2d14bbc8949075a78b",
+    "RightKit/Engine/FolderStore.swift": "c2b17f6cb9321f827de9ba8226ea9f515ce55344c0ee4b0e7d7b43dfd1be8c33",
+    "RightKit/Engine/ImageTools.swift": "05b77089b278a033a2c8d89b85e59e0280a13090a606670ed81313fd1a033262",
+    "RightKit/Engine/QRCode.swift": "4b8d53ec1b7674dd31bba5e23ca7ba929cf8281edf688d365b9a41c62ef7be46",
+    "RightKit/Engine/Tools.swift": "7a4ccd789049363125bae982c05634190b841c18cfa585a6278c9f0ec747e133",
+    "RightKit/Engine/UpdateCheck.swift": "219528916e4b21c6f5d4af9ae667a17fb4885bdbe9eaca5bdb55cdf791710547"
+  },
+  "driver_sha256": "3b162851b2fcb5803843ba3aff85c16b68456ab491efdee05f1632fb04ac91d1"
+}

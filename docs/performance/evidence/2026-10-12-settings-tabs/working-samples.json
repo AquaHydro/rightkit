@@ -1,0 +1,1444 @@
+{
+  "samples": [
+    {
+      "layout_display_ms": 85.97979166734149,
+      "query_count": {
+        "NewFilePane": 1,
+        "typeIcon": 24
+      },
+      "query_ms": {
+        "typeIcon": 0.7091250081430189
+      },
+      "round": 0,
+      "selected": true,
+      "tab": "newFile"
+    },
+    {
+      "layout_display_ms": 33.06966666787048,
+      "query_count": {
+        "appURL": 3,
+        "fileIcon": 3,
+        "OpenInPane": 1
+      },
+      "query_ms": {
+        "appURL": 0.5644583325192798,
+        "fileIcon": 0.7202499982668087
+      },
+      "round": 0,
+      "selected": true,
+      "tab": "openIn"
+    },
+    {
+      "layout_display_ms": 73.06716666425928,
+      "query_count": {
+        "appURL": 3,
+        "fileIcon": 15,
+        "folderName": 12,
+        "folderRefresh": 12,
+        "FoldersPane": 1,
+        "folderState": 12
+      },
+      "query_ms": {
+        "appURL": 0.05912500273552723,
+        "fileIcon": 1.3627499974973034,
+        "folderName": 1.0487916697456967,
+        "folderRefresh": 7.0194999971135985,
+        "folderState": 0.2796666667563841
+      },
+      "round": 0,
+      "selected": true,
+      "tab": "folders"
+    },
+    {
+      "layout_display_ms": 54.334583332092734,
+      "query_count": {
+        "ToolboxPane": 1
+      },
+      "query_ms": {},
+      "round": 0,
+      "selected": true,
+      "tab": "toolbox"
+    },
+    {
+      "layout_display_ms": 17.26083333414863,
+      "query_count": {
+        "fileIcon": 3,
+        "folderName": 3,
+        "folderRefresh": 3,
+        "folderState": 3
+      },
+      "query_ms": {
+        "fileIcon": 0.14633333194069564,
+        "folderName": 0.22879166499478742,
+        "folderRefresh": 1.5565833309665322,
+        "folderState": 0.06562500129803084
+      },
+      "round": 1,
+      "selected": true,
+      "tab": "general"
+    },
+    {
+      "layout_display_ms": 24.224083335866453,
+      "query_count": {},
+      "query_ms": {},
+      "round": 1,
+      "selected": true,
+      "tab": "newFile"
+    },
+    {
+      "layout_display_ms": 37.338958336476935,
+      "query_count": {
+        "appURL": 6,
+        "fileIcon": 6
+      },
+      "query_ms": {
+        "appURL": 0.2637083271110896,
+        "fileIcon": 2.650500005984213
+      },
+      "round": 1,
+      "selected": true,
+      "tab": "openIn"
+    },
+    {
+      "layout_display_ms": 46.199583335692296,
+      "query_count": {
+        "appURL": 3,
+        "fileIcon": 15,
+        "folderName": 12,
+        "folderRefresh": 12,
+        "folderState": 12
+      },
+      "query_ms": {
+        "appURL": 0.04558333239401691,
+        "fileIcon": 1.3105416655889712,
+        "folderName": 1.0965416695398744,
+        "folderRefresh": 7.320041670027422,
+        "folderState": 0.29604166047647595
+      },
+      "round": 1,
+      "selected": true,
+      "tab": "folders"
+    },
+    {
+      "layout_display_ms": 32.047625001723645,
+      "query_count": {},
+      "query_ms": {},
+      "round": 1,
+      "selected": true,
+      "tab": "toolbox"
+    },
+    {
+      "layout_display_ms": 37.54341666717664,
+      "query_count": {
+        "fileIcon": 3,
+        "folderName": 3,
+        "folderRefresh": 3,
+        "folderState": 3
+      },
+      "query_ms": {
+        "fileIcon": 0.2102083344652783,
+        "folderName": 0.30195833460311405,
+        "folderRefresh": 2.2629583327216096,
+        "folderState": 0.08795833491603844
+      },
+      "round": 2,
+      "selected": true,
+      "tab": "general"
+    },
+    {
+      "layout_display_ms": 24.555750002036802,
+      "query_count": {},
+      "query_ms": {},
+      "round": 2,
+      "selected": true,
+      "tab": "newFile"
+    },
+    {
+      "layout_display_ms": 30.432541669142665,
+      "query_count": {
+        "appURL": 6,
+        "fileIcon": 6
+      },
+      "query_ms": {
+        "appURL": 0.15766666547278874,
+        "fileIcon": 1.7542916684760712
+      },
+      "round": 2,
+      "selected": true,
+      "tab": "openIn"
+    },
+    {
+      "layout_display_ms": 40.07366666701273,
+      "query_count": {
+        "appURL": 3,
+        "fileIcon": 15,
+        "folderName": 12,
+        "folderRefresh": 12,
+        "folderState": 12
+      },
+      "query_ms": {
+        "appURL": 0.060583337472053245,
+        "fileIcon": 1.3857083322363906,
+        "folderName": 1.0894583283516113,
+        "folderRefresh": 6.225041666766629,
+        "folderState": 0.2851250028470531
+      },
+      "round": 2,
+      "selected": true,
+      "tab": "folders"
+    },
+    {
+      "layout_display_ms": 32.39529166967259,
+      "query_count": {},
+      "query_ms": {},
+      "round": 2,
+      "selected": true,
+      "tab": "toolbox"
+    },
+    {
+      "layout_display_ms": 39.81737499998417,
+      "query_count": {
+        "fileIcon": 3,
+        "folderName": 3,
+        "folderRefresh": 3,
+        "folderState": 3
+      },
+      "query_ms": {
+        "fileIcon": 0.21875000311410986,
+        "folderName": 0.32304166597896256,
+        "folderRefresh": 3.0591666654800065,
+        "folderState": 0.1006666680041235
+      },
+      "round": 3,
+      "selected": true,
+      "tab": "general"
+    },
+    {
+      "layout_display_ms": 31.674041667429265,
+      "query_count": {},
+      "query_ms": {},
+      "round": 3,
+      "selected": true,
+      "tab": "newFile"
+    },
+    {
+      "layout_display_ms": 43.71108333361917,
+      "query_count": {
+        "appURL": 6,
+        "fileIcon": 6
+      },
+      "query_ms": {
+        "appURL": 0.2793750063574407,
+        "fileIcon": 2.4972916653496213
+      },
+      "round": 3,
+      "selected": true,
+      "tab": "openIn"
+    },
+    {
+      "layout_display_ms": 49.96641666730284,
+      "query_count": {
+        "appURL": 3,
+        "fileIcon": 15,
+        "folderName": 12,
+        "folderRefresh": 12,
+        "folderState": 12
+      },
+      "query_ms": {
+        "appURL": 0.07312500383704901,
+        "fileIcon": 1.7657500065979548,
+        "folderName": 1.2235833310114685,
+        "folderRefresh": 7.39449999309727,
+        "folderState": 0.36983333848183975
+      },
+      "round": 3,
+      "selected": true,
+      "tab": "folders"
+    },
+    {
+      "layout_display_ms": 34.356916665274184,
+      "query_count": {},
+      "query_ms": {},
+      "round": 3,
+      "selected": true,
+      "tab": "toolbox"
+    },
+    {
+      "layout_display_ms": 38.93883333512349,
+      "query_count": {
+        "fileIcon": 3,
+        "folderName": 3,
+        "folderRefresh": 3,
+        "folderState": 3
+      },
+      "query_ms": {
+        "fileIcon": 0.23716667055850849,
+        "folderName": 0.3666666671051644,
+        "folderRefresh": 2.9031249978288542,
+        "folderState": 0.10674999430193566
+      },
+      "round": 4,
+      "selected": true,
+      "tab": "general"
+    },
+    {
+      "layout_display_ms": 22.815125001216074,
+      "query_count": {},
+      "query_ms": {},
+      "round": 4,
+      "selected": true,
+      "tab": "newFile"
+    },
+    {
+      "layout_display_ms": 23.54587499939953,
+      "query_count": {
+        "appURL": 6,
+        "fileIcon": 6
+      },
+      "query_ms": {
+        "appURL": 0.1136666614911519,
+        "fileIcon": 1.3265833331388421
+      },
+      "round": 4,
+      "selected": true,
+      "tab": "openIn"
+    },
+    {
+      "layout_display_ms": 46.430999998847255,
+      "query_count": {
+        "appURL": 3,
+        "fileIcon": 15,
+        "folderName": 12,
+        "folderRefresh": 12,
+        "folderState": 12
+      },
+      "query_ms": {
+        "appURL": 0.08354166857316159,
+        "fileIcon": 1.6860416690178681,
+        "folderName": 1.171999996586237,
+        "folderRefresh": 7.2100833313015755,
+        "folderState": 0.30825000067125075
+      },
+      "round": 4,
+      "selected": true,
+      "tab": "folders"
+    },
+    {
+      "layout_display_ms": 35.479416666930774,
+      "query_count": {},
+      "query_ms": {},
+      "round": 4,
+      "selected": true,
+      "tab": "toolbox"
+    },
+    {
+      "layout_display_ms": 37.494749998586485,
+      "query_count": {
+        "fileIcon": 3,
+        "folderName": 3,
+        "folderRefresh": 3,
+        "folderState": 3
+      },
+      "query_ms": {
+        "fileIcon": 0.2974166636704467,
+        "folderName": 0.4331250020186417,
+        "folderRefresh": 2.90254166975501,
+        "folderState": 0.13187500007916242
+      },
+      "round": 5,
+      "selected": true,
+      "tab": "general"
+    },
+    {
+      "layout_display_ms": 33.23866666687536,
+      "query_count": {},
+      "query_ms": {},
+      "round": 5,
+      "selected": true,
+      "tab": "newFile"
+    },
+    {
+      "layout_display_ms": 35.58304167017923,
+      "query_count": {
+        "appURL": 6,
+        "fileIcon": 6
+      },
+      "query_ms": {
+        "appURL": 0.22329166313284077,
+        "fileIcon": 2.1973749971948564
+      },
+      "round": 5,
+      "selected": true,
+      "tab": "openIn"
+    },
+    {
+      "layout_display_ms": 47.2435833326017,
+      "query_count": {
+        "appURL": 3,
+        "fileIcon": 15,
+        "folderName": 12,
+        "folderRefresh": 12,
+        "folderState": 12
+      },
+      "query_ms": {
+        "appURL": 0.07645833102287725,
+        "fileIcon": 1.5986249964043964,
+        "folderName": 1.079416659194976,
+        "folderRefresh": 6.9910833408357576,
+        "folderState": 0.2935833326773718
+      },
+      "round": 5,
+      "selected": true,
+      "tab": "folders"
+    },
+    {
+      "layout_display_ms": 24.812958334223367,
+      "query_count": {},
+      "query_ms": {},
+      "round": 5,
+      "selected": true,
+      "tab": "toolbox"
+    },
+    {
+      "layout_display_ms": 29.378041665040655,
+      "query_count": {
+        "fileIcon": 3,
+        "folderName": 3,
+        "folderRefresh": 3,
+        "folderState": 3
+      },
+      "query_ms": {
+        "fileIcon": 0.20770833725691773,
+        "folderName": 0.32429166458314285,
+        "folderRefresh": 1.9192500039935112,
+        "folderState": 0.09595833398634568
+      },
+      "round": 6,
+      "selected": true,
+      "tab": "general"
+    },
+    {
+      "layout_display_ms": 25.396041666681413,
+      "query_count": {},
+      "query_ms": {},
+      "round": 6,
+      "selected": true,
+      "tab": "newFile"
+    },
+    {
+      "layout_display_ms": 31.524291669484228,
+      "query_count": {
+        "appURL": 6,
+        "fileIcon": 6
+      },
+      "query_ms": {
+        "appURL": 0.16454167052870616,
+        "fileIcon": 1.7783750045055058
+      },
+      "round": 6,
+      "selected": true,
+      "tab": "openIn"
+    },
+    {
+      "layout_display_ms": 53.73229166434612,
+      "query_count": {
+        "appURL": 3,
+        "fileIcon": 15,
+        "folderName": 12,
+        "folderRefresh": 12,
+        "folderState": 12
+      },
+      "query_ms": {
+        "appURL": 0.07983333489391953,
+        "fileIcon": 1.7362916587444488,
+        "folderName": 1.1992499967163894,
+        "folderRefresh": 7.52137500239769,
+        "folderState": 0.32933333932305686
+      },
+      "round": 6,
+      "selected": true,
+      "tab": "folders"
+    },
+    {
+      "layout_display_ms": 20.270541666832287,
+      "query_count": {},
+      "query_ms": {},
+      "round": 6,
+      "selected": true,
+      "tab": "toolbox"
+    },
+    {
+      "layout_display_ms": 33.46237500227289,
+      "query_count": {
+        "fileIcon": 3,
+        "folderName": 3,
+        "folderRefresh": 3,
+        "folderState": 3
+      },
+      "query_ms": {
+        "fileIcon": 0.2444166639179457,
+        "folderName": 0.4890416639682371,
+        "folderRefresh": 3.283041663962649,
+        "folderState": 0.2001249958993867
+      },
+      "round": 7,
+      "selected": true,
+      "tab": "general"
+    },
+    {
+      "layout_display_ms": 35.926125001424225,
+      "query_count": {},
+      "query_ms": {},
+      "round": 7,
+      "selected": true,
+      "tab": "newFile"
+    },
+    {
+      "layout_display_ms": 34.900125003332505,
+      "query_count": {
+        "appURL": 6,
+        "fileIcon": 6
+      },
+      "query_ms": {
+        "appURL": 0.19770833387156017,
+        "fileIcon": 2.230041671282379
+      },
+      "round": 7,
+      "selected": true,
+      "tab": "openIn"
+    },
+    {
+      "layout_display_ms": 50.05741666536778,
+      "query_count": {
+        "appURL": 3,
+        "fileIcon": 15,
+        "folderName": 12,
+        "folderRefresh": 12,
+        "folderState": 12
+      },
+      "query_ms": {
+        "appURL": 0.0634166644886136,
+        "fileIcon": 1.5644583399989642,
+        "folderName": 1.2204583326820284,
+        "folderRefresh": 7.83449999653385,
+        "folderState": 0.3309999992779922
+      },
+      "round": 7,
+      "selected": true,
+      "tab": "folders"
+    },
+    {
+      "layout_display_ms": 32.8653333344846,
+      "query_count": {},
+      "query_ms": {},
+      "round": 7,
+      "selected": true,
+      "tab": "toolbox"
+    },
+    {
+      "layout_display_ms": 40.653500000189524,
+      "query_count": {
+        "fileIcon": 3,
+        "folderName": 3,
+        "folderRefresh": 3,
+        "folderState": 3
+      },
+      "query_ms": {
+        "fileIcon": 0.25224999990314245,
+        "folderName": 0.372458336642012,
+        "folderRefresh": 2.6695833294070326,
+        "folderState": 0.11845833068946376
+      },
+      "round": 8,
+      "selected": true,
+      "tab": "general"
+    },
+    {
+      "layout_display_ms": 29.803833334881347,
+      "query_count": {},
+      "query_ms": {},
+      "round": 8,
+      "selected": true,
+      "tab": "newFile"
+    },
+    {
+      "layout_display_ms": 41.270166668255115,
+      "query_count": {
+        "appURL": 6,
+        "fileIcon": 6
+      },
+      "query_ms": {
+        "appURL": 0.26391666688141413,
+        "fileIcon": 2.4412083366769366
+      },
+      "round": 8,
+      "selected": true,
+      "tab": "openIn"
+    },
+    {
+      "layout_display_ms": 53.377166666905396,
+      "query_count": {
+        "appURL": 3,
+        "fileIcon": 15,
+        "folderName": 12,
+        "folderRefresh": 12,
+        "folderState": 12
+      },
+      "query_ms": {
+        "appURL": 0.09099999806494452,
+        "fileIcon": 1.8425416674290318,
+        "folderName": 1.1801250002463348,
+        "folderRefresh": 7.573375009087613,
+        "folderState": 0.35112499608658254
+      },
+      "round": 8,
+      "selected": true,
+      "tab": "folders"
+    },
+    {
+      "layout_display_ms": 37.424875001306646,
+      "query_count": {},
+      "query_ms": {},
+      "round": 8,
+      "selected": true,
+      "tab": "toolbox"
+    },
+    {
+      "layout_display_ms": 42.69754166671191,
+      "query_count": {
+        "fileIcon": 3,
+        "folderName": 3,
+        "folderRefresh": 3,
+        "folderState": 3
+      },
+      "query_ms": {
+        "fileIcon": 0.2714583315537311,
+        "folderName": 0.4587083312799223,
+        "folderRefresh": 2.907374997448642,
+        "folderState": 0.1336249988526106
+      },
+      "round": 9,
+      "selected": true,
+      "tab": "general"
+    },
+    {
+      "layout_display_ms": 35.602916665084194,
+      "query_count": {},
+      "query_ms": {},
+      "round": 9,
+      "selected": true,
+      "tab": "newFile"
+    },
+    {
+      "layout_display_ms": 39.281666668102844,
+      "query_count": {
+        "appURL": 6,
+        "fileIcon": 6
+      },
+      "query_ms": {
+        "appURL": 0.21483333330252208,
+        "fileIcon": 2.5801666670304257
+      },
+      "round": 9,
+      "selected": true,
+      "tab": "openIn"
+    },
+    {
+      "layout_display_ms": 44.8217500015744,
+      "query_count": {
+        "appURL": 3,
+        "fileIcon": 15,
+        "folderName": 12,
+        "folderRefresh": 12,
+        "folderState": 12
+      },
+      "query_ms": {
+        "appURL": 0.10475000453880057,
+        "fileIcon": 1.8409999975119717,
+        "folderName": 1.1476249965198804,
+        "folderRefresh": 7.418375003908295,
+        "folderState": 0.3244166691729333
+      },
+      "round": 9,
+      "selected": true,
+      "tab": "folders"
+    },
+    {
+      "layout_display_ms": 35.550791668356396,
+      "query_count": {},
+      "query_ms": {},
+      "round": 9,
+      "selected": true,
+      "tab": "toolbox"
+    },
+    {
+      "layout_display_ms": 38.3215416695748,
+      "query_count": {
+        "fileIcon": 3,
+        "folderName": 3,
+        "folderRefresh": 3,
+        "folderState": 3
+      },
+      "query_ms": {
+        "fileIcon": 0.2523333350836765,
+        "folderName": 0.38620833583991043,
+        "folderRefresh": 2.779624999675434,
+        "folderState": 0.11650000305962749
+      },
+      "round": 10,
+      "selected": true,
+      "tab": "general"
+    },
+    {
+      "layout_display_ms": 33.29499999745167,
+      "query_count": {},
+      "query_ms": {},
+      "round": 10,
+      "selected": true,
+      "tab": "newFile"
+    },
+    {
+      "layout_display_ms": 35.36220833120751,
+      "query_count": {
+        "appURL": 6,
+        "fileIcon": 6
+      },
+      "query_ms": {
+        "appURL": 0.22583333338843659,
+        "fileIcon": 2.2447083283623215
+      },
+      "round": 10,
+      "selected": true,
+      "tab": "openIn"
+    },
+    {
+      "layout_display_ms": 38.03108333522687,
+      "query_count": {
+        "appURL": 3,
+        "fileIcon": 15,
+        "folderName": 12,
+        "folderRefresh": 12,
+        "folderState": 12
+      },
+      "query_ms": {
+        "appURL": 0.08204166442737915,
+        "fileIcon": 1.663916675170185,
+        "folderName": 1.0092083357449155,
+        "folderRefresh": 6.890625001688022,
+        "folderState": 0.2823750037350692
+      },
+      "round": 10,
+      "selected": true,
+      "tab": "folders"
+    },
+    {
+      "layout_display_ms": 30.864458334690426,
+      "query_count": {},
+      "query_ms": {},
+      "round": 10,
+      "selected": true,
+      "tab": "toolbox"
+    },
+    {
+      "layout_display_ms": 31.26124999835156,
+      "query_count": {
+        "fileIcon": 3,
+        "folderName": 3,
+        "folderRefresh": 3,
+        "folderState": 3
+      },
+      "query_ms": {
+        "fileIcon": 0.28950000341865234,
+        "folderName": 0.4783749936905224,
+        "folderRefresh": 2.62220833246829,
+        "folderState": 0.12962499749846756
+      },
+      "round": 11,
+      "selected": true,
+      "tab": "general"
+    },
+    {
+      "layout_display_ms": 31.28895833651768,
+      "query_count": {},
+      "query_ms": {},
+      "round": 11,
+      "selected": true,
+      "tab": "newFile"
+    },
+    {
+      "layout_display_ms": 32.72812499926658,
+      "query_count": {
+        "appURL": 6,
+        "fileIcon": 6
+      },
+      "query_ms": {
+        "appURL": 0.17174999811686575,
+        "fileIcon": 2.1492916712304577
+      },
+      "round": 11,
+      "selected": true,
+      "tab": "openIn"
+    },
+    {
+      "layout_display_ms": 52.63645833110786,
+      "query_count": {
+        "appURL": 3,
+        "fileIcon": 15,
+        "folderName": 12,
+        "folderRefresh": 12,
+        "folderState": 12
+      },
+      "query_ms": {
+        "appURL": 0.0824999988253694,
+        "fileIcon": 1.670833327807486,
+        "folderName": 1.152500008174684,
+        "folderRefresh": 7.24304166942602,
+        "folderState": 0.3147083225485403
+      },
+      "round": 11,
+      "selected": true,
+      "tab": "folders"
+    },
+    {
+      "layout_display_ms": 38.5288750003383,
+      "query_count": {},
+      "query_ms": {},
+      "round": 11,
+      "selected": true,
+      "tab": "toolbox"
+    },
+    {
+      "layout_display_ms": 39.9986666670884,
+      "query_count": {
+        "fileIcon": 3,
+        "folderName": 3,
+        "folderRefresh": 3,
+        "folderState": 3
+      },
+      "query_ms": {
+        "fileIcon": 0.256124996667495,
+        "folderName": 0.42512500294833444,
+        "folderRefresh": 3.050208331842441,
+        "folderState": 0.11704166536219418
+      },
+      "round": 12,
+      "selected": true,
+      "tab": "general"
+    },
+    {
+      "layout_display_ms": 17.904708332935115,
+      "query_count": {},
+      "query_ms": {},
+      "round": 12,
+      "selected": true,
+      "tab": "newFile"
+    },
+    {
+      "layout_display_ms": 33.87075000136974,
+      "query_count": {
+        "appURL": 6,
+        "fileIcon": 6
+      },
+      "query_ms": {
+        "appURL": 0.16762500308686867,
+        "fileIcon": 1.8890416649810504
+      },
+      "round": 12,
+      "selected": true,
+      "tab": "openIn"
+    },
+    {
+      "layout_display_ms": 50.204708335513715,
+      "query_count": {
+        "appURL": 3,
+        "fileIcon": 15,
+        "folderName": 12,
+        "folderRefresh": 12,
+        "folderState": 12
+      },
+      "query_ms": {
+        "appURL": 0.07783333421684802,
+        "fileIcon": 1.6823333389766049,
+        "folderName": 1.161874988611089,
+        "folderRefresh": 7.362249994912418,
+        "folderState": 0.30625000363215804
+      },
+      "round": 12,
+      "selected": true,
+      "tab": "folders"
+    },
+    {
+      "layout_display_ms": 31.223124999087304,
+      "query_count": {},
+      "query_ms": {},
+      "round": 12,
+      "selected": true,
+      "tab": "toolbox"
+    },
+    {
+      "layout_display_ms": 43.97349999999278,
+      "query_count": {
+        "fileIcon": 3,
+        "folderName": 3,
+        "folderRefresh": 3,
+        "folderState": 3
+      },
+      "query_ms": {
+        "fileIcon": 0.2504999974917155,
+        "folderName": 0.402000001486158,
+        "folderRefresh": 3.3852916640171316,
+        "folderState": 0.13583333566202782
+      },
+      "round": 13,
+      "selected": true,
+      "tab": "general"
+    },
+    {
+      "layout_display_ms": 31.1115416661778,
+      "query_count": {},
+      "query_ms": {},
+      "round": 13,
+      "selected": true,
+      "tab": "newFile"
+    },
+    {
+      "layout_display_ms": 37.3055000018212,
+      "query_count": {
+        "appURL": 6,
+        "fileIcon": 6
+      },
+      "query_ms": {
+        "appURL": 0.23179166237241589,
+        "fileIcon": 2.4695416614122223
+      },
+      "round": 13,
+      "selected": true,
+      "tab": "openIn"
+    },
+    {
+      "layout_display_ms": 53.21833333437098,
+      "query_count": {
+        "appURL": 3,
+        "fileIcon": 15,
+        "folderName": 12,
+        "folderRefresh": 12,
+        "folderState": 12
+      },
+      "query_ms": {
+        "appURL": 0.12249999781488441,
+        "fileIcon": 1.9418750089243986,
+        "folderName": 1.315291658102069,
+        "folderRefresh": 7.866458337957738,
+        "folderState": 0.32954165362752974
+      },
+      "round": 13,
+      "selected": true,
+      "tab": "folders"
+    },
+    {
+      "layout_display_ms": 33.498500000860076,
+      "query_count": {},
+      "query_ms": {},
+      "round": 13,
+      "selected": true,
+      "tab": "toolbox"
+    },
+    {
+      "layout_display_ms": 46.92037499989965,
+      "query_count": {
+        "fileIcon": 3,
+        "folderName": 3,
+        "folderRefresh": 3,
+        "folderState": 3
+      },
+      "query_ms": {
+        "fileIcon": 0.26537500161794014,
+        "folderName": 0.4200416697131004,
+        "folderRefresh": 3.1939166692609433,
+        "folderState": 0.12162499842816032
+      },
+      "round": 14,
+      "selected": true,
+      "tab": "general"
+    },
+    {
+      "layout_display_ms": 35.44045833405107,
+      "query_count": {},
+      "query_ms": {},
+      "round": 14,
+      "selected": true,
+      "tab": "newFile"
+    },
+    {
+      "layout_display_ms": 40.62316666750121,
+      "query_count": {
+        "appURL": 6,
+        "fileIcon": 6
+      },
+      "query_ms": {
+        "appURL": 0.3582916651794221,
+        "fileIcon": 2.675083338544937
+      },
+      "round": 14,
+      "selected": true,
+      "tab": "openIn"
+    },
+    {
+      "layout_display_ms": 44.82408333205967,
+      "query_count": {
+        "appURL": 3,
+        "fileIcon": 15,
+        "folderName": 12,
+        "folderRefresh": 12,
+        "folderState": 12
+      },
+      "query_ms": {
+        "appURL": 0.1349166632280685,
+        "fileIcon": 2.314749999641208,
+        "folderName": 1.16291666199686,
+        "folderRefresh": 7.828333327779546,
+        "folderState": 0.31779166602063924
+      },
+      "round": 14,
+      "selected": true,
+      "tab": "folders"
+    },
+    {
+      "layout_display_ms": 29.142249997676117,
+      "query_count": {},
+      "query_ms": {},
+      "round": 14,
+      "selected": true,
+      "tab": "toolbox"
+    },
+    {
+      "layout_display_ms": 33.82445833267411,
+      "query_count": {
+        "fileIcon": 3,
+        "folderName": 3,
+        "folderRefresh": 3,
+        "folderState": 3
+      },
+      "query_ms": {
+        "fileIcon": 0.21949999427306466,
+        "folderName": 0.3443749992584344,
+        "folderRefresh": 2.7851250015373807,
+        "folderState": 0.1089583347493317
+      },
+      "round": 15,
+      "selected": true,
+      "tab": "general"
+    },
+    {
+      "layout_display_ms": 16.505916668393183,
+      "query_count": {},
+      "query_ms": {},
+      "round": 15,
+      "selected": true,
+      "tab": "newFile"
+    },
+    {
+      "layout_display_ms": 33.326083332212875,
+      "query_count": {
+        "appURL": 6,
+        "fileIcon": 6
+      },
+      "query_ms": {
+        "appURL": 0.15829166659386829,
+        "fileIcon": 2.018208338995464
+      },
+      "round": 15,
+      "selected": true,
+      "tab": "openIn"
+    },
+    {
+      "layout_display_ms": 44.97254166926723,
+      "query_count": {
+        "appURL": 3,
+        "fileIcon": 15,
+        "folderName": 12,
+        "folderRefresh": 12,
+        "folderState": 12
+      },
+      "query_ms": {
+        "appURL": 0.08945833542384207,
+        "fileIcon": 1.743250002618879,
+        "folderName": 1.1017916622222401,
+        "folderRefresh": 7.224916666018544,
+        "folderState": 0.3016250084328931
+      },
+      "round": 15,
+      "selected": true,
+      "tab": "folders"
+    },
+    {
+      "layout_display_ms": 26.420083333505318,
+      "query_count": {},
+      "query_ms": {},
+      "round": 15,
+      "selected": true,
+      "tab": "toolbox"
+    },
+    {
+      "layout_display_ms": 44.84704166679876,
+      "query_count": {
+        "fileIcon": 3,
+        "folderName": 3,
+        "folderRefresh": 3,
+        "folderState": 3
+      },
+      "query_ms": {
+        "fileIcon": 0.3050833329325542,
+        "folderName": 0.4542499991657678,
+        "folderRefresh": 2.8023750019201543,
+        "folderState": 0.1309583349211607
+      },
+      "round": 16,
+      "selected": true,
+      "tab": "general"
+    },
+    {
+      "layout_display_ms": 35.88695833605016,
+      "query_count": {},
+      "query_ms": {},
+      "round": 16,
+      "selected": true,
+      "tab": "newFile"
+    },
+    {
+      "layout_display_ms": 27.530625000508735,
+      "query_count": {
+        "appURL": 6,
+        "fileIcon": 6
+      },
+      "query_ms": {
+        "appURL": 0.1442499997210689,
+        "fileIcon": 1.515749994723592
+      },
+      "round": 16,
+      "selected": true,
+      "tab": "openIn"
+    },
+    {
+      "layout_display_ms": 36.78425000180141,
+      "query_count": {
+        "appURL": 3,
+        "fileIcon": 15,
+        "folderName": 12,
+        "folderRefresh": 12,
+        "folderState": 12
+      },
+      "query_ms": {
+        "appURL": 0.10829166785697453,
+        "fileIcon": 1.9609999981184956,
+        "folderName": 1.4491666661342606,
+        "folderRefresh": 9.47141666256357,
+        "folderState": 0.46608332922914997
+      },
+      "round": 16,
+      "selected": true,
+      "tab": "folders"
+    },
+    {
+      "layout_display_ms": 28.996208333410323,
+      "query_count": {},
+      "query_ms": {},
+      "round": 16,
+      "selected": true,
+      "tab": "toolbox"
+    },
+    {
+      "layout_display_ms": 34.69616666552611,
+      "query_count": {
+        "fileIcon": 3,
+        "folderName": 3,
+        "folderRefresh": 3,
+        "folderState": 3
+      },
+      "query_ms": {
+        "fileIcon": 0.22445833383244462,
+        "folderName": 0.35541666511562653,
+        "folderRefresh": 1.9697916686709505,
+        "folderState": 0.10370833115302958
+      },
+      "round": 17,
+      "selected": true,
+      "tab": "general"
+    },
+    {
+      "layout_display_ms": 30.48924999893643,
+      "query_count": {},
+      "query_ms": {},
+      "round": 17,
+      "selected": true,
+      "tab": "newFile"
+    },
+    {
+      "layout_display_ms": 36.486041666648816,
+      "query_count": {
+        "appURL": 6,
+        "fileIcon": 6
+      },
+      "query_ms": {
+        "appURL": 0.13945833416073583,
+        "fileIcon": 1.6858333292475436
+      },
+      "round": 17,
+      "selected": true,
+      "tab": "openIn"
+    },
+    {
+      "layout_display_ms": 47.541208332404494,
+      "query_count": {
+        "appURL": 3,
+        "fileIcon": 15,
+        "folderName": 12,
+        "folderRefresh": 12,
+        "folderState": 12
+      },
+      "query_ms": {
+        "appURL": 0.10787499923026189,
+        "fileIcon": 1.8662499969650526,
+        "folderName": 1.1361666620359756,
+        "folderRefresh": 7.456666666257661,
+        "folderState": 0.3146249946439639
+      },
+      "round": 17,
+      "selected": true,
+      "tab": "folders"
+    },
+    {
+      "layout_display_ms": 36.07233333241311,
+      "query_count": {},
+      "query_ms": {},
+      "round": 17,
+      "selected": true,
+      "tab": "toolbox"
+    },
+    {
+      "layout_display_ms": 44.741249999788124,
+      "query_count": {
+        "fileIcon": 3,
+        "folderName": 3,
+        "folderRefresh": 3,
+        "folderState": 3
+      },
+      "query_ms": {
+        "fileIcon": 0.21275000108289532,
+        "folderName": 0.3557499985618051,
+        "folderRefresh": 2.210791666584555,
+        "folderState": 0.10312500307918526
+      },
+      "round": 18,
+      "selected": true,
+      "tab": "general"
+    },
+    {
+      "layout_display_ms": 27.50233333063079,
+      "query_count": {},
+      "query_ms": {},
+      "round": 18,
+      "selected": true,
+      "tab": "newFile"
+    },
+    {
+      "layout_display_ms": 34.02279166766675,
+      "query_count": {
+        "appURL": 6,
+        "fileIcon": 6
+      },
+      "query_ms": {
+        "appURL": 0.16266666716546752,
+        "fileIcon": 2.0770416704181116
+      },
+      "round": 18,
+      "selected": true,
+      "tab": "openIn"
+    },
+    {
+      "layout_display_ms": 49.438499998359475,
+      "query_count": {
+        "appURL": 3,
+        "fileIcon": 15,
+        "folderName": 12,
+        "folderRefresh": 12,
+        "folderState": 12
+      },
+      "query_ms": {
+        "appURL": 0.047958332288544625,
+        "fileIcon": 1.2130416616855655,
+        "folderName": 1.0247916616208386,
+        "folderRefresh": 6.194583329488523,
+        "folderState": 0.2844166701834183
+      },
+      "round": 18,
+      "selected": true,
+      "tab": "folders"
+    },
+    {
+      "layout_display_ms": 23.40149999872665,
+      "query_count": {},
+      "query_ms": {},
+      "round": 18,
+      "selected": true,
+      "tab": "toolbox"
+    },
+    {
+      "layout_display_ms": 35.38499999922351,
+      "query_count": {
+        "fileIcon": 3,
+        "folderName": 3,
+        "folderRefresh": 3,
+        "folderState": 3
+      },
+      "query_ms": {
+        "fileIcon": 0.19912499919882976,
+        "folderName": 0.30645833248854615,
+        "folderRefresh": 1.9857916704495437,
+        "folderState": 0.0929166708374396
+      },
+      "round": 19,
+      "selected": true,
+      "tab": "general"
+    },
+    {
+      "layout_display_ms": 19.95770833309507,
+      "query_count": {},
+      "query_ms": {},
+      "round": 19,
+      "selected": true,
+      "tab": "newFile"
+    },
+    {
+      "layout_display_ms": 32.255166664981516,
+      "query_count": {
+        "appURL": 6,
+        "fileIcon": 6
+      },
+      "query_ms": {
+        "appURL": 0.17745833611115813,
+        "fileIcon": 1.60666666488396
+      },
+      "round": 19,
+      "selected": true,
+      "tab": "openIn"
+    },
+    {
+      "layout_display_ms": 44.1762500013283,
+      "query_count": {
+        "appURL": 3,
+        "fileIcon": 15,
+        "folderName": 12,
+        "folderRefresh": 12,
+        "folderState": 12
+      },
+      "query_ms": {
+        "appURL": 0.11158333290950395,
+        "fileIcon": 1.7870833398774266,
+        "folderName": 0.9475416627537925,
+        "folderRefresh": 5.972750004730187,
+        "folderState": 0.2851250028470531
+      },
+      "round": 19,
+      "selected": true,
+      "tab": "folders"
+    },
+    {
+      "layout_display_ms": 31.10000000015134,
+      "query_count": {},
+      "query_ms": {},
+      "round": 19,
+      "selected": true,
+      "tab": "toolbox"
+    },
+    {
+      "layout_display_ms": 34.38016666768817,
+      "query_count": {
+        "fileIcon": 3,
+        "folderName": 3,
+        "folderRefresh": 3,
+        "folderState": 3
+      },
+      "query_ms": {
+        "fileIcon": 0.1903749980556313,
+        "folderName": 0.2917500023613684,
+        "folderRefresh": 2.083666666294448,
+        "folderState": 0.08641666499897838
+      },
+      "round": 20,
+      "selected": true,
+      "tab": "general"
+    },
+    {
+      "layout_display_ms": 27.11733333126176,
+      "query_count": {},
+      "query_ms": {},
+      "round": 20,
+      "selected": true,
+      "tab": "newFile"
+    },
+    {
+      "layout_display_ms": 35.89450000072247,
+      "query_count": {
+        "appURL": 6,
+        "fileIcon": 6
+      },
+      "query_ms": {
+        "appURL": 0.2181250019930303,
+        "fileIcon": 2.204249998612795
+      },
+      "round": 20,
+      "selected": true,
+      "tab": "openIn"
+    },
+    {
+      "layout_display_ms": 44.80599999806145,
+      "query_count": {
+        "appURL": 3,
+        "fileIcon": 15,
+        "folderName": 12,
+        "folderRefresh": 12,
+        "folderState": 12
+      },
+      "query_ms": {
+        "appURL": 0.10162500257138163,
+        "fileIcon": 1.688916661805706,
+        "folderName": 1.04020832804963,
+        "folderRefresh": 6.210916668351274,
+        "folderState": 0.2822083297360223
+      },
+      "round": 20,
+      "selected": true,
+      "tab": "folders"
+    },
+    {
+      "layout_display_ms": 31.16049999880488,
+      "query_count": {},
+      "query_ms": {},
+      "round": 20,
+      "selected": true,
+      "tab": "toolbox"
+    }
+  ],
+  "succeeded": true,
+  "assertions": [
+    {
+      "check": "language-bitmap-diff",
+      "passed": true
+    },
+    {
+      "check": "english-title-accessible",
+      "reason": "NSHostingView local AX getters cannot reliably expose SwiftUI leaf text; inspect with external accessibility or screenshots",
+      "status": "manual_required"
+    },
+    {
+      "check": "deleted-folder-refresh",
+      "observed": "missing",
+      "passed": true
+    }
+  ],
+  "window_content_size": [
+    640,
+    620
+  ]
+}

@@ -5,8 +5,11 @@ import UniformTypeIdentifiers
 /// F-010 至 F-016。
 struct NewFilePane: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.settingsPageActivity) private var pageActivity
+    @State private var standaloneActivity = SettingsPageActivity()
     @State private var importFailed = false
-    @State private var importTask: Task<Void, Never>?
+
+    private var activity: SettingsPageActivity { pageActivity ?? standaloneActivity }
 
     var body: some View {
         @Bindable var model = model
@@ -42,10 +45,10 @@ struct NewFilePane: View {
                 HStack {
                     Text(L("文件类型"))
                     Spacer()
-                    if importTask == nil {
+                    if activity.importTask == nil {
                         Button(L("添加模板…"), action: addTemplate)
                     } else {
-                        Button(L("取消")) { importTask?.cancel() }
+                        Button(L("取消")) { activity.importTask?.cancel() }
                     }
                 }
             } footer: {
@@ -60,7 +63,7 @@ struct NewFilePane: View {
         }
         .disabled(!model.settings.groups.newFile)
         .alert(L("无法导入模板。"), isPresented: $importFailed) { Button(L("好")) {} }
-        .onDisappear { importTask?.cancel() }
+        .onDisappear { activity.deactivate() }
     }
 
     private func addTemplate() {
@@ -70,14 +73,14 @@ struct NewFilePane: View {
         panel.prompt = L("添加")
         guard panel.runModal() == .OK, let url = panel.url else { return }
         guard let name = askTemplateName(default: Naming.removingExtension(url.lastPathComponent)) else { return }
-        guard importTask == nil else { return }
+        guard activity.importTask == nil else { return }
 
         importFailed = false
-        importTask = Task { @MainActor in
+        activity.importTask = Task { @MainActor in
             var uncommittedTemplate: CustomTemplate?
             defer {
                 if let uncommittedTemplate { TemplateLibrary.remove(uncommittedTemplate) }
-                importTask = nil
+                activity.importTask = nil
             }
             do {
                 let template = try await TemplateLibrary.importTemplate(from: url, name: name)
