@@ -226,7 +226,13 @@ python3 scripts/check_docs.py
 RightKit의 철학과 비전을 표현하기 위해, 브랜드 마스코트 Riko의 오리지널 90년대 애니메이션 스타일 뮤직비디오 **《Under the Right Click · 右クリックの向こう》**를 제작했습니다 (총 3분 28초, 170 BPM J-rock 애니메이션 오프닝 스타일).
 
 <p align="center">
-  <img src="website/assets/character/hero-pv-poster-ak.png" alt="Under the Right Click MV 포스터" width="820" />
+  <a href="https://www.bilibili.com/video/BV1XnpK6aEut" target="_blank" rel="noopener noreferrer">
+    <img src="website/assets/character/hero-pv-poster-ak.png" alt="Bilibili에서 Under the Right Click MV 감상" width="820" />
+  </a>
+  <br />
+  <a href="https://www.bilibili.com/video/BV1XnpK6aEut" target="_blank" rel="noopener noreferrer">
+    <img src="https://img.shields.io/badge/Bilibili-전체_고화질_MV_감상_(BV1XnpK6aEut)-00A1D6?style=for-the-badge&logo=bilibili&logoColor=white" alt="Bilibili에서 감상" />
+  </a>
 </p>
 
 ### 스토리와 비유: 혼돈의 아카이브 시티

@@ -228,7 +228,13 @@ python3 scripts/check_docs.py
 RightKit のデザイン哲学と世界観を表現するため、ブランドマスコット Riko のオリジナルアニメ MV **『Under the Right Click · 右クリックの向こう』** を制作しました（再生時間 3分28秒、170 BPM J-rock アニメ OP）。
 
 <p align="center">
-  <img src="website/assets/character/hero-pv-poster-ak.png" alt="『右クリックの向こう』ポスター" width="820" />
+  <a href="https://www.bilibili.com/video/BV1XnpK6aEut" target="_blank" rel="noopener noreferrer">
+    <img src="website/assets/character/hero-pv-poster-ak.png" alt="『右クリックの向こう』ポスター" width="820" />
+  </a>
+  <br />
+  <a href="https://www.bilibili.com/video/BV1XnpK6aEut" target="_blank" rel="noopener noreferrer">
+    <img src="https://img.shields.io/badge/Bilibili-フル_MV_を視聴_(BV1XnpK6aEut)-00A1D6?style=for-the-badge&logo=bilibili&logoColor=white" alt="Bilibili で視聴" />
+  </a>
 </p>
 
 ### ストーリーと製品のメタファー：失序のアーカイブ・シティ

@@ -226,7 +226,13 @@ python3 scripts/check_docs.py
 To embody RightKit's product philosophy and core metaphor, we created an original 90s-style anime music video for our mascot Riko: ***Under the Right Click · 右クリックの向こう*** (Runtime: 3:28, 170 BPM J-rock anime OP).
 
 <p align="center">
-  <img src="website/assets/character/hero-pv-poster-ak.png" alt="Under the Right Click MV Poster" width="820" />
+  <a href="https://www.bilibili.com/video/BV1XnpK6aEut" target="_blank" rel="noopener noreferrer">
+    <img src="website/assets/character/hero-pv-poster-ak.png" alt="Watch Under the Right Click MV on Bilibili" width="820" />
+  </a>
+  <br />
+  <a href="https://www.bilibili.com/video/BV1XnpK6aEut" target="_blank" rel="noopener noreferrer">
+    <img src="https://img.shields.io/badge/Bilibili-Watch_Full_MV_(BV1XnpK6aEut)-00A1D6?style=for-the-badge&logo=bilibili&logoColor=white" alt="Watch on Bilibili" />
+  </a>
 </p>
 
 ### Story & Metaphor: The Entropy of Archive City

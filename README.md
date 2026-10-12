@@ -228,7 +228,9 @@ python3 scripts/check_docs.py
 为了诠释 RightKit 的设计理念与核心隐喻，我们为品牌吉祥物 Riko 制作了一部专属的 90 年代动画风格音乐 MV：《Under the Right Click · 右クリックの向こう》（全长 3 分 28 秒，170 BPM J-rock 动画 OP）。
 
 <p align="center">
-  <img src="website/assets/character/hero-pv-poster-ak.png" alt="Under the Right Click MV 海报" width="820" />
+  <a href="https://www.bilibili.com/video/BV1XnpK6aEut" target="_blank" rel="noopener noreferrer">
+    <img src="https://img.shields.io/badge/Bilibili-观看完整高清_MV_(BV1XnpK6aEut)-00A1D6?style=for-the-badge&logo=bilibili&logoColor=white" alt="在哔哩哔哩观看完整 MV" />
+  </a>
 </p>
 
 ### 故事与隐喻：失序档案城
