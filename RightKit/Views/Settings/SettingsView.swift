@@ -62,17 +62,10 @@ private struct SettingsPageHost: NSViewRepresentable {
 
     func updateNSView(_ container: SettingsPageContainer<SettingsTab>, context: Context) {
         let environment = context.environment
-        // Independent hosting roots need the public appearance/accessibility environment.
-        // Refresh it for appearance/accessibility changes only,
-        // never for a routine tab switch or an observed settings edit.
+        // Independent hosting roots only receive the values `root` forwards. Refresh them
+        // when one of those changes, never for a routine tab switch or a settings edit.
         if let previous = context.coordinator.environment,
-           previous.colorScheme != environment.colorScheme || previous.locale != environment.locale
-               || previous.dynamicTypeSize != environment.dynamicTypeSize
-               || previous.displayScale != environment.displayScale
-               || previous.accessibilityReduceMotion != environment.accessibilityReduceMotion
-               || previous.accessibilityReduceTransparency != environment.accessibilityReduceTransparency
-               || previous.accessibilityDifferentiateWithoutColor != environment.accessibilityDifferentiateWithoutColor
-               || previous.colorSchemeContrast != environment.colorSchemeContrast {
+           previous.locale != environment.locale || previous.dynamicTypeSize != environment.dynamicTypeSize {
             for (key, page) in container.pages {
                 (page.view as? NSHostingView<AnyView>)?.rootView = root(for: key, activity: page.activity, environment: environment)
             }

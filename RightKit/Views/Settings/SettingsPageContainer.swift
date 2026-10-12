@@ -92,20 +92,24 @@ final class SettingsPageContainer<Key: Hashable>: NSView {
         guard let window else { return }
         NotificationCenter.default.addObserver(self, selector: #selector(windowWillClose),
                                                name: NSWindow.willCloseNotification, object: window)
-        NotificationCenter.default.addObserver(self, selector: #selector(windowDidBecomeKey),
+        NotificationCenter.default.addObserver(self, selector: #selector(windowDidBecomeVisible),
+                                               name: NSWindow.didChangeOcclusionStateNotification, object: window)
+        NotificationCenter.default.addObserver(self, selector: #selector(windowDidBecomeVisible),
                                                name: NSWindow.didBecomeKeyNotification, object: window)
     }
 
     @objc private func windowWillClose(_ notification: Notification) {
         isClosed = true
         releasePages()
-        // Keep only the weak selector-based reopen observer while the Window retains
+        // Keep only the weak selector-based reopen observers while the Window retains
         // its content. Reinstall the close observer on the next presentation.
         NotificationCenter.default.removeObserver(self, name: NSWindow.willCloseNotification, object: observedWindow)
     }
 
-    @objc private func windowDidBecomeKey(_ notification: Notification) {
-        guard isClosed else { return }
+    /// A reopened window may stay behind Finder when activation is refused, so rebuild as
+    /// soon as it is visible instead of waiting for it to become key.
+    @objc private func windowDidBecomeVisible(_ notification: Notification) {
+        guard isClosed, observedWindow?.isVisible == true else { return }
         isClosed = false
         NotificationCenter.default.addObserver(self, selector: #selector(windowWillClose),
                                                name: NSWindow.willCloseNotification, object: observedWindow)
@@ -115,6 +119,7 @@ final class SettingsPageContainer<Key: Hashable>: NSView {
     private func stopObservingWindow() {
         NotificationCenter.default.removeObserver(self, name: NSWindow.willCloseNotification, object: observedWindow)
         NotificationCenter.default.removeObserver(self, name: NSWindow.didBecomeKeyNotification, object: observedWindow)
+        NotificationCenter.default.removeObserver(self, name: NSWindow.didChangeOcclusionStateNotification, object: observedWindow)
         observedWindow = nil
     }
 

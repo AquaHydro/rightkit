@@ -93,8 +93,12 @@ struct SettingsPageContainerTests {
         try await Task.sleep(for: .milliseconds(50))
         #expect(firstHost == nil)
 
-        // A SwiftUI Window may reopen the same content instance. Recreate just its tab.
-        NotificationCenter.default.post(name: NSWindow.didBecomeKeyNotification, object: window)
+        // A SwiftUI Window may reopen the same content instance without making it key,
+        // for example when Finder keeps activation. Recreate just its tab once visible.
+        NotificationCenter.default.post(name: NSWindow.didChangeOcclusionStateNotification, object: window)
+        #expect(container.pages.isEmpty)
+        window.forcedVisible = true
+        NotificationCenter.default.post(name: NSWindow.didChangeOcclusionStateNotification, object: window)
         #expect(created == 3)
         #expect(container.pages.count == 1)
         #expect(container.pages[1] != nil)
@@ -114,9 +118,9 @@ struct SettingsPageContainerTests {
         #expect(container.subviews.isEmpty)
     }
 
-    private func window(containing view: NSView) -> NSWindow {
-        let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 640, height: 620),
-                              styleMask: [.titled, .closable], backing: .buffered, defer: false)
+    private func window(containing view: NSView) -> TestWindow {
+        let window = TestWindow(contentRect: NSRect(x: 0, y: 0, width: 640, height: 620),
+                                styleMask: [.titled, .closable], backing: .buffered, defer: false)
         window.isReleasedWhenClosed = false
         window.contentView = view
         return window
@@ -145,4 +149,10 @@ private struct TestTextField: NSViewRepresentable {
     }
 
     func updateNSView(_ field: NSTextField, context: Context) {}
+}
+
+/// Hostless unit tests cannot rely on the window server ordering windows in.
+private final class TestWindow: NSWindow {
+    var forcedVisible = false
+    override var isVisible: Bool { forcedVisible }
 }

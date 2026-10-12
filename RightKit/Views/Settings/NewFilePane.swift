@@ -63,6 +63,8 @@ struct NewFilePane: View {
         }
         .disabled(!model.settings.groups.newFile)
         .alert(L("无法导入模板。"), isPresented: $importFailed) { Button(L("好")) {} }
+        // 设置窗口里由 SettingsPageContainer 在切页和关窗时取消导入；
+        // 这里兜底页面脱离容器单独使用（没有注入 pageActivity）的情况，不要删除。
         .onDisappear { activity.deactivate() }
     }
 
