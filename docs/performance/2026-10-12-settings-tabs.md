@@ -55,6 +55,6 @@ python3 scripts/perf/run_settings.py --no-build --interactive --variant working
 
 首条会先完成两个版本的构建，再顺序采样，生成 `.build/settings-performance/` 下的 JSON、日志和内容位图。脚本检查构建清单，源码或探针改变后拒绝复用过期二进制；失败断言返回非零。交互预览只操作临时数据，请用菜单 Quit 结束并清理测试偏好。
 
-保存的[汇总数据](evidence/2026-10-12-settings-tabs/summary.json)、[基线原始样本](evidence/2026-10-12-settings-tabs/baseline-samples.json)、[优化版原始样本](evidence/2026-10-12-settings-tabs/working-samples.json)及构建清单位于同一证据目录。内容位图不包含系统工具栏的完整合成，不作为屏幕呈现时间或完整窗口截图。
+仓库只保存[汇总数据](evidence/2026-10-12-settings-tabs/summary.json)、构建清单和运行日志。逐次原始样本和内容位图不入库，用上面的命令重新生成。内容位图不包含系统工具栏的完整合成，不作为屏幕呈现时间或完整窗口截图。
 
 本次没有安装或替换 `/Applications/RightKit.app`，没有访问已安装应用的设置或改动系统扩展开关。同步目录查询仍受本地文件系统与 bookmark 状态影响，不把这些数值外推为离线卷或网络盘性能保证。

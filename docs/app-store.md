@@ -25,7 +25,7 @@
 
 ## 当前状态
 
-线上是 0.1.3。0.1.4 起加日文、韩文本地化。推广文本随时可改，不用送审。描述、关键词、截图和「此版本的新功能」随版本送审，下面的内容写入 0.1.4。
+2026-10-12 已通过 App Store Connect 核对 0.1.4 为 READY_FOR_DISTRIBUTION。0.1.5 准备发布，主要改进设置分栏切换与窗口重开。推广文本随时可改，不用送审；描述、关键词、截图和「此版本的新功能」随版本送审。
 
 ## 简体中文
 
@@ -89,14 +89,13 @@ RightKit 给访达的右键菜单加上新建文件、剪切粘贴、复制到�
 支持简体中文、英文、日文和韩文，需要 macOS 26 或更高版本。
 ```
 
-**此版本的新功能**（0.1.4）：
+**此版本的新功能**（0.1.5）：
 
 写用户能感知的变化，不写「请求被拒收」「后台重试」这类实现细节。
 
 ```text
-- 新增日文和韩文界面，可在设置里切换。
-- 右键菜单出现得更快。
-- 修复切换语言后，欢迎窗口有时仍显示旧语言的问题。
+- 设置分栏切换更流畅，切回时保留滚动位置。
+- 改善设置窗口重新打开时的显示稳定性。
 ```
 
 ## English (U.S.)
@@ -159,12 +158,11 @@ When you first open RightKit, authorize a folder (your home folder is recommende
 English, Simplified Chinese, Japanese and Korean. Requires macOS 26 or later.
 ```
 
-**What's New in This Version** (0.1.4):
+**What's New in This Version** (0.1.5):
 
 ```text
-- Added Japanese and Korean. Switch languages in Settings.
-- The context menu now appears faster.
-- Fixed the Welcome window sometimes keeping the old language after you switched languages.
+- Switch between Settings tabs more smoothly and keep your scroll position when returning.
+- Improved reliability when reopening the Settings window.
 ```
 
 ## 日本語
@@ -229,12 +227,11 @@ RightKit は Finder の右クリックメニューに、新規ファイル、カ
 日本語、英語、簡体字中国語、韓国語に対応。macOS 26 以降が必要です。
 ```
 
-**このバージョンの新機能**（0.1.4）：
+**このバージョンの新機能**（0.1.5）：
 
 ```text
-- 日本語と韓国語に対応しました。設定で切り替えられます。
-- 右クリックメニューがより速く表示されるようになりました。
-- 言語を切り替えたあと、ようこそウインドウに以前の言語が残ることがある問題を修正しました。
+- 設定のタブ切り替えがよりスムーズになり、戻ったときのスクロール位置も保持されます。
+- 設定ウインドウを開き直したときの表示の安定性を改善しました。
 ```
 
 ## 한국어
@@ -299,12 +296,11 @@ RightKit은 Finder의 단축 메뉴에 새 파일, 잘라내기 및 붙여넣기
 한국어, 영어, 중국어 간체, 일본어 지원. macOS 26 이상이 필요합니다.
 ```
 
-**이 버전의 새로운 기능**（0.1.4）：
+**이 버전의 새로운 기능**（0.1.5）：
 
 ```text
-- 일본어와 한국어를 지원합니다. 설정에서 언어를 바꿀 수 있습니다.
-- 단축 메뉴가 더 빠르게 표시됩니다.
-- 언어를 바꾼 뒤 환영 윈도우에 이전 언어가 남아 있던 문제를 수정했습니다.
+- 설정 탭을 더 부드럽게 전환하고, 돌아왔을 때 스크롤 위치를 유지합니다.
+- 설정 윈도우를 다시 열 때의 표시 안정성을 개선했습니다.
 ```
 
 ## App 隐私
