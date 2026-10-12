@@ -221,12 +221,40 @@ python3 scripts/check_docs.py
 
 ---
 
+## 🎬 Official Animated Music Video: "Under the Right Click"
+
+To embody RightKit's product philosophy and core metaphor, we created an original 90s-style anime music video for our mascot Riko: ***Under the Right Click · 右クリックの向こう*** (Runtime: 3:28, 170 BPM J-rock anime OP).
+
+<p align="center">
+  <img src="website/assets/character/hero-pv-poster-ak.png" alt="Under the Right Click MV Poster" width="820" />
+</p>
+
+### Story & Metaphor: The Entropy of Archive City
+
+> "Fingertip suspended in the air, the cursor lights up. Three lines, they are all I believe in. 3, 2, 1... Right click! Open the backside of the world."
+
+Set in "Archive City", a towering metropolis formed of countless filing cabinets, an unprecedented wave of entropy strikes: towers collapse, uncatalogued files scatter like snowflakes, and file paths break. **Riko**, the city's archivist, triggers her right-click ability: expanding context menus of "New File", "Copy", and "Move", restoring scattered files to their proper drawers, and reducing the city's entropy back to zero at dawn.
+
+The story is a creative metaphor for RightKit: no matter how chaotic your desktop or directories become, a single right-click restores clarity and order.
+
+### The "Riso-Cel" Rendering Pipeline
+
+The full rendering pipeline for the MV is maintained directly in this repository:
+- **Shader-Driven Repainting**: Processed through custom WebGL shaders (Kuwahara smoothing, XDoG cel contour lines with 12 fps line jitter, 45° halftone dots, and risograph paper texture) to forge an authentic 1990s retro cel aesthetic.
+- **Open-Source Tooling**: Explore the pipeline in [`mv/under-the-right-click/`](mv/under-the-right-click/README.md), featuring headless Chrome frame-by-frame rendering, lyric timing logic, and the complete [shot-by-shot storyboard](mv/under-the-right-click/STORYBOARD.md).
+
+<p align="center">
+  <img src="mv/under-the-right-click/qa/contact-sheet.jpg" alt="Under the Right Click Contact Sheet" width="820" />
+</p>
+
+---
+
 ## 🎨 Brand Mascot & Asset Licensing
 
 RightKit's brand mascot is **Riko**, a cheerful, quick-handed assistant with coral-gradient hair, an ahoge, and a signature cursor-menu hair clip.
 
 - **Source Code & Documentation**: Licensed under the [MIT License](LICENSE).
-- **Brand Assets Reserved**: The RightKit name, Riko character art, app icons, menu bar icons, illustrations, animations, and promotional media are proprietary with all rights reserved. See [Asset Licensing (ASSETS.md)](ASSETS.md). Open-source licensing does not grant rights to reuse brand assets in other products.
+- **Brand Assets Reserved**: The RightKit name, Riko character art, app icons, menu bar icons, illustrations, animations, and promotional media are proprietary with all rights reserved. See [Asset Licensing (ASSETS.md)](ASSETS.md) and [MV Licensing Notice (mv/under-the-right-click/NOTICE.md)](mv/under-the-right-click/NOTICE.md). Open-source licensing does not grant rights to reuse brand assets in other products.
 - **Third-Party Trademarks & Icons**: See [Third Party Notices (THIRD_PARTY_NOTICES.md)](THIRD_PARTY_NOTICES.md) and [App Icon Sources (website/assets/apps/SOURCES.md)](website/assets/apps/SOURCES.md).
 
 ---

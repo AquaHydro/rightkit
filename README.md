@@ -223,12 +223,40 @@ python3 scripts/check_docs.py
 
 ---
 
+## 🎬 官方音乐动画 MV: 《Under the Right Click》
+
+为了诠释 RightKit 的设计理念与核心隐喻，我们为品牌吉祥物 Riko 制作了一部专属的 90 年代动画风格音乐 MV：《Under the Right Click · 右クリックの向こう》（全长 3 分 28 秒，170 BPM J-rock 动画 OP）。
+
+<p align="center">
+  <img src="website/assets/character/hero-pv-poster-ak.png" alt="Under the Right Click MV 海报" width="820" />
+</p>
+
+### 故事与隐喻：失序档案城
+
+> 「指尖悬在半空，光标亮起；三条横线，我只相信它们。3、2、1……右键！打开世界的背面。」
+
+故事设定在一个由无数文件柜堆叠而成的「失序档案城」。当突如其来的「熵潮」摧毁高楼、文件像雪花般散落失去路径与名称时，档案整理者 **Riko** 唤醒了指尖的右键能力：伴随「新建、拷贝、移动」的层层菜单展开，混乱的碎片重回原位，城市的熵值最终归零，迎接黎明。
+
+这是对 RightKit 的浪漫隐喻：无论日常的文件多乱、路径多深，只要点下右键，一切都能恢复井然有序。
+
+### 独特的 riso-cel 视觉重绘管线
+
+MV 的全套渲染管线代码已在仓库中开源：
+- **纯代码着色器重绘**：通过 WebGL 着色器（Kuwahara 降噪、XDoG 动态描边、45° 网点叠印与纸张纤维质感），将画面统一重绘为带有孔版印刷（Risograph）质感的 90 年代赛璐璐风格。
+- **渲染引擎开源**：位于 [`mv/under-the-right-click/`](mv/under-the-right-click/README.md)，包含无头浏览器逐帧渲染脚本、歌词卡点时间轴与完整的[逐镜头分镜表](mv/under-the-right-click/STORYBOARD.md)。
+
+<p align="center">
+  <img src="mv/under-the-right-click/qa/contact-sheet.jpg" alt="Under the Right Click 分镜联络图" width="820" />
+</p>
+
+---
+
 ## 🎨 品牌形象与素材授权
 
 RightKit 的品牌吉祥物是 **Riko**，一位开朗、手快、留着珊瑚色发尾与呆毛、佩戴光标菜单发卡的小帮手。
 
 - **源代码与文档**：基于 [MIT 许可证](LICENSE) 开源。
-- **原创品牌资产保护**：RightKit 名称、Riko 角色形象、应用图标、菜单栏图标、原创插画、视频及宣传物料均保留所有权利，详见 [素材授权说明 (ASSETS.md)](ASSETS.md)。开源项目代码不代表授予品牌资产与美术素材的二次商业使用或许可。
+- **原创品牌资产保护**：RightKit 名称、Riko 角色形象、应用图标、菜单栏图标、原创插画、动画、MV 视频及宣传物料均保留所有权利，详见 [素材授权说明 (ASSETS.md)](ASSETS.md) 与 [MV 许可说明 (mv/under-the-right-click/NOTICE.md)](mv/under-the-right-click/NOTICE.md)。开源项目代码不代表授予品牌资产与美术素材的二次商业使用或许可。
 - **第三方图标与资源**：详见 [第三方资源与许可 (THIRD_PARTY_NOTICES.md)](THIRD_PARTY_NOTICES.md) 与 [应用图标来源记录 (website/assets/apps/SOURCES.md)](website/assets/apps/SOURCES.md)。
 
 ---

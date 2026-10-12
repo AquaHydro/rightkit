@@ -221,12 +221,40 @@ python3 scripts/check_docs.py
 
 ---
 
+## 🎬 공식 애니메이션 뮤직비디오: 《Under the Right Click》
+
+RightKit의 철학과 비전을 표현하기 위해, 브랜드 마스코트 Riko의 오리지널 90년대 애니메이션 스타일 뮤직비디오 **《Under the Right Click · 右クリックの向こう》**를 제작했습니다 (총 3분 28초, 170 BPM J-rock 애니메이션 오프닝 스타일).
+
+<p align="center">
+  <img src="website/assets/character/hero-pv-poster-ak.png" alt="Under the Right Click MV 포스터" width="820" />
+</p>
+
+### 스토리와 비유: 혼돈의 아카이브 시티
+
+> "허공에 뜬 손끝, 커서가 빛난다. 세 줄의 라인, 그것만을 믿고. 3, 2, 1... Right click! 세상의 이면을 열어라."
+
+수많은 파일 캐비닛으로 이루어진 '아카이브 시티'에 정체불명의 엔트로피 파도가 닥쳐 고층 빌딩이 무너지고 이름 없는 파일들이 눈처럼 흩날립니다. 도시의 정리자인 **Riko**는 우클릭 능력을 통해 '새 파일, 복사, 이동'의 메뉴를 연속해서 펼쳐냅니다. 흩어진 파일들을 제자리로 되돌리고 새벽녘 도시의 엔트로피를 0.0%로 되돌립니다.
+
+폴더가 아무리 복잡하고 어지러워도 우클릭 한 번이면 모든 것이 제자리로 돌아온다는 RightKit의 핵심 가치를 담은 이야기입니다.
+
+### 독창적인 riso-cel 셰이더 렌더링 파이프라인
+
+MV 렌더링에 사용된 전체 파이프라인 코드는 저장소에 포함되어 있습니다:
+- **코드로 구현한 레트로 셀 감성**: WebGL 셰이더(Kuwahara 필터, XDoG 윤곽선 지터링, 45도 망점 인쇄 효과, 리소그래프 종이 질감)를 통해 90년대 리소 인쇄 셀 애니메이션 스타일로 프레임마다 재렌더링.
+- **파이프라인 오픈소스**: [`mv/under-the-right-click/`](mv/under-the-right-click/README.md)에서 헤드리스 브라우저 렌더러 스크립트, 가사 싱크 타임라인, 전체 [스토리보드 (STORYBOARD.md)](mv/under-the-right-click/STORYBOARD.md)를 확인할 수 있습니다.
+
+<p align="center">
+  <img src="mv/under-the-right-click/qa/contact-sheet.jpg" alt="Under the Right Click 콘택트 시트" width="820" />
+</p>
+
+---
+
 ## 🎨 브랜드 캐릭터 및 라이선스
 
 RightKit의 브랜드 마스코트는 **Riko**입니다. 코랄색 그라데이션 머리와 바보털, 마우스 커서와 메뉴 모양의 헤어핀이 특징인 밝고 든든한 조수입니다.
 
 - **소스 코드 및 문서**: [MIT 라이선스](LICENSE)에 따라 오픈소스로 공개됩니다.
-- **브랜드 자산 보호**: RightKit 명칭, Riko 캐릭터 이미지, 앱 아이콘, 메뉴 막대 아이콘, 오리지널 일러스트, 동영상 등의 자산은 모든 권리가 보유되어 있습니다. 자세한 내용은 [자산 라이선스 안내 (ASSETS.md)](ASSETS.md)를 참조해 주세요. 오픈소스 라이선스가 브랜드 아트워크의 무단 재사용을 허용하는 것은 아닙니다.
+- **브랜드 자산 보호**: RightKit 명칭, Riko 캐릭터 이미지, 앱 아이콘, 메뉴 막대 아이콘, 오리지널 일러스트, 동영상 등의 자산은 모든 권리가 보유되어 있습니다. 자세한 내용은 [자산 라이선스 안내 (ASSETS.md)](ASSETS.md) 및 [MV 라이선스 고지 (mv/under-the-right-click/NOTICE.md)](mv/under-the-right-click/NOTICE.md)를 참조해 주세요. 오픈소스 라이선스가 브랜드 아트워크의 무단 재사용을 허용하는 것은 아닙니다.
 - **서드파티 상표 및 아이콘**: [서드파티 고지 (THIRD_PARTY_NOTICES.md)](THIRD_PARTY_NOTICES.md) 및 [앱 아이콘 출처 (website/assets/apps/SOURCES.md)](website/assets/apps/SOURCES.md)를 확인하세요.
 
 ---
