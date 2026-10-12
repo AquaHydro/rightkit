@@ -30,6 +30,7 @@ enum SharedStore {
     static let suite = argument("--suite", fallback: "app.rightkit.settings-probe." + UUID().uuidString)
     static let defaults = UserDefaults(suiteName: suite)!
     static let interactive = CommandLine.arguments.contains("--interactive") || !CommandLine.arguments.contains("--output")
+    #if RIGHTKIT_SETTINGS_E2E
     static let opener = WindowOpener()
     static var startTemplateImport: (() -> Void)?
     static let importSource = SharedStore.directory.appending(path: "import-fixture.txt")
@@ -51,6 +52,7 @@ enum SharedStore {
         try await Task.sleep(for: .milliseconds(200))
         layout(window)
     }
+    #endif
     static var displayedTab = ""
     static var totals: [String: Double] = [:]
     static var counts: [String: Int] = [:]
@@ -190,9 +192,11 @@ enum SharedStore {
             let refreshedState = folderStates[deleted] ?? "not-rendered"
             assertions.append(["check": "deleted-folder-refresh", "passed": refreshedState == "missing", "observed": refreshedState])
             _ = try screenshot(window, to: URL(filePath: output.path + ".deleted-folder.png"))
+            #if RIGHTKIT_SETTINGS_E2E
             if CommandLine.arguments.contains("--e2e") {
                 try await lifecycleChecks(model, window: window, output: output, assertions: &assertions)
             }
+            #endif
             let data = try JSONSerialization.data(withJSONObject: [
                 "samples": samples, "assertions": assertions,
                 "succeeded": !assertions.contains(where: { ($0["passed"] as? Bool) == false }),
@@ -214,6 +218,7 @@ enum SharedStore {
             NSApp.terminate(nil)
         }
     }
+    #if RIGHTKIT_SETTINGS_E2E
     /// Actual NSWindow close/orderFront notifications drive the production container.
     /// A second temporary window owns key status, reproducing a visible settings
     /// window behind another app without activating or changing the user's Finder.
@@ -307,6 +312,7 @@ enum SharedStore {
         }
         startTemplateImport = nil
     }
+    #endif
 
 }
 
@@ -322,20 +328,31 @@ enum SharedStore {
 
 private struct SettingsProbeRoot: View {
     let model: AppModel
+    @Environment(\.openWindow) private var openWindow
     var body: some View {
         SettingsView()
             .environment(model)
             .defaultAppStorage(ProbeMetric.defaults)
-            .background(WindowBridge(opener: ProbeMetric.opener))
-            .onAppear { PreviewLifecycleDelegate.reopen = { ProbeMetric.opener.openSettings() } }
+            .background {
+                #if RIGHTKIT_SETTINGS_E2E
+                WindowBridge(opener: ProbeMetric.opener)
+                #endif
+            }
+            .onAppear {
+                #if RIGHTKIT_SETTINGS_E2E
+                PreviewLifecycleDelegate.reopen = { ProbeMetric.opener.openSettings() }
+                #else
+                PreviewLifecycleDelegate.reopen = { openWindow(id: WindowID.settings) }
+                #endif
+            }
             .task {
-                if CommandLine.arguments.contains("--e2e") {
-                    // The test controller intentionally survives the tested window's
-                    // SwiftUI task cancellation. Production work remains unchanged.
-                    Task { @MainActor in await ProbeMetric.run(model) }
-                } else {
-                    await ProbeMetric.run(model)
-                }
+                #if RIGHTKIT_SETTINGS_E2E
+                // The test controller intentionally survives the tested window's
+                // SwiftUI task cancellation. Production work remains unchanged.
+                Task { @MainActor in await ProbeMetric.run(model) }
+                #else
+                await ProbeMetric.run(model)
+                #endif
             }
     }
 }

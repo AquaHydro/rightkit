@@ -162,7 +162,8 @@ for variant in variants:
     subprocess.run(['xcrun', 'actool', '--compile', str(resources), '--platform', 'macosx',
                     '--minimum-deployment-target', '26.0',
                     str(source / 'RightKit/Resources/Assets.xcassets')], check=True, cwd=ROOT)
-    subprocess.run(['xcrun', 'swiftc', '-O', '-parse-as-library', '-D', 'APP_STORE',
+    probe_flags = ['-D', 'RIGHTKIT_SETTINGS_E2E'] if args.e2e and variant == 'working' else []
+    subprocess.run(['xcrun', 'swiftc', '-O', '-parse-as-library', '-D', 'APP_STORE', *probe_flags,
                     '-I', str(products), *map(str, sources),
                     str(ROOT / 'scripts/perf/settings_probe.swift'), str(objects[0]),
                     '-o', str(executable)], check=True, cwd=ROOT)
