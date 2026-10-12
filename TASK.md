@@ -6,8 +6,8 @@
 
 资料在 [App Store 上架资料](docs/app-store.md)，过程见 [提审记录](docs/app-store-submission-log.md)。0.1.1 至 0.1.3 已上架。0.1.4 包含日文、韩文界面和右键菜单提速。
 
-- [ ] 合并版本号 PR 后推 `v0.1.4` 标签，Release 工作流发布 GitHub Release 并上传商店构建 `0.1.4 (8)`。
-- [ ] App Store Connect 建 0.1.4，关联构建，写入中英日韩资料，提交审核。
+- [x] 合并版本号 PR 后推 `v0.1.4` 标签，Release 工作流发布 GitHub Release 并上传商店构建 `0.1.4 (8)`。
+- [x] App Store Connect 建 0.1.4，关联构建，写入中英日韩资料，2026-10-08 提交审核，等待审核。
 - [ ] 审核通过后手动发布，再部署官网（`make website-deploy`），官网的日文、韩文说明已改为「已支持」。
 
 ## 自动化发布（GitHub Actions）
