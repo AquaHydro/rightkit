@@ -2,13 +2,15 @@
 
 需要人工配合、或者只能在真机上完成的事项。完成后勾选；整组做完就删掉那一节。编号含义见[功能规格](docs/features.md)和[验收](docs/verification.md)。
 
-## 0.1.4 发布
+## 0.1.5 发布
 
-资料在 [App Store 上架资料](docs/app-store.md)，过程见 [提审记录](docs/app-store-submission-log.md)。0.1.1 至 0.1.3 已上架。0.1.4 包含日文、韩文界面和右键菜单提速。
+资料在 [App Store 上架资料](docs/app-store.md)，过程见 [提审记录](docs/app-store-submission-log.md)。0.1.4 已上架，0.1.5 改善设置分栏切换与窗口重开。
 
-- [x] 合并版本号 PR 后推 `v0.1.4` 标签，Release 工作流发布 GitHub Release 并上传商店构建 `0.1.4 (8)`。
-- [x] App Store Connect 建 0.1.4，关联构建，写入中英日韩资料，2026-10-08 提交审核，等待审核。
-- [ ] 审核通过后手动发布，再部署官网（`make website-deploy`），官网的日文、韩文说明已改为「已支持」。
+- [x] #43 合入 #42，#42 合入 main；已推 `v0.1.5` 标签，提交 `00ff715`。
+- [x] 官网版 GitHub Release 已发布，附 DMG 和 SHA-256。
+- [x] Release 工作流完成商店构建 `0.1.5 (9)` 上传并通过处理。
+- [x] App Store Connect 关联构建，2026-10-12 22:58（北京时间）提交审核，状态为等待审核。
+- [ ] 审核通过后手动发布。
 
 ## 自动化发布（GitHub Actions）
 
