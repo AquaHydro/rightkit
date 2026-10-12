@@ -30,8 +30,8 @@ enum SharedStore {
     static let suite = argument("--suite", fallback: "app.rightkit.settings-probe." + UUID().uuidString)
     static let defaults = UserDefaults(suiteName: suite)!
     static let interactive = CommandLine.arguments.contains("--interactive") || !CommandLine.arguments.contains("--output")
-    #if RIGHTKIT_SETTINGS_E2E
     static let opener = WindowOpener()
+    #if RIGHTKIT_SETTINGS_E2E
     static var startTemplateImport: (() -> Void)?
     static let importSource = SharedStore.directory.appending(path: "import-fixture.txt")
     static var importGate: CheckedContinuation<Void, Never>?
@@ -328,23 +328,12 @@ enum SharedStore {
 
 private struct SettingsProbeRoot: View {
     let model: AppModel
-    @Environment(\.openWindow) private var openWindow
     var body: some View {
         SettingsView()
             .environment(model)
             .defaultAppStorage(ProbeMetric.defaults)
-            .background {
-                #if RIGHTKIT_SETTINGS_E2E
-                WindowBridge(opener: ProbeMetric.opener)
-                #endif
-            }
-            .onAppear {
-                #if RIGHTKIT_SETTINGS_E2E
-                PreviewLifecycleDelegate.reopen = { ProbeMetric.opener.openSettings() }
-                #else
-                PreviewLifecycleDelegate.reopen = { openWindow(id: WindowID.settings) }
-                #endif
-            }
+            .background(WindowBridge(opener: ProbeMetric.opener))
+            .onAppear { PreviewLifecycleDelegate.reopen = { ProbeMetric.opener.openSettings() } }
             .task {
                 #if RIGHTKIT_SETTINGS_E2E
                 // The test controller intentionally survives the tested window's
