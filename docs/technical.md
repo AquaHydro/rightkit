@@ -47,6 +47,7 @@
 - 扩展传来的 URL 只有落在某个已授权文件夹内时才执行，判断放在命令分派入口的同一处，不在每个命令里各写一遍。
 - 沙盒里 `homeDirectoryForCurrentUser`、`URL.homeDirectory`、`URL.desktopDirectory` 指向应用容器。真实主目录用 `getpwuid(getuid())` 取得，桌面等位置由它拼出。`F-009` 和 `F-073` 里的「主目录」都指真实主目录。
 - 快捷指令的 `IntentFile` 自带对文件本身的访问权；写到源文件旁边前，同样检查所在文件夹是否已授权。开始访问传入的 security-scoped URL 后再检查目录。系统可能通过不同路径提供同一目录（真机发现 `/.nofollow/Users/...`）；路径不匹配时，用 `FileManager.getRelationship` 确认它与已授权目录相同或位于其中，查询失败则拒绝，不通过删除系统前缀猜测授权。这一步只解析父目录的符号链接，授权目录外指向授权目录的链接本身不算授权；`/` 和按路径匹配时一样，不算授权目录。
+- 其他 App 的沙盒容器受「App 数据」保护（macOS 14 起），文件夹授权覆盖不到；交给其他应用打开时 LaunchServices 返回 `NSOSStatusErrorDomain` `-54`。完全磁盘访问权限没有申请或查询 API，只用 `x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles` 打开设置页（`F-084`），判定和打开都在 `FolderStore`。
 - 自定义模板、设置、待粘贴列表和心跳都放在 App Group 容器里。
 
 扩展按系统要求启用 Sandbox，但不在扩展里改文件。
