@@ -23,6 +23,24 @@ enum FolderStore {
         }
     }
 
+    /// F-084：其他 App 的沙盒容器受「App 数据」保护，目录授权不够，交给其他应用打开时报 `-54`（permErr）。
+    /// LaunchServices 可能把它包在外层错误里，沿 `NSUnderlyingErrorKey` 往下找。
+    static func isOtherAppDataDenied(_ error: Error) -> Bool {
+        var current: NSError? = error as NSError
+        while let error = current {
+            if error.domain == NSOSStatusErrorDomain, error.code == -54 { return true }
+            current = error.userInfo[NSUnderlyingErrorKey] as? NSError
+        }
+        return false
+    }
+
+    /// F-084：完全磁盘访问权限没有申请 API，只能打开系统设置里的那一页。
+    @MainActor
+    static func openFullDiskAccessSettings() {
+        guard let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles") else { return }
+        NSWorkspace.shared.open(url)
+    }
+
     /// 真实主目录。沙盒里 `homeDirectoryForCurrentUser` 和 `NSHomeDirectory()` 都指向应用容器。
     static let home: String = {
         guard let pw = getpwuid(getuid()), let dir = pw.pointee.pw_dir else { return NSHomeDirectory() }

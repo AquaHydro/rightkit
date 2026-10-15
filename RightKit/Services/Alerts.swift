@@ -13,6 +13,17 @@ enum Alerts {
         run(alert)
     }
 
+    /// 带一个动作按钮的提示：动作按钮是默认按钮，「好」响应 Esc。
+    static func show(_ message: String, informative: String, action: String, perform: () -> Void) {
+        let alert = NSAlert()
+        alert.alertStyle = .warning
+        alert.messageText = message
+        alert.informativeText = informative
+        alert.addButton(withTitle: action)
+        alert.addButton(withTitle: L("好")).keyEquivalent = "\u{1b}"
+        if run(alert) == .alertFirstButtonReturn { perform() }
+    }
+
     static func showFailure(for action: CommandAction) {
         show(Messages.failure(for: action))
     }
