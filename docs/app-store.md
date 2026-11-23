@@ -25,7 +25,7 @@
 
 ## 当前状态
 
-2026-10-12 已通过 App Store Connect 核对 0.1.4 为 READY_FOR_DISTRIBUTION。0.1.5 (9) 已于北京时间 2026-10-12 22:58 提交，当前等待审核，主要改进设置分栏切换与窗口重开。推广文本随时可改，不用送审；描述、关键词、截图和「此版本的新功能」随版本送审。
+2026-10-12 已通过 App Store Connect 核对 0.1.4 为 READY_FOR_DISTRIBUTION。0.1.5 (9) 已于北京时间 2026-10-12 22:58 提交，当前等待审核，主要改进设置分栏切换与窗口重开。0.1.6 (10) 已准备好资料，加入其他 App 数据的完全磁盘访问权限指引，待构建上传后提审。推广文本随时可改，不用送审；描述、关键词、截图和「此版本的新功能」随版本送审。
 
 ## 简体中文
 
@@ -89,13 +89,13 @@ RightKit 给访达的右键菜单加上新建文件、剪切粘贴、复制到�
 支持简体中文、英文、日文和韩文，需要 macOS 26 或更高版本。
 ```
 
-**此版本的新功能**（0.1.5）：
+**此版本的新功能**（0.1.6）：
 
 写用户能感知的变化，不写「请求被拒收」「后台重试」这类实现细节。
 
 ```text
-- 设置分栏切换更流畅，切回时保留滚动位置。
-- 改善设置窗口重新打开时的显示稳定性。
+- 在微信等其他 App 保存的文件上「在应用中打开」被系统拦下时，会说明原因，并可一键前往完全磁盘访问权限设置。
+- 「通用」设置新增「访问其他 App 的数据」说明和入口。
 ```
 
 ## English (U.S.)
@@ -158,11 +158,11 @@ When you first open RightKit, authorize a folder (your home folder is recommende
 English, Simplified Chinese, Japanese and Korean. Requires macOS 26 or later.
 ```
 
-**What's New in This Version** (0.1.5):
+**What's New in This Version** (0.1.6):
 
 ```text
-- Switch between Settings tabs more smoothly and keep your scroll position when returning.
-- Improved reliability when reopening the Settings window.
+- When macOS blocks Open in App for files saved by other apps, such as WhatsApp or Telegram, RightKit now explains why and takes you to Full Disk Access settings.
+- General settings has a new Access Data from Other Apps section with a shortcut to System Settings.
 ```
 
 ## 日本語
@@ -227,11 +227,11 @@ RightKit は Finder の右クリックメニューに、新規ファイル、カ
 日本語、英語、簡体字中国語、韓国語に対応。macOS 26 以降が必要です。
 ```
 
-**このバージョンの新機能**（0.1.5）：
+**このバージョンの新機能**（0.1.6）：
 
 ```text
-- 設定のタブ切り替えがよりスムーズになり、戻ったときのスクロール位置も保持されます。
-- 設定ウインドウを開き直したときの表示の安定性を改善しました。
+- LINE など他の App が保存したファイルで「アプリで開く」が macOS に止められたとき、理由を表示し、フルディスクアクセスの設定へ移動できるようになりました。
+- 「一般」設定に「他の App のデータへのアクセス」の説明と設定への入口を追加しました。
 ```
 
 ## 한국어
@@ -296,11 +296,11 @@ RightKit은 Finder의 단축 메뉴에 새 파일, 잘라내기 및 붙여넣기
 한국어, 영어, 중국어 간체, 일본어 지원. macOS 26 이상이 필요합니다.
 ```
 
-**이 버전의 새로운 기능**（0.1.5）：
+**이 버전의 새로운 기능**（0.1.6）：
 
 ```text
-- 설정 탭을 더 부드럽게 전환하고, 돌아왔을 때 스크롤 위치를 유지합니다.
-- 설정 윈도우를 다시 열 때의 표시 안정성을 개선했습니다.
+- 카카오톡 등 다른 앱이 저장한 파일에서 ‘앱으로 열기’가 macOS에 의해 차단되면 이유를 알려 주고 전체 디스크 접근 권한 설정으로 바로 이동할 수 있습니다.
+- ‘일반’ 설정에 ‘다른 앱의 데이터 접근’ 설명과 설정 바로가기를 추가했습니다.
 ```
 
 ## App 隐私
@@ -361,6 +361,9 @@ HOW TO TEST
 
 WHY WE NEED FOLDER ACCESS
 RightKit runs in the App Sandbox. It creates, copies and moves files only inside folders the user selects in the standard open panel (com.apple.security.files.user-selected.read-write). Access is kept with app-scoped security-scoped bookmarks (com.apple.security.files.bookmarks.app-scope) so the context menu keeps working after a restart. Nothing outside the chosen folders is accessed.
+
+FULL DISK ACCESS (OPTIONAL)
+macOS protects files that other apps keep in their own containers, even inside a folder the user authorized. RightKit never requests Full Disk Access and works without it. If Open in App fails with this protection (error -54), RightKit explains the cause and offers a button that opens System Settings > Privacy & Security > Full Disk Access, where the user can choose to turn it on. General settings shows the same explanation. RightKit does not check or change this setting itself.
 
 BACKGROUND HELPER
 The app bundle contains a small launch agent (registered with SMAppService). It only relays menu commands from the Finder extension to the main app over XPC and does not handle files. It starts on demand when the extension uses it. Launch at login is off by default and only turns on if the user enables it.
