@@ -2,6 +2,20 @@
 
 [验收](verification.md) 里需要真正打开访达的用例记录在这里。每次记录系统版本、构建、监视目录、步骤、结果和菜单回调日志。
 
+## 2026-11-23 其他 App 数据访问权限指引（V-086）
+
+基于 `aea72cb` 的官网版 Debug 构建，开发 bundle ID `app.rightkit.mac`，从 `/private/tmp` 的隔离副本启动，macOS 27.2.1。测试期间临时关闭商店版 Finder 扩展，结束后恢复；没有修改已安装的 `/Applications/RightKit.app`。
+
+- 自动测试：`FolderStoreTests` 3 项通过，其中 `otherAppDataDeniedMatchesOnlyPermErr` 覆盖 `-54` 的直接返回、包在外层错误里和其他错误码。
+- 设置页：监视目录下方新增的「访问其他 App 的数据」一行有标题、锁盾图标、说明和按钮。把设置窗口设为最小宽度 420 × 600 pt，浅色、深色各检查 English、日本語、한국어、简体中文共 8 组，标题、说明和按钮都完整可见，没有截断、重叠或溢出。示例 App 分别是 WhatsApp 和 Telegram、LINE、카카오톡、微信和 QQ。按钮实点后落在「隐私与安全性 → 完全磁盘访问权限」，没有改任何开关。
+- 权限被拒：在开发副本里临时授权真实主目录，没有开完全磁盘访问。在微信容器 `~/Library/Containers/com.tencent.xinWeChat/Data/Documents` 里放测试自己创建的探测文件，右键「在应用中打开 → Terminal」，两次都弹出提示。英文界面下标题为 `Couldn’t open with “Terminal”.`，正文为 `The selected items are in another app’s data, which macOS protects. Turn on RightKit in System Settings → Privacy & Security → Full Disk Access, then try again.`，按钮为 `Open System Settings` 和 `OK`，与 `Localizable.xcstrings` 的英文一致。点 `OK` 后弹窗关闭，点 `Open System Settings` 后落在完全磁盘访问权限页面。
+- 开启权限后重试：用户在系统设置里给开发副本手动打开完全磁盘访问，系统日志确认被修改的是 `app.rightkit.mac`。重启开发副本后同一操作不再弹窗，Terminal 新增一个标题为 `Documents — -zsh` 的窗口。
+- 普通启动失败对照：测试应用 QuitEditor 能被 LaunchServices 按 bundle ID 找到，去掉可执行权限后 `NSWorkspace.open` 返回 `NSCocoaErrorDomain` 256，错误链是 256、`RBSRequestErrorDomain` 5、`NSPOSIXErrorDomain` 111，没有 `-54`。右键「在应用中打开 → QuitEditor」的弹窗只有标题 `Couldn’t open with “QuitEditor”.` 和 `OK`，没有 `Open System Settings` 和保护说明，仍是 `F-023` 的原提示。
+- 未复现的情况：同样授权主目录，TextEdit 和 Word 容器里的文件直接打开，没有触发提示。不是所有其他 App 的容器都会返回 `-54`，本次只在微信容器确认。
+- 未覆盖：弹窗截图是空白，文字来自无障碍读取，默认按钮和 Esc 的对应关系只在代码里确认，没有逐项做视觉验证。中、日、韩弹窗文案只经过字符串检查，没有在真实访达里逐语言触发。只验证官网版 Debug，商店版靠同一份共享代码和构建检查。设置窗口最小宽度下，英文的「Finder extension is off」卡片按钮被截成 `Open System Setti...`，这是已有控件，不属于本次改动，未处理。
+- 过程发现：开发副本的设置页和欢迎窗口一直显示「Finder extension is off」，但访达右键菜单正常出现，`pluginkit` 也显示扩展已启用。状态判断与实际不一致，与本次改动无关，未追查原因。
+- 清理：测试用的探测文件、测试应用和测试目录已删除，开发副本的监视目录已清空，商店版 Finder 扩展已恢复。
+
 ## 2026-10-12 设置分栏复用（V-002、V-007、V-011）
 
 基于 `0470610` 的工作树，macOS 27.0.1。设置分栏改为按需保留真实控件；切页、窗口关闭及语言重建时处理任务取消、焦点和缓存寿命。`make verify XCODE_FLAGS=CODE_SIGNING_ALLOWED=NO` 通过 125 项 Swift 测试、双渠道构建及其余检查。
