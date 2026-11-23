@@ -71,3 +71,19 @@
 - 构建上传：推 `v0.1.4` 标签触发 Release 工作流（run `37753537997`），官网版和商店版两个任务都成功。GitHub Release `v0.1.4` 附 DMG 和 sha256；Connect 中 `0.1.4 (8)` 为 VALID。
 - 助手执行：关联构建 `(8)`，`asc validate` 0 错误 0 警告，只有手动发布和隐私发布状态无法经 API 核实两条提示。2026-10-08 09:13 UTC 按用户要求提交审核，提交 `ed283614-60cd-45f5-8b5f-fd6bd53cac04` 与版本均为「等待审核」。
 - 待用户执行：审核通过后手动发布，再部署官网（`make website-deploy`）。
+
+
+## 2026-10-12 0.1.5 (9)
+
+- 内容：#43 合入 #42 后，用户将 #42 合入 main，提交 `00ff715b828bbd500bca03e952fe7a451d1ad0c2`。设置分栏按需创建、回访复用并保留滚动位置，明确打开请求保证后台重开不依赖 key 或遮挡通知。验收与边界见 [窗口寿命回归记录](evidence/settings-window-lifecycle-2026-10-12.md)。
+- 构建：推 `v0.1.5` 标签触发 [Release run 38264815359](https://github.com/AquaHydro/rightkit/actions/runs/38264815359)，两个渠道均成功。官网 app 和 DMG 公证为 Accepted、钉票通过；[GitHub Release v0.1.5](https://github.com/AquaHydro/rightkit/releases/tag/v0.1.5) 已附 DMG 与 SHA-256。商店版签名检查通过并上传，Connect 的 `0.1.5 (9)` 为 VALID，构建 ID `256c58bd-a843-4e41-b41c-71712e5be424`。
+- 商店资料：通过仓库技能对应的 `asc` CLI 创建 macOS 0.1.5（手动发布），继承四语描述、关键词、推广文本、网址和截图，更新四语新功能与审核说明并读回逐字一致。四语各 5 张截图，共 20 张，均为 COMPLETE。
+- 校验：关联构建后 `asc validate` 为 0 错误、0 警告；仅有手动发布和公开 API 无法核实隐私发布状态两项信息。额外 `--deep` 检查因无缓存 Apple 网页会话未能核实隐私和协议网页状态；本次未修改隐私声明或数据收集行为，沿用已发布版本，不把 API 校验称为网页隐私核验。
+- 提交：按用户授权，`asc review submit --dry-run` 确认版本和构建后用 `--confirm` 提交。北京时间 2026-10-12 22:58，提交 ID `0ac84864-b2d1-441f-8429-1a064025b08f`。读回版本与提交均为 WAITING_FOR_REVIEW。版本 ID `aefccc98-f383-4209-9bde-60f3626d26cf`，App ID `6816212746`。
+- 后续：等待 Apple 审核；通过后手动发布。本次提审成功不代表审核通过或已经上架。
+
+查询状态：
+
+```sh
+asc review status --app 6816212746 --version-id aefccc98-f383-4209-9bde-60f3626d26cf --platform MAC_OS --output table
+```
