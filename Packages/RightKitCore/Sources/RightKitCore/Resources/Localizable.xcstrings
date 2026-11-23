@@ -1709,6 +1709,34 @@
         }
       }
     },
+    "微信、QQ 等 App 自己保存的文件受系统保护。要在这些位置使用 RightKit，请在系统设置里允许 RightKit 完全磁盘访问权限。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Files that apps like WhatsApp and Telegram keep for themselves are protected by macOS. To use RightKit in those locations, give RightKit Full Disk Access in System Settings."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LINE などの App が自分で保存しているファイルは、システムによって保護されています。これらの場所で RightKit を使うには、システム設定で RightKit にフルディスクアクセスを許可してください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카카오톡 등의 앱이 자체적으로 저장한 파일은 시스템이 보호합니다. 이 위치에서 RightKit을 사용하려면 시스템 설정에서 RightKit에 전체 디스크 접근 권한을 허용하세요."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "微信、QQ 等 App 自己保存的文件受系统保护。要在这些位置使用 RightKit，请在系统设置里允许 RightKit 完全磁盘访问权限。"
+          }
+        }
+      }
+    },
     "恢复默认": {
       "localizations": {
         "en": {
@@ -1733,6 +1761,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "기본값으로 복원"
+          }
+        }
+      }
+    },
+    "所选项目在其他 App 的数据里，受系统保护。请在“系统设置 → 隐私与安全性 → 完全磁盘访问权限”中打开 RightKit，然后再试一次。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The selected items are in another app’s data, which macOS protects. Turn on RightKit in System Settings → Privacy & Security → Full Disk Access, then try again."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選択した項目は他の App のデータ内にあり、システムによって保護されています。「システム設定 → プライバシーとセキュリティ → フルディスクアクセス」で RightKit をオンにしてから、もう一度お試しください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "선택한 항목은 다른 앱의 데이터에 있어 시스템이 보호합니다. ‘시스템 설정 → 개인정보 보호 및 보안 → 전체 디스크 접근 권한’에서 RightKit을 켠 다음 다시 시도하세요."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "所选项目在其他 App 的数据里，受系统保护。请在“系统设置 → 隐私与安全性 → 完全磁盘访问权限”中打开 RightKit，然后再试一次。"
           }
         }
       }
@@ -4897,6 +4953,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "Finder 확장 프로그램이 실행되고 있지 않습니다"
+          }
+        }
+      }
+    },
+    "访问其他 App 的数据": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Access Data from Other Apps"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "他の App のデータへのアクセス"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다른 앱의 데이터 접근"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "访问其他 App 的数据"
           }
         }
       }

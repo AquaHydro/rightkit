@@ -192,8 +192,14 @@ final class CommandRouter {
         let configuration = NSWorkspace.OpenConfiguration()
         configuration.activates = true
         NSWorkspace.shared.open(targets, withApplicationAt: appURL, configuration: configuration) { _, error in
-            guard error != nil else { return }
-            Task { @MainActor in Alerts.show(L("无法用“%@”打开。", tool.name)) }
+            guard let error else { return }
+            let appDataDenied = FolderStore.isOtherAppDataDenied(error)
+            Task { @MainActor in
+                guard appDataDenied else { return Alerts.show(L("无法用“%@”打开。", tool.name)) }
+                Alerts.show(L("无法用“%@”打开。", tool.name),
+                            informative: L("所选项目在其他 App 的数据里，受系统保护。请在“系统设置 → 隐私与安全性 → 完全磁盘访问权限”中打开 RightKit，然后再试一次。"),
+                            action: L("打开系统设置"), perform: FolderStore.openFullDiskAccessSettings)
+            }
         }
     }
 

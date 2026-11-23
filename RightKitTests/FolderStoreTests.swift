@@ -29,4 +29,16 @@ import RightKitCore
         let file = try dir.file("not-a-folder")
         #expect(FolderStore.state(FolderEntry(path: file.path(percentEncoded: false))) == .missing)
     }
+
+    /// F-084：只有 `-54` 才换成完全磁盘访问提示，包在外层错误里也要认出来。
+    @Test func otherAppDataDeniedMatchesOnlyPermErr() {
+        let denied = NSError(domain: NSOSStatusErrorDomain, code: -54)
+        #expect(FolderStore.isOtherAppDataDenied(denied))
+        let wrapped = NSError(domain: NSCocoaErrorDomain, code: NSFileReadNoPermissionError,
+                              userInfo: [NSUnderlyingErrorKey: denied])
+        #expect(FolderStore.isOtherAppDataDenied(wrapped))
+        #expect(!FolderStore.isOtherAppDataDenied(NSError(domain: NSOSStatusErrorDomain, code: -10814)))
+        #expect(!FolderStore.isOtherAppDataDenied(NSError(domain: NSPOSIXErrorDomain, code: -54)))
+        #expect(!FolderStore.isOtherAppDataDenied(CocoaError(.fileReadNoPermission)))
+    }
 }

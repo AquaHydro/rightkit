@@ -21,6 +21,17 @@ struct GeneralPane: View {
 
             MonitoredFoldersSection()
 
+            // F-084：没有可靠的公开 API 查询完全磁盘访问权限，只放说明和入口，不显示状态。
+            Section {
+                HStack {
+                    RowLabel(title: L("访问其他 App 的数据"),
+                             caption: L("微信、QQ 等 App 自己保存的文件受系统保护。要在这些位置使用 RightKit，请在系统设置里允许 RightKit 完全磁盘访问权限。"),
+                             symbol: "lock.shield", tint: .intentInspect)
+                    Spacer()
+                    Button(L("打开系统设置"), action: FolderStore.openFullDiskAccessSettings)
+                }
+            }
+
             Section(L("功能")) {
                 FeatureGroupToggles(showsIcons: true)
                 Toggle(isOn: $model.settings.confirmPermanentDelete) {
