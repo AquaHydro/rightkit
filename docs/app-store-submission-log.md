@@ -87,3 +87,12 @@
 ```sh
 asc review status --app 6816212746 --version-id aefccc98-f383-4209-9bde-60f3626d26cf --platform MAC_OS --output table
 ```
+
+## 2026-11-24 0.1.6 (10)
+
+- 内容：#45 其他 App 数据的完全磁盘访问权限指引（`F-084`，`V-086` 已通过）；#46 把版本升到 `0.1.6 (10)`。
+- 构建：推 `v0.1.6` 标签触发 [Release run 45308427489](https://github.com/AquaHydro/rightkit/actions/runs/45308427489)，官网版和商店版均成功；Connect 的 `0.1.6 (10)` 为 VALID，构建 ID `db99d9cb-a648-4ff1-873c-6db865a4db16`。
+- 商店资料：用 `asc` 创建 macOS 0.1.6（手动发布，从 0.1.5 复制资料），写入四语新功能，审核备注换成 0.1.6 的改动并补上完全磁盘访问说明（3901 字符）。
+- 校验：`asc validate` 0 错误、0 警告，仅手动发布和隐私发布状态两条提示。
+- 提交：`asc review submit --confirm`，提交 ID `0413f94d-69f4-4835-8f33-b01896b12d9d`，版本 ID `81879c34-821d-42f0-9834-44794fe9c0a4`，读回版本与提交均为 WAITING_FOR_REVIEW。
+- 后续：等待审核；通过后手动发布。
